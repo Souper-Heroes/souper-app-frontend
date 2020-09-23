@@ -21,6 +21,7 @@ import CardFooter from "components/MaterialKitComponents/Card/CardFooter.js";
 import CustomInput from "components/MaterialKitComponents/CustomInput/CustomInput.js";
 import LoginPage from "components/Login/LoginPage.js";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import CheckboxSquareSwitch from "components/layout/CheckboxSquareSwitch.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
@@ -157,6 +158,7 @@ export default function RegisterPage(props) {
                       </GridContainer>
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
+                      <CheckboxSquareSwitch />
                       <Button color="danger" size="lg">
                         Create Account
                       </Button>
