@@ -61,7 +61,7 @@ export default function RegisterPage(props) {
                 <Card className={classes[cardAnimaton]}>
                   <form className={classes.form}>
                     <CardHeader color="danger" className={classes.cardHeader}>
-                      <h4>Register</h4>
+                      <h2>Register</h2>
                       <div className={classes.socialLine}>
                         <Button
                           justIcon
@@ -156,9 +156,9 @@ export default function RegisterPage(props) {
                           </Button>
                         </Link>
                       </GridContainer>
+                      <CheckboxSquareSwitch />
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
-                      <CheckboxSquareSwitch />
                       <Button color="danger" size="lg">
                         Create Account
                       </Button>
