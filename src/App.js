@@ -1,11 +1,15 @@
+
 import React from 'react';
 import Navbar from './components/layout/Navbar';
 import SouperFooter from './components/layout/SouperFooter';
+import LoginPage from "./components/Login/LoginPage";
 import './App.css';
+
 
 function App() {
   return (
-    <div className='App'>
+    //<LoginPage />
+    <div className="App">
       <Navbar />
       <SouperFooter />
     </div>
