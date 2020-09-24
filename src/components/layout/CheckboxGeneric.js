@@ -11,9 +11,10 @@ import styles from 'assets/jss/material-kit-react/customCheckboxRadioSwitch.js';
 
 const useStyles = makeStyles(styles);
 
-export default function CheckboxTermsAndCond() {
+export default function CheckboxGeneric(props) {
   const [checked, setChecked] = React.useState([24, 22]);
   const classes = useStyles();
+
   const wrapperDiv = classNames(
     classes.checkboxAndRadio,
     classes.checkboxAndRadioHorizontal
@@ -43,7 +44,7 @@ export default function CheckboxTermsAndCond() {
             />
           }
           classes={{ label: classes.label }}
-          label='Terms and Conditions'
+          label={props.children}
         />
       </div>
     </div>
