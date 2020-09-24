@@ -21,7 +21,7 @@ import CardFooter from "components/MaterialKitComponents/Card/CardFooter.js";
 import CustomInput from "components/MaterialKitComponents/CustomInput/CustomInput.js";
 import LoginPage from "components/Login/LoginPage.js";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import CheckboxSquareSwitch from "components/layout/CheckboxSquareSwitch.js";
+import CheckboxTermsAndCond from "components/layout/CheckboxTermsAndCond.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
@@ -135,7 +135,7 @@ export default function RegisterPage(props) {
                         }}
                       />
 
-                      <CheckboxSquareSwitch />
+                      <CheckboxTermsAndCond />
                       <Button fullWidth size="lg" color="rose">
                         Create Account
                       </Button>
