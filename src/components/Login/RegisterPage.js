@@ -8,6 +8,7 @@ import Email from '@material-ui/icons/Email';
 //import People from "@material-ui/icons/People";
 import Face from '@material-ui/icons/Face';
 // core components
+//import Navbar from 'components/layout/Navbar';
 //import Header from "components/MaterialKitComponents/Header/Header.js";
 //import HeaderLinks from "components/MaterialKitComponents/Header/HeaderLinks.js";
 //import Footer from "components/MaterialKitComponents/Footer/Footer.js";
@@ -20,7 +21,6 @@ import CardHeader from 'components/MaterialKitComponents/Card/CardHeader.js';
 import CardFooter from 'components/MaterialKitComponents/Card/CardFooter.js';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput.js';
 import CheckboxGeneric from 'components/layout/CheckboxGeneric.js';
-import Navbar from 'components/layout/Navbar';
 import SouperFooter from 'components/layout/SouperFooter.js';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
