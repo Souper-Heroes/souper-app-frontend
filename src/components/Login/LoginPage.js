@@ -7,9 +7,6 @@ import Icon from "@material-ui/core/Icon";
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 // core components
-import Header from "components/MaterialKitComponents/Header/Header.js";
-import HeaderLinks from "components/MaterialKitComponents/Header/HeaderLinks.js";
-import Footer from "components/MaterialKitComponents/Footer/Footer.js";
 import GridContainer from "components/MaterialKitComponents/Grid/GridContainer.js";
 import GridItem from "components/MaterialKitComponents/Grid/GridItem.js";
 import Button from "components/MaterialKitComponents/CustomButtons/Button.js";
@@ -20,8 +17,10 @@ import CardFooter from "components/MaterialKitComponents/Card/CardFooter.js";
 import CustomInput from "components/MaterialKitComponents/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
+//import Image from  '/Documentation/assets/img/board.jpg'; // Import using relative path
 
 import image from "assets/img/bg7.jpg";
+import { Redirect, NavLink } from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 
@@ -34,21 +33,7 @@ export default function LoginPage(props) {
   const { ...rest } = props;
   return (
     <div>
-      <Header
-        absolute
-        color="transparent"
-        brand="Material Kit React"
-        rightLinks={<HeaderLinks />}
-        {...rest}
-      />
-      <div
-        className={classes.pageHeader}
-        style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center",
-        }}
-      >
+
         <div className={classes.container}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
@@ -86,23 +71,7 @@ export default function LoginPage(props) {
                       </Button>
                     </div>
                   </CardHeader>
-                  <p className={classes.divider}>Or Be Classical</p>
                   <CardBody>
-                    <CustomInput
-                      labelText="First Name..."
-                      id="first"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        type: "text",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
                     <CustomInput
                       labelText="Email..."
                       id="email"
@@ -138,8 +107,10 @@ export default function LoginPage(props) {
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
-                      Get started
+                    <Button variant="contained" color="rose" size="lg">
+                      <NavLink to="/register" activeClassName="hurray">
+                        LOG IN
+                      </NavLink>
                     </Button>
                   </CardFooter>
                 </form>
@@ -147,8 +118,6 @@ export default function LoginPage(props) {
             </GridItem>
           </GridContainer>
         </div>
-        <Footer whiteFont />
-      </div>
     </div>
   );
 }
