@@ -7,19 +7,19 @@ import "./App.css";
 
 function App() {
   return (
-      <BrowserRouter>
-          <Switch>
-              <Route path="/login">
-                  <LoginPage />
-              </Route>
-              <Route path="/register">
-                  <RegisterPage />
-              </Route>
-              <Route path="/">
-                  <Page />
-              </Route>
-          </Switch>
-      </BrowserRouter>
+        <BrowserRouter>
+            <Switch>
+                <Route path="/login">
+                    <LoginPage />
+                </Route>
+                <Route path="/register">
+                    <RegisterPage />
+                </Route>
+                <Route path="/">
+                    <Page />
+                </Route>
+            </Switch>
+        </BrowserRouter>
   );
 }
 
