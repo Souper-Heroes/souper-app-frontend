@@ -11,7 +11,7 @@ import styles from "assets/jss/material-kit-react/customCheckboxRadioSwitch.js";
 
 const useStyles = makeStyles(styles);
 
-export default function CheckboxRadioSwitch() {
+export default function CheckboxTermsAndCond() {
   const [checked, setChecked] = React.useState([24, 22]);
   const classes = useStyles();
   const wrapperDiv = classNames(
