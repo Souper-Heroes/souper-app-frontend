@@ -6,6 +6,12 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 
 function App() {
+  const registerInputs = [
+    { id: 'first', label: 'Full Name', type: 'text', icon: 'face' },
+    { id: 'second', label: 'Email', type: 'email', icon: 'email' },
+    { id: 'third', label: 'Password', type: 'password', icon: 'lock' },
+  ];
+
   return (
     <BrowserRouter>
       <Switch>
@@ -13,7 +19,7 @@ function App() {
           <LoginPage />
         </Route>
         <Route path='/register'>
-          <RegisterPage />
+          <RegisterPage textlabels={registerInputs} />
         </Route>
         <Route path='/'>
           <Page />
