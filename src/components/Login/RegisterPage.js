@@ -29,13 +29,13 @@ import image from 'assets/img/board.jpg';
 
 const useStyles = makeStyles(styles);
 
-export default function RegisterPage(props) {
+export default function RegisterPage({ textlabels }) {
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
   setTimeout(function () {
     setCardAnimation('');
   }, 700);
   const classes = useStyles();
-  const { ...rest } = props;
+  //const { ...rest } = props;
 
   return (
     <div>
@@ -85,54 +85,33 @@ export default function RegisterPage(props) {
                     </div>
                   </CardHeader>
                   <CardBody>
-                    <CustomInput
-                      labelText='Full Name'
-                      id='first'
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        type: 'text',
-                        endAdornment: (
-                          <InputAdornment position='start'>
-                            <Face className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <CustomInput
-                      labelText='Email...'
-                      id='email'
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        type: 'email',
-                        endAdornment: (
-                          <InputAdornment position='start'>
-                            <Email className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <CustomInput
-                      labelText='Password'
-                      id='pass'
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        type: 'password',
-                        endAdornment: (
-                          <InputAdornment position='start'>
-                            <Icon className={classes.inputIconsColor}>
-                              lock_outline
-                            </Icon>
-                          </InputAdornment>
-                        ),
-                        autoComplete: 'off',
-                      }}
-                    />
+                    {textlabels.map((label) => (
+                      <CustomInput
+                        labelText={label.label}
+                        id={label.id}
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                        inputProps={{
+                          type: `${label.type}`,
+                          endAdornment: (
+                            <InputAdornment position='start'>
+                              {label.icon === 'face' && (
+                                <Face className={classes.inputIconsColor} />
+                              )}
+                              {label.icon === 'email' && (
+                                <Email className={classes.inputIconsColor} />
+                              )}
+                              {label.icon === 'lock' && (
+                                <Icon className={classes.inputIconsColor}>
+                                  lock_outline
+                                </Icon>
+                              )}
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    ))}
 
                     <CheckboxGeneric>
                       <strong>Terms And Conditions</strong>
