@@ -40,13 +40,6 @@ export default function RegisterPage(props) {
   return (
     <Router>
       <div>
-        <Header
-          absolute
-          color="transparent"
-          brand="Material Kit React"
-          rightLinks={<HeaderLinks />}
-          {...rest}
-        />
         <div
           className={classes.pageHeader}
           style={{
@@ -60,7 +53,7 @@ export default function RegisterPage(props) {
               <GridItem xs={12} sm={12} md={4}>
                 <Card className={classes[cardAnimaton]}>
                   <form className={classes.form}>
-                    <CardHeader color="danger" className={classes.cardHeader}>
+                    <CardHeader color="rose" className={classes.cardHeader}>
                       <h2>Register</h2>
                       <div className={classes.socialLine}>
                         <Button
@@ -141,26 +134,15 @@ export default function RegisterPage(props) {
                           autoComplete: "off",
                         }}
                       />
-                      <GridContainer justify="center">
-                        <Link to="/LoginPage" className={classes.link}>
-                          <Button
-                            simple
-                            color="info"
-                            size="lg"
-                            to="/LoginPage"
-                            //link="../Login/LoginPage.js"
-                            //rightLinks={<LoginPage />}
-                            //target={<LoginPage />}
-                          >
-                            Log In
-                          </Button>
-                        </Link>
-                      </GridContainer>
+
                       <CheckboxSquareSwitch />
+                      <Button fullWidth size="lg" color="rose">
+                        Create Account
+                      </Button>
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
-                      <Button color="danger" size="lg">
-                        Create Account
+                      <Button fullWidth size="lg" color="info">
+                        Log In
                       </Button>
                     </CardFooter>
                   </form>
@@ -168,7 +150,6 @@ export default function RegisterPage(props) {
               </GridItem>
             </GridContainer>
           </div>
-          <Footer whiteFont />
         </div>
         <Switch>
           <Route exact path="/LoginPage" component={LoginPage} />
