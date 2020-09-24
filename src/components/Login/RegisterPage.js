@@ -19,13 +19,13 @@ import CardBody from "components/MaterialKitComponents/Card/CardBody.js";
 import CardHeader from "components/MaterialKitComponents/Card/CardHeader.js";
 import CardFooter from "components/MaterialKitComponents/Card/CardFooter.js";
 import CustomInput from "components/MaterialKitComponents/CustomInput/CustomInput.js";
-import LoginPage from "components/Login/LoginPage.js";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import CheckboxTermsAndCond from "components/layout/CheckboxTermsAndCond.js";
+import Navbar from "components/layout/Navbar";
+import SouperFooter from "components/layout/SouperFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
-import image from "assets/img/bg7.jpg";
+import image from "assets/img/board.jpg";
 
 const useStyles = makeStyles(styles);
 
@@ -38,123 +38,120 @@ export default function RegisterPage(props) {
   const { ...rest } = props;
 
   return (
-    <Router>
-      <div>
-        <div
-          className={classes.pageHeader}
-          style={{
-            backgroundImage: "url(" + image + ")",
-            backgroundSize: "cover",
-            backgroundPosition: "top center",
-          }}
-        >
-          <div className={classes.container}>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={4}>
-                <Card className={classes[cardAnimaton]}>
-                  <form className={classes.form}>
-                    <CardHeader color="rose" className={classes.cardHeader}>
-                      <h2>Register</h2>
-                      <div className={classes.socialLine}>
-                        <Button
-                          justIcon
-                          href="#pablo"
-                          target="_blank"
-                          color="transparent"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className={"fab fa-twitter"} />
-                        </Button>
-                        <Button
-                          justIcon
-                          href="#pablo"
-                          target="_blank"
-                          color="transparent"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className={"fab fa-facebook"} />
-                        </Button>
-                        <Button
-                          justIcon
-                          href="#pablo"
-                          target="_blank"
-                          color="transparent"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className={"fab fa-google-plus-g"} />
-                        </Button>
-                      </div>
-                    </CardHeader>
-                    <CardBody>
-                      <CustomInput
-                        labelText="Full Name"
-                        id="first"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: "text",
-                          endAdornment: (
-                            <InputAdornment position="start">
-                              <Face className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <CustomInput
-                        labelText="Email..."
-                        id="email"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: "email",
-                          endAdornment: (
-                            <InputAdornment position="start">
-                              <Email className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <CustomInput
-                        labelText="Password"
-                        id="pass"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: "password",
-                          endAdornment: (
-                            <InputAdornment position="start">
-                              <Icon className={classes.inputIconsColor}>
-                                lock_outline
-                              </Icon>
-                            </InputAdornment>
-                          ),
-                          autoComplete: "off",
-                        }}
-                      />
+    <div>
+      <div
+        className={classes.pageHeader}
+        style={{
+          backgroundImage: "url(" + image + ")",
+          backgroundSize: "cover",
+          backgroundPosition: "top center",
+        }}
+      >
+        <Navbar />
+        <div className={classes.container}>
+          <GridContainer justify="center">
+            <GridItem xs={12} sm={12} md={4}>
+              <Card className={classes[cardAnimaton]}>
+                <form className={classes.form}>
+                  <CardHeader color="rose" className={classes.cardHeader}>
+                    <h2>Register</h2>
+                    <div className={classes.socialLine}>
+                      <Button
+                        justIcon
+                        href="#pablo"
+                        target="_blank"
+                        color="transparent"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        <i className={"fab fa-twitter"} />
+                      </Button>
+                      <Button
+                        justIcon
+                        href="#pablo"
+                        target="_blank"
+                        color="transparent"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        <i className={"fab fa-facebook"} />
+                      </Button>
+                      <Button
+                        justIcon
+                        href="#pablo"
+                        target="_blank"
+                        color="transparent"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        <i className={"fab fa-google-plus-g"} />
+                      </Button>
+                    </div>
+                  </CardHeader>
+                  <CardBody>
+                    <CustomInput
+                      labelText="Full Name"
+                      id="first"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        type: "text",
+                        endAdornment: (
+                          <InputAdornment position="start">
+                            <Face className={classes.inputIconsColor} />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    <CustomInput
+                      labelText="Email..."
+                      id="email"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        type: "email",
+                        endAdornment: (
+                          <InputAdornment position="start">
+                            <Email className={classes.inputIconsColor} />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    <CustomInput
+                      labelText="Password"
+                      id="pass"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        type: "password",
+                        endAdornment: (
+                          <InputAdornment position="start">
+                            <Icon className={classes.inputIconsColor}>
+                              lock_outline
+                            </Icon>
+                          </InputAdornment>
+                        ),
+                        autoComplete: "off",
+                      }}
+                    />
 
-                      <CheckboxTermsAndCond />
-                      <Button fullWidth size="lg" color="rose">
-                        Create Account
-                      </Button>
-                    </CardBody>
-                    <CardFooter className={classes.cardFooter}>
-                      <Button fullWidth size="lg" color="info">
-                        Log In
-                      </Button>
-                    </CardFooter>
-                  </form>
-                </Card>
-              </GridItem>
-            </GridContainer>
-          </div>
+                    <CheckboxTermsAndCond />
+                    <Button fullWidth size="lg" color="rose">
+                      Create Account
+                    </Button>
+                  </CardBody>
+                  <CardFooter className={classes.cardFooter}>
+                    <Button fullWidth size="lg" color="info">
+                      Log In
+                    </Button>
+                  </CardFooter>
+                </form>
+              </Card>
+            </GridItem>
+          </GridContainer>
         </div>
-        <Switch>
-          <Route exact path="/LoginPage" component={LoginPage} />
-        </Switch>
       </div>
-    </Router>
+      <SouperFooter />
+    </div>
   );
 }
