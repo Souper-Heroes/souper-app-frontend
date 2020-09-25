@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'components/Layout/node_modules/react';
 
 //import Footer from '../MaterialKitComponents/Footer/Footer.js';
 import styles from '../../assets/jss/material-kit-react/components/footerStyle.js';
@@ -6,10 +6,10 @@ import styles from '../../assets/jss/material-kit-react/components/footerStyle.j
 // nodejs library that concatenates classes
 //import classNames from "classnames";
 //import { List, ListItem } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from 'components/Layout/node_modules/@material-ui/core/styles';
 
 // @material-ui/icons
-import Favorite from '@material-ui/icons/Favorite';
+import Favorite from 'components/Layout/node_modules/@material-ui/icons/Favorite';
 const useStyles = makeStyles(styles);
 
 function SouperFooter() {
