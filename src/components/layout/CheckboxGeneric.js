@@ -1,13 +1,13 @@
-import React from 'components/Layout/node_modules/react';
-import classNames from 'components/Layout/node_modules/classnames';
+import React from 'react';
+import classNames from 'classnames';
 // material-ui components
-import { makeStyles } from 'components/Layout/node_modules/@material-ui/core/styles';
-import Checkbox from 'components/Layout/node_modules/@material-ui/core/Checkbox';
-import FormControlLabel from 'components/Layout/node_modules/@material-ui/core/FormControlLabel';
+import { makeStyles } from '@material-ui/core/styles';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 // @material-ui/icons
-import Check from 'components/Layout/node_modules/@material-ui/icons/Check';
+import Check from '@material-ui/icons/Check';
 
-import styles from 'components/Layout/node_modules/assets/jss/material-kit-react/customCheckboxRadioSwitch.js.js';
+import styles from 'assets/jss/material-kit-react/customCheckboxRadioSwitch.js';
 
 const useStyles = makeStyles(styles);
 

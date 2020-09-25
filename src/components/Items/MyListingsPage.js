@@ -22,9 +22,9 @@ import ListingTabSection from './Sections/ListingTabSection.js';
 import ProductSection from './Sections/ProductSection.js';
 import TeamSection from './Sections/TeamSection.js';
 import WorkSection from './Sections/WorkSection.js';
-import HeaderLinks from 'components/layout/HeaderLinks.js';
-import Header from 'components/layout/Header.js';
-import SouperFooter from 'components/layout/SouperFooter';
+import HeaderLinks from 'components/Layout/HeaderLinks.js';
+import Header from 'components/Layout/Header.js';
+import SouperFooter from 'components/Layout/SouperFooter';
 
 const dashboardRoutes = [];
 

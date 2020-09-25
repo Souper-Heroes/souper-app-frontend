@@ -15,7 +15,7 @@ import InfoArea from 'components/MaterialKitComponents/InfoArea/InfoArea.js';
 import CustomTabs from 'components/MaterialKitComponents/CustomTabs/CustomTabs.js';
 //import styles from 'assets/jss/material-kit-react/views/landingPageSections/productStyle.js';
 import styles from 'assets/jss/Items/views/MyListingsPage.js';
-import MyItemListings from 'components/layout/MyItemListings.js';
+import MyItemListings from 'components/Layout/MyItemListings.js';
 
 const useStyles = makeStyles(styles);
 

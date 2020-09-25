@@ -1,6 +1,6 @@
-import React from 'components/Layout/node_modules/react';
+import React from 'react';
 // @material-ui/core components
-import { makeStyles } from 'components/Layout/node_modules/@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 // @material-ui/icons
 //import Chat from '@material-ui/icons/Chat';
@@ -9,17 +9,17 @@ import { makeStyles } from 'components/Layout/node_modules/@material-ui/core/sty
 //import Face from '@material-ui/icons/Face';
 //import Build from '@material-ui/icons/Build';
 // core components
-import GridContainer from 'components/Layout/node_modules/components/MaterialKitComponents/Grid/GridContainer.js.js';
-import GridItem from 'components/Layout/node_modules/components/MaterialKitComponents/Grid/GridItem.js.js';
-import Grid from 'components/Layout/node_modules/@material-ui/core/Grid';
+import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer.js';
+import GridItem from 'components/MaterialKitComponents/Grid/GridItem.js';
+import Grid from '@material-ui/core/Grid';
 //import InfoArea from 'components/MaterialKitComponents/InfoArea/InfoArea.js';
 //import CustomTabs from 'components/MaterialKitComponents/CustomTabs/CustomTabs.js';
 //import styles from 'assets/jss/material-kit-react/views/landingPageSections/productStyle.js';
-import styles from 'components/Layout/node_modules/assets/jss/Items/views/MyItemListings.js.js';
+import styles from 'assets/jss/Items/views/MyItemListings.js';
 
-import Paper from 'components/Layout/node_modules/@material-ui/core/Paper';
-import Typography from 'components/Layout/node_modules/@material-ui/core/Typography';
-import ButtonBase from 'components/Layout/node_modules/@material-ui/core/ButtonBase';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 import banana from 'assets/img/purple-banana.jpg';
 
