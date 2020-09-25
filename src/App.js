@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 
 function App() {
-  const [state, setState] = useState({
+  const [registerInputs, setRegisterInputs] = useState({
     registerInput: [
       { id: 'first', label: 'Full Name', type: 'text', icon: 'face' },
       { id: 'second', label: 'Email', type: 'email', icon: 'email' },
@@ -21,7 +21,7 @@ function App() {
           <LoginPage />
         </Route>
         <Route path='/register'>
-          <RegisterPage registerInputs={state['registerInput']} />
+          <RegisterPage registerInputs={registerInputs} />
         </Route>
         <Route path='/'>
           <Page />
