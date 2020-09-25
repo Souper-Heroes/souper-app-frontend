@@ -33,6 +33,7 @@ export default function LoginPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
   return (
+    <div></div>
     <div>
       <Header
         absolute
