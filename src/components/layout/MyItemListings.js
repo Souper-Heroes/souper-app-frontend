@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'components/Layout/node_modules/react';
 // @material-ui/core components
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from 'components/Layout/node_modules/@material-ui/core/styles';
 
 // @material-ui/icons
 //import Chat from '@material-ui/icons/Chat';
@@ -9,12 +9,12 @@ import { makeStyles } from '@material-ui/core/styles';
 //import Face from '@material-ui/icons/Face';
 //import Build from '@material-ui/icons/Build';
 // core components
-import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer.js';
-import GridItem from 'components/MaterialKitComponents/Grid/GridItem.js';
+import GridContainer from 'components/Layout/node_modules/components/MaterialKitComponents/Grid/GridContainer.js.js';
+import GridItem from 'components/Layout/node_modules/components/MaterialKitComponents/Grid/GridItem.js.js';
 //import InfoArea from 'components/MaterialKitComponents/InfoArea/InfoArea.js';
 //import CustomTabs from 'components/MaterialKitComponents/CustomTabs/CustomTabs.js';
-import ItemListing from 'components/layout/MyItemListing.js';
-import styles from 'assets/jss/Items/views/MyItemListings.js';
+import ItemListing from 'components/Layout/node_modules/components/layout/MyItemListing.js.js';
+import styles from 'components/Layout/node_modules/assets/jss/Items/views/MyItemListings.js.js';
 
 const useStyles = makeStyles(styles);
 
