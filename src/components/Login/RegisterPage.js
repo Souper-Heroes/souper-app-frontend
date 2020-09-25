@@ -29,7 +29,7 @@ import image from 'assets/img/board.jpg';
 
 const useStyles = makeStyles(styles);
 
-export default function RegisterPage({ textlabels }) {
+export default function RegisterPage({ registerInputs }) {
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
   setTimeout(function () {
     setCardAnimation('');
@@ -85,7 +85,7 @@ export default function RegisterPage({ textlabels }) {
                     </div>
                   </CardHeader>
                   <CardBody>
-                    {textlabels.map((label) => (
+                    {registerInputs.map((label) => (
                       <CustomInput
                         labelText={label.label}
                         id={label.id}
