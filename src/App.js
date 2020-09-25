@@ -35,7 +35,11 @@ function App() {
             rightLinks={<HeaderLinks />}
             fixed
           />
-          <Parallax small filter image={require('assets/img/profile-bg.jpg')} />
+          <Parallax
+            small
+            filter
+            image={require('assets/img/citrus-fruit.jpg')}
+          />
           <ItemListings />
           <SouperFooter />
         </Route>
