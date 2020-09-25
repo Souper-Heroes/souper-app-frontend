@@ -1,45 +1,47 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
+import { makeStyles } from '@material-ui/core/styles';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
-import Email from "@material-ui/icons/Email";
-import People from "@material-ui/icons/People";
+import Email from '@material-ui/icons/Email';
 // core components
-import GridContainer from "components/MaterialKitComponents/Grid/GridContainer.js";
-import GridItem from "components/MaterialKitComponents/Grid/GridItem.js";
-import Button from "components/MaterialKitComponents/CustomButtons/Button.js";
-import Card from "components/MaterialKitComponents/Card/Card.js";
-import CardBody from "components/MaterialKitComponents/Card/CardBody.js";
-import CardHeader from "components/MaterialKitComponents/Card/CardHeader.js";
-import CardFooter from "components/MaterialKitComponents/Card/CardFooter.js";
-import CustomInput from "components/MaterialKitComponents/CustomInput/CustomInput.js";
+import GridContainer from '../MaterialKitComponents/Grid/GridContainer.js';
+import GridItem from '../MaterialKitComponents/Grid/GridItem.js';
+import Button from '../MaterialKitComponents/CustomButtons/Button.js';
+import Card from '../MaterialKitComponents/Card/Card.js';
+import CardBody from '../MaterialKitComponents/Card/CardBody.js';
+import CardHeader from '../MaterialKitComponents/Card/CardHeader.js';
+import CardFooter from '../MaterialKitComponents/Card/CardFooter.js';
+import CustomInput from '../MaterialKitComponents/CustomInput/CustomInput.js';
 
-import styles from "assets/jss/material-kit-react/views/loginPage.js";
-//import Image from  '/Documentation/assets/img/board.jpg'; // Import using relative path
-
-import image from "assets/img/bg7.jpg";
-import { Redirect, NavLink } from "react-router-dom";
+import styles from '../../assets/jss/material-kit-react/views/loginPage.js';
+import image from '../../assets/img/board.jpg';
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage(props) {
-  const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  setTimeout(function () {
-    setCardAnimation("");
+export default function LoginPage() {
+  const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
+  setTimeout(() => {
+    setCardAnimation('');
   }, 700);
   const classes = useStyles();
-  const { ...rest } = props;
   return (
     <div>
-
+      <div
+        style={{
+          backgroundImage: `url(${image})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'top center',
+        }}
+      >
         <div className={classes.container}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
-                  <CardHeader color="primary" className={classes.cardHeader}>
+                  <CardHeader color="rose" className={classes.cardHeader}>
                     <h4>Login</h4>
                     <div className={classes.socialLine}>
                       <Button
@@ -49,7 +51,7 @@ export default function LoginPage(props) {
                         color="transparent"
                         onClick={(e) => e.preventDefault()}
                       >
-                        <i className={"fab fa-twitter"} />
+                        <i className="fab fa-twitter" />
                       </Button>
                       <Button
                         justIcon
@@ -58,7 +60,7 @@ export default function LoginPage(props) {
                         color="transparent"
                         onClick={(e) => e.preventDefault()}
                       >
-                        <i className={"fab fa-facebook"} />
+                        <i className="fab fa-facebook" />
                       </Button>
                       <Button
                         justIcon
@@ -67,7 +69,7 @@ export default function LoginPage(props) {
                         color="transparent"
                         onClick={(e) => e.preventDefault()}
                       >
-                        <i className={"fab fa-google-plus-g"} />
+                        <i className="fab fa-google-plus-g" />
                       </Button>
                     </div>
                   </CardHeader>
@@ -79,7 +81,7 @@ export default function LoginPage(props) {
                         fullWidth: true,
                       }}
                       inputProps={{
-                        type: "email",
+                        type: 'email',
                         endAdornment: (
                           <InputAdornment position="end">
                             <Email className={classes.inputIconsColor} />
@@ -94,7 +96,7 @@ export default function LoginPage(props) {
                         fullWidth: true,
                       }}
                       inputProps={{
-                        type: "password",
+                        type: 'password',
                         endAdornment: (
                           <InputAdornment position="end">
                             <Icon className={classes.inputIconsColor}>
@@ -102,15 +104,29 @@ export default function LoginPage(props) {
                             </Icon>
                           </InputAdornment>
                         ),
-                        autoComplete: "off",
+                        autoComplete: 'off',
                       }}
                     />
                   </CardBody>
+                  <GridContainer justify="center">
+                    <Link to="/ForgottenPassword" className={classes.link}>
+                      <Button simple color="info" size="lg" to="/ForgottenPassword">
+                        FORGOTTEN PASSWORD?
+                      </Button>
+                    </Link>
+                  </GridContainer>
                   <CardFooter className={classes.cardFooter}>
                     <Button variant="contained" color="rose" size="lg">
-                      <NavLink to="/register" activeClassName="hurray">
+                      <Link to="/">
                         LOG IN
-                      </NavLink>
+                      </Link>
+                    </Button>
+                  </CardFooter>
+                  <CardFooter className={classes.cardFooter}>
+                    <Button variant="contained" size="lg">
+                      <Link to="/register">
+                        REGISTER
+                      </Link>
                     </Button>
                   </CardFooter>
                 </form>
@@ -118,6 +134,7 @@ export default function LoginPage(props) {
             </GridItem>
           </GridContainer>
         </div>
+      </div>
     </div>
   );
 }
