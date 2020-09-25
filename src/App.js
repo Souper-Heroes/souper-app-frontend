@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import LoginPage from './components/Login/LoginPage';
 import RegisterPage from './components/Login/RegisterPage';
+import MyListingsPage from './components/Items/MyListingsPage';
 import Page from './components/Page';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
@@ -22,6 +23,9 @@ function App() {
         </Route>
         <Route path='/register'>
           <RegisterPage registerInputs={state['registerInput']} />
+        </Route>
+        <Route path='/mylistings'>
+          <MyListingsPage />
         </Route>
         <Route path='/'>
           <Page />
