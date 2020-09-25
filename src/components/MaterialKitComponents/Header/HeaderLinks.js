@@ -15,8 +15,8 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { Apps, CloudDownload } from "@material-ui/icons";
 
 // core components
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
-import Button from "components/CustomButtons/Button.js";
+import CustomDropdown from "components/MaterialKitComponents/CustomDropdown/CustomDropdown.js";
+import Button from "components/MaterialKitComponents/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 
@@ -32,7 +32,7 @@ export default function HeaderLinks(props) {
           buttonText="Components"
           buttonProps={{
             className: classes.navLink,
-            color: "transparent"
+            color: "transparent",
           }}
           buttonIcon={Apps}
           dropdownList={[
@@ -45,7 +45,7 @@ export default function HeaderLinks(props) {
               className={classes.dropdownLink}
             >
               Documentation
-            </a>
+            </a>,
           ]}
         />
       </ListItem>
