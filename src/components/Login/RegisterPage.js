@@ -89,6 +89,7 @@ export default function RegisterPage({ registerInputs }) {
                       <CustomInput
                         labelText={input.label}
                         id={input.id}
+                        key={input.id}
                         formControlProps={{
                           fullWidth: true,
                         }}
