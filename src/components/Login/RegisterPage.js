@@ -85,24 +85,24 @@ export default function RegisterPage({ registerInputs }) {
                     </div>
                   </CardHeader>
                   <CardBody>
-                    {registerInputs.map((label) => (
+                    {registerInputs.map((input) => (
                       <CustomInput
-                        labelText={label.label}
-                        id={label.id}
+                        labelText={input.label}
+                        id={input.id}
                         formControlProps={{
                           fullWidth: true,
                         }}
                         inputProps={{
-                          type: `${label.type}`,
+                          type: `${input.type}`,
                           endAdornment: (
                             <InputAdornment position='start'>
-                              {label.icon === 'face' && (
+                              {input.icon === 'face' && (
                                 <Face className={classes.inputIconsColor} />
                               )}
-                              {label.icon === 'email' && (
+                              {input.icon === 'email' && (
                                 <Email className={classes.inputIconsColor} />
                               )}
-                              {label.icon === 'lock' && (
+                              {input.icon === 'lock' && (
                                 <Icon className={classes.inputIconsColor}>
                                   lock_outline
                                 </Icon>
