@@ -6,12 +6,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import Chat from '@material-ui/icons/Chat';
 import VerifiedUser from '@material-ui/icons/VerifiedUser';
 import Fingerprint from '@material-ui/icons/Fingerprint';
+import Face from '@material-ui/icons/Face';
+import Build from '@material-ui/icons/Build';
 // core components
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer.js';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem.js';
 import InfoArea from 'components/MaterialKitComponents/InfoArea/InfoArea.js';
-
-import styles from 'assets/jss/material-kit-react/views/landingPageSections/productStyle.js';
+import CustomTabs from 'components/MaterialKitComponents/CustomTabs/CustomTabs.js';
+//import styles from 'assets/jss/material-kit-react/views/landingPageSections/productStyle.js';
+import styles from 'assets/jss/Items/views/MyListingsPage.js';
+import MyItemListings from 'components/layout/MyItemListings.js';
 
 const useStyles = makeStyles(styles);
 
@@ -19,49 +23,36 @@ export default function ListingTabSection() {
   const classes = useStyles();
   return (
     <div className={classes.section}>
-      <GridContainer justify='center'>
-        <GridItem xs={12} sm={12} md={8}>
-          <h2 className={classes.title}>Let{"'"}s talk product</h2>
-          <h5 className={classes.description}>
-            This is the paragraph where you can write more details about your
-            product. Keep you user engaged by providing meaningful information.
-            Remember that by this time, the user is curious, otherwise he wouldn
-            {"'"}t scroll to get here. Add a button if you want the user to see
-            more.
-          </h5>
-        </GridItem>
-      </GridContainer>
-      <div>
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
-            <InfoArea
-              title='Free Chat'
-              description='Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.'
-              icon={Chat}
-              iconColor='info'
-              vertical
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <InfoArea
-              title='Verified Users'
-              description='Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.'
-              icon={VerifiedUser}
-              iconColor='success'
-              vertical
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <InfoArea
-              title='Fingerprint'
-              description='Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.'
-              icon={Fingerprint}
-              iconColor='danger'
-              vertical
-            />
-          </GridItem>
-        </GridContainer>
-      </div>
+      <CustomTabs
+        headerColor='rose'
+        plainTabs
+        tabs={[
+          {
+            tabName: 'Listings',
+            //TODO tabIcon: Face,
+            tabContent: (
+              <MyItemListings />
+
+              /* (
+                <p className={classes.textCenter}>
+                  I think that’s a responsibility that I have, to push
+                  possibilities, to show people, this is the level that things
+                </p>
+              ) */
+            ),
+          },
+          {
+            tabName: 'Collections',
+            //TODO tabIcon: Chat,
+            tabContent: (
+              /*{<ItemListings />}*/
+              <p className={classes.textCenter}>
+                show people, this is the level that things
+              </p>
+            ),
+          },
+        ]}
+      />
     </div>
   );
 }
