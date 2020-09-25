@@ -1,14 +1,21 @@
-import React from "react";
-import Navbar from "../components/layout/Navbar";
-import SouperFooter from "../components/layout/SouperFooter";
+import React from 'react';
+import Header from 'components/Layout/Header.js';
+import HeaderLinks from 'components/Layout/HeaderLinks.js';
+import { Restaurant } from '@material-ui/icons';
+import SouperFooter from 'components/Layout/SouperFooter';
 
 function Page() {
-    return (
-     <>
-        <Navbar />
-        <SouperFooter />
-     </>
-    );
+  return (
+    <>
+      <Header
+        brand={<Restaurant />}
+        color='rose'
+        leftLinks={''}
+        rightLinks={<HeaderLinks />}
+      />
+      <SouperFooter />
+    </>
+  );
 }
 
 export default Page;
