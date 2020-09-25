@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from 'components/Layout/Header.js';
-import HeaderLinks from 'components/Layout/HeaderLinks.js';
+import Header from 'components/layout/Header.js';
+import HeaderLinks from 'components/layout/HeaderLinks.js';
 import { Restaurant } from '@material-ui/icons';
-import SouperFooter from 'components/Layout/SouperFooter';
+import SouperFooter from 'components/layout/SouperFooter';
 
 function Page() {
   return (

@@ -20,8 +20,8 @@ import CardBody from 'components/MaterialKitComponents/Card/CardBody.js';
 import CardHeader from 'components/MaterialKitComponents/Card/CardHeader.js';
 import CardFooter from 'components/MaterialKitComponents/Card/CardFooter.js';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput.js';
-import CheckboxGeneric from 'components/Layout/CheckboxGeneric.js';
-import SouperFooter from 'components/Layout/SouperFooter.js';
+import CheckboxGeneric from 'components/layout/CheckboxGeneric.js';
+import SouperFooter from 'components/layout/SouperFooter.js';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage.js';
 
@@ -89,6 +89,7 @@ export default function RegisterPage({ registerInputs }) {
                       <CustomInput
                         labelText={input.label}
                         id={input.id}
+                        key={input.id}
                         formControlProps={{
                           fullWidth: true,
                         }}
