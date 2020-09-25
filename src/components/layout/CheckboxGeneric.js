@@ -1,19 +1,20 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
 // material-ui components
-import { makeStyles } from "@material-ui/core/styles";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { makeStyles } from '@material-ui/core/styles';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 // @material-ui/icons
-import Check from "@material-ui/icons/Check";
+import Check from '@material-ui/icons/Check';
 
-import styles from "assets/jss/material-kit-react/customCheckboxRadioSwitch.js";
+import styles from 'assets/jss/material-kit-react/customCheckboxRadioSwitch.js';
 
 const useStyles = makeStyles(styles);
 
-export default function CheckboxRadioSwitch() {
+export default function CheckboxGeneric(props) {
   const [checked, setChecked] = React.useState([24, 22]);
   const classes = useStyles();
+
   const wrapperDiv = classNames(
     classes.checkboxAndRadio,
     classes.checkboxAndRadioHorizontal
@@ -43,7 +44,7 @@ export default function CheckboxRadioSwitch() {
             />
           }
           classes={{ label: classes.label }}
-          label="Terms and Conditions"
+          label={props.children}
         />
       </div>
     </div>
