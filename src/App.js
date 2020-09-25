@@ -6,11 +6,13 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 
 function App() {
-  const [registerInputs, setState] = useState([
-    { id: 'first', label: 'Full Name', type: 'text', icon: 'face' },
-    { id: 'second', label: 'Email', type: 'email', icon: 'email' },
-    { id: 'third', label: 'Password', type: 'password', icon: 'lock' },
-  ]);
+  const [state, setState] = useState({
+    registerInput: [
+      { id: 'first', label: 'Full Name', type: 'text', icon: 'face' },
+      { id: 'second', label: 'Email', type: 'email', icon: 'email' },
+      { id: 'third', label: 'Password', type: 'password', icon: 'lock' },
+    ],
+  });
 
   return (
     <BrowserRouter>
@@ -19,7 +21,7 @@ function App() {
           <LoginPage />
         </Route>
         <Route path='/register'>
-          <RegisterPage textlabels={registerInputs} />
+          <RegisterPage registerInputs={state['registerInput']} />
         </Route>
         <Route path='/'>
           <Page />
