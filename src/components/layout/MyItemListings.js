@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-tag-spacing */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 // @material-ui/core components
@@ -26,28 +27,37 @@ import Button from 'components/CustomButtons/Button.js';
 
 const useStyles = makeStyles(styles);
 
-export default function MyItemListings(props) {
+export default function MyItemListings({ type, myitems }) {
   const classes = useStyles();
 
   return (
     <div /* {className={classes.section} } */>
-      <GridContainer {...props}>
+      <GridContainer>
         <GridItem align='right'>
           <ListingsDropdown />
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
-          <MyItemListing />
-          <Divider xs={12} variant='middle' component='li' />
-          <MyItemListing />
+          {myitems.map((myitem) => (
+            <MyItemListing key={myitem.itemId} type={type} myitem={myitem} />
+          ))}
         </GridItem>
-        <GridItem xs={6} align='left'>
-          <Button type='button' color='rose'>
-            Add Item
-          </Button>
-        </GridItem>
-        <GridItem xs={6} align='right'>
-          <ListingsPagination />
-        </GridItem>
+        {type === 'provide' && (
+          <GridItem xs={6} align='left'>
+            <Button type='button' color='rose'>
+              Add Item
+            </Button>
+          </GridItem>
+        )}
+        {type === 'provide' && (
+          <GridItem xs={6} align='right'>
+            <ListingsPagination />
+          </GridItem>
+        )}
+        {type !== 'provide' && (
+          <GridItem xs={12} align='right'>
+            <ListingsPagination />
+          </GridItem>
+        )}
       </GridContainer>
     </div>
   );

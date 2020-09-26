@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,8 +20,16 @@ import MyItemListings from 'components/Layout/MyItemListings.js';
 
 const useStyles = makeStyles(styles);
 
-export default function ListingTabSection() {
+function getUserItems(type, userItems) {
+  return userItems.filter((item) => item.type === type);
+}
+
+export default function ListingTabSection({ userItems }) {
   const classes = useStyles();
+
+  const itemsToProvide = getUserItems('p', userItems);
+  const itemsToCollect = getUserItems('c', userItems);
+
   return (
     <div className={classes.section}>
       <CustomTabs
@@ -31,24 +40,14 @@ export default function ListingTabSection() {
             tabName: 'Listings',
             //TODO tabIcon: Face,
             tabContent: (
-              <MyItemListings />
-
-              /* (
-                <p className={classes.textCenter}>
-                  I think that’s a responsibility that I have, to push
-                  possibilities, to show people, this is the level that things
-                </p>
-              ) */
+              <MyItemListings type='provide' myitems={itemsToProvide} />
             ),
           },
           {
             tabName: 'Collections',
             //TODO tabIcon: Chat,
             tabContent: (
-              /*{<ItemListings />}*/
-              <p className={classes.textCenter}>
-                show people, this is the level that things
-              </p>
+              <MyItemListings type='collection' myitems={itemsToCollect} />
             ),
           },
         ]}
