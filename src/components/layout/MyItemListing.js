@@ -29,6 +29,7 @@ import styles from 'assets/jss/Items/views/MyItemListings.js';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
+import Divider from '@material-ui/core/Divider';
 
 import banana from 'assets/img/purple-banana.jpg';
 import { Button } from '@material-ui/core';
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MyItemListing() {
+export default function MyItemListing({ type, myitem }) {
   const classes = useStyles();
 
   return (
@@ -85,11 +86,7 @@ export default function MyItemListing() {
                 <GridItem xs={12}>
                   <a href='#'>
                     <Typography gutterBottom variant='body1'>
-                      <strong>
-                        5 Almost black over-ripe bananas sdfsdfsd sdfsdfsdf
-                        sdfsdsdfsdfsdfs sdfsdf sdfs sdfsfd sdfsf sdfsfsd
-                        sfdsdfsf
-                      </strong>
+                      <strong>{myitem.description}</strong>
                     </Typography>
                   </a>
                   <GridContainer align='left' item xs={12} container>
@@ -99,7 +96,7 @@ export default function MyItemListing() {
                         color='textPrimary'
                         gutterBottom
                       >
-                        Category: Fruit
+                        Category: {myitem.category}
                       </Typography>
                     </GridItem>
                     <GridItem xs={12} sm={6} md={6} lg={6}>
@@ -108,7 +105,7 @@ export default function MyItemListing() {
                         color='textPrimary'
                         gutterBottom
                       >
-                        Location: EN4 4QE
+                        Location: {myitem.location}
                       </Typography>
                     </GridItem>
                   </GridContainer>
@@ -119,7 +116,7 @@ export default function MyItemListing() {
                         color='textPrimary'
                         gutterBottom
                       >
-                        <strong>Expires: 23rd Sept 2020</strong>
+                        <strong>Expires: {myitem.expiry}</strong>
                       </Typography>
                     </GridItem>
                     <GridItem xs={12} sm={6} md={6} lg={6}>
@@ -128,7 +125,7 @@ export default function MyItemListing() {
                         color='textPrimary'
                         gutterBottom
                       >
-                        Collected: 23rd Sept 2020
+                        Collected: {myitem.collectionTime}
                       </Typography>
                     </GridItem>
                   </GridContainer>
@@ -138,9 +135,11 @@ export default function MyItemListing() {
                 <Button>
                   <EmojiEvent />
                 </Button>
-                <Button>
-                  <Edit />
-                </Button>
+                {type === 'provide' && (
+                  <Button>
+                    <Edit />
+                  </Button>
+                )}
                 <Button>
                   <Delete />
                 </Button>
