@@ -20,16 +20,17 @@ import styles from 'assets/jss/Items/views/MyItemListings.js';
 import Divider from '@material-ui/core/Divider';
 import ListingsDropdown from 'components/Layout/ListingsDropdown.js';
 import ListingsPagination from './ListingsPagination';
+import Button from 'components/CustomButtons/Button.js';
 //import Paginations from 'components/MaterialKitComponents/Pagination/Pagination.js';
 
 const useStyles = makeStyles(styles);
 
-export default function MyItemListings() {
+export default function MyItemListings(props) {
   const classes = useStyles();
 
   return (
     <div /* {className={classes.section} } */>
-      <GridContainer justify='center'>
+      <GridContainer {...props}>
         <GridItem align='right'>
           <ListingsDropdown />
         </GridItem>
@@ -38,7 +39,12 @@ export default function MyItemListings() {
           <Divider xs={12} variant='middle' component='li' />
           <MyItemListing />
         </GridItem>
-        <GridItem align='right'>
+        <GridItem xs={6} align='left'>
+          <Button type='button' color='rose'>
+            Add Item
+          </Button>
+        </GridItem>
+        <GridItem xs={6} align='right'>
           <ListingsPagination />
         </GridItem>
       </GridContainer>

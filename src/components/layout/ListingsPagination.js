@@ -1,21 +1,29 @@
 import React from 'react';
 
+import { makeStyles } from '@material-ui/core/styles';
 import Paginations from 'components/MaterialKitComponents/Pagination/Pagination.js';
 
-export default function ListingsPagination(props) {
+const useStyles = makeStyles((theme) => ({
+  box: {
+    margin: 'auto',
+  },
+}));
+
+export default function ListingsPagination() {
+  const classes = useStyles();
+
   return (
-    <div>
-      <Paginations
-        pages={[
-          { text: 'PREV' },
-          { text: 1 },
-          { active: true, text: 2 },
-          { text: 3 },
-          { text: 'NEXT' },
-        ]}
-        color='rose'
-      />
-    </div>
+    <Paginations
+      className={classes.box}
+      pages={[
+        { text: 'PREV' },
+        { text: 1 },
+        { active: true, text: 2 },
+        { text: 3 },
+        { text: 'NEXT' },
+      ]}
+      color='rose'
+    />
   );
 }
 
