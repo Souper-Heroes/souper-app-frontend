@@ -1,8 +1,8 @@
 import { container, title } from 'assets/jss/material-kit-react.js';
 
-const myListingsPageStyle = {
+const MyListingsPageStyle = {
   section: {
-    padding: '0px 0',
+    padding: '10px 0',
     textAlign: 'center',
   },
   /*
@@ -57,4 +57,4 @@ const myListingsPageStyle = {
   },
 };
 
-export default myListingsPageStyle;
+export default MyListingsPageStyle;

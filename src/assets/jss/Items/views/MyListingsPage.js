@@ -1,6 +1,11 @@
 import { container, title } from 'assets/jss/material-kit-react.js';
 
 const myListingsPageStyle = {
+  section: {
+    padding: '10px 0px',
+    textAlign: 'center',
+  },
+
   container: {
     zIndex: '12',
     color: '#FFFFFF',

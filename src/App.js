@@ -30,7 +30,20 @@ function App() {
           <RegisterPage registerInputs={registerInputs} />
         </Route>
         <Route path='/mylistings'>
+          <Header
+            brand={<Restaurant />}
+            color='rose'
+            leftLinks={''}
+            rightLinks={<HeaderLinks />}
+            fixed
+          />
+          <Parallax
+            small
+            filter
+            image={require('assets/img/citrus-fruit.jpg')}
+          />
           <MyListingsPage />
+          <SouperFooter />
         </Route>
         <Route path='/landing'>
           <LandingPage />
