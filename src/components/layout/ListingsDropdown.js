@@ -4,6 +4,7 @@ import CustomDropdown from 'components/MaterialKitComponents/CustomDropdown/Cust
 
 export default function ListingsDropdown() {
   return (
+    // eslint-disable-next-line react/jsx-filename-extension
     <CustomDropdown
       hoverColor='rose'
       dropdownHeader='Sort By'
