@@ -1,3 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable global-require */
+/* eslint-disable jsx-quotes */
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -96,21 +101,49 @@ export default function MyItemListing() {
                       </strong>
                     </Typography>
                   </a>
-                  <Typography variant='body2' color='textPrimary' gutterBottom>
-                    Category: Fruit
-                  </Typography>
-                  <Typography variant='body2' color='textPrimary' gutterBottom>
-                    PostCode: EN4 4QE
-                  </Typography>
-                  <Typography variant='body2' color='textPrimary' gutterBottom>
-                    Collected: 23rd Sept 2020
-                  </Typography>
-                  <Typography variant='body2' color='textPrimary' gutterBottom>
-                    <strong>Expires: 23rd Sept 2020</strong>
-                  </Typography>
+                  <GridContainer align='left' item xs={12} container>
+                    <GridItem xs={12} sm={6} md={6} lg={6}>
+                      <Typography
+                        variant='body2'
+                        color='textPrimary'
+                        gutterBottom
+                      >
+                        Category: Fruit
+                      </Typography>
+                    </GridItem>
+                    <GridItem xs={12} sm={6} md={6} lg={6}>
+                      <Typography
+                        variant='body2'
+                        color='textPrimary'
+                        gutterBottom
+                      >
+                        PostCode: EN4 4QE
+                      </Typography>
+                    </GridItem>
+                  </GridContainer>
+                  <GridContainer align='left' item xs={12} container>
+                    <GridItem xs={12} sm={6} md={6} lg={6}>
+                      <Typography
+                        variant='body2'
+                        color='textPrimary'
+                        gutterBottom
+                      >
+                        Collected: 23rd Sept 2020
+                      </Typography>
+                    </GridItem>
+                    <GridItem xs={12} sm={6} md={6} lg={6}>
+                      <Typography
+                        variant='body2'
+                        color='textPrimary'
+                        gutterBottom
+                      >
+                        <strong>Expires: 23rd Sept 2020</strong>
+                      </Typography>
+                    </GridItem>
+                  </GridContainer>
                 </GridItem>
               </GridItem>
-              <GridItem align='right' xs>
+              <GridItem align='right'>
                 <Button>
                   <EmojiEvent />
                 </Button>
