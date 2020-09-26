@@ -67,15 +67,6 @@ export default function MyItemListing() {
   const classes = useStyles();
 
   return (
-    /* <div /* {className={classes.section} } >
-      <GridContainer justify='center'>
-        <GridItem xs={3} sm={3} md={6}>
-          <a href='#'>
-            <img className={classes.image} src={banana} alt='Thumbnail Image' />
-          </a>
-        </GridItem>
-      </GridContainer>
-    </div> */
     <GridContainer spacing={2}>
       <GridItem>
         <Paper className={classes.paper} spacing={2}>
@@ -117,7 +108,7 @@ export default function MyItemListing() {
                         color='textPrimary'
                         gutterBottom
                       >
-                        PostCode: EN4 4QE
+                        Location: EN4 4QE
                       </Typography>
                     </GridItem>
                   </GridContainer>
@@ -128,7 +119,7 @@ export default function MyItemListing() {
                         color='textPrimary'
                         gutterBottom
                       >
-                        Collected: 23rd Sept 2020
+                        <strong>Expires: 23rd Sept 2020</strong>
                       </Typography>
                     </GridItem>
                     <GridItem xs={12} sm={6} md={6} lg={6}>
@@ -137,7 +128,7 @@ export default function MyItemListing() {
                         color='textPrimary'
                         gutterBottom
                       >
-                        <strong>Expires: 23rd Sept 2020</strong>
+                        Collected: 23rd Sept 2020
                       </Typography>
                     </GridItem>
                   </GridContainer>
