@@ -1,66 +1,33 @@
 import React from 'react';
-// nodejs library that concatenates classes
-import classNames from 'classnames';
-// @material-ui/core components
-import { makeStyles } from '@material-ui/core/styles';
-
-// @material-ui/icons
-
-// core components
-//import Header from 'components/MaterialKitComponents/Header/Header.js';
-import Footer from 'components/MaterialKitComponents/Footer/Footer.js';
-import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer.js';
-import GridItem from 'components/MaterialKitComponents/Grid/GridItem.js';
-import Button from 'components/MaterialKitComponents/CustomButtons/Button.js';
-//import HeaderLinks from 'components/MaterialKitComponents/Header/HeaderLinks.js';
-import Parallax from 'components/MaterialKitComponents/Parallax/Parallax.js';
-
-import styles from 'assets/jss/Items/views/MyListingsPage.js';
-
-// Sections for this page
-import ListingTabSection from './Sections/ListingTabSection.js';
-import ProductSection from './Sections/ProductSection.js';
-import TeamSection from './Sections/TeamSection.js';
-import WorkSection from './Sections/WorkSection.js';
-import HeaderLinks from 'components/Layout/HeaderLinks.js';
 import Header from 'components/Layout/Header.js';
+import HeaderLinks from 'components/Layout/HeaderLinks.js';
+import { Restaurant } from '@material-ui/icons';
 import SouperFooter from 'components/Layout/SouperFooter';
 
-const dashboardRoutes = [];
+import classNames from 'classnames';
+import { makeStyles } from '@material-ui/core/styles';
+import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer.js';
+import GridItem from 'components/MaterialKitComponents/Grid/GridItem.js';
+import Button from 'components/CustomButtons/Button.js';
+import ListingTabSection from './Sections/ListingTabSection.js';
+
+import styles from 'assets/jss/material-kit-react/views/profilePage.js';
 
 const useStyles = makeStyles(styles);
 
-export default function MyListingsPage(props) {
+function MyListingsPage() {
   const classes = useStyles();
-  const { ...rest } = props;
   return (
-    <div>
-      <Header
-        color='transparent'
-        routes={dashboardRoutes}
-        //brand='Material Kit React'
-        rightLinks={<HeaderLinks />}
-        fixed
-        changeColorOnScroll={{
-          height: 400,
-          color: 'white',
-        }}
-        {...rest}
-      />
-
-      <Parallax
-        className={classes.maxHeight}
-        image={require('assets/img/citrus-fruit.jpg')}
-      ></Parallax>
-      <div className={classNames(classes.main, classes.mainRaised)}>
-        <div className={classes.container}>
-          {<ListingTabSection />}
-          {/* <ProductSection /> */
-          /* <TeamSection /> */
-          /* <WorkSection /> */}
-        </div>
+    <div className={classNames(classes.main, classes.mainRaised)}>
+      <div className={classes.container}>
+        <GridContainer justify='center'>
+          <GridItem xs={12} sm={12} md={8} lg={8}>
+            <ListingTabSection />
+          </GridItem>
+        </GridContainer>
       </div>
-      <SouperFooter />
     </div>
   );
 }
+
+export default MyListingsPage;

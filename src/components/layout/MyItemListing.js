@@ -8,6 +8,10 @@ import { makeStyles } from '@material-ui/core/styles';
 //import Fingerprint from '@material-ui/icons/Fingerprint';
 //import Face from '@material-ui/icons/Face';
 //import Build from '@material-ui/icons/Build';
+import Edit from '@material-ui/icons/Edit';
+import Delete from '@material-ui/icons/Delete';
+import EmojiEvent from '@material-ui/icons/EmojiEvents';
+
 // core components
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer.js';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem.js';
@@ -22,6 +26,8 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 import banana from 'assets/img/purple-banana.jpg';
+import { Button } from '@material-ui/core';
+import { Markunread } from '@material-ui/icons';
 
 //const useStyles = makeStyles(styles);
 
@@ -32,7 +38,9 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     margin: 'auto',
-    maxWidth: 500,
+    minWidth: '900',
+    alignItems: 'left',
+    justify: 'left',
   },
   image: {
     width: 128,
@@ -43,6 +51,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     maxWidth: '100%',
     maxHeight: '100%',
+  },
+
+  box: {
+    margin: 'auto',
   },
 }));
 
@@ -59,47 +71,60 @@ export default function MyItemListing() {
         </GridItem>
       </GridContainer>
     </div> */
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        {/*<Grid container spacing={2}> */}
-        <GridContainer spacing={2}>
-          {/* <Grid item> */}
-          <GridItem>
-            <ButtonBase className={classes.image}>
-              <img
-                className={classes.img}
-                alt='complex'
-                src={require('assets/img/purple-banana.jpg')}
-              />
-            </ButtonBase>
-          </GridItem>
-          {/* </Grid> */}
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction='column' spacing={2}>
-              <Grid item xs>
-                <Typography gutterBottom variant='subtitle1'>
-                  Standard license
-                </Typography>
-                <Typography variant='body2' gutterBottom>
-                  Full resolution 1920x1080 • JPEG
-                </Typography>
-                <Typography variant='body2' color='textSecondary'>
-                  ID: 1030114
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant='body2' style={{ cursor: 'pointer' }}>
-                  Remove
-                </Typography>
-              </Grid>
-            </Grid>
+    <GridContainer spacing={2}>
+      <GridItem>
+        <Paper className={classes.paper} spacing={2}>
+          <GridContainer spacing={2}>
             <Grid item>
-              <Typography variant='subtitle1'>$19.00</Typography>
+              <ButtonBase className={classes.image}>
+                <img
+                  className={classes.img}
+                  alt='complex'
+                  src={require('assets/img/purple-banana.jpg')}
+                />
+              </ButtonBase>
             </Grid>
-          </Grid>
-        </GridContainer>
-        {/*</Grid> */}
-      </Paper>
-    </div>
+            <GridContainer align='left' item xs={12} sm container>
+              <GridItem xs container direction='column' spacing={2}>
+                <GridItem xs={12}>
+                  <a href='#'>
+                    <Typography gutterBottom variant='body1'>
+                      <strong>
+                        5 Almost black over-ripe bananas sdfsdfsd sdfsdfsdf
+                        sdfsdsdfsdfsdfs sdfsdf sdfs sdfsfd sdfsf sdfsfsd
+                        sfdsdfsf
+                      </strong>
+                    </Typography>
+                  </a>
+                  <Typography variant='body2' color='textPrimary' gutterBottom>
+                    Category: Fruit
+                  </Typography>
+                  <Typography variant='body2' color='textPrimary' gutterBottom>
+                    PostCode: EN4 4QE
+                  </Typography>
+                  <Typography variant='body2' color='textPrimary' gutterBottom>
+                    Collected: 23rd Sept 2020
+                  </Typography>
+                  <Typography variant='body2' color='textPrimary' gutterBottom>
+                    <strong>Expires: 23rd Sept 2020</strong>
+                  </Typography>
+                </GridItem>
+              </GridItem>
+              <GridItem align='right' xs>
+                <Button>
+                  <EmojiEvent />
+                </Button>
+                <Button>
+                  <Edit />
+                </Button>
+                <Button>
+                  <Delete />
+                </Button>
+              </GridItem>
+            </GridContainer>
+          </GridContainer>
+        </Paper>
+      </GridItem>
+    </GridContainer>
   );
 }
