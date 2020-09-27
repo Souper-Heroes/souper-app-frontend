@@ -4,19 +4,20 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 // @material-ui/icons
-import Chat from '@material-ui/icons/Chat';
-import VerifiedUser from '@material-ui/icons/VerifiedUser';
-import Fingerprint from '@material-ui/icons/Fingerprint';
-import Face from '@material-ui/icons/Face';
-import Build from '@material-ui/icons/Build';
+//import Chat from '@material-ui/icons/Chat';
+//import VerifiedUser from '@material-ui/icons/VerifiedUser';
+//import Fingerprint from '@material-ui/icons/Fingerprint';
+//import Face from '@material-ui/icons/Face';
+//import Build from '@material-ui/icons/Build';
 // core components
-import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer.js';
-import GridItem from 'components/MaterialKitComponents/Grid/GridItem.js';
-import InfoArea from 'components/MaterialKitComponents/InfoArea/InfoArea.js';
-import CustomTabs from 'components/MaterialKitComponents/CustomTabs/CustomTabs.js';
+//import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer.js';
+//import GridItem from 'components/MaterialKitComponents/Grid/GridItem.js';
+//import InfoArea from 'components/MaterialKitComponents/InfoArea/InfoArea.js';
 //import styles from 'assets/jss/material-kit-react/views/landingPageSections/productStyle.js';
 import styles from 'assets/jss/Items/views/MyListingsPage.js';
-import MyItemListings from 'components/Layout/MyItemListings.js';
+import MyItemListings from 'components/Items/MyItemListings.js';
+
+import CustomTabs from 'components/MaterialKitComponents/CustomTabs/CustomTabs.js';
 
 const useStyles = makeStyles(styles);
 

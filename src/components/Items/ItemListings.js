@@ -6,7 +6,6 @@ import GridItem from 'components/MaterialKitComponents/Grid/GridItem.js';
 import Button from 'components/CustomButtons/Button.js';
 
 import styles from 'assets/jss/material-kit-react/views/profilePage.js';
-import profile from 'assets/img/faces/christian.jpg';
 
 const useStyles = makeStyles(styles);
 
