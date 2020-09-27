@@ -7,6 +7,8 @@ import Button from 'components/CustomButtons/Button.js';
 
 import styles from 'assets/jss/material-kit-react/views/profilePage.js';
 import profile from 'assets/img/faces/christian.jpg';
+import Card from 'components/MaterialKitComponents/Card/Card.js';
+import CardBody from 'components/MaterialKitComponents/Card/CardBody.js';
 
 const useStyles = makeStyles(styles);
 
@@ -16,23 +18,59 @@ function Page() {
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div>
         <div className={classes.container}>
-          <GridContainer justify='center'>
-            <GridItem xs={12} sm={12} md={6}>
-              <div className={classes.profile}>
-                <div className={classes.name}>
-                  <h3 className={classes.title}>Christian Louboutin</h3>
-                  <h6>DESIGNER</h6>
-                  <Button justIcon link className={classes.margin5}>
-                    <i className={'fab fa-twitter'} />
-                  </Button>
-                  <Button justIcon link className={classes.margin5}>
-                    <i className={'fab fa-instagram'} />
-                  </Button>
-                  <Button justIcon link className={classes.margin5}>
-                    <i className={'fab fa-facebook'} />
-                  </Button>
+          <GridContainer>
+            <GridItem xs={12} sm={6} md={3}>
+              <GridItem xs={12} sm={12} md={12}>
+                <div className={classes.profile}>
+                  <div className={classes.name}>
+                    <h3 className={classes.title}>Christian Louboutin</h3>
+                    <h6>DESIGNER</h6>
+                    <Button justIcon link className={classes.margin5}>
+                      <i className={'fab fa-twitter'} />
+                    </Button>
+                    <Button justIcon link className={classes.margin5}>
+                      <i className={'fab fa-instagram'} />
+                    </Button>
+                    <Button justIcon link className={classes.margin5}>
+                      <i className={'fab fa-facebook'} />
+                    </Button>
+                  </div>
                 </div>
-              </div>
+              </GridItem>
+            </GridItem>
+
+            <GridItem xs={12} sm={6} md={3}>
+              <Card xs={12} sm={6} md={3}>
+                <CardBody>
+                  <h4 className={classes.cardTitle}>Card title</h4>
+                  <p>
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </p>
+                </CardBody>
+              </Card>
+            </GridItem>
+            <GridItem xs={12} sm={6} md={3}>
+              <Card>
+                <CardBody>
+                  <h4 className={classes.cardTitle}>Card title</h4>
+                  <p>
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </p>
+                </CardBody>
+              </Card>
+            </GridItem>
+            <GridItem xs={12} sm={6} md={3}>
+              <Card>
+                <CardBody>
+                  <h4 className={classes.cardTitle}>Card title</h4>
+                  <p>
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </p>
+                </CardBody>
+              </Card>
             </GridItem>
           </GridContainer>
           <div className={classes.description}>
