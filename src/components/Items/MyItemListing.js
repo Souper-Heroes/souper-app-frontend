@@ -53,6 +53,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const GetCollectionMsg = (type, time) => {
+  const message =
+    type === 'provide'
+      ? time !== ''
+        ? `Being Collected: ${time}`
+        : ''
+      : time !== ''
+      ? `To Collect: ${time}`
+      : '';
+
+  return (
+    <Typography variant='body2' color='textPrimary' gutterBottom>
+      {message}
+    </Typography>
+  );
+};
+
 export default function MyItemListing({ type, myitem }) {
   const classes = useStyles();
 
@@ -105,17 +122,11 @@ export default function MyItemListing({ type, myitem }) {
                         color='textPrimary'
                         gutterBottom
                       >
-                        <strong>Expires: {myitem.expiry}</strong>
+                        <strong>Expires: {myitem.expiryDate}</strong>
                       </Typography>
                     </GridItem>
                     <GridItem xs={12} sm={6} md={6} lg={6}>
-                      <Typography
-                        variant='body2'
-                        color='textPrimary'
-                        gutterBottom
-                      >
-                        Collected: {myitem.collectionTime}
-                      </Typography>
+                      {GetCollectionMsg(type, myitem.preferredCollectTime)}
                     </GridItem>
                   </GridContainer>
                 </GridItem>
