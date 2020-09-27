@@ -15,7 +15,7 @@ import ListingTabSection from './Sections/ListingTabSection.js';
 
 const useStyles = makeStyles(styles);
 
-function MyListingsPage({ userItems }) {
+function MyListingsPage({ userProfile, userItems }) {
   //const [userItems, setUserItems] = React.useState(state);
 
   const classes = useStyles();
@@ -24,7 +24,10 @@ function MyListingsPage({ userItems }) {
       <div className={classes.container}>
         <GridContainer justify='center'>
           <GridItem xs={12} sm={12} md={8} lg={8}>
-            <ListingTabSection userItems={userItems} />
+            <ListingTabSection
+              userProfile={userProfile}
+              userItems={userItems}
+            />
           </GridItem>
         </GridContainer>
       </div>

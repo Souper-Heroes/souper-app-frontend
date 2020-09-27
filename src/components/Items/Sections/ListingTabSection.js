@@ -20,15 +20,17 @@ import MyItemListings from 'components/Layout/MyItemListings.js';
 
 const useStyles = makeStyles(styles);
 
-function getUserItems(type, userItems) {
-  return userItems.filter((item) => item.type === type);
+function getUserItems(type, userProfileId, userItems) {
+  return type === 'provide'
+    ? userItems.filter((item) => item.provideUserId === userProfileId)
+    : userItems.filter((item) => item.collectUserId === userProfileId);
 }
 
-export default function ListingTabSection({ userItems }) {
+export default function ListingTabSection({ userProfile, userItems }) {
   const classes = useStyles();
 
-  const itemsToProvide = getUserItems('p', userItems);
-  const itemsToCollect = getUserItems('c', userItems);
+  const itemsToProvide = getUserItems('provide', userProfile.userId, userItems);
+  const itemsToCollect = getUserItems('collect', userProfile.userId, userItems);
 
   return (
     <div className={classes.section}>
@@ -47,7 +49,7 @@ export default function ListingTabSection({ userItems }) {
             tabName: 'Collections',
             //TODO tabIcon: Chat,
             tabContent: (
-              <MyItemListings type='collection' myitems={itemsToCollect} />
+              <MyItemListings type='collect' myitems={itemsToCollect} />
             ),
           },
         ]}
