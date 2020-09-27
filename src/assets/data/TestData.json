@@ -20,7 +20,7 @@
     }
   ],
 
-  "userProfileId": 1,
+  "myUserProfileId": 1,
 
   "userProfile": {
     "userId": "1",
@@ -29,7 +29,7 @@
     "userFullName": "Benedict Cumberbatch",
     "address": "63 Kamar Taj",
     "postCode": "EN4 5TQ",
-    "email": "dstrange@gmail.com",
+    "email": "dstrange@gmailx.com",
     "password": "dfsssD@02sda",
     "preferredItemDistance": "2 miles",
     "preferredProvideStartTime": "9:30AM",
