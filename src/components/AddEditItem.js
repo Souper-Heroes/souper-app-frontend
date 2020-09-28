@@ -115,7 +115,7 @@ export default function AddEditItem(props) {
               </GridItem>
               <GridItem xs={12} sm={6} className={classes.navWrapper}>
                 <p>Available collection time</p>
-                <GridContainer justify="center">
+                <GridItem container direction='row'>
                   <GridItem xs={12} sm={6} className={classes.navWrapper}>
                       <TextField
                         id="date"
@@ -140,7 +140,7 @@ export default function AddEditItem(props) {
                         }}
                       /> 
                   </GridItem>
-                </GridContainer>
+                </GridItem>
               </GridItem>
             </GridContainer>
           </div>
