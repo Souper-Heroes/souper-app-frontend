@@ -19,60 +19,86 @@ function Page() {
       <div>
         <div className={classes.container}>
           <GridContainer>
-            <GridItem xs={12} sm={6} md={3}>
-              <GridItem xs={12} sm={12} md={12}>
+            <GridItem xs={12} sm={4} md={3} container justify="center">
+              <GridItem xs={12} sm={6} md={12}>
                 <div className={classes.profile}>
                   <div className={classes.name}>
                     <h3 className={classes.title}>Christian Louboutin</h3>
                     <h6>DESIGNER</h6>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={'fab fa-twitter'} />
-                    </Button>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={'fab fa-instagram'} />
-                    </Button>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={'fab fa-facebook'} />
-                    </Button>
                   </div>
                 </div>
               </GridItem>
             </GridItem>
-
-            <GridItem xs={12} sm={6} md={3}>
-              <Card xs={12} sm={6} md={3}>
-                <CardBody>
-                  <h4 className={classes.cardTitle}>Card title</h4>
-                  <p>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+            <GridItem xs={12} sm={8} md={9} container direction="row">
+              <GridItem xs={12} sm={6} md={4}>
+                <Card>
+                  <CardBody>
+                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <p>
+                      Some quick example text to build on the card title and make
+                      up the bulk of the card's content.
                   </p>
-                </CardBody>
-              </Card>
-            </GridItem>
-            <GridItem xs={12} sm={6} md={3}>
-              <Card>
-                <CardBody>
-                  <h4 className={classes.cardTitle}>Card title</h4>
-                  <p>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  </CardBody>
+                </Card>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={4}>
+                <Card>
+                  <CardBody>
+                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <p>
+                      Some quick example text to build on the card title and make
+                      up the bulk of the card's content.
                   </p>
-                </CardBody>
-              </Card>
-            </GridItem>
-            <GridItem xs={12} sm={6} md={3}>
-              <Card>
-                <CardBody>
-                  <h4 className={classes.cardTitle}>Card title</h4>
-                  <p>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  </CardBody>
+                </Card>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={4}>
+                <Card>
+                  <CardBody>
+                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <p>
+                      Some quick example text to build on the card title and make
+                      up the bulk of the card's content.
                   </p>
-                </CardBody>
-              </Card>
+                  </CardBody>
+                </Card>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={4}>
+                <Card>
+                  <CardBody>
+                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <p>
+                      Some quick example text to build on the card title and make
+                      up the bulk of the card's content.
+                  </p>
+                  </CardBody>
+                </Card>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={4}>
+                <Card>
+                  <CardBody>
+                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <p>
+                      Some quick example text to build on the card title and make
+                      up the bulk of the card's content.
+                  </p>
+                  </CardBody>
+                </Card>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={4}>
+                <Card>
+                  <CardBody>
+                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <p>
+                      Some quick example text to build on the card title and make
+                      up the bulk of the card's content.
+                  </p>
+                  </CardBody>
+                </Card>
+              </GridItem>
             </GridItem>
           </GridContainer>
+
           <div className={classes.description}>
             <p>
               An artist of considerable range, Chet Faker — the name taken by
@@ -91,7 +117,7 @@ function Page() {
           </GridContainer>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
