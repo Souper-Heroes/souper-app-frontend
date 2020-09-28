@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -31,6 +32,7 @@ const useStyles = makeStyles(styles);
 
 export default function RegisterPage({ registerInputs }) {
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
+
   setTimeout(function () {
     setCardAnimation('');
   }, 700);
