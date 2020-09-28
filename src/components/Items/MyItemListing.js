@@ -44,8 +44,8 @@ const useStyles = makeStyles((theme) => ({
   img: {
     margin: 'auto',
     display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
+    maxWidth: '80%',
+    maxHeight: '80%',
   },
 
   box: {
@@ -54,14 +54,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const GetCollectionMsg = (type, time) => {
-  const message =
-    type === 'provide'
-      ? time !== ''
-        ? `Being Collected: ${time}`
-        : ''
-      : time !== ''
-      ? `To Collect: ${time}`
-      : '';
+  if (time === null) {
+    return null;
+  }
+
+  let message = null;
+  if (type === 'provide') {
+    message = `Being Collected: ${time}`;
+  } else {
+    message = `To Collect: ${time}`;
+  }
 
   return (
     <Typography variant='body2' color='textPrimary' gutterBottom>
