@@ -89,7 +89,7 @@
       "expiryDate": "24/10/2020",
       "location": "SR5 4TQ",
       "preferredProvideTime": "24/10/2020 10:30AM-5:50PM",
-      "preferredCollectTime": "",
+      "preferredCollectTime": null,
       "reservedItem": "false"
     },
     {
@@ -102,7 +102,7 @@
       "expiryDate": "30/11/2020",
       "location": "EN4 4QE",
       "preferredProvideTime": "24/11/2020 1PM-3PM",
-      "preferredCollectTime": "",
+      "preferredCollectTime": null,
       "reservedItem": "false"
     },
     {
@@ -115,7 +115,7 @@
       "expiryDate": "28/11/2020",
       "location": "DE3 7TE",
       "preferredProvideTime": "28/11/2020 1PM-3PM",
-      "preferredCollectTime": "",
+      "preferredCollectTime": null,
       "reservedItem": "false"
     },
     {
@@ -141,7 +141,7 @@
       "expiryDate": "03/12/2020",
       "location": "SP3 7XE",
       "preferredProvideTime": "02/12/2020 4PM-8PM",
-      "preferredCollectTime": "",
+      "preferredCollectTime": null,
       "reservedItem": "false"
     }
   ]

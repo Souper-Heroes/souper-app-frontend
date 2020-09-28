@@ -11,6 +11,7 @@ import HeaderLinks from 'components/Layout/HeaderLinks.js';
 import { Restaurant } from '@material-ui/icons';
 import SouperFooter from 'components/Layout/SouperFooter';
 import Parallax from 'components/MaterialKitComponents/Parallax/Parallax.js';
+import ItemViewPage from 'components/Items/ItemViewPage.js';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TestData from 'assets/data/TestData.json';
 import './App.css';
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path='/register'>
           <RegisterPage registerInputs={state['registerInputs']} />
+        </Route>
+        <Route path='/itemview'>
+          <ItemViewPage myitem={state['userItems'][0]} />
         </Route>
         <Route path='/mylistings'>
           <Header
