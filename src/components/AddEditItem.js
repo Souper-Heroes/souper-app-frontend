@@ -27,7 +27,7 @@ import FoodPic from '../assets/img/purple-banana.jpg';
 
 // TODO - this uses files from views will have to get styles from somewhere else
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import { CalendarToday } from '@material-ui/icons';
+import { CalendarToday, FormatAlignRight, FormatAlignLeft } from '@material-ui/icons';
 const useStyles = makeStyles(styles);
 
 
@@ -90,8 +90,8 @@ export default function AddEditItem(props) {
                   id="date"
                   label="Expiry date"
                   type="date"
-                  defaultValue={CalendarToday}
                   fullWidth
+                  // defaultValue={CalendarToday}
                   className={classes.textField}
                   InputLabelProps={{
                     shrink: true,
@@ -108,38 +108,50 @@ export default function AddEditItem(props) {
                     }}
                  />   
                 <FormControlLabel 
+                  style={{float:'left'}}
                   control={
-                    <Checkbox name="locationSameProfile" />} 
+                    <Checkbox  
+                    name="locationSameProfile" />} 
                     label="Use location set in User profile?" 
                 /> 
               </GridItem>
               <GridItem xs={12} sm={6} className={classes.navWrapper}>
-                <p>Available collection time</p>
+                <muted style={{float:'left'}}>Available collection time</muted>
                 <GridItem container direction='row'>
                   <GridItem xs={12} sm={6} className={classes.navWrapper}>
                       <TextField
                         id="date"
                         label="From:"
                         type="date"
-                        defaultValue={CalendarToday}    
+                        // defaultValue={CalendarToday}    
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true,
                         }}
                       />      
                   </GridItem>
-                  <GridItem xs={12} sm={6} className={classes.navWrapper}>
+                  <GridItem  xs={12} sm={6} className={classes.navWrapper}>
                       <TextField
                         id="date"
                         label="To:"
                         type="date"
-                        defaultValue={CalendarToday}
+                        // defaultValue={CalendarToday}
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true,
                         }}
                       /> 
                   </GridItem>
+                  <GridItem align='right'>
+                      <Button 
+                        color="danger" size="lg">
+                        Cancel
+                      </Button>
+                      <Button
+                       color="success" size="lg">
+                        Save
+                      </Button>
+                  </GridItem>      
                 </GridItem>
               </GridItem>
             </GridContainer>
