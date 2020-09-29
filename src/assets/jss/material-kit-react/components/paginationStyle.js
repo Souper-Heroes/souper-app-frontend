@@ -4,14 +4,14 @@ import {
   infoColor,
   successColor,
   warningColor,
-  dangerColor
+  dangerColor,
 } from "assets/jss/material-kit-react.js";
 
 const paginationStyle = {
   pagination: {
     display: "inline-block",
     paddingLeft: "0",
-    margin: "0 0 20px 0",
+    margin: "25px 0 20px 0",
     borderRadius: "4px"
   },
   paginationItem: {
