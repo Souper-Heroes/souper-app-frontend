@@ -1,18 +1,18 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import clsx from 'clsx';
-import TextField from '@material-ui/core/TextField';
+//import clsx from 'clsx';
+//import TextField from '@material-ui/core/TextField';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer.js';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem.js';
-import CustomButton from 'components/CustomButtons/Button.js';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+//import CustomButton from 'components/CustomButtons/Button.js';
+//import Card from '@material-ui/core/Card';
+//import CardActionArea from '@material-ui/core/CardActionArea';
+//import CardActions from '@material-ui/core/CardActions';
+//import CardContent from '@material-ui/core/CardContent';
+//import CardMedia from '@material-ui/core/CardMedia';
 import Button from 'components/CustomButtons/Button.js';
 
 import Typography from '@material-ui/core/Typography';
@@ -74,7 +74,7 @@ function ItemViewCard({ item }) {
             </GridItem>
             <GridItem xs={12} sm={12} md={12}>
               <Typography variant='body1' gutterBottom>
-                <strong>5 Over-ripe bananas still yellow</strong>
+                <strong>{item.description}</strong>
               </Typography>
             </GridItem>
             <GridContainer align='center'>
@@ -108,7 +108,7 @@ function ItemViewCard({ item }) {
                       align='left'
                       gutterBottom
                     >
-                      Fruit
+                      {item.category}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -143,7 +143,7 @@ function ItemViewCard({ item }) {
                       align='left'
                       gutterBottom
                     >
-                      EN4 4QE
+                      {item.location}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -180,7 +180,7 @@ function ItemViewCard({ item }) {
                       align='left'
                       gutterBottom
                     >
-                      23/10/2020
+                      {item.expiryDate}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -218,7 +218,7 @@ function ItemViewCard({ item }) {
                       align='left'
                       gutterBottom
                     >
-                      23/11/2020 1PM
+                      {item.preferredCollectStartTime}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -253,7 +253,7 @@ function ItemViewCard({ item }) {
                       align='left'
                       gutterBottom
                     >
-                      23/11/2020 6PM
+                      {item.preferredCollectStartTime}
                     </Typography>
                   </GridItem>
                 </GridContainer>

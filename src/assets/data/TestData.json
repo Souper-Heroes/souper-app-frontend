@@ -75,8 +75,10 @@
       "description": "5 Squashy Bananas",
       "expiryDate": "23/10/2020",
       "location": "EN4 4QE",
-      "preferredProvideTime": "23/10/2020 4PM-6PM",
-      "preferredCollectTime": "23/10/2020 4PM-6PM",
+      "preferredProvideStartTime": "23/10/2020 4PM",
+      "preferredProvideEndTime": "23/10/2020 6PM",
+      "preferredCollectStartTime": "23/10/2020 4PM",
+      "preferredCollectEndTime": "23/10/2020 6PM",
       "reservedItem": "false"
     },
     {
@@ -88,8 +90,10 @@
       "description": "Bag of Cashew Nuts",
       "expiryDate": "24/10/2020",
       "location": "SR5 4TQ",
-      "preferredProvideTime": "24/10/2020 10:30AM-5:50PM",
-      "preferredCollectTime": null,
+      "preferredProvideStartTime": "24/10/2020 10:30AM",
+      "preferredProvideEndTime": "24/10/2020 5:50PM",
+      "preferredCollectStartTime": null,
+      "preferredCollectEndTime": null,
       "reservedItem": "false"
     },
     {
@@ -101,8 +105,10 @@
       "description": "6 Chicken Wings",
       "expiryDate": "30/11/2020",
       "location": "EN4 4QE",
-      "preferredProvideTime": "24/11/2020 1PM-3PM",
-      "preferredCollectTime": null,
+      "preferredProvideStartTime": "24/11/2020 1PM",
+      "preferredProvideEndTime": "24/11/2020 3PM",
+      "preferredCollectStartTime": null,
+      "preferredCollectEndTime": null,
       "reservedItem": "false"
     },
     {
@@ -114,8 +120,10 @@
       "description": "7 Potatoes with roots growing",
       "expiryDate": "28/11/2020",
       "location": "DE3 7TE",
-      "preferredProvideTime": "28/11/2020 1PM-3PM",
-      "preferredCollectTime": null,
+      "preferredProvideStartTime": "28/11/2020 1PM",
+      "preferredProvideEndTime": "28/11/2020 3PM",
+      "preferredCollectStartTime": null,
+      "preferredCollectEndTime": null,
       "reservedItem": "false"
     },
     {
@@ -127,8 +135,10 @@
       "description": "10 Leaks picked from my garden 5 days ago",
       "expiryDate": "29/12/2020",
       "location": "SL3 7TE",
-      "preferredProvideTime": "26/12/2020 1PM-3PM",
-      "preferredCollectTime": "25/12/2020 8AM-10PM",
+      "preferredProvideStartTime": "26/12/2020 1PM",
+      "preferredProvideEndTime": "26/12/2020 3PM",
+      "preferredCollectStartTime": "25/12/2020 8AM",
+      "preferredCollectEndTime": "25/12/2020 10PM",
       "reservedItem": "false"
     },
     {
@@ -140,8 +150,10 @@
       "description": "2 Tins Of Baxters Carrot And Corriander Soup",
       "expiryDate": "03/12/2020",
       "location": "SP3 7XE",
-      "preferredProvideTime": "02/12/2020 4PM-8PM",
-      "preferredCollectTime": null,
+      "preferredProvideStartTime": "02/12/2020 4PM",
+      "preferredProvideEndTime": "02/12/2020 8PM",
+      "preferredCollectStartTime": null,
+      "preferredCollectEndTime": null,
       "reservedItem": "false"
     }
   ]
