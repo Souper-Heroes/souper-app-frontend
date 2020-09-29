@@ -65,11 +65,11 @@ function ItemViewCard({ item }) {
             <GridItem xs={12} sm={12} md={12} lg={12}>
               <Typography
                 align='center'
-                variant='h5'
-                color='primary'
+                variant='body1'
+                color='error'
                 gutterBottom
               >
-                Message
+                Expires soon!
               </Typography>
             </GridItem>
             <GridItem xs={12} sm={12} md={12}>
@@ -259,25 +259,37 @@ function ItemViewCard({ item }) {
                 </GridContainer>
               </GridItem>
             </GridContainer>
-            <GridContainer align='center'>
-              <GridItem xs={6} sm={6} className={classesCard.button_label}>
-                <Button color='rose' size='sm'>
+            <GridItem align='center' container>
+              <GridItem align='center' xs={12} sm={6}>
+                <Button
+                  className={classesCard.button_label}
+                  color='rose'
+                  size='sm'
+                >
                   Amend Time
                 </Button>
               </GridItem>
-              <GridContainer align='center'>
-                <GridItem xs={6} sm={6} className={classesCard.button_label}>
-                  <Button color='danger' size='sm'>
+              <GridItem xs={12} sm={6} align='center' container>
+                <GridItem xs={6} sm={6} align='right'>
+                  <Button
+                    className={classesCard.button_label}
+                    color='danger'
+                    size='sm'
+                  >
                     Cancel
                   </Button>
                 </GridItem>
-                <GridItem xs={6} sm={6} className={classesCard.button_label}>
-                  <Button color='success' size='sm'>
+                <GridItem xs={6} sm={6} align='left'>
+                  <Button
+                    className={classesCard.button_label}
+                    color='success'
+                    size='sm'
+                  >
                     Reserve
                   </Button>
                 </GridItem>
-              </GridContainer>
-            </GridContainer>
+              </GridItem>
+            </GridItem>
           </GridItem>
         </GridContainer>
       </div>
