@@ -21,7 +21,7 @@ import styles from 'assets/jss/material-kit-react/views/profilePage.js';
 
 const useStyles = makeStyles(styles);
 
-const useStyles2 = makeStyles({
+const useCardStyles = makeStyles({
   root: {
     maxWidth: 345,
   },
@@ -43,25 +43,32 @@ const useStyles2 = makeStyles({
 
   label: { margin: 'auto', padding: '0px' },
   output: { margin: 'auto', padding: '0px' },
+  button_label2: { margin: 'auto', padding: '0px' },
+  border: { margin: '15px' },
 });
 
-function ItemViewCard() {
+function ItemViewCard({ item }) {
   const classes = useStyles();
-  const classes2 = useStyles2();
+  const classesCard = useCardStyles();
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div className={classes.container}>
         <GridContainer justify='center'>
-          <GridItem>
+          <GridItem className={classesCard.border}>
             <GridItem xs={12} sm={12} md={12} lg={12}>
               <img
-                className={classes2.img}
+                className={classesCard.img}
                 src={require('assets/img/purple-banana.jpg')}
                 justify='center'
               />
             </GridItem>
-            <GridItem xs={12}>
-              <Typography variant='h5' color='primary' gutterBottom>
+            <GridItem xs={12} sm={12} md={12} lg={12}>
+              <Typography
+                align='center'
+                variant='h5'
+                color='primary'
+                gutterBottom
+              >
                 Message
               </Typography>
             </GridItem>
@@ -78,7 +85,7 @@ function ItemViewCard() {
                     sm={6}
                     md={6}
                     lg={6}
-                    className={classes2.label}
+                    className={classesCard.label}
                   >
                     <Typography
                       variant='body2'
@@ -93,7 +100,7 @@ function ItemViewCard() {
                     sm={6}
                     md={6}
                     lg={6}
-                    className={classes2.output}
+                    className={classesCard.output}
                   >
                     <Typography
                       variant='body2'
@@ -113,7 +120,7 @@ function ItemViewCard() {
                     sm={6}
                     md={6}
                     lg={6}
-                    className={classes2.label}
+                    className={classesCard.label}
                   >
                     <Typography
                       variant='body2'
@@ -128,7 +135,7 @@ function ItemViewCard() {
                     sm={6}
                     md={6}
                     lg={6}
-                    className={classes2.output}
+                    className={classesCard.output}
                   >
                     <Typography
                       variant='body2'
@@ -150,7 +157,7 @@ function ItemViewCard() {
                     sm={6}
                     md={6}
                     lg={6}
-                    className={classes2.label}
+                    className={classesCard.label}
                   >
                     <Typography
                       variant='body2'
@@ -165,7 +172,7 @@ function ItemViewCard() {
                     sm={6}
                     md={6}
                     lg={6}
-                    className={classes2.output}
+                    className={classesCard.output}
                   >
                     <Typography
                       variant='body2'
@@ -188,7 +195,7 @@ function ItemViewCard() {
                     sm={6}
                     md={6}
                     lg={6}
-                    className={classes2.label}
+                    className={classesCard.label}
                   >
                     <Typography
                       variant='body2'
@@ -203,7 +210,7 @@ function ItemViewCard() {
                     sm={6}
                     md={6}
                     lg={6}
-                    className={classes2.output}
+                    className={classesCard.output}
                   >
                     <Typography
                       variant='body2'
@@ -223,7 +230,7 @@ function ItemViewCard() {
                     sm={6}
                     md={6}
                     lg={6}
-                    className={classes2.label}
+                    className={classesCard.label}
                   >
                     <Typography
                       variant='body2'
@@ -238,7 +245,7 @@ function ItemViewCard() {
                     sm={6}
                     md={6}
                     lg={6}
-                    className={classes2.output}
+                    className={classesCard.output}
                   >
                     <Typography
                       variant='body2'
@@ -253,18 +260,18 @@ function ItemViewCard() {
               </GridItem>
             </GridContainer>
             <GridContainer align='center'>
-              <GridItem xs={12} sm={6}>
+              <GridItem xs={6} sm={6} className={classesCard.button_label}>
                 <Button color='rose' size='sm'>
                   Amend Time
                 </Button>
               </GridItem>
               <GridContainer align='center'>
-                <GridItem xs={12} sm={6}>
+                <GridItem xs={6} sm={6} className={classesCard.button_label}>
                   <Button color='danger' size='sm'>
                     Cancel
                   </Button>
                 </GridItem>
-                <GridItem xs={12} sm={6}>
+                <GridItem xs={6} sm={6} className={classesCard.button_label}>
                   <Button color='success' size='sm'>
                     Reserve
                   </Button>

@@ -7,7 +7,7 @@ import SouperFooter from 'components/Layout/SouperFooter';
 import ItemViewCard from './ItemViewCard';
 import Parallax from 'components/MaterialKitComponents/Parallax/Parallax.js';
 
-function ItemViewPage() {
+function ItemViewPage({ item }) {
   return (
     <>
       <Header
@@ -18,7 +18,7 @@ function ItemViewPage() {
         fixed
       />
       <Parallax small filter image={require('assets/img/citrus-fruit.jpg')} />
-      <ItemViewCard />
+      <ItemViewCard item={item} />
       <SouperFooter />
     </>
   );

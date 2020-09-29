@@ -17,7 +17,7 @@ import TestData from 'assets/data/TestData.json';
 import './App.css';
 
 function App() {
-  const [state, setState] = useState(TestData);
+  const [data, setData] = useState(TestData);
 
   return (
     <BrowserRouter>
@@ -26,10 +26,10 @@ function App() {
           <LoginPage />
         </Route>
         <Route path='/register'>
-          <RegisterPage registerInputs={state['registerInputs']} />
+          <RegisterPage registerInputs={data['registerInputs']} />
         </Route>
         <Route path='/itemview'>
-          <ItemViewPage myitem={state['userItems'][0]} />
+          <ItemViewPage myitem={data['userItems'][0]} />
         </Route>
         <Route path='/mylistings'>
           <Header
@@ -45,8 +45,8 @@ function App() {
             image={require('assets/img/citrus-fruit.jpg')}
           />
           <MyListingsPage
-            userProfile={state['userProfile']}
-            userItems={state['userItems']}
+            userProfile={data['userProfile']}
+            userItems={data['userItems']}
           />
           <SouperFooter />
         </Route>
