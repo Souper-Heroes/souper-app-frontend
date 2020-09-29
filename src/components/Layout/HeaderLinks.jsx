@@ -32,7 +32,7 @@ export default function HeaderLinks(props) {
           }}
           buttonIcon={Face}
           dropdownList={[
-            <Link to='/' className={classes.dropdownLink}>
+            <Link to='/profile' className={classes.dropdownLink}>
               My Account
             </Link>,
             <Link to='/' className={classes.dropdownLink}>
@@ -47,7 +47,7 @@ export default function HeaderLinks(props) {
             <Link to='/' className={classes.dropdownLink}>
               Items for Collection
             </Link>,
-            <Link to='/Login/LoginPage' className={classes.dropdownLink}>
+            <Link to='/login' className={classes.dropdownLink}>
               Logout
             </Link>,
           ]}

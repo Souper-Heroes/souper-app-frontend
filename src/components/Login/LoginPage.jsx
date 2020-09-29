@@ -42,7 +42,7 @@ export default function LoginPage() {
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
                   <CardHeader color="rose" className={classes.cardHeader}>
-                    <h4>Login</h4>
+                    <h2>Login</h2>
                     <div className={classes.socialLine}>
                       <Button
                         justIcon
@@ -75,7 +75,7 @@ export default function LoginPage() {
                   </CardHeader>
                   <CardBody>
                     <CustomInput
-                      labelText="Email..."
+                      labelText="Email"
                       id="email"
                       formControlProps={{
                         fullWidth: true,
@@ -115,20 +115,20 @@ export default function LoginPage() {
                       </Button>
                     </Link>
                   </GridContainer>
-                  <CardFooter className={classes.cardFooter}>
-                    <Button variant="contained" color="rose" size="lg">
-                      <Link to="/">
-                        LOG IN
-                      </Link>
-                    </Button>
-                  </CardFooter>
-                  <CardFooter className={classes.cardFooter}>
-                    <Button variant="contained" size="lg">
-                      <Link to="/register">
-                        REGISTER
-                      </Link>
-                    </Button>
-                  </CardFooter>
+                  <Link to="/">
+                    <CardFooter className={classes.cardFooter}>
+                      <Button fullWidth size="lg" color="rose">
+                          Log in
+                      </Button>
+                    </CardFooter>
+                  </Link>
+                  <Link to="/register">
+                    <CardFooter className={classes.cardFooter}>
+                      <Button fullWidth size="lg" color="info">
+                          Register
+                      </Button>
+                    </CardFooter>
+                  </Link>
                 </form>
               </Card>
             </GridItem>
