@@ -11,13 +11,16 @@ import CardBody from 'components/MaterialKitComponents/Card/CardBody.js';
 import CustomInput from "components/MaterialKitComponents/CustomInput/CustomInput.js";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+import TextField from '@material-ui/core/TextField';
 import Button from 'components/MaterialKitComponents/CustomButtons/Button.js';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles(styles);
 
 function Page() {
   const classes = useStyles();
-  const [unit, setUnit] = useState('');
+  const [unit, setUnit] = useState('miles');
 
   const handleChange = (event) => {
     setUnit(event.target.value);
@@ -27,6 +30,24 @@ function Page() {
       <div>
         <div className={classes.container}>
           <GridContainer>
+            <GridItem xs={12} sm={12} md={12} container spacing={1} direction="row-reverse">
+              <GridItem xs={12} sm={4} md={3} >
+                <InputLabel className={classes.filterLabel}>Sort By</InputLabel>
+                <FormControl fullWidth required className={classes.formControl}>
+                  <Select
+                    native
+                    value={unit}
+                    onChange={handleChange}
+                    name="age"
+                  >
+                    <option aria-label="None" value="" />
+                    <option value={'miles'}>In Miles</option>
+                    <option value={'kilometers'}>In Kilometers</option>
+                  </Select>
+
+                </FormControl>
+              </GridItem>
+            </GridItem>
             <GridItem xs={12} sm={4} md={3} container spacing={1}>
               <GridItem xs={12} sm={12} md={12} >
                 <h4 className={classes.filterTitle}>Filters</h4>
@@ -37,6 +58,37 @@ function Page() {
                   <Datetime
                     inputProps={{ placeholder: "Select Expiry date.." }}
                   />
+                </FormControl>
+                <InputLabel className={classes.filterLabel}>Distance</InputLabel>
+                <FormControl fullWidth required className={classes.formControl}>
+
+                  <Select
+                    native
+                    value={unit}
+                    onChange={handleChange}
+                    name="age"
+                  >
+                    <option aria-label="None" value="" />
+                    <option value={'miles'}>In Miles</option>
+                    <option value={'kilometers'}>In Kilometers</option>
+                  </Select>
+
+                </FormControl>
+                <InputLabel className={classes.filterLabel}>Category</InputLabel>
+                <FormControl fullWidth required className={classes.formControl}>
+
+                  <Select
+                    native
+                    value={unit}
+                    onChange={handleChange}
+                    name="age"
+                  >
+                    <option aria-label="None" value="" />
+                    <option value={0}>In Miles</option>
+                    <option value={1}>In Kilometers</option>
+                    <option value={3}>In Kilometers</option>
+                  </Select>
+
                 </FormControl>
                 <FormControl fullWidth>
                   <Button fullWidth size='md' color='rose'>

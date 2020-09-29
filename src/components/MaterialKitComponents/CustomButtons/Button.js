@@ -69,7 +69,7 @@ RegularButton.propTypes = {
     "github",
     "transparent"
   ]),
-  size: PropTypes.oneOf(["sm", "lg"]),
+  size: PropTypes.oneOf(["md", "sm", "lg"]),
   simple: PropTypes.bool,
   round: PropTypes.bool,
   fullWidth: PropTypes.bool,
