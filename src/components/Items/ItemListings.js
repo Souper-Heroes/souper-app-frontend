@@ -98,7 +98,7 @@ function Page() {
               </GridItem>
             </GridItem>
             <GridItem xs={12} sm={8} md={9} container direction="row" spacing={1}>
-              <GridItem xs={12} sm={6} md={4} >
+              <GridItem xs={12} sm={6} md={4}>
                 <Card>
                   <CardBody>
                     <h4 className={classes.cardTitle}>Card title</h4>
