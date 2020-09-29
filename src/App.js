@@ -2,14 +2,8 @@ import React, { useState } from 'react';
 import LoginPage from './components/Login/LoginPage';
 import RegisterPage from './components/Login/RegisterPage';
 import ItemListings from 'components/Items/ItemListings.js';
-import Page from './components/Page';
-import Header from 'components/Layout/Header.js';
-import HeaderLinks from 'components/Layout/HeaderLinks.js';
-import { Restaurant } from '@material-ui/icons';
-import SouperFooter from 'components/Layout/SouperFooter';
-import Parallax from 'components/MaterialKitComponents/Parallax/Parallax.js';
+import Layout from 'components/Layout/Layout.js';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.css';
 
 function App() {
   const [registerInputs] = useState([
@@ -27,22 +21,11 @@ function App() {
         <Route path='/register'>
           <RegisterPage registerInputs={registerInputs} />
         </Route>
-        <Route path='/'>
-          <Header
-            brand={<Restaurant />}
-            color='rose'
-            leftLinks={''}
-            rightLinks={<HeaderLinks />}
-            fixed
-          />
-          <Parallax
-            small
-            filter
-            image={require('assets/img/citrus-fruit.jpg')}
-          />
-          <ItemListings />
-          <SouperFooter />
-        </Route>
+        <Layout>
+          <Route path='/'>
+            <ItemListings />
+          </Route>
+        </Layout>
       </Switch>
     </BrowserRouter>
   );
