@@ -79,17 +79,15 @@ export default function AddEditItem(props) {
             </GridContainer>
             <GridContainer justify="center">
               <GridItem xs={12} sm={6} className={classes.navWrapper}>
-              <TextField
-                  id="date"
-                  label="Expiry date"
-                  type="date"
-                  fullWidth
-                  // defaultValue={CalendarToday}
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />    
+                  <InputLabel style={{float:'left'}} className={classes.label}>
+                    Expiry date
+                  </InputLabel>
+                  <br />
+                  <FormControl fullWidth>
+                    <Datetime
+                      inputProps={{ placeholder: "Enter the date the item will expire" }}
+                    />
+                  </FormControl>
                <CustomInput
                     labelText="Location"
                     id="float"
