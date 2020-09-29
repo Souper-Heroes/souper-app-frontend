@@ -2,14 +2,11 @@ import React from 'react';
 
 // nodejs library that concatenates classes
 import classNames from 'classnames';
-// @material-ui/core components
+// @material-ui components
 import { makeStyles } from '@material-ui/core/styles';
 import { Select } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-// material-ui components
-
-import InputLabel from '@material-ui/core/InputLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
@@ -20,34 +17,30 @@ import GridContainer from "./MaterialKitComponents/Grid/GridContainer.js";
 import GridItem from "./MaterialKitComponents/Grid/GridItem.js";
 import CustomInput from "./MaterialKitComponents/CustomInput/CustomInput.js";
 
-// @material-ui/icons
-// import Check from "@material-ui/icons/Check";
-// assets
-import FoodPic from '../assets/img/purple-banana.jpg';
+// Date time imports
+import Datetime from "react-datetime";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
 
 // TODO - this uses files from views will have to get styles from somewhere else
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import { CalendarToday, FormatAlignRight } from '@material-ui/icons';
 const useStyles = makeStyles(styles);
 
-
 export default function AddEditItem(props) {
-  
+
   const classes = useStyles();
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
-  
   return (
     <div>
-      <Parallax small filter image={require("assets/img/unsplash-redfruit.jpg")} />
+      <Parallax small image={require("assets/img/unsplash-redfruit.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)}>
-       
           <div className={classes.container}>
             <GridContainer justify="center">
               <GridItem xs={12} sm={6} className={classes.navWrapper}>
                 <a href="#LinkToChangeThePic">
                   <img        
-                      src={FoodPic}
+                      src={require("../assets/img/purple-banana.jpg")}
                       alt="Bananas"
                       className={navImageClasses}  
                   />
@@ -115,51 +108,43 @@ export default function AddEditItem(props) {
                     label="Use location set in User profile?" 
                 /> 
               </GridItem>
-              
-                
-                <GridItem xs={12} sm={6} container spacing={1} direction='row' >
+              <GridItem xs={12} sm={6} container spacing={1} direction='row' >
                 <GridItem xs={12} >
-                  
                   <h4 xs={12} md={12} style={{float:'left'}}>Available collection time</h4>
                   </GridItem>
                   <GridItem xs={12} md={6} >
-                      <TextField
-                        id="date"
-                        label="From:"
-                        type="date"
-                        fullWidth
-                        // defaultValue={CalendarToday}    
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      />      
+                    <InputLabel  style={{float:'left'}} className={classes.label}>
+                        From:
+                      </InputLabel>
+                      <br />
+                      <FormControl fullWidth>
+                        <Datetime
+                          inputProps={{ placeholder: "Enter the time you are availble from" }}
+                        />
+                      </FormControl>
                   </GridItem>
                   <GridItem  xs={12} md={6} >
-                      <TextField
-                        id="date"
-                        label="To:"
-                        type="date"
-                        fullWidth
-                        // defaultValue={CalendarToday}
-                        className={classes.textField}
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      /> 
+                    <InputLabel style={{float:'left'}} className={classes.label}>
+                        Till:
+                      </InputLabel>
+                      <br />
+                      <FormControl fullWidth>
+                        <Datetime
+                          inputProps={{ placeholder: "Enter the time you are availble till" }}
+                        />
+                      </FormControl>
                   </GridItem>
-                  <GridItem align='right'>
+                  <GridItem fullWidth align='right'>
                       <Button 
                         color="danger" size="lg">
                         Cancel
                       </Button>
                       <Button
                        color="success" size="lg">
-                        Save
+                         Save 
                       </Button>
                   </GridItem>      
                 </GridItem>
-              
             </GridContainer>
           </div>
       </div>
