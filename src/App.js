@@ -29,7 +29,7 @@ function App() {
           <RegisterPage registerInputs={data['registerInputs']} />
         </Route>
         <Route path='/itemview'>
-          <ItemViewPage myitem={data['userItems'][0]} />
+          <ItemViewPage item={data['userItems'][0]} />
         </Route>
         <Route path='/mylistings'>
           <Header

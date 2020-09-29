@@ -128,7 +128,7 @@ export default function MyItemListing({ type, myitem }) {
                       </Typography>
                     </GridItem>
                     <GridItem xs={12} sm={6} md={6} lg={6}>
-                      {GetCollectionMsg(type, myitem.preferredCollectTime)}
+                      {GetCollectionMsg(type, myitem.preferredCollectStartTime)}
                     </GridItem>
                   </GridContainer>
                 </GridItem>
