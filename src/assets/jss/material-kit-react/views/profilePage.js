@@ -79,7 +79,7 @@ const profilePageStyle = {
     marginTop: '50px',
     marginBottom: '50px',
   },
-  category: {
+  bottomFilter: {
     marginBottom: '20px',
   },
 };
