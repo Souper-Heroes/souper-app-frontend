@@ -74,7 +74,14 @@ const profilePageStyle = {
     paddingLeft: "0",
     letterSpacing: "normal",
     textAlign: 'left',
-  }
+  },
+  slider: {
+    marginTop: '50px',
+    marginBottom: '50px',
+  },
+  category: {
+    marginBottom: '20px',
+  },
 };
 
 export default profilePageStyle;

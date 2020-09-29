@@ -8,13 +8,12 @@ import GridItem from 'components/MaterialKitComponents/Grid/GridItem.js';
 import styles from 'assets/jss/material-kit-react/views/profilePage.js';
 import Card from 'components/MaterialKitComponents/Card/Card.js';
 import CardBody from 'components/MaterialKitComponents/Card/CardBody.js';
-import CustomInput from "components/MaterialKitComponents/CustomInput/CustomInput.js";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
-import TextField from '@material-ui/core/TextField';
 import Button from 'components/MaterialKitComponents/CustomButtons/Button.js';
-import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import Paginations from "components/MaterialKitComponents/Pagination/Pagination.js";
+import Slider from "nouislider";
 
 const useStyles = makeStyles(styles);
 
@@ -25,6 +24,30 @@ function Page() {
   const handleChange = (event) => {
     setUnit(event.target.value);
   };
+
+  React.useEffect(() => {
+    Slider.create(document.getElementById("sliderRegular"), {
+      start: 2,
+      keyboardSupport: true,
+      connect: [true, false],
+      range: {
+        min: 0,
+        max: 5,
+      },
+      tooltips: true,
+      format: {
+        from: Number,
+        to: function (value) {
+          return value.toFixed(2) + ' Miles';
+        },
+      },
+      pips: {
+        mode: 'steps',
+        stepped: true,
+        density: 10,
+      },
+    });
+  });
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div>
@@ -72,7 +95,9 @@ function Page() {
                     <option value={'miles'}>In Miles</option>
                     <option value={'kilometers'}>In Kilometers</option>
                   </Select>
-
+                </FormControl>
+                <FormControl fullWidth>
+                  <div className="slider-primary" id="sliderRegular" className={classes.slider} />
                 </FormControl>
                 <InputLabel className={classes.filterLabel}>Category</InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
@@ -82,6 +107,7 @@ function Page() {
                     value={unit}
                     onChange={handleChange}
                     name="age"
+                    className={classes.category}
                   >
                     <option aria-label="None" value="" />
                     <option value={0}>In Miles</option>
@@ -297,24 +323,23 @@ function Page() {
                 </Card>
               </GridItem>
             </GridItem>
+            <GridItem xs={12} sm={12} md={12} container spacing={1} direction="row-reverse">
 
-          </GridContainer>
+              <Paginations
+                pages={[
+                  { text: "PREV" },
+                  { text: 1 },
+                  { text: 2 },
+                  { active: true, text: 3 },
+                  { text: 4 },
+                  { text: 5 },
+                  { text: "NEXT" }
+                ]}
+                color="rose"
+              />
 
-          <div className={classes.description}>
-            <p>
-              An artist of considerable range, Chet Faker — the name taken by
-              Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-              and records all of his own music, giving it a warm, intimate feel
-              with a solid groove structure.{' '}
-            </p>
-          </div>
-          <GridContainer justify='center'>
-            <GridItem
-              xs={12}
-              sm={12}
-              md={8}
-              className={classes.navWrapper}
-            ></GridItem>
+
+            </GridItem>
           </GridContainer>
         </div>
       </div>
