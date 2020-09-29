@@ -8,12 +8,12 @@ import RegisterPage from './components/Login/RegisterPage';
 import MyListingsPage from './components/Items/MyListingsPage';
 import LandingPage from './views/LandingPage/LandingPage';
 import ItemListings from './components/Items/ItemListings';
-// import Page from './components/Page';
 import Header from './components/Layout/Header';
 import HeaderLinks from './components/Layout/HeaderLinks';
 import SouperFooter from './components/Layout/SouperFooter';
 import Parallax from './components/MaterialKitComponents/Parallax/Parallax';
 import './App.css';
+import Profile from "./components/Profile/Profile";
 
 function App() {
   const [state] = useState(TestData);
@@ -49,6 +49,23 @@ function App() {
         <Route path="/landing">
           <LandingPage />
         </Route>
+        <Route path="/profile">
+          <Header
+              brand={<Restaurant />}
+              color="rose"
+              leftLinks=""
+              rightLinks={<HeaderLinks />}
+              fixed
+          />
+          <Parallax
+              small
+              filter
+              image={require('assets/img/citrus-fruit.jpg')}
+          />
+          <Profile />
+          <SouperFooter />
+        </Route>
+
         <Route path="/">
           <Header
             brand={<Restaurant />}
