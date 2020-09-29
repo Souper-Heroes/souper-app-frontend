@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer.js';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem.js';
 
-import styles from 'assets/jss/material-kit-react/views/profilePage.js';
+import profile from 'assets/jss/material-kit-react/views/profilePage.js';
 import Card from 'components/MaterialKitComponents/Card/Card.js';
 import CardBody from 'components/MaterialKitComponents/Card/CardBody.js';
 import InputLabel from "@material-ui/core/InputLabel";
@@ -13,7 +13,18 @@ import FormControl from "@material-ui/core/FormControl";
 import Button from 'components/MaterialKitComponents/CustomButtons/Button.js';
 import Select from '@material-ui/core/Select';
 import Paginations from "components/MaterialKitComponents/Pagination/Pagination.js";
+import { cardTitle, cardLink, cardSubtitle } from "assets/jss/material-kit-react.js";
 import Slider from "nouislider";
+
+const styles = {
+  ...profile,
+  cardTitle,
+  cardLink,
+  cardSubtitle,
+  textLeft: {
+    textAlign: "left"
+  }
+};
 
 const useStyles = makeStyles(styles);
 
@@ -122,200 +133,326 @@ function Page() {
             </GridItem>
             <GridItem xs={12} sm={8} md={9} container direction="row" spacing={1}>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
-                <Card>
+                <Card className={classes.textLeft}>
                   <CardBody>
-                    <h4 className={classes.cardTitle}>Card title</h4>
+                    <h4 className={classes.cardTitle}>Card Title</h4>
+                    <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and make
-                      up the bulk of the card's content.
-                  </p>
+                      Some quick example text to build on the card title and content
+
+                    </p>
+                    <a
+                      href="#pablo"
+                      className={classes.cardLink}
+                      onClick={(e) => e.preventDefault()}>
+                      View Item
+                    </a>
                   </CardBody>
                 </Card>
               </GridItem>
