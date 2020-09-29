@@ -74,14 +74,6 @@ function Page() {
             <GridItem xs={12} sm={4} md={3} container spacing={1}>
               <GridItem xs={12} sm={12} md={12} >
                 <h4 className={classes.filterTitle}>Filters</h4>
-                <InputLabel className={classes.filterLabel}>
-                  Expiry Date
-                </InputLabel>
-                <FormControl fullWidth>
-                  <Datetime
-                    inputProps={{ placeholder: "Select Expiry date.." }}
-                  />
-                </FormControl>
                 <InputLabel className={classes.filterLabel}>Distance</InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
 
@@ -101,20 +93,25 @@ function Page() {
                 </FormControl>
                 <InputLabel className={classes.filterLabel}>Category</InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
-
                   <Select
                     native
                     value={unit}
                     onChange={handleChange}
                     name="age"
-                    className={classes.category}
                   >
                     <option aria-label="None" value="" />
                     <option value={0}>In Miles</option>
                     <option value={1}>In Kilometers</option>
                     <option value={3}>In Kilometers</option>
                   </Select>
-
+                </FormControl>
+                <InputLabel className={classes.filterLabel}>
+                  Expiry Date
+                </InputLabel>
+                <FormControl fullWidth>
+                  <Datetime className={classes.bottomFilter}
+                    inputProps={{ placeholder: "Select Expiry date.." }}
+                  />
                 </FormControl>
                 <FormControl fullWidth>
                   <Button fullWidth size='md' color='rose'>
