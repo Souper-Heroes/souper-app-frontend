@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Datetime from "react-datetime";
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
@@ -28,15 +28,15 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-function Page() {
+function ItemListings() {
   const classes = useStyles();
-  const [unit, setUnit] = useState('miles');
+  const [unit, setUnit] = useState('Miles');
 
   const handleChange = (event) => {
     setUnit(event.target.value);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     Slider.create(document.getElementById("sliderRegular"), {
       start: 2,
       keyboardSupport: true,
@@ -46,19 +46,28 @@ function Page() {
         max: 5,
       },
       tooltips: true,
-      format: {
-        from: Number,
-        to: function (value) {
-          return value.toFixed(2) + ' Miles';
-        },
-      },
       pips: {
         mode: 'steps',
         stepped: true,
         density: 10,
       },
     });
+  }, []);
+
+  useEffect(() => {
+    const Slider = document.getElementById('sliderRegular');
+    const start = Slider.noUiSlider.get().replace(/[^\d.-]/g, '');
+    Slider.noUiSlider.updateOptions({
+      start: start,
+      format: {
+        from: Number,
+        to: function (value) {
+          return value.toFixed(2) + ` ${unit}`;
+        },
+      },
+    });
   });
+
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div>
@@ -68,16 +77,16 @@ function Page() {
               <GridItem xs={12} sm={4} md={3} >
                 <InputLabel className={classes.filterLabel}>Sort By</InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
-                  <Select
+                  {/* <Select
                     native
                     value={unit}
                     onChange={handleChange}
                     name="age"
                   >
                     <option aria-label="None" value="" />
-                    <option value={'miles'}>In Miles</option>
-                    <option value={'kilometers'}>In Kilometers</option>
-                  </Select>
+                    <option value={'Miles'}>In Miles</option>
+                    <option value={'Kilometers'}>In Kilometers</option>
+                  </Select> */}
 
                 </FormControl>
               </GridItem>
@@ -92,11 +101,11 @@ function Page() {
                     native
                     value={unit}
                     onChange={handleChange}
-                    name="age"
+                    name="Distance"
                   >
                     <option aria-label="None" value="" />
-                    <option value={'miles'}>In Miles</option>
-                    <option value={'kilometers'}>In Kilometers</option>
+                    <option value={'Miles'}>In Miles</option>
+                    <option value={'Kilometers'}>In Kilometers</option>
                   </Select>
                 </FormControl>
                 <FormControl fullWidth>
@@ -481,4 +490,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default ItemListings;
