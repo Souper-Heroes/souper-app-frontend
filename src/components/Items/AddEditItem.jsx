@@ -32,8 +32,10 @@ export default function AddEditItem({ userItems }) {
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
   const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
   const [category, setCategory] = useState('1');
+  const [description, setDescription] = useState('');
+  const [expiry, setExpiry] = useState('');
+  const [location, setLocation] = useState('');
 
   const [items, setItems] = useState(userItems);
 
@@ -41,34 +43,42 @@ export default function AddEditItem({ userItems }) {
     console.log(e.target.value);
     setTitle(e.target.value);
   };
-  const handleDescriptionChange = e => {
-    console.log(e.target.value);
-    setDescription(e.target.value);
-  };
   const handleCategoryChange = e => {
     console.log(e.target.value);
     setCategory(e.target.value);
   };
+  const handleDescriptionChange = e => {
+    console.log(e.target.value);
+    setDescription(e.target.value);
+  };
+  const handleExpiryChange = e => {
+    console.log(e.target.value);
+    setExpiry(e.target.value);
+  };
+  const handleLocationChange = e => {
+    console.log(e.target.value);
+    setLocation(e.target.value);
+  };
+
 
   // An attempt at makign the data stick about for a bit
   const addNewItem = e => {
     console.log('onClick: ', title, description);
-    
-    // Add item info to new item obj and push it on
+
     // Create a copy of the tasks array
     const updatedItems = items.slice();
 
     // Create a new task object
     const newItem = {
-      itemId: 8, // Change to count items +1
+      itemId: 1000 + items.length + 1, // Change to count items +1
       provideUserId: 1, // Get from profile
       collectUserId: null,
       photoId: '#1118',
       title: title,
       category: category, // Use an array number instead of string here?
       description: description,
-      expiryDate: '10/10/2020',
-      location: 'EN4 4QE',
+      expiry: expiry,
+      location: location, // Get this from profile if required
       preferredProvideTime: '05/10/2020 4PM-6PM',
       preferredCollectTime: ''
     };
@@ -135,17 +145,20 @@ export default function AddEditItem({ userItems }) {
               <InputLabel style={{ float: 'left' }} className={classes.label}>
                 Expiry date
               </InputLabel>
-              <br />
               <FormControl fullWidth>
                 <Datetime
-                  inputProps={{ placeholder: 'Enter the date the item will expire' }}
+                  inputProps={{
+                    placeholder: 'Enter the date the item will expire',
+                    onBlur: event => handleExpiryChange(event)
+                  }}
                 />
               </FormControl>
               <CustomInput
                 labelText="Location"
                 id="float"
                 inputProps={{
-                  placeholder: 'Enter a Postcode'
+                  placeholder: 'Enter a Postcode',
+                  onChange: event => handleLocationChange(event)
                 }}
                 formControlProps={{
                   fullWidth: true
