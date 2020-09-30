@@ -1,7 +1,12 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
 import { Restaurant } from '@material-ui/icons';
-import ItemViewPage from './components/Items/ItemViewPage';
+<<<<<<< HEAD:src/App.js
+import SouperFooter from 'components/Layout/SouperFooter';
+import Parallax from 'components/MaterialKitComponents/Parallax/Parallax.js';
+import ItemViewPage from 'components/Items/ItemViewPage.js';
+=======
+>>>>>>> ffec4c779785fd8872e3cebc6b178126c14ca088:src/App.jsx
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TestData from 'assets/data/TestData.json';
 import LoginPage from './components/Login/LoginPage';
@@ -17,25 +22,34 @@ import Parallax from './components/MaterialKitComponents/Parallax/Parallax';
 import './App.css';
 
 function App() {
+<<<<<<< HEAD:src/App.js
   const [data, setData] = useState(TestData);
+=======
+  const [state] = useState(TestData);
+>>>>>>> ffec4c779785fd8872e3cebc6b178126c14ca088:src/App.jsx
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route path='/login'>
+        <Route path="/login">
           <LoginPage />
         </Route>
+<<<<<<< HEAD:src/App.js
         <Route path='/register'>
           <RegisterPage registerInputs={data['registerInputs']} />
         </Route>
         <Route path='/itemview'>
           <ItemViewPage item={data['userItems'][0]} />
+=======
+        <Route path="/register">
+          <RegisterPage registerInputs={state.registerInputs} />
+>>>>>>> ffec4c779785fd8872e3cebc6b178126c14ca088:src/App.jsx
         </Route>
-        <Route path='/mylistings'>
+        <Route path="/mylistings">
           <Header
             brand={<Restaurant />}
-            color='rose'
-            leftLinks=''
+            color="rose"
+            leftLinks=""
             rightLinks={<HeaderLinks />}
             fixed
           />
@@ -45,19 +59,24 @@ function App() {
             image={require('assets/img/citrus-fruit.jpg')}
           />
           <MyListingsPage
+<<<<<<< HEAD:src/App.js
             userProfile={data['userProfile']}
             userItems={data['userItems']}
+=======
+            userProfile={state.userProfile}
+            userItems={state.userItems}
+>>>>>>> ffec4c779785fd8872e3cebc6b178126c14ca088:src/App.jsx
           />
           <SouperFooter />
         </Route>
-        <Route path='/landing'>
+        <Route path="/landing">
           <LandingPage />
         </Route>
-        <Route path='/'>
+        <Route path="/">
           <Header
             brand={<Restaurant />}
-            color='rose'
-            leftLinks=''
+            color="rose"
+            leftLinks=""
             rightLinks={<HeaderLinks />}
             fixed
           />
