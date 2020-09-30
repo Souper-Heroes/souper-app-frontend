@@ -22,7 +22,7 @@ import CardBody from 'components/MaterialKitComponents/Card/CardBody';
 import CardHeader from 'components/MaterialKitComponents/Card/CardHeader';
 import CardFooter from 'components/MaterialKitComponents/Card/CardFooter';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
-import CheckboxGeneric from 'components/Layout/CheckboxGeneric';
+import CheckboxTermsAndConds from 'components/Login/CheckboxTermsAndConds';
 import SouperFooter from 'components/Layout/SouperFooter';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage';
@@ -33,11 +33,16 @@ const useStyles = makeStyles(styles);
 
 export default function RegisterPage({ registerInputs }) {
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
+  const [checkedTermsAndConds, setcheckedTermsAndConds] = React.useState(true);
 
   setTimeout(() => {
     setCardAnimation('');
   }, 700);
   const classes = useStyles();
+
+  const checkTermsAndConds = (checkedValue) => {
+    setcheckedTermsAndConds(checkedValue);
+  };
 
   return (
     <div>
@@ -50,44 +55,44 @@ export default function RegisterPage({ registerInputs }) {
         }}
       >
         <div className={classes.container}>
-          <GridContainer justify="center">
+          <GridContainer justify='center'>
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
-                  <CardHeader color="rose" className={classes.cardHeader}>
+                  <CardHeader color='rose' className={classes.cardHeader}>
                     <h2>Register</h2>
                     <div className={classes.socialLine}>
                       <Button
                         justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
+                        href='#pablo'
+                        target='_blank'
+                        color='transparent'
+                        onClick={(e) => e.preventDefault()}
                       >
-                        <i className="fab fa-twitter" />
+                        <i className='fab fa-twitter' />
                       </Button>
                       <Button
                         justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
+                        href='#pablo'
+                        target='_blank'
+                        color='transparent'
+                        onClick={(e) => e.preventDefault()}
                       >
-                        <i className="fab fa-facebook" />
+                        <i className='fab fa-facebook' />
                       </Button>
                       <Button
                         justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
+                        href='#pablo'
+                        target='_blank'
+                        color='transparent'
+                        onClick={(e) => e.preventDefault()}
                       >
-                        <i className="fab fa-google-plus-g" />
+                        <i className='fab fa-google-plus-g' />
                       </Button>
                     </div>
                   </CardHeader>
                   <CardBody>
-                    {registerInputs.map(input => (
+                    {registerInputs.map((input) => (
                       <CustomInput
                         labelText={input.label}
                         id={input.id}
@@ -98,7 +103,7 @@ export default function RegisterPage({ registerInputs }) {
                         inputProps={{
                           type: `${input.type}`,
                           endAdornment: (
-                            <InputAdornment position="start">
+                            <InputAdornment position='start'>
                               {input.icon === 'face' && (
                                 <Face className={classes.inputIconsColor} />
                               )}
@@ -116,15 +121,22 @@ export default function RegisterPage({ registerInputs }) {
                       />
                     ))}
 
-                    <CheckboxGeneric>
+                    <CheckboxTermsAndConds
+                      checkTermsAndConds={checkTermsAndConds}
+                    >
                       <strong>Terms And Conditions</strong>
-                    </CheckboxGeneric>
-                    <Button fullWidth size="lg" color="rose">
+                    </CheckboxTermsAndConds>
+                    <Button
+                      disabled={checkedTermsAndConds}
+                      fullWidth
+                      size='lg'
+                      color='rose'
+                    >
                       Create Account
                     </Button>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button fullWidth size="lg" color="info">
+                    <Button fullWidth size='lg' color='info'>
                       Log In
                     </Button>
                   </CardFooter>
@@ -140,5 +152,5 @@ export default function RegisterPage({ registerInputs }) {
 }
 
 RegisterPage.propTypes = {
-  registerInputs: PropTypes.array
+  registerInputs: PropTypes.array,
 };
