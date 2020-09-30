@@ -98,7 +98,7 @@ material-kit-react
 │   ├── index.html
 │   └── manifest.json
 └── src
-    ├── index.js
+    ├── index.jsx
     ├── logo.svg
     ├── assets
     │   ├── css
@@ -121,77 +121,77 @@ material-kit-react
     │       └── material-kit-react.scss
     ├── components
     │   ├── Badge
-    │   │   └── Badge.js
+    │   │   └── Badge.jsx
     │   ├── Card
-    │   │   ├── Card.js
-    │   │   ├── CardBody.js
-    │   │   ├── CardFooter.js
-    │   │   └── CardHeader.js
+    │   │   ├── Card.jsx
+    │   │   ├── CardBody.jsx
+    │   │   ├── CardFooter.jsx
+    │   │   └── CardHeader.jsx
     │   ├── Clearfix
-    │   │   └── Clearfix.js
+    │   │   └── Clearfix.jsx
     │   ├── CustomButtons
-    │   │   └── Button.js
+    │   │   └── Button.jsx
     │   ├── CustomDropdown
-    │   │   └── CustomDropdown.js
+    │   │   └── CustomDropdown.jsx
     │   ├── CustomInput
-    │   │   └── CustomInput.js
+    │   │   └── CustomInput.jsx
     │   ├── CustomLinearProgress
-    │   │   └── CustomLinearProgress.js
+    │   │   └── CustomLinearProgress.jsx
     │   ├── CustomTabs
-    │   │   └── CustomTabs.js
+    │   │   └── CustomTabs.jsx
     │   ├── Footer
-    │   │   └── Footer.js
+    │   │   └── Footer.jsx
     │   ├── Grid
-    │   │   ├── GridContainer.js
-    │   │   └── GridItem.js
+    │   │   ├── GridContainer.jsx
+    │   │   └── GridItem.jsx
     │   ├── Header
-    │   │   ├── Header.js
-    │   │   └── HeaderLinks.js
+    │   │   ├── Header.jsx
+    │   │   └── HeaderLinks.jsx
     │   ├── InfoArea
-    │   │   └── InfoArea.js
+    │   │   └── InfoArea.jsx
     │   ├── NavPills
-    │   │   └── NavPills.js
+    │   │   └── NavPills.jsx
     │   ├── Pagination
-    │   │   └── Pagination.js
+    │   │   └── Pagination.jsx
     │   ├── Parallax
-    │   │   └── Parallax.js
+    │   │   └── Parallax.jsx
     │   ├── Snackbar
-    │   │   └── SnackbarContent.js
+    │   │   └── SnackbarContent.jsx
     │   └── Typography
-    │       ├── Danger.js
-    │       ├── Info.js
-    │       ├── Muted.js
-    │       ├── Primary.js
-    │       ├── Quote.js
-    │       ├── Small.js
-    │       ├── Success.js
-    │       └── Warning.js
+    │       ├── Danger.jsx
+    │       ├── Info.jsx
+    │       ├── Muted.jsx
+    │       ├── Primary.jsx
+    │       ├── Quote.jsx
+    │       ├── Small.jsx
+    │       ├── Success.jsx
+    │       └── Warning.jsx
     └── views
         ├── Components
-        │   ├── Components.js
+        │   ├── Components.jsx
         │   └── Sections
-        │       ├── SectionBasics.js
-        │       ├── SectionCarousel.js
-        │       ├── SectionCompletedExamples.js
-        │       ├── SectionDownload.js
-        │       ├── SectionExamples.js
-        │       ├── SectionJavascript.js
-        │       ├── SectionLogin.js
-        │       ├── SectionNavbars.js
-        │       ├── SectionNotifications.js
-        │       ├── SectionPills.js
-        │       ├── SectionTabs.js
-        │       └── SectionTypography.js
+        │       ├── SectionBasics.jsx
+        │       ├── SectionCarousel.jsx
+        │       ├── SectionCompletedExamples.jsx
+        │       ├── SectionDownload.jsx
+        │       ├── SectionExamples.jsx
+        │       ├── SectionJavascript.jsx
+        │       ├── SectionLogin.jsx
+        │       ├── SectionNavbars.jsx
+        │       ├── SectionNotifications.jsx
+        │       ├── SectionPills.jsx
+        │       ├── SectionTabs.jsx
+        │       └── SectionTypography.jsx
         ├── LandingPage
-        │   ├── LandingPage.js
+        │   ├── LandingPage.jsx
         │   └── Sections
-        │       ├── ProductSection.js
-        │       ├── TeamSection.js
-        │       └── WorkSection.js
+        │       ├── ProductSection.jsx
+        │       ├── TeamSection.jsx
+        │       └── WorkSection.jsx
         ├── LoginPage
         │   └── LoginPage.jsx
         └── ProfilePage
-            └── ProfilePage.js
+            └── ProfilePage.jsx
 ```
 
 

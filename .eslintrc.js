@@ -3,6 +3,14 @@ module.exports = {
     browser: true,
     es6: true,
   },
+  settings: {
+    "import/resolver": {
+      node: {
+        paths: ["src"],
+        extensions: [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
   extends: [
     'plugin:react/recommended',
     'airbnb',
@@ -23,6 +31,9 @@ module.exports = {
   ],
   rules: {
     "linebreak-style": 0,
-    "comma-dangle": 0
+    "comma-dangle": 0,
+    "max-len": [2, 150],
+    "arrow-parens": [2, "as-needed"],
+    "react/jsx-props-no-spreading": 0
   },
 };
