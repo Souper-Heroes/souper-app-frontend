@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -32,12 +32,41 @@ import image from 'assets/img/board.jpg';
 const useStyles = makeStyles(styles);
 
 export default function RegisterPage({ registerInputs }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
 
   setTimeout(() => {
     setCardAnimation('');
   }, 700);
   const classes = useStyles();
+
+  const onChangeHandler = event => {
+    const { id, value } = event.currentTarget;
+    if (id === 'first') {
+      setName(value);
+    } else if (id === 'second') {
+      setEmail(value);
+    } else if (id === 'third') {
+      setPassword(value);
+    }
+  };
+
+  const [checked, setChecked] = React.useState(false);
+  const handleToggle = () => {
+    let value;
+    if (checked) {
+      value = false;
+      setButtonDisabled(true);
+    } else {
+      value = true;
+      setButtonDisabled(false);
+    }
+    setChecked(value);
+  };
 
   return (
     <div>
@@ -97,6 +126,7 @@ export default function RegisterPage({ registerInputs }) {
                         }}
                         inputProps={{
                           type: `${input.type}`,
+                          onChange: event => onChangeHandler(event),
                           endAdornment: (
                             <InputAdornment position="start">
                               {input.icon === 'face' && (
@@ -116,10 +146,10 @@ export default function RegisterPage({ registerInputs }) {
                       />
                     ))}
 
-                    <CheckboxGeneric>
+                    <CheckboxGeneric handleToggle={handleToggle}>
                       <strong>Terms And Conditions</strong>
                     </CheckboxGeneric>
-                    <Button fullWidth size="lg" color="rose">
+                    <Button disabled={buttonDisabled} fullWidth size="lg" color="rose">
                       Create Account
                     </Button>
                   </CardBody>
