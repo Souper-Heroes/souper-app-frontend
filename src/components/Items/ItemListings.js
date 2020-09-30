@@ -62,7 +62,7 @@ function ItemListings() {
       format: {
         from: Number,
         to: function (value) {
-          return value.toFixed(2) + ` ${unit}`;
+          return value.toFixed(2) + ` ${unit === 'Miles' ? 'mi' : 'km'}`;
         },
       },
     });
@@ -94,20 +94,19 @@ function ItemListings() {
             <GridItem xs={12} sm={4} md={3} container spacing={1}>
               <GridItem xs={12} sm={12} md={12} >
                 <h4 className={classes.filterTitle}>Filters</h4>
-                <InputLabel className={classes.filterLabel}>Distance</InputLabel>
+                <InputLabel className={classes.filterLabel}>Unit</InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
-
                   <Select
                     native
                     value={unit}
                     onChange={handleChange}
                     name="Distance"
                   >
-                    <option aria-label="None" value="" />
                     <option value={'Miles'}>In Miles</option>
                     <option value={'Kilometers'}>In Kilometers</option>
                   </Select>
                 </FormControl>
+                <InputLabel className={classes.filterLabel}>Distance</InputLabel>
                 <FormControl fullWidth>
                   <div className="slider-primary" id="sliderRegular" className={classes.slider} />
                 </FormControl>
@@ -467,21 +466,18 @@ function ItemListings() {
               </GridItem>
             </GridItem>
             <GridItem xs={12} sm={12} md={12} container spacing={1} direction="row-reverse">
-
               <Paginations
                 pages={[
                   { text: "PREV" },
-                  { text: 1 },
+                  { active: true, text: 1 },
                   { text: 2 },
-                  { active: true, text: 3 },
+                  { text: 3 },
                   { text: 4 },
                   { text: 5 },
                   { text: "NEXT" }
                 ]}
-                color="rose"
+                color="primary"
               />
-
-
             </GridItem>
           </GridContainer>
         </div>
