@@ -5,15 +5,15 @@ import React from 'react';
 //import TextField from '@material-ui/core/TextField';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
-import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer.js';
-import GridItem from 'components/MaterialKitComponents/Grid/GridItem.js';
+import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
+import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 //import CustomButton from 'components/CustomButtons/Button.js';
 //import Card from '@material-ui/core/Card';
 //import CardActionArea from '@material-ui/core/CardActionArea';
 //import CardActions from '@material-ui/core/CardActions';
 //import CardContent from '@material-ui/core/CardContent';
 //import CardMedia from '@material-ui/core/CardMedia';
-import Button from 'components/CustomButtons/Button.js';
+import Button from 'components/CustomButtons/Button';
 
 import Typography from '@material-ui/core/Typography';
 
