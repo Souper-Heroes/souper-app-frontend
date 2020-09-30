@@ -35,7 +35,7 @@ export default function AddEditItem({ userItems }) {
   const [category, setCategory] = useState('1');
   const [description, setDescription] = useState('');
   const [expiry, setExpiry] = useState('');
-  const [location, setLocation] = useState('');
+  
 
   const [items, setItems] = useState(userItems);
 
@@ -55,9 +55,29 @@ export default function AddEditItem({ userItems }) {
     console.log(e.target.value);
     setExpiry(e.target.value);
   };
+
+  const [location, setLocation] = useState('');
   const handleLocationChange = e => {
     console.log(e.target.value);
     setLocation(e.target.value);
+  };
+  
+  const [checked, setChecked] = useState(false);
+  const handleToggle = () => {
+    let toggle;
+    let postcode = '';
+    if (checked) {
+      postcode = '';
+      toggle = false;
+    } else {
+      // Add postcode from profile here
+      postcode = 'SP3 6RN';
+      toggle = true;
+    }
+    console.log('I toggle ', toggle);
+    console.log('I toggle ', postcode);
+    setLocation(postcode);
+    setChecked(toggle);
   };
 
 
@@ -70,7 +90,7 @@ export default function AddEditItem({ userItems }) {
 
     // Create a new task object
     const newItem = {
-      itemId: 1000 + items.length + 1, // Change to count items +1
+      itemId: 1000 + items.length + 1, // could use uuid() ??
       provideUserId: 1, // Get from profile
       collectUserId: null,
       photoId: '#1118',
@@ -156,9 +176,10 @@ export default function AddEditItem({ userItems }) {
               <CustomInput
                 labelText="Location"
                 id="float"
+                value={location}
                 inputProps={{
                   placeholder: 'Enter a Postcode',
-                  onChange: event => handleLocationChange(event)
+                  onChange: event => handleLocationChange(event),
                 }}
                 formControlProps={{
                   fullWidth: true
@@ -166,6 +187,7 @@ export default function AddEditItem({ userItems }) {
               />
               <FormControlLabel
                 style={{ float: 'left' }}
+                onChange={handleToggle}
                 control={(
                   <Checkbox
                     name="locationSameProfile"
