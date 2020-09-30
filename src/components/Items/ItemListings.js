@@ -30,15 +30,33 @@ const useStyles = makeStyles(styles);
 
 function ItemListings() {
   const classes = useStyles();
+  const [sortBy, setSortBy] = useState('Distance');
+  const [distance, setDistance] = useState(2);
   const [unit, setUnit] = useState('Miles');
+  const [category, setCategory] = useState('');
+  const [expiry, setExpiry] = useState('');
 
-  const handleChange = (event) => {
-    setUnit(event.target.value);
+  const onChangeHandler = (event) => {
+    const { name, value } = event.currentTarget;
+    console.log(name, value)
+    if (name === 'sortBy') {
+      setSortBy(value);
+    }
+    else if (name === 'unit') {
+      setUnit(value);
+    }
+    else if (name === 'category') {
+      setCategory(value);
+    }
   };
+
+  const onDateChangeHandler = (date) => {
+    setExpiry(date);
+  }
 
   useEffect(() => {
     Slider.create(document.getElementById("sliderRegular"), {
-      start: 2,
+      start: `${distance}`,
       keyboardSupport: true,
       connect: [true, false],
       range: {
@@ -52,11 +70,13 @@ function ItemListings() {
         density: 10,
       },
     });
+
   }, []);
 
   useEffect(() => {
     const Slider = document.getElementById('sliderRegular');
     const start = Slider.noUiSlider.get().replace(/[^\d.-]/g, '');
+
     Slider.noUiSlider.updateOptions({
       start: start,
       format: {
@@ -66,6 +86,7 @@ function ItemListings() {
         },
       },
     });
+    Slider.noUiSlider.on('change', () => setDistance(Slider.noUiSlider.get().replace(/[^\d.-]/g, '')));
   });
 
   return (
@@ -77,16 +98,16 @@ function ItemListings() {
               <GridItem xs={12} sm={4} md={3} >
                 <InputLabel className={classes.filterLabel}>Sort By</InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
-                  {/* <Select
+                  <Select
                     native
-                    value={unit}
-                    onChange={handleChange}
-                    name="age"
+                    value={sortBy}
+                    onChange={event => onChangeHandler(event)}
+                    name="sortBy"
                   >
                     <option aria-label="None" value="" />
-                    <option value={'Miles'}>In Miles</option>
-                    <option value={'Kilometers'}>In Kilometers</option>
-                  </Select> */}
+                    <option value={'Distance'}>Distance</option>
+                    <option value={'Expiry'}>Expiry Date</option>
+                  </Select>
 
                 </FormControl>
               </GridItem>
@@ -99,8 +120,8 @@ function ItemListings() {
                   <Select
                     native
                     value={unit}
-                    onChange={handleChange}
-                    name="Distance"
+                    onChange={event => onChangeHandler(event)}
+                    name="unit"
                   >
                     <option value={'Miles'}>In Miles</option>
                     <option value={'Kilometers'}>In Kilometers</option>
@@ -108,20 +129,20 @@ function ItemListings() {
                 </FormControl>
                 <InputLabel className={classes.filterLabel}>Distance</InputLabel>
                 <FormControl fullWidth>
-                  <div className="slider-primary" id="sliderRegular" className={classes.slider} />
+                  <div className="slider-primary" id="sliderRegular" className={classes.slider} name="slider" onChange={event => onChangeHandler(event)} />
                 </FormControl>
                 <InputLabel className={classes.filterLabel}>Category</InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
                   <Select
                     native
-                    value={unit}
-                    onChange={handleChange}
-                    name="age"
+                    value={category}
+                    onChange={event => onChangeHandler(event)}
+                    name="category"
                   >
                     <option aria-label="None" value="" />
-                    <option value={0}>In Miles</option>
-                    <option value={1}>In Kilometers</option>
-                    <option value={3}>In Kilometers</option>
+                    <option value={'Fruit'}>Fruit</option>
+                    <option value={'Tinned'}>Tinned</option>
+                    <option value={'Veg'}>Veg</option>
                   </Select>
                 </FormControl>
                 <InputLabel className={classes.filterLabel}>
@@ -130,6 +151,9 @@ function ItemListings() {
                 <FormControl fullWidth>
                   <Datetime className={classes.bottomFilter}
                     inputProps={{ placeholder: "Select Expiry date.." }}
+                    name="expiry"
+                    value={expiry}
+                    onChange={onDateChangeHandler}
                   />
                 </FormControl>
                 <FormControl fullWidth>
