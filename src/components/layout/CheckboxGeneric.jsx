@@ -34,7 +34,7 @@ export default function CheckboxGeneric(props) {
     <div>
       <div className={wrapperDiv}>
         <FormControlLabel
-          control={(
+          control={
             <Checkbox
               tabIndex={-1}
               onClick={() => handleToggle(21)}
@@ -42,7 +42,7 @@ export default function CheckboxGeneric(props) {
               icon={<Check className={classes.uncheckedIcon} />}
               classes={{ checked: classes.checked }}
             />
-          )}
+          }
           classes={{ label: classes.label }}
           label={props.children}
         />

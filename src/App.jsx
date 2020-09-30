@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
 import { Restaurant } from '@material-ui/icons';
-import ItemViewPage from './components/Items/ItemViewPage.js';
+import ItemViewPage from './components/Items/ItemViewPage';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TestData from 'assets/data/TestData.json';
 import LoginPage from './components/Login/LoginPage';
@@ -22,7 +22,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/login">
+        <Route path='/login'>
           <LoginPage />
         </Route>
         <Route path='/register'>
@@ -31,11 +31,11 @@ function App() {
         <Route path='/itemview'>
           <ItemViewPage item={data['userItems'][0]} />
         </Route>
-        <Route path="/mylistings">
+        <Route path='/mylistings'>
           <Header
             brand={<Restaurant />}
-            color="rose"
-            leftLinks=""
+            color='rose'
+            leftLinks=''
             rightLinks={<HeaderLinks />}
             fixed
           />
@@ -50,14 +50,14 @@ function App() {
           />
           <SouperFooter />
         </Route>
-        <Route path="/landing">
+        <Route path='/landing'>
           <LandingPage />
         </Route>
-        <Route path="/">
+        <Route path='/'>
           <Header
             brand={<Restaurant />}
-            color="rose"
-            leftLinks=""
+            color='rose'
+            leftLinks=''
             rightLinks={<HeaderLinks />}
             fixed
           />
