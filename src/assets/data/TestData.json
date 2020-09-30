@@ -67,82 +67,82 @@
 
   "userItems": [
     {
-      "itemId": "1",
+      "itemId": 1,
+      "provideUserId": 1,
+      "collectUserId": 2,
       "photoId": "#1111",
-      "provideUserId": "1",
-      "collectUserId": "2",
+      "title": "5 Squashy Bananas",
       "category": "Fruit",
-      "description": "5 Squashy Bananas",
+      "description": "Been in my bag, only one end is squishy.",
       "expiryDate": "23/10/2020",
       "location": "EN4 4QE",
       "preferredProvideTime": "23/10/2020 4PM-6PM",
-      "preferredCollectTime": "23/10/2020 4PM-6PM",
-      "reservedItem": "false"
+      "preferredCollectTime": "23/10/2020 4PM-6PM"
     },
     {
-      "itemId": "2",
+      "itemId": 2,
+      "provideUserId": 2,
+      "collectUserId": 3,
       "photoId": "#1112",
-      "provideUserId": "1",
-      "collectUserId": "3",
+      "title": "Cashew nuts",
       "category": "Nuts",
-      "description": "Bag of Cashew Nuts",
+      "description": "Unopened but the packet is a bit battered",
       "expiryDate": "24/10/2020",
       "location": "SR5 4TQ",
       "preferredProvideTime": "24/10/2020 10:30AM-5:50PM",
-      "preferredCollectTime": "",
-      "reservedItem": "false"
+      "preferredCollectTime": "25/12/2020 8AM-10PM"
     },
     {
-      "itemId": "3",
+      "itemId": 3,
+      "provideUserId": 2,
+      "collectUserId": 3,
       "photoId": "#1113",
-      "provideUserId": "1",
-      "collectUserId": "4",
+      "title": "6 Chicken Wings",
       "category": "Meat",
-      "description": "6 Chicken Wings",
+      "description": "Cooked yesterday, I don't want them.",
       "expiryDate": "30/11/2020",
       "location": "EN4 4QE",
       "preferredProvideTime": "24/11/2020 1PM-3PM",
-      "preferredCollectTime": "",
-      "reservedItem": "false"
+      "preferredCollectTime": "25/12/2020 8AM-10PM"
     },
     {
-      "itemId": "4",
+      "itemId": 4,
+      "provideUserId": 1,
+      "collectUserId": 2,
       "photoId": "#1113",
-      "provideUserId": "4",
-      "collectUserId": "1",
+      "title": "Potatoes",
       "category": "Vegtables",
-      "description": "7 Potatoes with roots growing",
+      "description": "Half a bag of Potatoes roots growing",
       "expiryDate": "28/11/2020",
       "location": "DE3 7TE",
       "preferredProvideTime": "28/11/2020 1PM-3PM",
-      "preferredCollectTime": "",
-      "reservedItem": "false"
+      "preferredCollectTime": "25/12/2020 8AM-10PM"
     },
     {
-      "itemId": "5",
+      "itemId": 5,
+      "provideUserId": 3,
+      "collectUserId": null,
       "photoId": "#1113",
-      "provideUserId": "5",
-      "collectUserId": "1",
+      "title": "10 Leeks",
       "category": "Vegetables",
-      "description": "10 Leaks picked from my garden 5 days ago",
+      "description": "10 Leeks picked from my garden 5 days ago",
       "expiryDate": "29/12/2020",
       "location": "SL3 7TE",
       "preferredProvideTime": "26/12/2020 1PM-3PM",
-      "preferredCollectTime": "25/12/2020 8AM-10PM",
-      "reservedItem": "false"
+      "preferredCollectTime": ""
     },
     {
-      "itemId": "6",
-      "photoId": "#1113",
-      "provideUserId": "6",
+      "itemId": 6,
+      "provideUserId": 2,
       "collectUserId": null,
+      "photoId": "#1113",
+      "title": "Soup",
       "category": "Canned Food",
       "description": "2 Tins Of Baxters Carrot And Corriander Soup",
       "expiryDate": "03/12/2020",
       "location": "SP3 7XE",
       "preferredProvideTime": "02/12/2020 4PM-8PM",
-      "preferredCollectTime": "",
-      "reservedItem": "false"
+      "preferredCollectTime": ""
     }
   ]
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // nodejs library that concatenates classes
 import classNames from 'classnames';
@@ -27,9 +27,58 @@ import styles from 'assets/jss/material-kit-react/views/profilePage';
 
 const useStyles = makeStyles(styles);
 
-export default function AddEditItem(props) {
+export default function AddEditItem({ userItems }) {
   const classes = useStyles();
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('1');
+
+  const [items, setItems] = useState(userItems);
+
+  const handleTitleChange = e => {
+    console.log(e.target.value);
+    setTitle(e.target.value);
+  };
+  const handleDescriptionChange = e => {
+    console.log(e.target.value);
+    setDescription(e.target.value);
+  };
+  const handleCategoryChange = e => {
+    console.log(e.target.value);
+    setCategory(e.target.value);
+  };
+
+  // An attempt at makign the data stick about for a bit
+  const addNewItem = e => {
+    console.log('onClick: ', title, description);
+    
+    // Add item info to new item obj and push it on
+    // Create a copy of the tasks array
+    const updatedItems = items.slice();
+
+    // Create a new task object
+    const newItem = {
+      itemId: 8, // Change to count items +1
+      provideUserId: 1, // Get from profile
+      collectUserId: null,
+      photoId: '#1118',
+      title: title,
+      category: category, // Use an array number instead of string here?
+      description: description,
+      expiryDate: '10/10/2020',
+      location: 'EN4 4QE',
+      preferredProvideTime: '05/10/2020 4PM-6PM',
+      preferredCollectTime: ''
+    };
+
+    // Add the new task to the array
+    updatedItems.push(newItem);
+    console.log(newItem);
+    // Update the state with the new array
+    setItems(updatedItems);
+  };
 
   return (
     <div>
@@ -51,7 +100,8 @@ export default function AddEditItem(props) {
                 labelText="Title"
                 id="float"
                 inputProps={{
-                  placeholder: 'Give your item a name'
+                  placeholder: 'Give your item a name',
+                  onChange: event => handleTitleChange(event),
                 }}
                 formControlProps={{
                   fullWidth: true
@@ -61,18 +111,21 @@ export default function AddEditItem(props) {
                 labelText="Description"
                 id="float"
                 inputProps={{
-                  placeholder: 'Describe your item, has it been opened or dropped?'
+                  placeholder: 'Describe your item, has it been opened or dropped?',
+                  onChange: event => handleDescriptionChange(event)
                 }}
                 formControlProps={{
                   fullWidth: true
                 }}
               />
               <div>
-                <Select fullWidth labelId="label" id="select" value="10">
-                  <MenuItem value="10">Fresh produce</MenuItem>
-                  <MenuItem value="20">Tinned goods</MenuItem>
-                  <MenuItem value="20">Packet</MenuItem>
-                  <MenuItem value="20">Frozen</MenuItem>
+                <Select fullWidth labelId="label" id="select" onChange={handleCategoryChange} value={category}>
+                  <MenuItem value="1">Fresh produce</MenuItem>
+                  <MenuItem value="2">Tinned goods</MenuItem>
+                  <MenuItem value="3">Nuts</MenuItem>
+                  <MenuItem value="4">Packet</MenuItem>
+                  <MenuItem value="5">Frozen</MenuItem>
+                  <MenuItem value="6">Meat</MenuItem>
                 </Select>
               </div>
             </GridItem>
@@ -144,6 +197,7 @@ export default function AddEditItem(props) {
                 <Button
                   color="success"
                   size="lg"
+                  onClick={event => addNewItem(event)}
                 >
                   Save
                 </Button>
