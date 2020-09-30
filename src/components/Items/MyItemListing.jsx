@@ -44,8 +44,8 @@ const useStyles = makeStyles((theme) => ({
   img: {
     margin: 'auto',
     display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
+    maxWidth: '80%',
+    maxHeight: '80%',
   },
 
   box: {
@@ -54,13 +54,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const GetCollectionMsg = (type, time) => {
-  const message = type === 'provide'
-    ? time !== ''
-      ? `Being Collected: ${time}`
-      : ''
-    : time !== ''
-      ? `To Collect: ${time}`
-      : '';
+  if (time === null) {
+    return null;
+  }
+
+  let message = null;
+  if (type === 'provide') {
+    message = `Being Collected: ${time}`;
+  } else {
+    message = `To Collect: ${time}`;
+  }
 
   return (
     <Typography variant='body2' color='textPrimary' gutterBottom>
@@ -132,7 +135,7 @@ export default function MyItemListing({ type, myitem }) {
                       </Typography>
                     </GridItem>
                     <GridItem xs={12} sm={6} md={6} lg={6}>
-                      {GetCollectionMsg(type, myitem.preferredCollectTime)}
+                      {GetCollectionMsg(type, myitem.preferredCollectStartTime)}
                     </GridItem>
                   </GridContainer>
                 </GridItem>
