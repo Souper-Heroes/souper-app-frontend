@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
 import { Restaurant } from '@material-ui/icons';
+import ItemViewPage from './components/Items/ItemViewPage';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TestData from 'assets/data/TestData.json';
 import LoginPage from './components/Login/LoginPage';
@@ -14,9 +15,11 @@ import SouperFooter from './components/Layout/SouperFooter';
 import Parallax from './components/MaterialKitComponents/Parallax/Parallax';
 import './App.css';
 import Profile from "./components/Profile/Profile";
+import Forgotten from "./components/Login/Forgotten";
+import ResetPassword from "./components/Login/ResetPassword";
 
 function App() {
-  const [state] = useState(TestData);
+  const [data, setData] = useState(TestData);
 
   return (
     <BrowserRouter>
@@ -25,9 +28,12 @@ function App() {
           <LoginPage />
         </Route>
         <Route path="/register">
-          <RegisterPage registerInputs={state.registerInputs} />
+          <RegisterPage registerInputs={data['registerInputs']} />
         </Route>
-        <Route path="/mylistings">
+        <Route path='/itemview'>
+          <ItemViewPage item={data['userItems'][0]} />
+        </Route>
+        <Route path='/mylistings'>
           <Header
             brand={<Restaurant />}
             color="rose"
@@ -41,13 +47,10 @@ function App() {
             image={require('assets/img/citrus-fruit.jpg')}
           />
           <MyListingsPage
-            userProfile={state.userProfile}
-            userItems={state.userItems}
+            userProfile={data['userProfile']}
+            userItems={data['userItems']}
           />
           <SouperFooter />
-        </Route>
-        <Route path="/landing">
-          <LandingPage />
         </Route>
         <Route path="/profile">
           <Header
@@ -65,7 +68,15 @@ function App() {
           <Profile />
           <SouperFooter />
         </Route>
-
+        <Route path="/forgotten">
+          <Forgotten />
+        </Route>
+        <Route path="/reset">
+          <ResetPassword />
+        </Route>
+        <Route path="/landing">
+          <LandingPage />
+        </Route>
         <Route path="/">
           <Header
             brand={<Restaurant />}

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import classNames from 'classnames';
 // material-ui components
@@ -11,25 +12,25 @@ import styles from 'assets/jss/material-kit-react/customCheckboxRadioSwitch';
 
 const useStyles = makeStyles(styles);
 
-export default function CheckboxGeneric(props) {
-  const [checked, setChecked] = React.useState([24, 22]);
+export default function CheckboxTermsAndConds({
+  checkTermsAndConds,
+  children,
+}) {
+  const [checked, setChecked] = React.useState(true);
   const classes = useStyles();
 
   const wrapperDiv = classNames(
     classes.checkboxAndRadio,
     classes.checkboxAndRadioHorizontal
   );
-  const handleToggle = (value) => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  const handleToggle = () => {
+    const newChecked = checked ? false : true;
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
     setChecked(newChecked);
+    //Callback function to take care of what happens in the Parent component based on the new value
+    checkTermsAndConds(newChecked);
   };
+
   return (
     <div>
       <div className={wrapperDiv}>
@@ -37,14 +38,14 @@ export default function CheckboxGeneric(props) {
           control={
             <Checkbox
               tabIndex={-1}
-              onClick={() => handleToggle(21)}
+              onClick={() => handleToggle()}
               checkedIcon={<Check className={classes.checkedIcon} />}
               icon={<Check className={classes.uncheckedIcon} />}
               classes={{ checked: classes.checked }}
             />
           }
           classes={{ label: classes.label }}
-          label={props.children}
+          label={children}
         />
       </div>
     </div>
