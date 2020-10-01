@@ -24,6 +24,9 @@ import FormControl from '@material-ui/core/FormControl';
 // TODO - this uses files from views will have to get styles from somewhere else
 import styles from 'assets/jss/material-kit-react/views/profilePage';
 
+// DropZone imports
+import DropZone from '../dropzone/DropZone';
+
 const useStyles = makeStyles(styles);
 
 export default function AddEditItem({ userItems }) {
@@ -106,18 +109,12 @@ export default function AddEditItem({ userItems }) {
 
   return (
     <div>
-      <Parallax small image={require('assets/img/unsplash-redfruit.jpg')} />
+      <Parallax small image={require('assets/img/citrus-fruit.jpg')} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
           <GridContainer justify='center'>
             <GridItem xs={12} sm={6} className={classes.navWrapper}>
-              <a href='#LinkToChangeThePic'>
-                <img
-                  src={require('../../assets/img/purple-banana.jpg')}
-                  alt='Bananas'
-                  className={navImageClasses}
-                />
-              </a>
+              <DropZone />
             </GridItem>
             <GridItem xs={12} sm={6} className={classes.navWrapper}>
               <CustomInput
