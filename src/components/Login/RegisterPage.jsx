@@ -28,6 +28,7 @@ import SouperFooter from 'components/Layout/SouperFooter';
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 
 import image from 'assets/img/board.jpg';
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 
@@ -126,6 +127,7 @@ export default function RegisterPage({ registerInputs }) {
                     >
                       <strong>Terms And Conditions</strong>
                     </CheckboxTermsAndConds>
+                    <Link to="/profile">
                     <Button
                       disabled={checkedTermsAndConds}
                       fullWidth
@@ -134,12 +136,15 @@ export default function RegisterPage({ registerInputs }) {
                     >
                       Create Account
                     </Button>
+                    </Link>
                   </CardBody>
-                  <CardFooter className={classes.cardFooter}>
-                    <Button fullWidth size='lg' color='info'>
-                      Log In
-                    </Button>
-                  </CardFooter>
+                  <Link to="/login">
+                    <CardFooter className={classes.cardFooter}>
+                      <Button fullWidth size='lg' color='info'>
+                        Log In
+                      </Button>
+                    </CardFooter>
+                  </Link>
                 </form>
               </Card>
             </GridItem>
