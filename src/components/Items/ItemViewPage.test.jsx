@@ -12,7 +12,7 @@ const item = {
   category: 'Nuts',
   description: 'Bag of Cashew Nuts',
   expiryDate: '24/10/2020',
-  location: 'SR5 4TQ',
+  location: 'SR5 4ZQ',
   preferredProvideStartTime: '24/10/2020 10:30AM',
   preferredProvideEndTime: '24/10/2020 5:50PM',
   preferredCollectStartTime: null,
