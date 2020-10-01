@@ -72,7 +72,7 @@ function ItemListings() {
       format: {
         from: Number,
         to: function (value) {
-          return value.toFixed(2) + ` ${unit}`;
+          return value.toFixed(2) + ` ${unit === 'Miles' ? 'mi' : 'km'}`;
         },
       },
       keyboardSupport: true,
