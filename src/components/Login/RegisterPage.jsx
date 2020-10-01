@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,10 +11,6 @@ import Email from '@material-ui/icons/Email';
 // import People from "@material-ui/icons/People";
 import Face from '@material-ui/icons/Face';
 // core components
-// import Navbar from 'components/Layout/Navbar';
-// import Header from "components/MaterialKitComponents/Header/Header";
-// import HeaderLinks from "components/MaterialKitComponents/Header/HeaderLinks";
-// import Footer from "components/MaterialKitComponents/Footer/Footer";
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import Button from 'components/MaterialKitComponents/CustomButtons/Button';
@@ -32,8 +29,11 @@ import image from 'assets/img/board.jpg';
 const useStyles = makeStyles(styles);
 
 export default function RegisterPage({ registerInputs }) {
-  const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
-  const [checkedTermsAndConds, setcheckedTermsAndConds] = React.useState(true);
+  const [cardAnimaton, setCardAnimation] = useState('cardHidden');
+  const [checkedTermsAndConds, setcheckedTermsAndConds] = useState(true);
+  const [displayName, setDisplayName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   setTimeout(() => {
     setCardAnimation('');
@@ -42,6 +42,24 @@ export default function RegisterPage({ registerInputs }) {
 
   const checkTermsAndConds = (checkedValue) => {
     setcheckedTermsAndConds(checkedValue);
+  };
+
+  function handleOnClickCreateAcc() {
+    console.log('Create account for ', displayName, email, password);
+  }
+
+  const handleInputChange = (event) => {
+    event.preventDefault();
+    const { id, value } = event.currentTarget;
+    console.log('My handler: ', id, value);
+
+    if (id === 'first') {
+      setDisplayName(value);
+    } else if (id === 'second') {
+      setEmail(value);
+    } else if (id === 'third') {
+      setPassword(value);
+    }
   };
 
   return (
@@ -101,7 +119,9 @@ export default function RegisterPage({ registerInputs }) {
                           fullWidth: true,
                         }}
                         inputProps={{
+                          id: `${input.id}`,
                           type: `${input.type}`,
+                          onChange: (event) => handleInputChange(event),
                           endAdornment: (
                             <InputAdornment position='start'>
                               {input.icon === 'face' && (
@@ -120,17 +140,19 @@ export default function RegisterPage({ registerInputs }) {
                         }}
                       />
                     ))}
-
                     <CheckboxTermsAndConds
                       checkTermsAndConds={checkTermsAndConds}
                     >
-                      <strong>Terms And Conditions</strong>
+                      <Link to='/register'>
+                        <strong>Terms And Conditions</strong>{' '}
+                      </Link>
                     </CheckboxTermsAndConds>
                     <Button
                       disabled={checkedTermsAndConds}
                       fullWidth
                       size='lg'
                       color='rose'
+                      onClick={handleOnClickCreateAcc}
                     >
                       Create Account
                     </Button>
