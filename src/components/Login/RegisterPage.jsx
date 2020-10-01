@@ -45,7 +45,7 @@ export default function RegisterPage({ registerInputs }) {
   };
 
   function handleOnClickCreateAcc() {
-    console.log('Create account for ', displayName, email, password);
+    console.log('Create account for:', displayName, email, password);
   }
 
   const handleInputChange = (event) => {
