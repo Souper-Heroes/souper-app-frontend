@@ -16,6 +16,7 @@ import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInpu
 
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import image from 'assets/img/citrus-fruit.jpg';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(styles);
 
@@ -78,11 +79,13 @@ export default function ResetPassword() {
                     />
 
                   </CardBody>
-                  <CardFooter className={classes.cardFooter}>
-                    <Button fullWidth to="#TODO_Send email" variant="contained" color="rose" size="lg">
-                      Reset Password
-                    </Button>
-                  </CardFooter>
+                  <Link to="/login">
+                    <CardFooter className={classes.cardFooter}>
+                      <Button fullWidth to="#TODO_Send email" variant="contained" color="rose" size="lg">
+                        Reset Password
+                      </Button>
+                    </CardFooter>
+                  </Link>
                 </form>
               </Card>
             </GridItem>

@@ -9,12 +9,14 @@ import RegisterPage from './components/Login/RegisterPage';
 import MyListingsPage from './components/Items/MyListingsPage';
 import LandingPage from './views/LandingPage/LandingPage';
 import ItemListings from './components/Items/ItemListings';
-// import Page from './components/Page';
 import Header from './components/Layout/Header';
 import HeaderLinks from './components/Layout/HeaderLinks';
 import SouperFooter from './components/Layout/SouperFooter';
 import Parallax from './components/MaterialKitComponents/Parallax/Parallax';
 import './App.css';
+import Profile from "./components/Profile/Profile";
+import Forgotten from "./components/Login/Forgotten";
+import ResetPassword from "./components/Login/ResetPassword";
 
 function App() {
   const [data, setData] = useState(TestData);
@@ -22,10 +24,10 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path='/login'>
+        <Route path="/login">
           <LoginPage />
         </Route>
-        <Route path='/register'>
+        <Route path="/register">
           <RegisterPage registerInputs={data['registerInputs']} />
         </Route>
         <Route path='/itemview'>
@@ -34,8 +36,8 @@ function App() {
         <Route path='/mylistings'>
           <Header
             brand={<Restaurant />}
-            color='rose'
-            leftLinks=''
+            color="rose"
+            leftLinks=""
             rightLinks={<HeaderLinks />}
             fixed
           />
@@ -50,14 +52,36 @@ function App() {
           />
           <SouperFooter />
         </Route>
-        <Route path='/landing'>
+        <Route path="/profile">
+          <Header
+              brand={<Restaurant />}
+              color="rose"
+              leftLinks=""
+              rightLinks={<HeaderLinks />}
+              fixed
+          />
+          <Parallax
+              small
+              filter
+              image={require('assets/img/citrus-fruit.jpg')}
+          />
+          <Profile />
+          <SouperFooter />
+        </Route>
+        <Route path="/forgotten">
+          <Forgotten />
+        </Route>
+        <Route path="/reset">
+          <ResetPassword />
+        </Route>
+        <Route path="/landing">
           <LandingPage />
         </Route>
-        <Route path='/'>
+        <Route path="/">
           <Header
             brand={<Restaurant />}
-            color='rose'
-            leftLinks=''
+            color="rose"
+            leftLinks=""
             rightLinks={<HeaderLinks />}
             fixed
           />
