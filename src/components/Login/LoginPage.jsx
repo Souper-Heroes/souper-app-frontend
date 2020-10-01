@@ -109,23 +109,23 @@ export default function LoginPage() {
                     />
                   </CardBody>
                   <GridContainer justify="center">
-                    <Link to="/ForgottenPassword" className={classes.link}>
+                    <Link to="/forgotten" className={classes.link}>
                       <Button simple color="info" size="lg" to="/ForgottenPassword">
                         FORGOTTEN PASSWORD?
                       </Button>
                     </Link>
                   </GridContainer>
-                  <Link to="/">
+                  <Link to="/profile">
                     <CardFooter className={classes.cardFooter}>
                       <Button fullWidth size="lg" color="rose">
-                          Log in
+                        Log in
                       </Button>
                     </CardFooter>
                   </Link>
                   <Link to="/register">
                     <CardFooter className={classes.cardFooter}>
                       <Button fullWidth size="lg" color="info">
-                          Register
+                        Register
                       </Button>
                     </CardFooter>
                   </Link>
