@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Select } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
@@ -35,33 +34,33 @@ export default function AddEditItem({ userItems }) {
   const [category, setCategory] = useState('1');
   const [description, setDescription] = useState('');
   const [expiry, setExpiry] = useState('');
-  
 
   const [items, setItems] = useState(userItems);
 
-  const handleTitleChange = e => {
+  const handleTitleChange = (e) => {
     console.log(e.target.value);
     setTitle(e.target.value);
   };
-  const handleCategoryChange = e => {
+  const handleCategoryChange = (e) => {
     console.log(e.target.value);
     setCategory(e.target.value);
   };
-  const handleDescriptionChange = e => {
+  const handleDescriptionChange = (e) => {
     console.log(e.target.value);
     setDescription(e.target.value);
   };
-  const handleExpiryChange = e => {
-    console.log(e.target.value);
-    setExpiry(e.target.value);
+  const handleExpiryChange = (value) => {
+    const newDate = value._d.toLocaleDateString('en-GB');
+    console.log(newDate);
+    setExpiry(newDate);
   };
 
-  const [location, setLocation] = useState('');
-  const handleLocationChange = e => {
+  const [zlocation, setzLocation] = useState(''); // Set to postcode found in profile here?
+  const handleLocationChange = (e) => {
     console.log(e.target.value);
-    setLocation(e.target.value);
+    setzLocation(e.target.value);
   };
-  
+
   const [checked, setChecked] = useState(false);
   const handleToggle = () => {
     let toggle;
@@ -74,23 +73,18 @@ export default function AddEditItem({ userItems }) {
       postcode = 'SP3 6RN';
       toggle = true;
     }
-    console.log('I toggle ', toggle);
-    console.log('I toggle ', postcode);
-    setLocation(postcode);
+    setzLocation(postcode);
     setChecked(toggle);
   };
 
-
   // An attempt at makign the data stick about for a bit
-  const addNewItem = e => {
-    console.log('onClick: ', title, description);
-
+  const addNewItem = (e) => {
     // Create a copy of the tasks array
     const updatedItems = items.slice();
 
     // Create a new task object
     const newItem = {
-      itemId: 1000 + items.length + 1, // could use uuid() ??
+      itemId: 1000 + items.length + 1, // Mongo DB will assign an ID
       provideUserId: 1, // Get from profile
       collectUserId: null,
       photoId: '#1118',
@@ -98,11 +92,11 @@ export default function AddEditItem({ userItems }) {
       category: category, // Use an array number instead of string here?
       description: description,
       expiry: expiry,
-      location: location, // Get this from profile if required
+      location: zlocation, // Get this from profile if required
       preferredProvideTime: '05/10/2020 4PM-6PM',
-      preferredCollectTime: ''
+      preferredCollectTime: '',
     };
-
+    // ## TODO ## set all fields to '' or equivalent.
     // Add the new task to the array
     updatedItems.push(newItem);
     console.log(newItem);
@@ -115,90 +109,100 @@ export default function AddEditItem({ userItems }) {
       <Parallax small image={require('assets/img/unsplash-redfruit.jpg')} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <GridContainer justify="center">
+          <GridContainer justify='center'>
             <GridItem xs={12} sm={6} className={classes.navWrapper}>
-              <a href="#LinkToChangeThePic">
+              <a href='#LinkToChangeThePic'>
                 <img
                   src={require('../../assets/img/purple-banana.jpg')}
-                  alt="Bananas"
+                  alt='Bananas'
                   className={navImageClasses}
                 />
               </a>
             </GridItem>
             <GridItem xs={12} sm={6} className={classes.navWrapper}>
               <CustomInput
-                labelText="Title"
-                id="float"
+                labelText='Title'
+                id='float'
                 inputProps={{
                   placeholder: 'Give your item a name',
-                  onChange: event => handleTitleChange(event),
+                  onChange: (event) => handleTitleChange(event),
                 }}
                 formControlProps={{
-                  fullWidth: true
+                  fullWidth: true,
                 }}
               />
               <CustomInput
-                labelText="Description"
-                id="float"
+                labelText='Description'
+                id='float'
                 inputProps={{
-                  placeholder: 'Describe your item, has it been opened or dropped?',
-                  onChange: event => handleDescriptionChange(event)
+                  placeholder:
+                    'Describe your item, has it been opened or dropped?',
+                  onChange: (event) => handleDescriptionChange(event),
                 }}
                 formControlProps={{
-                  fullWidth: true
+                  fullWidth: true,
                 }}
               />
               <div>
-                <Select fullWidth labelId="label" id="select" onChange={handleCategoryChange} value={category}>
-                  <MenuItem value="1">Fresh produce</MenuItem>
-                  <MenuItem value="2">Tinned goods</MenuItem>
-                  <MenuItem value="3">Nuts</MenuItem>
-                  <MenuItem value="4">Packet</MenuItem>
-                  <MenuItem value="5">Frozen</MenuItem>
-                  <MenuItem value="6">Meat</MenuItem>
+                <Select
+                  fullWidth
+                  labelId='label'
+                  id='select'
+                  onChange={handleCategoryChange}
+                  value={category}
+                >
+                  <MenuItem value='1'>Fresh produce</MenuItem>
+                  <MenuItem value='2'>Tinned goods</MenuItem>
+                  <MenuItem value='3'>Nuts</MenuItem>
+                  <MenuItem value='4'>Packet</MenuItem>
+                  <MenuItem value='5'>Frozen</MenuItem>
+                  <MenuItem value='6'>Meat</MenuItem>
                 </Select>
               </div>
             </GridItem>
           </GridContainer>
-          <GridContainer justify="center">
+          <GridContainer justify='center'>
             <GridItem xs={12} sm={6} className={classes.navWrapper}>
               <InputLabel style={{ float: 'left' }} className={classes.label}>
                 Expiry date
               </InputLabel>
               <FormControl fullWidth>
                 <Datetime
+                  className={classes.bottomFilter}
+                  name='expiry'
+                  value={expiry}
+                  timeFormat={false}
                   inputProps={{
                     placeholder: 'Enter the date the item will expire',
-                    onBlur: event => handleExpiryChange(event)
                   }}
+                  onChange={handleExpiryChange}
                 />
               </FormControl>
               <CustomInput
-                labelText="Location"
-                id="float"
-                value={location}
+                labelText='Location'
+                id='float'
+                name='location'
                 inputProps={{
                   placeholder: 'Enter a Postcode',
-                  onChange: event => handleLocationChange(event),
+                  onChange: (event) => handleLocationChange(event),
+                  value: `${zlocation}`,
                 }}
                 formControlProps={{
-                  fullWidth: true
+                  fullWidth: true,
                 }}
               />
               <FormControlLabel
                 style={{ float: 'left' }}
                 onChange={handleToggle}
-                control={(
-                  <Checkbox
-                    name="locationSameProfile"
-                  />
-                  )}
-                label="Use location set in User profile?"
+                control={<Checkbox name='locationSameProfile' />}
+                label='Use location set in User profile?'
               />
             </GridItem>
-            <GridItem xs={12} sm={6} container spacing={1} direction="row">
+            <GridItem xs={12} sm={6} container spacing={1} direction='row'>
               <GridItem xs={12}>
-                <h4 xs={12} md={12} style={{ float: 'left' }}>Available collection time</h4>
+                <h4 xs={12} md={12} style={{ float: 'left' }}>
+                  Available collection time
+                </h4>
               </GridItem>
               <GridItem xs={12} md={6}>
                 <InputLabel style={{ float: 'left' }} className={classes.label}>
@@ -207,7 +211,9 @@ export default function AddEditItem({ userItems }) {
                 <br />
                 <FormControl fullWidth>
                   <Datetime
-                    inputProps={{ placeholder: 'Enter the time you are availble from' }}
+                    inputProps={{
+                      placeholder: 'Enter the time you are availble from',
+                    }}
                   />
                 </FormControl>
               </GridItem>
@@ -218,21 +224,20 @@ export default function AddEditItem({ userItems }) {
                 <br />
                 <FormControl fullWidth>
                   <Datetime
-                    inputProps={{ placeholder: 'Enter the time you are availble till' }}
+                    inputProps={{
+                      placeholder: 'Enter the time you are availble till',
+                    }}
                   />
                 </FormControl>
               </GridItem>
-              <GridItem fullWidth align="right">
-                <Button
-                  color="danger"
-                  size="lg"
-                >
+              <GridItem fullWidth align='right'>
+                <Button color='danger' size='lg'>
                   Cancel
                 </Button>
                 <Button
-                  color="success"
-                  size="lg"
-                  onClick={event => addNewItem(event)}
+                  color='success'
+                  size='lg'
+                  onClick={(event) => addNewItem(event)}
                 >
                   Save
                 </Button>
