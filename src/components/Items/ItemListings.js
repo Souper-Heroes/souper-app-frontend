@@ -38,12 +38,22 @@ function ItemListings() {
 
   const onChangeHandler = (event) => {
     const { name, value } = event.currentTarget;
-    console.log(name, value)
+    // console.log(name, value)
     if (name === 'sortBy') {
       setSortBy(value);
     }
     else if (name === 'unit') {
+      console.log(value);
       setUnit(value);
+      document.getElementById('sliderRegular').noUiSlider.updateOptions({
+        start: `${distance}`,
+        format: {
+          from: Number,
+          to: function (val) {
+            return val.toFixed(2) + ` ${value === 'Miles' ? 'mi' : 'km'}`;
+          },
+        },
+      });
     }
     else if (name === 'category') {
       setCategory(value);
@@ -55,8 +65,16 @@ function ItemListings() {
   }
 
   useEffect(() => {
-    Slider.create(document.getElementById("sliderRegular"), {
+    const distanceSlider = document.getElementById('sliderRegular');
+    // create distance Slider when component mounts
+    Slider.create(distanceSlider, {
       start: `${distance}`,
+      format: {
+        from: Number,
+        to: function (value) {
+          return value.toFixed(2) + ` ${unit}`;
+        },
+      },
       keyboardSupport: true,
       connect: [true, false],
       range: {
@@ -70,24 +88,9 @@ function ItemListings() {
         density: 10,
       },
     });
-
+    // set the Distance State when slider value changed 
+    distanceSlider.noUiSlider.on('change', () => setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, '')));
   }, []);
-
-  useEffect(() => {
-    const Slider = document.getElementById('sliderRegular');
-    const start = Slider.noUiSlider.get().replace(/[^\d.-]/g, '');
-
-    Slider.noUiSlider.updateOptions({
-      start: start,
-      format: {
-        from: Number,
-        to: function (value) {
-          return value.toFixed(2) + ` ${unit === 'Miles' ? 'mi' : 'km'}`;
-        },
-      },
-    });
-    Slider.noUiSlider.on('change', () => setDistance(Slider.noUiSlider.get().replace(/[^\d.-]/g, '')));
-  });
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
