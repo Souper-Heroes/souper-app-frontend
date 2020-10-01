@@ -99,20 +99,6 @@ function ItemListings() {
           <GridContainer>
             <GridItem xs={12} sm={4} md={3} container spacing={1}>
               <GridItem xs={12} sm={12} md={12} >
-                <InputLabel className={classes.filterLabel}>Sort By</InputLabel>
-                <FormControl fullWidth required className={classes.formControl}>
-                  <Select
-                    native
-                    value={sortBy}
-                    onChange={event => onChangeHandler(event)}
-                    name="sortBy"
-                  >
-                    <option aria-label="None" value="" />
-                    <option value={'Distance'}>Distance</option>
-                    <option value={'Expiry'}>Expiry Date</option>
-                  </Select>
-
-                </FormControl>
                 <h4 className={classes.filterTitle}>Filters</h4>
                 <InputLabel className={classes.filterLabel}>Unit</InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
@@ -163,6 +149,25 @@ function ItemListings() {
               </GridItem>
             </GridItem>
             <GridItem xs={12} sm={8} md={9} container direction="row" spacing={1}>
+              <GridItem xs={12} sm={12} md={8}>
+                <h6>18 ITEMS FOUND</h6>
+              </GridItem>
+              <GridItem xs={12} sm={12} md={4}>
+                {/* <InputLabel className={classes.filterLabel}>Sort By</InputLabel> */}
+                <FormControl fullWidth required className={classes.formControl}>
+                  <Select
+                    native
+                    value={sortBy}
+                    onChange={event => onChangeHandler(event)}
+                    name="sortBy"
+                  >
+                    <option aria-label="None" value="" />
+                    <option value={'Distance'}>Sort by: Distance</option>
+                    <option value={'Expiry'}>Sort by: Expiry Date</option>
+                  </Select>
+
+                </FormControl>
+              </GridItem>
               <GridItem xs={12} sm={6} md={4}>
                 <Card className={classes.textLeft}>
                   <CardBody>
