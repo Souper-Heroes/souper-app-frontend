@@ -97,8 +97,8 @@ function ItemListings() {
       <div>
         <div className={classes.container}>
           <GridContainer>
-            <GridItem xs={12} sm={12} md={12} container spacing={1} direction="row-reverse">
-              <GridItem xs={12} sm={4} md={3} >
+            <GridItem xs={12} sm={4} md={3} container spacing={1}>
+              <GridItem xs={12} sm={12} md={12} >
                 <InputLabel className={classes.filterLabel}>Sort By</InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
                   <Select
@@ -113,10 +113,6 @@ function ItemListings() {
                   </Select>
 
                 </FormControl>
-              </GridItem>
-            </GridItem>
-            <GridItem xs={12} sm={4} md={3} container spacing={1}>
-              <GridItem xs={12} sm={12} md={12} >
                 <h4 className={classes.filterTitle}>Filters</h4>
                 <InputLabel className={classes.filterLabel}>Unit</InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
