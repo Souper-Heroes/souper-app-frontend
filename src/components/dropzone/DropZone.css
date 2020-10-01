@@ -41,8 +41,8 @@
   margin-top: 10px;
   margin-bottom: 20px;
   position: relative;
-  line-height: 50px;
-  height: 50px;
+  line-height: 20px;
+  height: 20px;
 }
 
 .file-status-bar > div {
@@ -55,7 +55,7 @@
   font-size: 12px;
   font-weight: 700;
   line-height: 13px;
-  margin-top: 25px;
+  margin-top: 5px;
   padding: 0 4px;
   border-radius: 2px;
   box-shadow: 1px 1px 2px #abc;
@@ -83,8 +83,8 @@
 }
 
 .file-type-logo {
-  width: 50px;
-  height: 50px;
+  width: 20px;
+  height: 20px;
   background: url(../../assets/img/generic.png) no-repeat center center;
   background-size: 100%;
   position: absolute;
@@ -104,10 +104,24 @@
 
 .file-remove {
   position: absolute;
-  top: 20px;
+  top: 2px;
   right: 10px;
   line-height: 15px;
   cursor: pointer;
   color: red;
   margin-right: -10px;
+}
+
+.file-input {
+  display: none;
+}
+
+.image-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
 }
