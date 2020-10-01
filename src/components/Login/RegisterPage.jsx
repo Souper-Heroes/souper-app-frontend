@@ -22,7 +22,7 @@ import CardBody from 'components/MaterialKitComponents/Card/CardBody';
 import CardHeader from 'components/MaterialKitComponents/Card/CardHeader';
 import CardFooter from 'components/MaterialKitComponents/Card/CardFooter';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
-import CheckboxGeneric from 'components/Layout/CheckboxGeneric';
+import CheckboxTermsAndConds from 'components/Login/CheckboxTermsAndConds';
 import SouperFooter from 'components/Layout/SouperFooter';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage';
@@ -33,11 +33,16 @@ const useStyles = makeStyles(styles);
 
 export default function RegisterPage({ registerInputs }) {
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
+  const [checkedTermsAndConds, setcheckedTermsAndConds] = React.useState(true);
 
   setTimeout(() => {
     setCardAnimation('');
   }, 700);
   const classes = useStyles();
+
+  const checkTermsAndConds = (checkedValue) => {
+    setcheckedTermsAndConds(checkedValue);
+  };
 
   return (
     <div>
@@ -116,10 +121,17 @@ export default function RegisterPage({ registerInputs }) {
                       />
                     ))}
 
-                    <CheckboxGeneric>
+                    <CheckboxTermsAndConds
+                      checkTermsAndConds={checkTermsAndConds}
+                    >
                       <strong>Terms And Conditions</strong>
-                    </CheckboxGeneric>
-                    <Button fullWidth size='lg' color='rose'>
+                    </CheckboxTermsAndConds>
+                    <Button
+                      disabled={checkedTermsAndConds}
+                      fullWidth
+                      size='lg'
+                      color='rose'
+                    >
                       Create Account
                     </Button>
                   </CardBody>
