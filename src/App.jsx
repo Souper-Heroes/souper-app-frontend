@@ -1,23 +1,17 @@
-/* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
-import { Restaurant } from '@material-ui/icons';
-import ItemViewPage from './components/Items/ItemViewPage';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Layout from 'components/Layout/Layout';
 import TestData from 'assets/data/TestData.json';
-import LoginPage from './components/Login/LoginPage';
-import RegisterPage from './components/Login/RegisterPage';
-import MyListingsPage from './components/Items/MyListingsPage';
-import LandingPage from './views/LandingPage/LandingPage';
-import ItemListings from './components/Items/ItemListings';
-import Header from './components/Layout/Header';
-import HeaderLinks from './components/Layout/HeaderLinks';
-import SouperFooter from './components/Layout/SouperFooter';
-import Parallax from './components/MaterialKitComponents/Parallax/Parallax';
-import AddEditItem from './components/Items/AddEditItem';
-import './App.css';
+import ItemViewPage from 'components/Items/ItemViewPage';
+import LoginPage from 'components/Login/LoginPage';
+import RegisterPage from 'components/Login/RegisterPage';
+import LandingPage from 'views/LandingPage/LandingPage';
+import ItemListings from 'components/Items/ItemListings';
+
 import Profile from './components/Profile/Profile';
 import Forgotten from './components/Login/Forgotten';
 import ResetPassword from './components/Login/ResetPassword';
+import AddEditItem from './components/Items/AddEditItem';
 
 function App() {
   const [data, setData] = useState(TestData);
@@ -25,75 +19,31 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/login">
-          <LoginPage />
-        </Route>
+        <Route path="/login" component={LoginPage} />
         <Route path="/register">
           <RegisterPage registerInputs={data['registerInputs']} />
         </Route>
-        <Route path="/itemview">
-          <ItemViewPage item={data['userItems'][0]} />
-        </Route>
-        <Route path="/mylistings">
-          <Header
-            brand={<Restaurant />}
-            color="rose"
-            leftLinks=""
-            rightLinks={<HeaderLinks />}
-            fixed
+        <Route path="/forgotten" component={Forgotten} />
+        <Route path="/reset" component={ResetPassword} />
+        <Layout>
+          <Route
+            path="/itemview"
+            render={() => <ItemViewPage item={data['userItems'][0]} />}
           />
-          <Parallax
-            small
-            filter
-            image={require('assets/img/citrus-fruit.jpg')}
+          <Route
+            path="/mylistings"
+            render={() => (
+              <ItemViewPage
+                userProfile={data['userProfile']}
+                userItems={data['userItems']}
+              />
+            )}
           />
-          <MyListingsPage
-            userProfile={data['userProfile']}
-            userItems={data['userItems']}
-          />
-          <SouperFooter />
-        </Route>
-        <Route path="/profile">
-          <Header
-            brand={<Restaurant />}
-            color="rose"
-            leftLinks=""
-            rightLinks={<HeaderLinks />}
-            fixed
-          />
-          <Parallax
-            small
-            filter
-            image={require('assets/img/citrus-fruit.jpg')}
-          />
-          <Profile />
-          <SouperFooter />
-        </Route>
-        <Route path="/forgotten">
-          <Forgotten />
-        </Route>
-        <Route path="/reset">
-          <ResetPassword />
-        </Route>
-        <Route path="/landing">
-          <LandingPage />
-        </Route>
-        <Route path="/">
-          <Header
-            brand={<Restaurant />}
-            color="rose"
-            leftLinks=""
-            rightLinks={<HeaderLinks />}
-            fixed
-          />
-          <Parallax
-            small
-            filter
-            image={require('assets/img/citrus-fruit.jpg')}
-          />
-          <ItemListings />
-          <SouperFooter />
-        </Route>
+          <Route path="/profile" component={Profile} />
+          <Route path="/landing" component={LandingPage} />
+          <Route path="/dashboard" component={ItemListings} />
+          <Route path="/addEditItem" component={AddEditItem} />
+        </Layout>
       </Switch>
     </BrowserRouter>
   );

@@ -35,7 +35,7 @@ export default function HeaderLinks(props) {
             <Link to='/profile' className={classes.dropdownLink}>
               My Account
             </Link>,
-            <Link to='/' className={classes.dropdownLink}>
+            <Link to='/dashboard' className={classes.dropdownLink}>
               Dashboard
             </Link>,
             <Link to='/' className={classes.dropdownLink}>
