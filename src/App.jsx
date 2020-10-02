@@ -6,12 +6,13 @@ import ItemViewPage from 'components/Items/ItemViewPage';
 import LoginPage from 'components/Login/LoginPage';
 import RegisterPage from 'components/Login/RegisterPage';
 import LandingPage from 'views/LandingPage/LandingPage';
-import ItemListings from 'components/Items/ItemListings';
+import ItemListPage from 'components/Items/ItemListPage';
 
 import Profile from './components/Profile/Profile';
 import Forgotten from './components/Login/Forgotten';
 import ResetPassword from './components/Login/ResetPassword';
 import AddEditItem from './components/Items/AddEditItem';
+import ItemListings from 'components/Items/ItemListings';
 
 function App() {
   const [data, setData] = useState(TestData);
@@ -19,30 +20,30 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/login" component={LoginPage} />
-        <Route path="/register">
+        <Route path='/login' component={LoginPage} />
+        <Route path='/register'>
           <RegisterPage registerInputs={data['registerInputs']} />
         </Route>
-        <Route path="/forgotten" component={Forgotten} />
-        <Route path="/reset" component={ResetPassword} />
+        <Route path='/forgotten' component={Forgotten} />
+        <Route path='/reset' component={ResetPassword} />
         <Layout>
           <Route
-            path="/itemview"
+            path='/itemview'
             render={() => <ItemViewPage item={data['userItems'][0]} />}
           />
           <Route
-            path="/mylistings"
+            path='/itemlist'
             render={() => (
-              <ItemViewPage
+              <ItemListPage
                 userProfile={data['userProfile']}
                 userItems={data['userItems']}
               />
             )}
           />
-          <Route path="/profile" component={Profile} />
-          <Route path="/landing" component={LandingPage} />
-          <Route path="/dashboard" component={ItemListings} />
-          <Route path="/addEditItem" component={AddEditItem} />
+          <Route path='/profile' component={Profile} />
+          <Route path='/landing' component={LandingPage} />
+          <Route path='/dashboard' component={ItemListings} />
+          <Route path='/addEditItem' component={AddEditItem} />
         </Layout>
       </Switch>
     </BrowserRouter>

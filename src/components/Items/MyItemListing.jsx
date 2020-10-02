@@ -1,11 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable global-require */
-/* eslint-disable jsx-quotes */
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
+import styles from 'assets/jss/Items/views/MyItemListing';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -21,32 +17,7 @@ import EmojiEvent from '@material-ui/icons/EmojiEvents';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    margin: 'auto',
-    minWidth: '900',
-    alignItems: 'left',
-    justify: 'left',
-  },
-  image: {
-    width: 128,
-    height: 128,
-  },
-  img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '80%',
-    maxHeight: '80%',
-  },
-
-  box: {
-    margin: 'auto',
-  },
-}));
+const useStyles = makeStyles(styles);
 
 const GetCollectionMsg = (type, time) => {
   if (time === null) {
