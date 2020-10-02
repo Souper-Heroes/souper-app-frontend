@@ -1,0 +1,128 @@
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.drop-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 250px;
+  border: 4px dashed #e91e63;
+}
+
+.upload-icon {
+  width: 50px;
+  height: 50px;
+  background: url(../../assets/img/upload.png) no-repeat center center;
+  background-size: 100%;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+.drop-message {
+  text-align: center;
+  color: #e91e63;
+  font-family: Arial;
+  font-size: 20px;
+}
+
+.file-display-container {
+  position: flex;
+  width: 100%;
+}
+
+.file-status-bar {
+  width: 100%;
+  vertical-align: top;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  position: relative;
+  line-height: 20px;
+  height: 20px;
+}
+
+.file-status-bar > div {
+  overflow: hidden;
+}
+
+.file-type {
+  display: inline-block !important;
+  position: absolute;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 13px;
+  margin-top: 5px;
+  padding: 0 4px;
+  border-radius: 2px;
+  box-shadow: 1px 1px 2px #abc;
+  color: #fff;
+  background: #0080c8;
+  text-transform: uppercase;
+}
+
+.file-name {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 50px;
+  color: #4aa1f3;
+}
+
+.file-error {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 50px;
+  color: #9aa9bb;
+}
+
+.file-error-message {
+  color: red;
+}
+
+.file-type-logo {
+  width: 20px;
+  height: 20px;
+  background: url(../../assets/img/generic.png) no-repeat center center;
+  background-size: 100%;
+  position: absolute;
+}
+
+.file-size {
+  display: inline-block;
+  vertical-align: top;
+  color: #30693d;
+  margin-left: 10px;
+  margin-right: 5px;
+  margin-left: 10px;
+  color: #444242;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.file-remove {
+  position: absolute;
+  top: 2px;
+  right: 10px;
+  line-height: 15px;
+  cursor: pointer;
+  color: red;
+  margin-right: -10px;
+}
+
+.file-input {
+  display: none;
+}
+
+.image-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
