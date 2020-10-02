@@ -1,27 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
 import Email from '@material-ui/icons/Email';
 // core components
-import GridContainer from '../MaterialKitComponents/Grid/GridContainer';
-import GridItem from '../MaterialKitComponents/Grid/GridItem';
-import Button from '../MaterialKitComponents/CustomButtons/Button';
-import Card from '../MaterialKitComponents/Card/Card';
-import CardBody from '../MaterialKitComponents/Card/CardBody';
-import CardHeader from '../MaterialKitComponents/Card/CardHeader';
-import CardFooter from '../MaterialKitComponents/Card/CardFooter';
-import CustomInput from '../MaterialKitComponents/CustomInput/CustomInput';
+import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
+import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
+import Button from 'components/MaterialKitComponents/CustomButtons/Button';
+import Card from 'components/MaterialKitComponents/Card/Card';
+import CardBody from 'components/MaterialKitComponents/Card/CardBody';
+import CardHeader from 'components/MaterialKitComponents/Card/CardHeader';
+import CardFooter from 'components/MaterialKitComponents/Card/CardFooter';
+import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
 
-import styles from '../../assets/jss/material-kit-react/views/loginPage';
-import image from '../../assets/img/board.jpg';
+import styles from 'assets/jss/material-kit-react/views/loginPage';
+import image from 'assets/img/citrus-fruit.jpg';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage() {
+export default function Forgotten() {
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
   setTimeout(() => {
     setCardAnimation('');
@@ -30,19 +29,21 @@ export default function LoginPage() {
   return (
     <div>
       <div
+        className={classes.pageHeader}
         style={{
           backgroundImage: `url(${image})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'top center',
+          backgroundPosition: 'top center'
         }}
       >
+
         <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
+            <GridItem xs={10} sm={8} md={4}>
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
                   <CardHeader color="rose" className={classes.cardHeader}>
-                    <h2>Login</h2>
+                    <h4>Reset Password</h4>
                     <div className={classes.socialLine}>
                       <Button
                         justIcon
@@ -74,8 +75,10 @@ export default function LoginPage() {
                     </div>
                   </CardHeader>
                   <CardBody>
+                    <h3>Forgotten your password?</h3>
+                    <p>Enter the email address that you used to register. We'll send you an email with a link to reset your password.</p>
                     <CustomInput
-                      labelText="Email"
+                      labelText="Email..."
                       id="email"
                       formControlProps={{
                         fullWidth: true,
@@ -90,42 +93,26 @@ export default function LoginPage() {
                       }}
                     />
                     <CustomInput
-                      labelText="Password"
-                      id="pass"
+                      labelText="Confirm email"
+                      id="email"
                       formControlProps={{
                         fullWidth: true,
                       }}
                       inputProps={{
-                        type: 'password',
+                        type: 'email',
                         endAdornment: (
                           <InputAdornment position="end">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_outline
-                            </Icon>
+                            <Email className={classes.inputIconsColor} />
                           </InputAdornment>
                         ),
-                        autoComplete: 'off',
                       }}
                     />
+
                   </CardBody>
-                  <GridContainer justify="center">
-                    <Link to="/forgotten" className={classes.link}>
-                      <Button simple color="info" size="lg" to="/ForgottenPassword">
-                        FORGOTTEN PASSWORD?
-                      </Button>
-                    </Link>
-                  </GridContainer>
-                  <Link to="/profile">
+                  <Link to="/reset">
                     <CardFooter className={classes.cardFooter}>
-                      <Button fullWidth size="lg" color="rose">
-                        Log in
-                      </Button>
-                    </CardFooter>
-                  </Link>
-                  <Link to="/register">
-                    <CardFooter className={classes.cardFooter}>
-                      <Button fullWidth size="lg" color="info">
-                        Register
+                      <Button fullWidth to="#TODO_Send email" variant="contained" color="rose" size="lg">
+                        Reset
                       </Button>
                     </CardFooter>
                   </Link>
