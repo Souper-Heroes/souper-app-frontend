@@ -21,11 +21,6 @@ import EmojiEvent from '@material-ui/icons/EmojiEvents';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 
-// import styles from 'assets/jss/material-kit-react/views/landingPageSections/productStyle';
-// import styles from 'assets/jss/Items/views/MyItemListings';
-
-// const useStyles = makeStyles(styles);
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -105,7 +100,6 @@ export default function MyItemListing({ type, myitem }) {
                         gutterBottom
                       >
                         Category:
-
                         {myitem.category}
                       </Typography>
                     </GridItem>
@@ -116,7 +110,6 @@ export default function MyItemListing({ type, myitem }) {
                         gutterBottom
                       >
                         Location:
-
                         {myitem.location}
                       </Typography>
                     </GridItem>
