@@ -13,6 +13,7 @@ import Header from './components/Layout/Header';
 import HeaderLinks from './components/Layout/HeaderLinks';
 import SouperFooter from './components/Layout/SouperFooter';
 import Parallax from './components/MaterialKitComponents/Parallax/Parallax';
+import AddEditItem from './components/Items/AddEditItem';
 import './App.css';
 import Profile from "./components/Profile/Profile";
 import Forgotten from "./components/Login/Forgotten";
@@ -91,6 +92,7 @@ function App() {
             image={require('assets/img/citrus-fruit.jpg')}
           />
           <ItemListings />
+          <AddEditItem />
           <SouperFooter />
         </Route>
       </Switch>
