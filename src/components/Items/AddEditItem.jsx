@@ -114,14 +114,14 @@ export default function AddEditItem({ userItems }) {
       <Parallax small image={require('assets/img/citrus-fruit.jpg')} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <GridContainer justify='center'>
+          <GridContainer justify="center">
             <GridItem xs={12} sm={6} className={classes.navWrapper}>
-              <DropZone photoId={userItems.photoId} />
+              <DropZone />
             </GridItem>
             <GridItem xs={12} sm={6} className={classes.navWrapper}>
               <CustomInput
-                labelText='Title'
-                id='float'
+                labelText="Title"
+                id="float"
                 inputProps={{
                   placeholder: 'Give your item a name',
                   onChange: (event) => handleTitleChange(event),
@@ -131,8 +131,8 @@ export default function AddEditItem({ userItems }) {
                 }}
               />
               <CustomInput
-                labelText='Description'
-                id='float'
+                labelText="Description"
+                id="float"
                 inputProps={{
                   placeholder:
                     'Describe your item, has it been opened or dropped?',
@@ -145,22 +145,22 @@ export default function AddEditItem({ userItems }) {
               <div>
                 <Select
                   fullWidth
-                  labelId='label'
-                  id='select'
+                  labelId="label"
+                  id="select"
                   onChange={handleCategoryChange}
                   value={category}
                 >
-                  <MenuItem value='1'>Fresh produce</MenuItem>
-                  <MenuItem value='2'>Tinned goods</MenuItem>
-                  <MenuItem value='3'>Nuts</MenuItem>
-                  <MenuItem value='4'>Packet</MenuItem>
-                  <MenuItem value='5'>Frozen</MenuItem>
-                  <MenuItem value='6'>Meat</MenuItem>
+                  <MenuItem value="1">Fresh produce</MenuItem>
+                  <MenuItem value="2">Tinned goods</MenuItem>
+                  <MenuItem value="3">Nuts</MenuItem>
+                  <MenuItem value="4">Packet</MenuItem>
+                  <MenuItem value="5">Frozen</MenuItem>
+                  <MenuItem value="6">Meat</MenuItem>
                 </Select>
               </div>
             </GridItem>
           </GridContainer>
-          <GridContainer justify='center'>
+          <GridContainer justify="center">
             <GridItem xs={12} sm={6} className={classes.navWrapper}>
               <InputLabel style={{ float: 'left' }} className={classes.label}>
                 Expiry date
@@ -168,7 +168,7 @@ export default function AddEditItem({ userItems }) {
               <FormControl fullWidth>
                 <Datetime
                   className={classes.bottomFilter}
-                  name='expiry'
+                  name="expiry"
                   value={expiry}
                   timeFormat={false}
                   inputProps={{
@@ -178,9 +178,9 @@ export default function AddEditItem({ userItems }) {
                 />
               </FormControl>
               <CustomInput
-                labelText='Location'
-                id='float'
-                name='location'
+                labelText="Location"
+                id="float"
+                name="location"
                 inputProps={{
                   placeholder: 'Enter a Postcode',
                   onChange: (event) => handleLocationChange(event),
@@ -193,11 +193,11 @@ export default function AddEditItem({ userItems }) {
               <FormControlLabel
                 style={{ float: 'left' }}
                 onChange={handleToggle}
-                control={<Checkbox name='locationSameProfile' />}
-                label='Use location set in User profile?'
+                control={<Checkbox name="locationSameProfile" />}
+                label="Use location set in User profile?"
               />
             </GridItem>
-            <GridItem xs={12} sm={6} container spacing={1} direction='row'>
+            <GridItem xs={12} sm={6} container spacing={1} direction="row">
               <GridItem xs={12}>
                 <h4 xs={12} md={12} style={{ float: 'left' }}>
                   Available collection time
@@ -229,13 +229,13 @@ export default function AddEditItem({ userItems }) {
                   />
                 </FormControl>
               </GridItem>
-              <GridItem fullWidth align='right'>
-                <Button color='danger' size='lg'>
+              <GridItem fullWidth align="right">
+                <Button color="danger" size="lg">
                   Cancel
                 </Button>
                 <Button
-                  color='success'
-                  size='lg'
+                  color="success"
+                  size="lg"
                   onClick={(event) => addNewItem(event)}
                 >
                   Save
