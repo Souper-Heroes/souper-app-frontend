@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-filename-extension */
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -28,6 +30,7 @@ import {Link} from "react-router-dom";
 const useStyles = makeStyles(styles);
 
 export default function RegisterPage({ registerInputs }) {
+
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
   const [checkedTermsAndConds, setcheckedTermsAndConds] = useState(true);
   const [displayName, setDisplayName] = useState('');
@@ -120,7 +123,11 @@ export default function RegisterPage({ registerInputs }) {
                         inputProps={{
                           id: `${input.id}`,
                           type: `${input.type}`,
+<<<<<<< HEAD
                           onChange: (event) => handleInputChange(event),
+=======
+                          onChange: event => onChangeHandler(event),
+>>>>>>> app-comp-addedit
                           endAdornment: (
                             <InputAdornment position='start'>
                               {input.icon === 'face' && (
@@ -139,6 +146,7 @@ export default function RegisterPage({ registerInputs }) {
                         }}
                       />
                     ))}
+<<<<<<< HEAD
                     <CheckboxTermsAndConds
                       checkTermsAndConds={checkTermsAndConds}
                     >
@@ -154,6 +162,13 @@ export default function RegisterPage({ registerInputs }) {
                       color='rose'
                       onClick={handleOnClickCreateAcc}
                     >
+=======
+
+                    <CheckboxGeneric handleToggle={handleToggle}>
+                      <strong>Terms And Conditions</strong>
+                    </CheckboxGeneric>
+                    <Button disabled={buttonDisabled} fullWidth size="lg" color="rose">
+>>>>>>> app-comp-addedit
                       Create Account
                     </Button>
                     </Link>
