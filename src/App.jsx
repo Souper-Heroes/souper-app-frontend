@@ -1,14 +1,15 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
 import { Restaurant } from '@material-ui/icons';
-import ItemViewPage from './components/Items/ItemViewPage';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TestData from 'assets/data/TestData.json';
 import LoginPage from './components/Login/LoginPage';
 import RegisterPage from './components/Login/RegisterPage';
 import MyListingsPage from './components/Items/MyListingsPage';
+import ItemViewPage from './components/Items/ItemViewPage';
 import LandingPage from './views/LandingPage/LandingPage';
 import ItemListings from './components/Items/ItemListings';
+
 // import Page from './components/Page';
 import Header from './components/Layout/Header';
 import HeaderLinks from './components/Layout/HeaderLinks';

@@ -4,16 +4,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 // @material-ui/icons
-// import Chat from '@material-ui/icons/Chat';
-// import VerifiedUser from '@material-ui/icons/VerifiedUser';
-// import Fingerprint from '@material-ui/icons/Fingerprint';
-// import Face from '@material-ui/icons/Face';
-// import Build from '@material-ui/icons/Build';
-// core components
-// import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
-// import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
-// import InfoArea from 'components/MaterialKitComponents/InfoArea/InfoArea';
-// import styles from 'assets/jss/material-kit-react/views/landingPageSections/productStyle';
 import styles from 'assets/jss/Items/views/MyListingsPage';
 import MyItemListings from 'components/Items/MyItemListings';
 
@@ -36,21 +26,21 @@ export default function ListingTabSection({ userProfile, userItems }) {
   return (
     <div className={classes.section}>
       <CustomTabs
-        headerColor="rose"
+        headerColor='rose'
         plainTabs
         tabs={[
           {
             tabName: 'Listings',
-            //TODO tabIcon: Face,
+            //TODO tabIcon: Listings,
             tabContent: (
-              <MyItemListings type="provide" myitems={itemsToProvide} />
+              <MyItemListings type='provide' myitems={itemsToProvide} />
             ),
           },
           {
             tabName: 'Collections',
-            //TODO tabIcon: Chat,
+            //TODO tabIcon: Collections,
             tabContent: (
-              <MyItemListings type="collect" myitems={itemsToCollect} />
+              <MyItemListings type='collect' myitems={itemsToCollect} />
             ),
           },
         ]}

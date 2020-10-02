@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
@@ -10,15 +10,16 @@ import TabListings from 'components/Items/TabListings';
 const useStyles = makeStyles(styles);
 
 function MyListingsPage({ userProfile, userItems }) {
-  //const [userItems, setUserItems] = React.useState(state);
+  const [items, setItems] = useState(userItems);
+  const [profile, setProfile] = useState(userProfile);
 
   const classes = useStyles();
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div className={classes.container}>
-        <GridContainer justify="center">
+        <GridContainer justify='center'>
           <GridItem xs={12} sm={12} md={8} lg={8}>
-            <TabListings userProfile={userProfile} userItems={userItems} />
+            <TabListings userProfile={profile} userItems={items} />
           </GridItem>
         </GridContainer>
       </div>
