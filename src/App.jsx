@@ -15,9 +15,9 @@ import SouperFooter from './components/Layout/SouperFooter';
 import Parallax from './components/MaterialKitComponents/Parallax/Parallax';
 import AddEditItem from './components/Items/AddEditItem';
 import './App.css';
-import Profile from "./components/Profile/Profile";
-import Forgotten from "./components/Login/Forgotten";
-import ResetPassword from "./components/Login/ResetPassword";
+import Profile from './components/Profile/Profile';
+import Forgotten from './components/Login/Forgotten';
+import ResetPassword from './components/Login/ResetPassword';
 
 function App() {
   const [data, setData] = useState(TestData);
@@ -31,10 +31,10 @@ function App() {
         <Route path="/register">
           <RegisterPage registerInputs={data['registerInputs']} />
         </Route>
-        <Route path='/itemview'>
+        <Route path="/itemview">
           <ItemViewPage item={data['userItems'][0]} />
         </Route>
-        <Route path='/mylistings'>
+        <Route path="/mylistings">
           <Header
             brand={<Restaurant />}
             color="rose"
@@ -55,16 +55,16 @@ function App() {
         </Route>
         <Route path="/profile">
           <Header
-              brand={<Restaurant />}
-              color="rose"
-              leftLinks=""
-              rightLinks={<HeaderLinks />}
-              fixed
+            brand={<Restaurant />}
+            color="rose"
+            leftLinks=""
+            rightLinks={<HeaderLinks />}
+            fixed
           />
           <Parallax
-              small
-              filter
-              image={require('assets/img/citrus-fruit.jpg')}
+            small
+            filter
+            image={require('assets/img/citrus-fruit.jpg')}
           />
           <Profile />
           <SouperFooter />
@@ -92,7 +92,6 @@ function App() {
             image={require('assets/img/citrus-fruit.jpg')}
           />
           <ItemListings />
-          <AddEditItem />
           <SouperFooter />
         </Route>
       </Switch>

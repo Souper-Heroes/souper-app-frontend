@@ -25,12 +25,10 @@ import CheckboxTermsAndConds from 'components/Login/CheckboxTermsAndConds';
 import SouperFooter from 'components/Layout/SouperFooter';
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import image from 'assets/img/board.jpg';
-import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 
 export default function RegisterPage({ registerInputs }) {
-
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
   const [checkedTermsAndConds, setcheckedTermsAndConds] = useState(true);
   const [displayName, setDisplayName] = useState('');
@@ -75,39 +73,39 @@ export default function RegisterPage({ registerInputs }) {
         }}
       >
         <div className={classes.container}>
-          <GridContainer justify='center'>
+          <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
-                  <CardHeader color='rose' className={classes.cardHeader}>
+                  <CardHeader color="rose" className={classes.cardHeader}>
                     <h2>Register</h2>
                     <div className={classes.socialLine}>
                       <Button
                         justIcon
-                        href='#pablo'
-                        target='_blank'
-                        color='transparent'
+                        href="#pablo"
+                        target="_blank"
+                        color="transparent"
                         onClick={(e) => e.preventDefault()}
                       >
-                        <i className='fab fa-twitter' />
+                        <i className="fab fa-twitter" />
                       </Button>
                       <Button
                         justIcon
-                        href='#pablo'
-                        target='_blank'
-                        color='transparent'
+                        href="#pablo"
+                        target="_blank"
+                        color="transparent"
                         onClick={(e) => e.preventDefault()}
                       >
-                        <i className='fab fa-facebook' />
+                        <i className="fab fa-facebook" />
                       </Button>
                       <Button
                         justIcon
-                        href='#pablo'
-                        target='_blank'
-                        color='transparent'
+                        href="#pablo"
+                        target="_blank"
+                        color="transparent"
                         onClick={(e) => e.preventDefault()}
                       >
-                        <i className='fab fa-google-plus-g' />
+                        <i className="fab fa-google-plus-g" />
                       </Button>
                     </div>
                   </CardHeader>
@@ -123,13 +121,11 @@ export default function RegisterPage({ registerInputs }) {
                         inputProps={{
                           id: `${input.id}`,
                           type: `${input.type}`,
-<<<<<<< HEAD
+
                           onChange: (event) => handleInputChange(event),
-=======
-                          onChange: event => onChangeHandler(event),
->>>>>>> app-comp-addedit
+
                           endAdornment: (
-                            <InputAdornment position='start'>
+                            <InputAdornment position="start">
                               {input.icon === 'face' && (
                                 <Face className={classes.inputIconsColor} />
                               )}
@@ -146,36 +142,29 @@ export default function RegisterPage({ registerInputs }) {
                         }}
                       />
                     ))}
-<<<<<<< HEAD
+
                     <CheckboxTermsAndConds
                       checkTermsAndConds={checkTermsAndConds}
                     >
-                      <Link to='/register'>
+                      <Link to="/register">
                         <strong>Terms And Conditions</strong>{' '}
                       </Link>
                     </CheckboxTermsAndConds>
                     <Link to="/profile">
-                    <Button
-                      disabled={checkedTermsAndConds}
-                      fullWidth
-                      size='lg'
-                      color='rose'
-                      onClick={handleOnClickCreateAcc}
-                    >
-=======
-
-                    <CheckboxGeneric handleToggle={handleToggle}>
-                      <strong>Terms And Conditions</strong>
-                    </CheckboxGeneric>
-                    <Button disabled={buttonDisabled} fullWidth size="lg" color="rose">
->>>>>>> app-comp-addedit
-                      Create Account
-                    </Button>
+                      <Button
+                        disabled={checkedTermsAndConds}
+                        fullWidth
+                        size="lg"
+                        color="rose"
+                        onClick={handleOnClickCreateAcc}
+                      >
+                        Create Account
+                      </Button>
                     </Link>
                   </CardBody>
                   <Link to="/login">
                     <CardFooter className={classes.cardFooter}>
-                      <Button fullWidth size='lg' color='info'>
+                      <Button fullWidth size="lg" color="info">
                         Log In
                       </Button>
                     </CardFooter>
