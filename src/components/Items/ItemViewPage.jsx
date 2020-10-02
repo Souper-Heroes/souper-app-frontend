@@ -4,8 +4,8 @@ import Header from 'components/Layout/Header';
 import HeaderLinks from 'components/Layout/HeaderLinks';
 import { Restaurant } from '@material-ui/icons';
 import SouperFooter from 'components/Layout/SouperFooter';
-import ItemViewCard from './ItemViewCard';
 import Parallax from 'components/MaterialKitComponents/Parallax/Parallax';
+import ItemViewCard from './ItemViewCard';
 
 function ItemViewPage({ item }) {
   return (
