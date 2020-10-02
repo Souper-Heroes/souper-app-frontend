@@ -49,7 +49,7 @@ export default function RegisterPage({ registerInputs }) {
   };
 
   const handleInputChange = (event) => {
-    //   event.preventDefault();
+    // event.preventDefault();
     const { id, value } = event.currentTarget;
     //console.log('My handler: ', id, value);
 
