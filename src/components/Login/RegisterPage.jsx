@@ -43,15 +43,13 @@ export default function RegisterPage({ registerInputs }) {
   };
 
   const handleOnClickCreateAcc = () => {
-    console.log(
-      `Clicked Create Account, do something with DisplayName: ${displayName}, Email: ${email}, Passowrd: ${password}`
-    );
+    //console.log(
+    //  `Clicked Create Account, do something with DisplayName: ${displayName}, Email: ${email}, Passowrd: ${password}`
+    //);
   };
 
   const handleInputChange = (event) => {
-    //   event.preventDefault();
     const { id, value } = event.currentTarget;
-    //console.log('My handler: ', id, value);
 
     if (id === 'name') {
       setDisplayName(value);
