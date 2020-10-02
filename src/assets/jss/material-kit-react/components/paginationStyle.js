@@ -5,15 +5,15 @@ import {
   successColor,
   warningColor,
   dangerColor,
-  roseColor,
-} from 'assets/jss/material-kit-react.js';
+  roseColor
+} from "assets/jss/material-kit-react.js";
 
 const paginationStyle = {
   pagination: {
-    display: 'inline-block',
-    paddingLeft: '0',
-    margin: '0 0 20px 0',
-    borderRadius: '4px',
+    display: "inline-block",
+    paddingLeft: "0",
+    margin: "25px 0 20px 0",
+    borderRadius: "4px"
   },
   paginationItem: {
     display: 'inline',

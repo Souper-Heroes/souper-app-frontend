@@ -111,7 +111,6 @@ export default function AddEditItem({ userItems }) {
 
   return (
     <div>
-      <Parallax small image={require('assets/img/citrus-fruit.jpg')} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
           <GridContainer justify="center">

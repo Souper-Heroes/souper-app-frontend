@@ -71,8 +71,8 @@ export default function Header(props) {
               {leftLinks}
             </Hidden>
           ) : (
-            brandComponent
-          )}
+              brandComponent
+            )}
         </div>
         <Hidden smDown implementation="css">
           {rightLinks}
