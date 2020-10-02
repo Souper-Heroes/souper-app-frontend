@@ -28,6 +28,7 @@ function DropZone() {
   const handleFiles = (files) => {
     if (validateFile(files[0])) {
       setSelectedFile(files[0]);
+      // Upload the file to the DB and display here
     }
     // ## TODO - tell the user the file is invalid
   };

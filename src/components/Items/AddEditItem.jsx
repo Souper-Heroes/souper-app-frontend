@@ -58,12 +58,14 @@ export default function AddEditItem({ userItems }) {
     setExpiry(newDate);
   };
 
-  const [zlocation, setzLocation] = useState(''); // Set to postcode found in profile here?
+  // Set to postcode found in profile here
+  const [location, setzLocation] = useState('');
   const handleLocationChange = (e) => {
     console.log(e.target.value);
     setzLocation(e.target.value);
   };
 
+  // If there's a location set in profile set checked to true
   const [checked, setChecked] = useState(false);
   const handleToggle = () => {
     let toggle;
@@ -88,14 +90,14 @@ export default function AddEditItem({ userItems }) {
     // Create a new task object
     const newItem = {
       itemId: 1000 + items.length + 1, // Mongo DB will assign an ID
-      provideUserId: 1, // Get from profile
+      provideUserId: 1, // TODO Get from profile
       collectUserId: null,
-      photoId: '#1118',
+      photoId: '1117', // TODO Get from DropZone
       title: title,
-      category: category, // Use an array number instead of string here?
+      category: category, // TODO Use an array number instead of string here?
       description: description,
       expiry: expiry,
-      location: zlocation, // Get this from profile if required
+      location: location,
       preferredProvideTime: '05/10/2020 4PM-6PM',
       preferredCollectTime: '',
     };
@@ -114,7 +116,7 @@ export default function AddEditItem({ userItems }) {
         <div className={classes.container}>
           <GridContainer justify='center'>
             <GridItem xs={12} sm={6} className={classes.navWrapper}>
-              <DropZone />
+              <DropZone photoId={userItems.photoId} />
             </GridItem>
             <GridItem xs={12} sm={6} className={classes.navWrapper}>
               <CustomInput
@@ -182,7 +184,7 @@ export default function AddEditItem({ userItems }) {
                 inputProps={{
                   placeholder: 'Enter a Postcode',
                   onChange: (event) => handleLocationChange(event),
-                  value: `${zlocation}`,
+                  value: `${location}`,
                 }}
                 formControlProps={{
                   fullWidth: true,
