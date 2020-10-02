@@ -21,9 +21,7 @@ import CardFooter from 'components/MaterialKitComponents/Card/CardFooter';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
 import CheckboxTermsAndConds from 'components/Login/CheckboxTermsAndConds';
 import SouperFooter from 'components/Layout/SouperFooter';
-
 import styles from 'assets/jss/material-kit-react/views/loginPage';
-
 import image from 'assets/img/board.jpg';
 
 const useStyles = makeStyles(styles);
@@ -44,20 +42,22 @@ export default function RegisterPage({ registerInputs }) {
     setcheckedTermsAndConds(checkedValue);
   };
 
-  function handleOnClickCreateAcc() {
-    console.log('Create account for:', displayName, email, password);
-  }
+  const handleOnClickCreateAcc = () => {
+    console.log(
+      `Clicked Create Account, do something with DisplayName: ${displayName}, Email: ${email}, Passowrd: ${password}`
+    );
+  };
 
   const handleInputChange = (event) => {
-    event.preventDefault();
+    //   event.preventDefault();
     const { id, value } = event.currentTarget;
-    console.log('My handler: ', id, value);
+    //console.log('My handler: ', id, value);
 
-    if (id === 'first') {
+    if (id === 'name') {
       setDisplayName(value);
-    } else if (id === 'second') {
+    } else if (id === 'email') {
       setEmail(value);
-    } else if (id === 'third') {
+    } else if (id === 'password') {
       setPassword(value);
     }
   };

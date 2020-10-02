@@ -1,19 +1,19 @@
 {
   "registerInputs": [
     {
-      "id": "first",
+      "id": "name",
       "label": "Full Name",
       "type": "text",
       "icon": "face"
     },
     {
-      "id": "second",
+      "id": "email",
       "label": "Email",
       "type": "email",
       "icon": "email"
     },
     {
-      "id": "third",
+      "id": "password",
       "label": "Password",
       "type": "password",
       "icon": "lock"
