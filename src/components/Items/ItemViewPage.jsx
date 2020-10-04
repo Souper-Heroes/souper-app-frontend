@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
@@ -10,7 +10,21 @@ import styles from 'assets/jss/Items/views/ItemViewPage';
 const useStyles = makeStyles(styles);
 
 export default function ItemViewPage({ item }) {
+  const [currentItem, setCurrentItem] = useState(item);
+
   const classes = useStyles();
+
+  const handleOnClickReserve = () => {
+    //console.log(`Clicked Reserve Account, do something with DisplayName: `);
+  };
+
+  const handleOnClickAmendTime = () => {
+    //console.log(`Clicked AmendTime Account, do something with DisplayName: `);
+  };
+
+  const handleOnClickCancel = () => {
+    //console.log(`Clicked Cancel Account, do something with DisplayName: `);
+  };
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
@@ -36,8 +50,8 @@ export default function ItemViewPage({ item }) {
               </Typography>
             </GridItem>
             <GridItem xs={12} sm={12} md={12}>
-              <Typography variant='body1' gutterBottom>
-                <strong>{item.description}</strong>
+              <Typography align='center' variant='body1' gutterBottom>
+                <strong>{currentItem.description}</strong>
               </Typography>
             </GridItem>
             <GridContainer align='center'>
@@ -71,7 +85,7 @@ export default function ItemViewPage({ item }) {
                       align='left'
                       gutterBottom
                     >
-                      {item.category}
+                      {currentItem.category}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -106,7 +120,7 @@ export default function ItemViewPage({ item }) {
                       align='left'
                       gutterBottom
                     >
-                      {item.location}
+                      {currentItem.location}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -143,7 +157,7 @@ export default function ItemViewPage({ item }) {
                       align='left'
                       gutterBottom
                     >
-                      {item.expiryDate}
+                      {currentItem.expiryDate}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -181,7 +195,7 @@ export default function ItemViewPage({ item }) {
                       align='left'
                       gutterBottom
                     >
-                      {item.preferredCollectStartTime}
+                      {currentItem.preferredCollectStartTime}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -216,7 +230,7 @@ export default function ItemViewPage({ item }) {
                       align='left'
                       gutterBottom
                     >
-                      {item.preferredCollectStartTime}
+                      {currentItem.preferredCollectStartTime}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -224,7 +238,12 @@ export default function ItemViewPage({ item }) {
             </GridContainer>
             <GridItem align='center' container>
               <GridItem align='center' xs={12} sm={6}>
-                <Button className={classes.button_label} color='rose' size='sm'>
+                <Button
+                  className={classes.button_label}
+                  color='rose'
+                  size='sm'
+                  onClick={handleOnClickAmendTime}
+                >
                   Amend Time
                 </Button>
               </GridItem>
@@ -234,6 +253,7 @@ export default function ItemViewPage({ item }) {
                     className={classes.button_label}
                     color='danger'
                     size='sm'
+                    onClick={handleOnClickCancel}
                   >
                     Cancel
                   </Button>
@@ -243,6 +263,7 @@ export default function ItemViewPage({ item }) {
                     className={classes.button_label}
                     color='success'
                     size='sm'
+                    onClick={handleOnClickReserve}
                   >
                     Reserve
                   </Button>

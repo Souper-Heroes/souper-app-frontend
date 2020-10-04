@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import styles from 'assets/jss/Items/views/MyItemListing';
@@ -20,23 +20,40 @@ import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 
 const useStyles = makeStyles(styles);
 
-const GetCollectionMsg = (type) => {
-  let message = null;
-  if (type === 'provide') {
-    message = 'Being Collected:';
-  } else {
-    message = 'To Collect:';
-  }
-
-  return (
-    <Typography variant='body2' color='textSecondary' gutterBottom>
-      {message}
-    </Typography>
-  );
-};
-
 export default function MyItemListing({ type, myitem }) {
+  const [item, setItem] = useState(myitem);
+  const [itemType, setType] = useState(type);
+
   const classes = useStyles();
+
+  const GetCollectionMsg = (type) => {
+    let message = null;
+    if (type === 'provide') {
+      message = 'Being Collected:';
+    } else {
+      message = 'To Collect:';
+    }
+
+    return (
+      <Typography variant='body2' color='textSecondary' gutterBottom>
+        {message}
+      </Typography>
+    );
+  };
+
+  const handleOnClickDelete = (event) => {
+    // TODO
+    console.log(
+      `Clicked Delete button, do something with item: ${item.itemId}, Title: ${item.description}`
+    );
+  };
+
+  const handleOnClickAgreeCup = (event) => {
+    // TODO
+    console.log(
+      `Clicked Cup button, do something with item: ${item.itemId}, Title: ${item.description}`
+    );
+  };
 
   return (
     <GridContainer spacing={1}>
@@ -76,7 +93,7 @@ export default function MyItemListing({ type, myitem }) {
                       <GridItem
                         xs={5}
                         sm={5}
-                        sm={5}
+                        md={5}
                         lg={5}
                         className={classes.cell}
                       >
@@ -91,7 +108,7 @@ export default function MyItemListing({ type, myitem }) {
                       <GridItem
                         xs={7}
                         sm={7}
-                        sm={7}
+                        md={7}
                         lg={7}
                         align='left'
                         className={classes.cell}
@@ -121,7 +138,7 @@ export default function MyItemListing({ type, myitem }) {
                       <GridItem
                         xs={5}
                         sm={5}
-                        sm={5}
+                        md={5}
                         lg={5}
                         className={classes.cell}
                       >
@@ -136,7 +153,7 @@ export default function MyItemListing({ type, myitem }) {
                       <GridItem
                         xs={7}
                         sm={7}
-                        sm={7}
+                        md={7}
                         lg={7}
                         align='left'
                         className={classes.cell}
@@ -168,7 +185,7 @@ export default function MyItemListing({ type, myitem }) {
                       <GridItem
                         xs={5}
                         sm={5}
-                        sm={5}
+                        md={5}
                         lg={5}
                         className={classes.cell}
                       >
@@ -183,7 +200,7 @@ export default function MyItemListing({ type, myitem }) {
                       <GridItem
                         xs={7}
                         sm={7}
-                        sm={7}
+                        md={7}
                         lg={7}
                         align='left'
                         className={classes.cell}
@@ -213,17 +230,17 @@ export default function MyItemListing({ type, myitem }) {
                       <GridItem
                         xs={5}
                         sm={5}
-                        sm={5}
+                        md={5}
                         lg={5}
                         className={classes.cell}
                       >
                         {myitem.preferredCollectStartTime !== null &&
-                          GetCollectionMsg(type)}
+                          GetCollectionMsg(itemType)}
                       </GridItem>
                       <GridItem
                         xs={7}
                         sm={7}
-                        sm={7}
+                        md={7}
                         lg={7}
                         align='left'
                         className={classes.cell}
@@ -244,15 +261,17 @@ export default function MyItemListing({ type, myitem }) {
                 </GridContainer>
               </GridItem>
               <GridItem xs={12} align='right'>
-                <Button>
+                <Button onClick={handleOnClickAgreeCup}>
                   <EmojiEvent />
                 </Button>
-                {type === 'provide' && (
-                  <Button>
-                    <Edit />
-                  </Button>
+                {itemType === 'provide' && (
+                  <Link to='/addedititem/' className={classes.link}>
+                    <Button>
+                      <Edit />
+                    </Button>
+                  </Link>
                 )}
-                <Button>
+                <Button onClick={handleOnClickDelete}>
                   <Delete />
                 </Button>
               </GridItem>

@@ -8,9 +8,9 @@ import styles from 'assets/jss/material-kit-react/views/loginPage';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import MyItemListing from 'components/Items/MyItemListing';
-import ListingsDropdown from 'components/Layout/ListingsDropdown';
+import ListingsDropdown from 'components/Items/ListingsDropdown';
 import Button from 'components/CustomButtons/Button';
-import ListingsPagination from '../Layout/ListingsPagination';
+import ListingsPaginations from 'components/Items/ListingsPaginations';
 
 // import Divider from '@material-ui/core/Divider';
 
@@ -65,7 +65,7 @@ export default function MyItemListings({ type, myitems }) {
           ))}
         </GridItem>
         {type === 'provide' && (
-          <GridItem xs={6} align='left'>
+          <GridItem xs={6} sm={6} align='left'>
             <Link to='/addedititem' className={classes.link}>
               <Button type='button' color='rose' to='/addedititem'>
                 Add Item
@@ -73,8 +73,8 @@ export default function MyItemListings({ type, myitems }) {
             </Link>
           </GridItem>
         )}
-        <GridItem xs={paginationColSize} align='right'>
-          <ListingsPagination />
+        <GridItem xs={paginationColSize} sm={paginationColSize} align='right'>
+          <ListingsPaginations />
         </GridItem>
       </GridContainer>
     </div>
