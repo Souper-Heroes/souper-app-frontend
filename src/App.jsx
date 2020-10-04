@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Layout from 'components/Layout/Layout';
 import TestData from 'assets/data/TestData.json';
 import ItemViewPage from 'components/Items/ItemViewPage';
-import LoginPage from 'components/Login/LoginPage';
+import LoginPage from 'containers/Login/Login';
 import RegisterPage from 'components/Login/RegisterPage';
 import LandingPage from 'views/LandingPage/LandingPage';
 import ItemListings from 'components/Items/ItemListings';
@@ -14,7 +14,7 @@ import ResetPassword from 'components/Login/ResetPassword';
 import AddEditItem from 'components/Items/AddEditItem';
 
 function App() {
-  const [data, setData] = useState(TestData);
+  const [data] = useState(TestData);
 
   return (
     <BrowserRouter>
@@ -47,6 +47,6 @@ function App() {
       </Switch>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
