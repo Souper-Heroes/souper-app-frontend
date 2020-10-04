@@ -23,6 +23,16 @@ const MyListingPageStyle = {
   box: {
     margin: 'auto',
   },
+
+  cell: {
+    padding: '0em',
+    margin: 'auto',
+  },
+
+  container: {
+    padding: '0em',
+    margin: 'auto',
+  },
 };
 
 export default MyListingPageStyle;

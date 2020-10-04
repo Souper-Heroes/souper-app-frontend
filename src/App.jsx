@@ -7,12 +7,11 @@ import LoginPage from 'components/Login/LoginPage';
 import RegisterPage from 'components/Login/RegisterPage';
 import LandingPage from 'views/LandingPage/LandingPage';
 import ItemListPage from 'components/Items/ItemListPage';
-
+import ItemListings from 'components/Items/ItemListings';
 import Profile from './components/Profile/Profile';
 import Forgotten from './components/Login/Forgotten';
 import ResetPassword from './components/Login/ResetPassword';
 import AddEditItem from './components/Items/AddEditItem';
-import ItemListings from 'components/Items/ItemListings';
 
 function App() {
   const [data, setData] = useState(TestData);
