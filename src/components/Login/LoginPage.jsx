@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -21,7 +21,16 @@ import image from '../../assets/img/board.jpg';
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage() {
+export default function LoginPage(props) {
+  const history = useHistory();
+  const emailRef = React.useRef(null);
+  const passRef = React.useRef(null);
+  const handleClick = async () => {
+    await props.login(emailRef.current.value, passRef.current.value);
+    await props.check();
+    history.push('/dashboard');
+  };
+
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
   setTimeout(() => {
     setCardAnimation('');
@@ -82,6 +91,7 @@ export default function LoginPage() {
                       }}
                       inputProps={{
                         type: 'email',
+                        inputRef: emailRef,
                         endAdornment: (
                           <InputAdornment position="end">
                             <Email className={classes.inputIconsColor} />
@@ -97,6 +107,7 @@ export default function LoginPage() {
                       }}
                       inputProps={{
                         type: 'password',
+                        inputRef: passRef,
                         endAdornment: (
                           <InputAdornment position="end">
                             <Icon className={classes.inputIconsColor}>
@@ -115,13 +126,11 @@ export default function LoginPage() {
                       </Button>
                     </Link>
                   </GridContainer>
-                  <Link to="/profile">
-                    <CardFooter className={classes.cardFooter}>
-                      <Button fullWidth size="lg" color="rose">
-                        Log in
-                      </Button>
-                    </CardFooter>
-                  </Link>
+                  <CardFooter className={classes.cardFooter}>
+                    <Button fullWidth size="lg" color="rose" onClick={handleClick}>
+                      Log in
+                    </Button>
+                  </CardFooter>
                   <Link to="/register">
                     <CardFooter className={classes.cardFooter}>
                       <Button fullWidth size="lg" color="info">
