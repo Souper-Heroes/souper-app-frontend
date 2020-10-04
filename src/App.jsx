@@ -8,10 +8,10 @@ import RegisterPage from 'components/Login/RegisterPage';
 import LandingPage from 'views/LandingPage/LandingPage';
 import ItemListings from 'components/Items/ItemListings';
 
-import Profile from './components/Profile/Profile';
-import Forgotten from './components/Login/Forgotten';
-import ResetPassword from './components/Login/ResetPassword';
-import AddEditItem from './components/Items/AddEditItem';
+import Profile from 'containers/Profile/Profile';
+import Forgotten from 'components/Login/Forgotten';
+import ResetPassword from 'components/Login/ResetPassword';
+import AddEditItem from 'components/Items/AddEditItem';
 
 function App() {
   const [data, setData] = useState(TestData);
