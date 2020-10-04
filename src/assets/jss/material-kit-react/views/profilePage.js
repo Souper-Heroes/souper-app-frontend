@@ -29,7 +29,7 @@ const profilePageStyle = {
     zIndex: '3',
   },
   mainRaised: {
-    margin: '-60px 30px 0px',
+    margin: '-60px 10px 0px',
     borderRadius: '6px',
     boxShadow:
       '0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)',
@@ -56,6 +56,31 @@ const profilePageStyle = {
   navWrapper: {
     margin: '20px auto 50px auto',
     textAlign: 'center',
+  },
+  filterTitle: {
+    ...title,
+    marginTop: '30px',
+    marginBottom: '0px',
+    textAlign: 'left',
+  },
+  filterLabel: {
+    marginTop: '10px',
+    color: "rgba(0, 0, 0, 0.26)",
+    cursor: "pointer",
+    fontSize: "14px",
+    transition: "0.3s ease all",
+    lineHeight: "1.428571429",
+    fontWeight: "400",
+    paddingLeft: "0",
+    letterSpacing: "normal",
+    textAlign: 'left',
+  },
+  slider: {
+    marginTop: '50px',
+    marginBottom: '50px',
+  },
+  bottomFilter: {
+    marginBottom: '20px',
   },
 };
 
