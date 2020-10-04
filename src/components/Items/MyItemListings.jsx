@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // core components
 import { makeStyles } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
+//import styles from 'assets/jss/Items/views/MyItemListings';
+import styles from 'assets/jss/material-kit-react/views/loginPage';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import MyItemListing from 'components/Items/MyItemListing';
@@ -10,8 +12,6 @@ import ListingsDropdown from 'components/Layout/ListingsDropdown';
 import Button from 'components/CustomButtons/Button';
 import ListingsPagination from '../Layout/ListingsPagination';
 
-//import styles from 'assets/jss/Items/views/MyItemListings';
-import styles from 'assets/jss/material-kit-react/views/loginPage.js';
 // import Divider from '@material-ui/core/Divider';
 
 // const useStyles = makeStyles(styles);
@@ -26,15 +26,28 @@ export default function MyItemListings({ type, myitems }) {
     const newItems = [...items];
 
     if (menuItem === 'Category') {
-      newItems.sort((a, b) =>
-        a.category > b.category ? 1 : b.category > a.category ? -1 : 0
-      );
+      newItems.sort((a, b) => {
+        if (a.category > b.category) {
+          return 1;
+        }
+        if (b.category > a.category) {
+          return -1;
+        }
+        return 0;
+      });
     } else {
       //  Sort By Expiry Date
-      newItems.sort((a, b) =>
-        a.expiryDate > b.expiryDate ? 1 : b.expiryDate > a.expiryDate ? -1 : 0
-      );
+      newItems.sort((a, b) => {
+        if (a.expiryDate > b.expiryDate) {
+          return 1;
+        }
+        if (b.expiryDate > a.expiryDate) {
+          return -1;
+        }
+        return 0;
+      });
     }
+
     console.log('Sorted Items:', newItems);
 
     setItems(newItems);
@@ -54,7 +67,7 @@ export default function MyItemListings({ type, myitems }) {
         {type === 'provide' && (
           <GridItem xs={6} align='left'>
             <Link to='/addedititem' className={classes.link}>
-              <Button type='button' color='rose'>
+              <Button type='button' color='rose' to='/addedititem'>
                 Add Item
               </Button>
             </Link>

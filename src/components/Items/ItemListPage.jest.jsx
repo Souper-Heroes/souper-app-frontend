@@ -5,10 +5,10 @@ import '@testing-library/jest-dom/extend-expect';
 import ItemListPage from './ItemListPage';
 
 const item = {
-  itemId: '2',
+  itemId: 2,
   photoId: '#1112',
-  provideUserId: '1',
-  collectUserId: '3',
+  provideUserId: 1,
+  collectUserId: 3,
   category: 'Nuts',
   description: 'Bag of Cashew Nuts',
   expiryDate: '24/10/2020',
