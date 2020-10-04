@@ -32,22 +32,19 @@ export default function HeaderLinks(props) {
           }}
           buttonIcon={Face}
           dropdownList={[
-            <Link to='/' className={classes.dropdownLink}>
+            <Link to='/profile' className={classes.dropdownLink}>
               My Account
             </Link>,
-            <Link to='/' className={classes.dropdownLink}>
+            <Link to='/dashboard' className={classes.dropdownLink}>
               Dashboard
             </Link>,
-            <Link to='/' className={classes.dropdownLink}>
+            <Link to='/itemlist' className={classes.dropdownLink}>
               My Items
             </Link>,
-            <Link to='/' className={classes.dropdownLink}>
+            <Link to='/addEditItem' className={classes.dropdownLink}>
               Add Items
             </Link>,
-            <Link to='/' className={classes.dropdownLink}>
-              Items for Collection
-            </Link>,
-            <Link to='/Login/LoginPage' className={classes.dropdownLink}>
+            <Link to='/login' className={classes.dropdownLink}>
               Logout
             </Link>,
           ]}

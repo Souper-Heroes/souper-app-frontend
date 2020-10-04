@@ -1,17 +1,8 @@
-/* eslint-disable react/jsx-tag-spacing */
-/* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
-// @material-ui/core components
-import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
-// @material-ui/icons
-// import Chat from '@material-ui/icons/Chat';
-// import VerifiedUser from '@material-ui/icons/VerifiedUser';
-// import Fingerprint from '@material-ui/icons/Fingerprint';
-// import Face from '@material-ui/icons/Face';
-// import Build from '@material-ui/icons/Build';
 
 // core components
+import { makeStyles } from '@material-ui/core/styles';
+import Link from '@material-ui/core/Link';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import MyItemListing from 'components/Items/MyItemListing';
@@ -50,7 +41,7 @@ export default function MyItemListings({ type, myitems }) {
   };
 
   return (
-    <div /* {className={classes.section} } */>
+    <div>
       <GridContainer>
         <GridItem align='right'>
           <ListingsDropdown sortItems={sortItems} />

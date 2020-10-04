@@ -9,7 +9,7 @@ import TabListings from 'components/Items/TabListings';
 
 const useStyles = makeStyles(styles);
 
-function MyListingsPage({ userProfile, userItems }) {
+export default function ItemListPage({ userProfile, userItems }) {
   const [items, setItems] = useState(userItems);
   const [profile, setProfile] = useState(userProfile);
 
@@ -26,5 +26,3 @@ function MyListingsPage({ userProfile, userItems }) {
     </div>
   );
 }
-
-export default MyListingsPage;

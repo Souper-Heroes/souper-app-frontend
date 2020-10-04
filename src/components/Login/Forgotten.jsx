@@ -16,6 +16,7 @@ import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInpu
 
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import image from 'assets/img/citrus-fruit.jpg';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(styles);
 
@@ -108,11 +109,13 @@ export default function Forgotten() {
                     />
 
                   </CardBody>
-                  <CardFooter className={classes.cardFooter}>
-                    <Button fullWidth to="#TODO_Send email" variant="contained" color="rose" size="lg">
-                      Reset
-                    </Button>
-                  </CardFooter>
+                  <Link to="/reset">
+                    <CardFooter className={classes.cardFooter}>
+                      <Button fullWidth to="#TODO_Send email" variant="contained" color="rose" size="lg">
+                        Reset
+                      </Button>
+                    </CardFooter>
+                  </Link>
                 </form>
               </Card>
             </GridItem>
