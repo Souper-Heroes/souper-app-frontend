@@ -1,16 +1,17 @@
 import { types } from 'actions';
 
 const auth = (state = { jwt: '', message: '', isLogged: false }, action) => {
+    const newState = {...state};
     switch (action.type) {
         case `${types.LOGIN}_FULFILLED`:
-            state.jwt = action.payload.data.token;
-            state.isLogged = true;
+            newState.jwt = action.payload.data.token;
+            newState.isLogged = true;
             break;
         case `${types.CHECK}_FULFILLED`:
-            state.message = action.payload.data.message;
+            newState.message = action.payload.data.message;
             break;
     }
-    return state;
+    return newState;
 };
 
 export default auth;
