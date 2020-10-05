@@ -32,7 +32,12 @@ function App() {
         <Layout>
           <Route
             path="/itemview"
-            render={() => <ItemViewPage item={data['userItems'][0]} />}
+            render={() => (
+              <ItemViewPage
+                userId={data.otherUserProfileId}
+                item={data['userItems'][0]}
+              />
+            )}
           />
           <Route
             path="/itemlist"

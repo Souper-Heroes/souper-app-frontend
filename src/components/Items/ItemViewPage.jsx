@@ -9,11 +9,10 @@ import Datetime from 'react-datetime';
 import FormControl from '@material-ui/core/FormControl';
 import styles from 'assets/jss/Items/views/ItemViewPage';
 import moment from 'moment';
-import { NewLineKind } from 'typescript';
 
 const useStyles = makeStyles(styles);
 
-export default function ItemViewPage({ item }) {
+export default function ItemViewPage({ userId, item }) {
   const [currentItem, setCurrentItem] = useState(item);
   const [isDisableAmendBtn, setIsDisableAmendBtn] = useState(true);
 
@@ -26,7 +25,7 @@ export default function ItemViewPage({ item }) {
 
   const classes = useStyles();
   // TODO Default for now for testing but will get passed from props
-  const userId = 2;
+  //const userId = 2;
 
   const handleOnClickReserve = () => {
     //console.log(`Clicked Reserve Account, do something with DisplayName: `);
@@ -77,12 +76,6 @@ export default function ItemViewPage({ item }) {
       : setCollectionEndDateTime(newDate);
 
     setIsDisableAmendBtn(false);
-  };
-
-  const handleEndDateChange = (event) => {
-    const value = event.target;
-
-    // console.log(`Handle Date Change, do something with  ${value}`);
   };
 
   return (
@@ -248,26 +241,32 @@ export default function ItemViewPage({ item }) {
                     lg={6}
                     className={classes.output}
                   >
-                    {userId !== item.collectUserId && (
+                    {userId !== currentItem.collectUserId && (
                       <Typography
                         variant="body2"
                         color="textPrimary"
                         align="left"
                         gutterBottom
                       >
-                        {currentItem.preferredCollectStartTime}
+                        {moment(collectionStartDateTime).format(
+                          'Do MMM YY hh:mm'
+                        )}
                       </Typography>
                     )}
-                    {userId === item.collectUserId && (
+                    {userId === currentItem.collectUserId && (
                       <>
                         <FormControl>
                           <Datetime
-                            value={collectionStartDateTime}
+                            value={moment(collectionStartDateTime).format(
+                              'Do MMM YY hh:mm'
+                            )}
                             onChange={(event) =>
                               handleCollectionDateChange('start', event)
                             }
                             inputProps={{
-                              placeholder: `${currentItem.preferredCollectStartTime}`,
+                              placeholder: `${moment(
+                                currentItem.preferredCollectStartTime
+                              ).format('Do MMM YY hh:mm')}`,
                             }}
                           />
                         </FormControl>
@@ -301,26 +300,32 @@ export default function ItemViewPage({ item }) {
                     lg={6}
                     className={classes.label}
                   >
-                    {userId !== item.collectUserId && (
+                    {userId !== currentItem.collectUserId && (
                       <Typography
                         variant="body2"
                         color="textPrimary"
                         align="left"
                         gutterBottom
                       >
-                        {currentItem.preferredCollectEndTime}
+                        {moment(collectionEndDateTime).format(
+                          'Do MMM YY hh:mm'
+                        )}
                       </Typography>
                     )}
-                    {userId === item.collectUserId && (
+                    {userId === currentItem.collectUserId && (
                       <>
                         <FormControl>
                           <Datetime
-                            value={collectionEndDateTime}
+                            value={moment(collectionEndDateTime).format(
+                              'Do MMM YY hh:mm'
+                            )}
                             onChange={(event) =>
                               handleCollectionDateChange('end', event)
                             }
                             inputProps={{
-                              placeholder: `${currentItem.preferredCollectEndTime}`,
+                              placeholder: `${moment(
+                                collectionEndDateTime
+                              ).format('Do MMM YY hh:mm')}`,
                             }}
                           />
                         </FormControl>

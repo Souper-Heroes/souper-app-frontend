@@ -21,6 +21,7 @@
   ],
 
   "myUserProfileId": 1,
+  "otherUserProfileId": 2,
 
   "userProfile": {
     "userId": 1,
