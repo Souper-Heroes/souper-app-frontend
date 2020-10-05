@@ -22,7 +22,7 @@ const item = {
 
 test('renders MyItemListing Component', () => {
   const { getByText } = render(
-    <MyItemListing key={item.ItemId} type='provide' myitem={item} />
+    <MyItemListing key={item.ItemId} type="provide" myitem={item} />
   );
 
   const linkExpires = getByText(/Expires/i);
