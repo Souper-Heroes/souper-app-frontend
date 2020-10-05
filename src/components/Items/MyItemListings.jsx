@@ -12,6 +12,7 @@ import ListingsDropdown from 'components/Items/ListingsDropdown';
 import Button from 'components/CustomButtons/Button';
 import ListingsPaginations from 'components/Items/ListingsPaginations';
 
+import moment from 'moment';
 // import Divider from '@material-ui/core/Divider';
 
 // const useStyles = makeStyles(styles);
@@ -38,17 +39,17 @@ export default function MyItemListings({ type, myitems }) {
     } else {
       //  Sort By Expiry Date
       newItems.sort((a, b) => {
-        if (a.expiryDate > b.expiryDate) {
+        if (moment(a.expiryDate) > moment(b.expiryDate)) {
           return 1;
         }
-        if (b.expiryDate > a.expiryDate) {
+        if (moment(b.expiryDate) > moment(a.expiryDate)) {
           return -1;
         }
         return 0;
       });
     }
 
-    console.log('Sorted Items:', newItems);
+    // console.log('Sorted Items:', newItems);
 
     setItems(newItems);
   };
