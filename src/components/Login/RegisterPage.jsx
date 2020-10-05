@@ -147,7 +147,7 @@ export default function RegisterPage({ registerInputs }) {
                       checkTermsAndConds={checkTermsAndConds}
                     >
                       <Link to="/register">
-                        <strong>Terms And Conditions</strong>{' '}
+                        <strong>Terms And Conditions</strong>
                       </Link>
                     </CheckboxTermsAndConds>
                     <Link to="/profile">
