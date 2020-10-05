@@ -29,34 +29,34 @@ export default function ItemViewPage({ item }) {
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div className={classes.container}>
-        <GridContainer justify='center'>
+        <GridContainer justify="center">
           <GridItem className={classes.border}>
             <GridItem xs={12} sm={12} md={12} lg={12}>
               <img
                 className={classes.img}
-                alt='item of food'
+                alt="item of food"
                 src={require('assets/img/purple-banana.jpg')}
-                justify='center'
+                justify="center"
               />
             </GridItem>
             <GridItem xs={12} sm={12} md={12} lg={12}>
               <Typography
-                align='center'
-                variant='body1'
-                color='error'
+                align="center"
+                variant="body1"
+                color="error"
                 gutterBottom
               >
                 Expires soon!
               </Typography>
             </GridItem>
             <GridItem xs={12} sm={12} md={12}>
-              <Typography align='center' variant='body1' gutterBottom>
+              <Typography align="center" variant="body1" gutterBottom>
                 <strong>{currentItem.description}</strong>
               </Typography>
             </GridItem>
-            <GridContainer align='center'>
+            <GridContainer align="center">
               <GridItem xs={6} sm={6} md={6} lg={6}>
-                <GridContainer align='center' spacing={0} direction='column'>
+                <GridContainer align="center" spacing={0} direction="column">
                   <GridItem
                     xs={6}
                     sm={6}
@@ -65,9 +65,9 @@ export default function ItemViewPage({ item }) {
                     className={classes.label}
                   >
                     <Typography
-                      variant='body2'
-                      color='textSecondary'
-                      align='left'
+                      variant="body2"
+                      color="textSecondary"
+                      align="left"
                     >
                       Category:
                     </Typography>
@@ -80,9 +80,9 @@ export default function ItemViewPage({ item }) {
                     className={classes.output}
                   >
                     <Typography
-                      variant='body2'
-                      color='textPrimary'
-                      align='left'
+                      variant="body2"
+                      color="textPrimary"
+                      align="left"
                       gutterBottom
                     >
                       {currentItem.category}
@@ -91,7 +91,7 @@ export default function ItemViewPage({ item }) {
                 </GridContainer>
               </GridItem>
               <GridItem xs={6} sm={6} md={6} lg={6}>
-                <GridContainer align='center' spacing={0} direction='column'>
+                <GridContainer align="center" spacing={0} direction="column">
                   <GridItem
                     xs={6}
                     sm={6}
@@ -100,9 +100,9 @@ export default function ItemViewPage({ item }) {
                     className={classes.label}
                   >
                     <Typography
-                      variant='body2'
-                      color='textSecondary'
-                      align='left'
+                      variant="body2"
+                      color="textSecondary"
+                      align="left"
                     >
                       Location:
                     </Typography>
@@ -115,9 +115,9 @@ export default function ItemViewPage({ item }) {
                     className={classes.output}
                   >
                     <Typography
-                      variant='body2'
-                      color='textPrimary'
-                      align='left'
+                      variant="body2"
+                      color="textPrimary"
+                      align="left"
                       gutterBottom
                     >
                       {currentItem.location}
@@ -126,9 +126,9 @@ export default function ItemViewPage({ item }) {
                 </GridContainer>
               </GridItem>
             </GridContainer>
-            <GridContainer align='center'>
+            <GridContainer align="center">
               <GridItem xs={6} sm={6} md={6} lg={6}>
-                <GridContainer align='center' spacing={0} direction='column'>
+                <GridContainer align="center" spacing={0} direction="column">
                   <GridItem
                     xs={6}
                     sm={6}
@@ -137,9 +137,9 @@ export default function ItemViewPage({ item }) {
                     className={classes.label}
                   >
                     <Typography
-                      variant='body2'
-                      color='textSecondary'
-                      align='left'
+                      variant="body2"
+                      color="textSecondary"
+                      align="left"
                     >
                       Expiry Date:
                     </Typography>
@@ -152,9 +152,9 @@ export default function ItemViewPage({ item }) {
                     className={classes.output}
                   >
                     <Typography
-                      variant='body2'
-                      color='textPrimary'
-                      align='left'
+                      variant="body2"
+                      color="textPrimary"
+                      align="left"
                       gutterBottom
                     >
                       {currentItem.expiryDate}
@@ -164,9 +164,9 @@ export default function ItemViewPage({ item }) {
               </GridItem>
               <GridItem xs={6} sm={6} md={6} lg={6} />
             </GridContainer>
-            <GridContainer align='center'>
+            <GridContainer align="center">
               <GridItem xs={6} sm={6} md={6} lg={6}>
-                <GridContainer align='left' spacing={0} direction='column'>
+                <GridContainer align="left" spacing={0} direction="column">
                   <GridItem
                     xs={6}
                     sm={6}
@@ -175,9 +175,9 @@ export default function ItemViewPage({ item }) {
                     className={classes.label}
                   >
                     <Typography
-                      variant='body2'
-                      color='textSecondary'
-                      align='left'
+                      variant="body2"
+                      color="textSecondary"
+                      align="left"
                     >
                       Start Time Slot:
                     </Typography>
@@ -190,9 +190,9 @@ export default function ItemViewPage({ item }) {
                     className={classes.output}
                   >
                     <Typography
-                      variant='body2'
-                      color='textPrimary'
-                      align='left'
+                      variant="body2"
+                      color="textPrimary"
+                      align="left"
                       gutterBottom
                     >
                       {currentItem.preferredCollectStartTime}
@@ -201,7 +201,7 @@ export default function ItemViewPage({ item }) {
                 </GridContainer>
               </GridItem>
               <GridItem xs={6} sm={6} md={6} lg={6}>
-                <GridContainer align='right' spacing={0} direction='column'>
+                <GridContainer align="right" spacing={0} direction="column">
                   <GridItem
                     xs={6}
                     sm={6}
@@ -210,9 +210,9 @@ export default function ItemViewPage({ item }) {
                     className={classes.label}
                   >
                     <Typography
-                      variant='body2'
-                      color='textSecondary'
-                      align='left'
+                      variant="body2"
+                      color="textSecondary"
+                      align="left"
                     >
                       End Time Slot:
                     </Typography>
@@ -225,9 +225,9 @@ export default function ItemViewPage({ item }) {
                     className={classes.output}
                   >
                     <Typography
-                      variant='body2'
-                      color='textPrimary'
-                      align='left'
+                      variant="body2"
+                      color="textPrimary"
+                      align="left"
                       gutterBottom
                     >
                       {currentItem.preferredCollectStartTime}
@@ -236,33 +236,33 @@ export default function ItemViewPage({ item }) {
                 </GridContainer>
               </GridItem>
             </GridContainer>
-            <GridItem align='center' container>
-              <GridItem align='center' xs={12} sm={6}>
+            <GridItem align="center" container>
+              <GridItem align="center" xs={12} sm={6}>
                 <Button
                   className={classes.button_label}
-                  color='rose'
-                  size='sm'
+                  color="rose"
+                  size="sm"
                   onClick={handleOnClickAmendTime}
                 >
                   Amend Time
                 </Button>
               </GridItem>
-              <GridItem xs={12} sm={6} align='center' container>
-                <GridItem xs={6} sm={6} align='right'>
+              <GridItem xs={12} sm={6} align="center" container>
+                <GridItem xs={6} sm={6} align="right">
                   <Button
                     className={classes.button_label}
-                    color='danger'
-                    size='sm'
+                    color="danger"
+                    size="sm"
                     onClick={handleOnClickCancel}
                   >
                     Cancel
                   </Button>
                 </GridItem>
-                <GridItem xs={6} sm={6} align='left'>
+                <GridItem xs={6} sm={6} align="left">
                   <Button
                     className={classes.button_label}
-                    color='success'
-                    size='sm'
+                    color="success"
+                    size="sm"
                     onClick={handleOnClickReserve}
                   >
                     Reserve

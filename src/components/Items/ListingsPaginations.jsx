@@ -22,7 +22,7 @@ export default function ListingsPaginations() {
         { text: 3 },
         { text: 'NEXT' },
       ]}
-      color='rose'
+      color="rose"
     />
   );
 }
