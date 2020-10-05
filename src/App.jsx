@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Layout from 'components/Layout/Layout';
+import Layout from 'containers/Layout/Layout';
 import TestData from 'assets/data/TestData.json';
 import ItemViewPage from 'components/Items/ItemViewPage';
 import LoginPage from 'containers/Login/Login';

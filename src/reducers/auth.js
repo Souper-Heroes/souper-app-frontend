@@ -3,20 +3,19 @@ import { types } from 'actions';
 const initialState = { jwt: '', message: '', isLogged: false };
 
 const auth = (state = {...initialState}, action) => {
-    let newState = {...state};
     switch (action.type) {
         case `${types.LOGIN}_FULFILLED`:
-            newState.jwt = action.payload.data.token;
-            newState.isLogged = true;
-            break;
+            return { ...state, jwt: action.payload.data.token, isLogged: true};
         case `${types.CHECK}_FULFILLED`:
-            newState.message = action.payload.data.message;
-            break;
+            return { ...state, message: action.payload.data.message};
         case types.LOGOUT:
-            newState = {...initialState};
-            break;
+            return {...initialState};
+        default:
+            if (state.isLogged && action.type.includes('_REJECTED') && [401, 403].includes(action.payload.response.status)) {
+                return {...initialState};
+            }
     }
-    return newState;
+    return state;
 };
 
 export default auth;
