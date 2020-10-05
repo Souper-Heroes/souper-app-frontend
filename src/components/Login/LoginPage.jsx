@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,6 +23,11 @@ const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
   const history = useHistory();
+  useEffect(() => {
+    if (props.isLogged) {
+      history.push('/');
+    }
+  }, []);
   const emailRef = React.useRef(null);
   const passRef = React.useRef(null);
   const handleClick = async () => {

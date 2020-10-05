@@ -14,7 +14,7 @@ export const login = (email, password) => ({
     payload: axios.post(`${SOUP_API}/login`, {email, password})
 });
 
-export const logout = () => ({
+export const logout = () => dispatch => dispatch({
     type: types.LOGOUT
 });
 
