@@ -6,6 +6,7 @@ import ItemViewPage from 'components/Items/ItemViewPage';
 import LoginPage from 'containers/Login/Login';
 import RegisterPage from 'components/Login/RegisterPage';
 import LandingPage from 'views/LandingPage/LandingPage';
+import ItemListPage from 'components/Items/ItemListPage';
 import ItemListings from 'components/Items/ItemListings';
 
 import Profile from 'containers/Profile/Profile';
@@ -20,9 +21,13 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/login" component={LoginPage} />
-        <Route path="/register">
-          <RegisterPage registerInputs={data['registerInputs']} />
-        </Route>
+        <Route
+          path="/register"
+          render={() => (
+            <RegisterPage registerInputs={data['registerInputs']} />
+          )}
+        />
+
         <Route path="/forgotten" component={Forgotten} />
         <Route path="/reset" component={ResetPassword} />
         <Layout>
@@ -31,9 +36,9 @@ function App() {
             render={() => <ItemViewPage item={data['userItems'][0]} />}
           />
           <Route
-            path="/mylistings"
+            path="/itemlist"
             render={() => (
-              <ItemViewPage
+              <ItemListPage
                 userProfile={data['userProfile']}
                 userItems={data['userItems']}
               />
