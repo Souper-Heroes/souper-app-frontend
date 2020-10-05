@@ -9,21 +9,20 @@ import TabListings from 'components/Items/TabListings';
 
 const useStyles = makeStyles(styles);
 
-function MyListingsPage({ userProfile }) {
-  // const [userItems, setUserItems] = React.useState(state);
+export default function ItemListPage({ userProfile, userItems }) {
+  const [items, setItems] = useState(userItems);
+  const [profile, setProfile] = useState(userProfile);
 
   const classes = useStyles();
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div className={classes.container}>
-        <GridContainer justify='center'>
+        <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={8} lg={8}>
-            <TabListings userProfile={userProfile} />
+            <TabListings userProfile={profile} userItems={items} />
           </GridItem>
         </GridContainer>
       </div>
     </div>
   );
 }
-
-export default MyListingsPage;

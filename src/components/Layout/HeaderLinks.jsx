@@ -43,14 +43,11 @@ export default function HeaderLinks(props) {
             <Link to='/dashboard' className={classes.dropdownLink}>
               Dashboard
             </Link>,
-            <Link to='/' className={classes.dropdownLink}>
+            <Link to='/itemlist' className={classes.dropdownLink}>
               My Items
             </Link>,
-            <Link to='/' className={classes.dropdownLink}>
+            <Link to='/addEditItem' className={classes.dropdownLink}>
               Add Items
-            </Link>,
-            <Link to='/' className={classes.dropdownLink}>
-              Items for Collection
             </Link>,
             <a onClick={logout}  className={classes.dropdownLink}>
               Logout
