@@ -4,13 +4,12 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 // @material-ui components
 import { makeStyles } from '@material-ui/core/styles';
-import { Select } from '@material-ui/core';
-import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 // Material Kit components
-import Parallax from 'components/MaterialKitComponents/Parallax/Parallax';
 import Button from 'components/MaterialKitComponents/CustomButtons/Button';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
@@ -24,35 +23,54 @@ import FormControl from '@material-ui/core/FormControl';
 // TODO - this uses files from views will have to get styles from somewhere else
 import styles from 'assets/jss/material-kit-react/views/profilePage';
 
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+
 // DropZone imports
 import DropZone from '../dropzone/DropZone';
 
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
 const useStyles = makeStyles(styles);
+
+// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
+const categories = [
+  { title: 'Nuts', checked: null },
+  { title: 'Fruit', checked: null },
+  { title: 'Dairy', checked: null },
+  { title: 'Fish', checked: null },
+  { title: 'Meat', checked: null },
+  { title: 'Cereal', checked: null },
+  { title: 'Fresh', checked: null },
+  { title: 'Cooked', checked: null },
+  { title: 'Raw', checked: null },
+  { title: 'Frozen', checked: null },
+  { title: 'Dried', checked: null },
+  { title: 'Tinned', checked: null },
+  { title: 'Packet', checked: null },
+];
 
 export default function AddEditItem({ userItems }) {
   const classes = useStyles();
-  const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
   const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('1');
-  const [description, setDescription] = useState('');
-  const [expiry, setExpiry] = useState('');
-
-  const [items, setItems] = useState(userItems);
-
-  const handleTitleChange = (e) => {
+  const handleTitleChange = e => {
     console.log(e.target.value);
     setTitle(e.target.value);
   };
-  const handleCategoryChange = (e) => {
+  const [category, setCategory] = useState('1');
+  const handleCategoryChange = e => {
     console.log(e.target.value);
     setCategory(e.target.value);
   };
-  const handleDescriptionChange = (e) => {
+  const [description, setDescription] = useState('');
+  const handleDescriptionChange = e => {
     console.log(e.target.value);
     setDescription(e.target.value);
   };
-  const handleExpiryChange = (value) => {
+  const [expiry, setExpiry] = useState('');
+  const handleExpiryChange = value => {
     const newDate = value._d.toLocaleDateString('en-GB');
     console.log(newDate);
     setExpiry(newDate);
@@ -60,7 +78,7 @@ export default function AddEditItem({ userItems }) {
 
   // Set to postcode found in profile here
   const [location, setzLocation] = useState('');
-  const handleLocationChange = (e) => {
+  const handleLocationChange = e => {
     console.log(e.target.value);
     setzLocation(e.target.value);
   };
@@ -82,8 +100,20 @@ export default function AddEditItem({ userItems }) {
     setChecked(toggle);
   };
 
+  const [zchecked, zsetChecked] = useState();
+  const handleCategoryToggle = (option, selected) => {
+    if (selected) {
+      option.checked = false;
+    } else {
+      option.checked = true;
+    }
+    console.log(option.title, option.checked);
+    zsetChecked(option.checked);
+  };
+
   // An attempt at makign the data stick about for a bit
-  const addNewItem = (e) => {
+  const [items, setItems] = useState(userItems);
+  const addNewItem = e => {
     // Create a copy of the tasks array
     const updatedItems = items.slice();
 
@@ -93,11 +123,11 @@ export default function AddEditItem({ userItems }) {
       provideUserId: 1, // TODO Get from profile
       collectUserId: null,
       photoId: '1117', // TODO Get from DropZone
-      title: title,
-      category: category, // TODO Use an array number instead of string here?
-      description: description,
-      expiry: expiry,
-      location: location,
+      title,
+      category, // TODO Use an array number instead of string here?
+      description,
+      expiry,
+      location,
       preferredProvideTime: '05/10/2020 4PM-6PM',
       preferredCollectTime: '',
     };
@@ -123,7 +153,7 @@ export default function AddEditItem({ userItems }) {
                 id="float"
                 inputProps={{
                   placeholder: 'Give your item a name',
-                  onChange: (event) => handleTitleChange(event),
+                  onChange: event => handleTitleChange(event),
                 }}
                 formControlProps={{
                   fullWidth: true,
@@ -135,27 +165,40 @@ export default function AddEditItem({ userItems }) {
                 inputProps={{
                   placeholder:
                     'Describe your item, has it been opened or dropped?',
-                  onChange: (event) => handleDescriptionChange(event),
+                  onChange: event => handleDescriptionChange(event),
                 }}
                 formControlProps={{
                   fullWidth: true,
                 }}
               />
               <div>
-                <Select
-                  fullWidth
-                  labelId="label"
-                  id="select"
-                  onChange={handleCategoryChange}
-                  value={category}
-                >
-                  <MenuItem value="1">Fresh produce</MenuItem>
-                  <MenuItem value="2">Tinned goods</MenuItem>
-                  <MenuItem value="3">Nuts</MenuItem>
-                  <MenuItem value="4">Packet</MenuItem>
-                  <MenuItem value="5">Frozen</MenuItem>
-                  <MenuItem value="6">Meat</MenuItem>
-                </Select>
+                <Autocomplete
+                  multiple
+                  id="checkboxes"
+                  options={categories}
+                  disableCloseOnSelect
+                  getOptionLabel={option => option.title}
+                  renderOption={(option, { selected }) => (
+                    <React.Fragment>
+                      <Checkbox
+                        icon={icon}
+                        checkedIcon={checkedIcon}
+                        style={{ marginRight: 8 }}
+                        checked={selected}
+                        onChange={e => handleCategoryToggle(option, selected)}
+                      />
+                      {option.title}
+                    </React.Fragment>
+                  )}
+                  renderInput={params => (
+                    <TextField
+                      {...params}
+                      variant="outlined"
+                      label="Category"
+                      placeholder="Choose all that apply"
+                    />
+                  )}
+                />
               </div>
             </GridItem>
           </GridContainer>
@@ -182,7 +225,7 @@ export default function AddEditItem({ userItems }) {
                 name="location"
                 inputProps={{
                   placeholder: 'Enter a Postcode',
-                  onChange: (event) => handleLocationChange(event),
+                  onChange: event => handleLocationChange(event),
                   value: `${location}`,
                 }}
                 formControlProps={{
@@ -198,35 +241,18 @@ export default function AddEditItem({ userItems }) {
             </GridItem>
             <GridItem xs={12} sm={6} container spacing={1} direction="row">
               <GridItem xs={12}>
-                <h4 xs={12} md={12} style={{ float: 'left' }}>
-                  Available collection time
-                </h4>
-              </GridItem>
-              <GridItem xs={12} md={6}>
-                <InputLabel style={{ float: 'left' }} className={classes.label}>
-                  From:
-                </InputLabel>
-                <br />
-                <FormControl fullWidth>
-                  <Datetime
-                    inputProps={{
-                      placeholder: 'Enter the time you are availble from',
-                    }}
-                  />
-                </FormControl>
-              </GridItem>
-              <GridItem xs={12} md={6}>
-                <InputLabel style={{ float: 'left' }} className={classes.label}>
-                  Till:
-                </InputLabel>
-                <br />
-                <FormControl fullWidth>
-                  <Datetime
-                    inputProps={{
-                      placeholder: 'Enter the time you are availble till',
-                    }}
-                  />
-                </FormControl>
+                <CustomInput
+                  labelText="Available collection times"
+                  id="float"
+                  inputProps={{
+                    placeholder:
+                      'e.g. Weekdays between 9 and 5pm, and all day Sunday',
+                    onChange: event => handleTitleChange(event),
+                  }}
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                />
               </GridItem>
               <GridItem fullWidth align="right">
                 <Button color="danger" size="lg">
@@ -235,7 +261,7 @@ export default function AddEditItem({ userItems }) {
                 <Button
                   color="success"
                   size="lg"
-                  onClick={(event) => addNewItem(event)}
+                  onClick={event => addNewItem(event)}
                 >
                   Save
                 </Button>
