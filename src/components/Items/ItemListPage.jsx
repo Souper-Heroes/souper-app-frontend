@@ -17,7 +17,7 @@ export default function ItemListPage({ userProfile, userItems }) {
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div className={classes.container}>
-        <GridContainer justify='center'>
+        <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={8} lg={8}>
             <TabListings userProfile={profile} userItems={items} />
           </GridItem>

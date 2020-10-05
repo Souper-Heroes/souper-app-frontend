@@ -56,7 +56,7 @@ export default function MyItemListings({ type, myitems }) {
   return (
     <div>
       <GridContainer>
-        <GridItem align='right'>
+        <GridItem align="right">
           <ListingsDropdown sortItems={sortItems} />
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
@@ -65,15 +65,15 @@ export default function MyItemListings({ type, myitems }) {
           ))}
         </GridItem>
         {type === 'provide' && (
-          <GridItem xs={6} sm={6} align='left'>
-            <Link to='/addedititem' className={classes.link}>
-              <Button type='button' color='rose' to='/addedititem'>
+          <GridItem xs={6} sm={6} align="left">
+            <Link to="/addedititem" className={classes.link}>
+              <Button type="button" color="rose" to="/addedititem">
                 Add Item
               </Button>
             </Link>
           </GridItem>
         )}
-        <GridItem xs={paginationColSize} sm={paginationColSize} align='right'>
+        <GridItem xs={paginationColSize} sm={paginationColSize} align="right">
           <ListingsPaginations />
         </GridItem>
       </GridContainer>

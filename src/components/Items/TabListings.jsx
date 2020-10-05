@@ -31,19 +31,19 @@ export default function TabListings({ userProfile, userItems }) {
   return (
     <div className={classes.section}>
       <CustomTabs
-        headerColor='rose'
+        headerColor="rose"
         plainTabs
         tabs={[
           {
             tabName: 'Listings',
             tabContent: (
-              <MyItemListings type='provide' myitems={itemsToProvide} />
+              <MyItemListings type="provide" myitems={itemsToProvide} />
             ),
           },
           {
             tabName: 'Collections',
             tabContent: (
-              <MyItemListings type='collect' myitems={itemsToCollect} />
+              <MyItemListings type="collect" myitems={itemsToCollect} />
             ),
           },
         ]}

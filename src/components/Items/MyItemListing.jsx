@@ -35,7 +35,7 @@ export default function MyItemListing({ type, myitem }) {
     }
 
     return (
-      <Typography variant='body2' color='textSecondary' gutterBottom>
+      <Typography variant="body2" color="textSecondary" gutterBottom>
         {message}
       </Typography>
     );
@@ -61,20 +61,20 @@ export default function MyItemListing({ type, myitem }) {
         <Paper className={classes.paper} spacing={1}>
           <GridContainer spacing={1}>
             <Grid item>
-              <Link to='/itemview' className={classes.link}>
+              <Link to="/itemview" className={classes.link}>
                 <ButtonBase className={classes.image}>
                   <img
                     className={classes.img}
-                    alt='complex'
+                    alt="complex"
                     src={require('assets/img/purple-banana.jpg')}
                   />
                 </ButtonBase>
               </Link>
             </Grid>
-            <GridContainer xs={12} sm item spacing={0} direction='column'>
-              <GridItem align='left' xs={12} className={classes.cell}>
-                <Link to='/itemview' className={classes.link}>
-                  <Typography gutterBottom variant='body1'>
+            <GridContainer xs={12} sm item spacing={0} direction="column">
+              <GridItem align="left" xs={12} className={classes.cell}>
+                <Link to="/itemview" className={classes.link}>
+                  <Typography gutterBottom variant="body1">
                     <strong>{myitem.description}</strong>
                   </Typography>
                 </Link>
@@ -87,7 +87,7 @@ export default function MyItemListing({ type, myitem }) {
                     className={classes.cell}
                   >
                     <GridContainer
-                      direction='row'
+                      direction="row"
                       className={classes.container}
                     >
                       <GridItem
@@ -98,8 +98,8 @@ export default function MyItemListing({ type, myitem }) {
                         className={classes.cell}
                       >
                         <Typography
-                          variant='body2'
-                          color='textSecondary'
+                          variant="body2"
+                          color="textSecondary"
                           gutterBottom
                         >
                           Category:
@@ -110,14 +110,14 @@ export default function MyItemListing({ type, myitem }) {
                         sm={7}
                         md={7}
                         lg={7}
-                        align='left'
+                        align="left"
                         className={classes.cell}
                       >
                         <Typography
-                          variant='body2'
-                          color='textPrimary'
+                          variant="body2"
+                          color="textPrimary"
                           gutterBottom
-                          align='left'
+                          align="left"
                         >
                           {myitem.category}
                         </Typography>
@@ -132,7 +132,7 @@ export default function MyItemListing({ type, myitem }) {
                     className={classes.cell}
                   >
                     <GridContainer
-                      direction='row'
+                      direction="row"
                       className={classes.container}
                     >
                       <GridItem
@@ -143,8 +143,8 @@ export default function MyItemListing({ type, myitem }) {
                         className={classes.cell}
                       >
                         <Typography
-                          variant='body2'
-                          color='textSecondary'
+                          variant="body2"
+                          color="textSecondary"
                           gutterBottom
                         >
                           Location:
@@ -155,14 +155,14 @@ export default function MyItemListing({ type, myitem }) {
                         sm={7}
                         md={7}
                         lg={7}
-                        align='left'
+                        align="left"
                         className={classes.cell}
                       >
                         <Typography
-                          variant='body2'
-                          color='textPrimary'
+                          variant="body2"
+                          color="textPrimary"
                           gutterBottom
-                          align='left'
+                          align="left"
                         >
                           {myitem.location}
                         </Typography>
@@ -179,7 +179,7 @@ export default function MyItemListing({ type, myitem }) {
                     className={classes.cell}
                   >
                     <GridContainer
-                      direction='row'
+                      direction="row"
                       className={classes.container}
                     >
                       <GridItem
@@ -190,8 +190,8 @@ export default function MyItemListing({ type, myitem }) {
                         className={classes.cell}
                       >
                         <Typography
-                          variant='body2'
-                          color='textSecondary'
+                          variant="body2"
+                          color="textSecondary"
                           gutterBottom
                         >
                           Expires:
@@ -202,14 +202,14 @@ export default function MyItemListing({ type, myitem }) {
                         sm={7}
                         md={7}
                         lg={7}
-                        align='left'
+                        align="left"
                         className={classes.cell}
                       >
                         <Typography
-                          variant='body2'
-                          color='textPrimary'
+                          variant="body2"
+                          color="textPrimary"
                           gutterBottom
-                          align='left'
+                          align="left"
                         >
                           {myitem.expiryDate}
                         </Typography>
@@ -224,7 +224,7 @@ export default function MyItemListing({ type, myitem }) {
                     className={classes.cell}
                   >
                     <GridContainer
-                      direction='row'
+                      direction="row"
                       className={classes.container}
                     >
                       <GridItem
@@ -242,15 +242,15 @@ export default function MyItemListing({ type, myitem }) {
                         sm={7}
                         md={7}
                         lg={7}
-                        align='left'
+                        align="left"
                         className={classes.cell}
                       >
                         {myitem.preferredCollectStartTime !== null && (
                           <Typography
-                            variant='body2'
-                            color='textPrimary'
+                            variant="body2"
+                            color="textPrimary"
                             gutterBottom
-                            align='left'
+                            align="left"
                           >
                             {myitem.preferredCollectStartTime}
                           </Typography>
@@ -260,12 +260,12 @@ export default function MyItemListing({ type, myitem }) {
                   </GridItem>
                 </GridContainer>
               </GridItem>
-              <GridItem xs={12} align='right'>
+              <GridItem xs={12} align="right">
                 <Button onClick={handleOnClickAgreeCup}>
                   <EmojiEvent />
                 </Button>
                 {itemType === 'provide' && (
-                  <Link to='/addedititem/' className={classes.link}>
+                  <Link to="/addedititem/" className={classes.link}>
                     <Button>
                       <Edit />
                     </Button>

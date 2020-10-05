@@ -7,17 +7,16 @@ export default function ListingsDropdown({ sortItems }) {
   const [menuItem, setMenuItem] = useState('');
 
   const handleOnClickDropdown = (menuItem) => {
-    console.log(menuItem);
+    //console.log(menuItem);
     setMenuItem(menuItem);
     setSortBy(`Sorted By ${menuItem}`);
     sortItems(menuItem);
   };
 
   return (
-    // eslint-disable-next-line react/jsx-filename-extension
     <CustomDropdown
-      hoverColor='rose'
-      dropdownHeader='Sort By'
+      hoverColor="rose"
+      dropdownHeader="Sort By"
       buttonText={sortBy}
       onClick={(menuItem) => handleOnClickDropdown(menuItem)}
       buttonProps={{
