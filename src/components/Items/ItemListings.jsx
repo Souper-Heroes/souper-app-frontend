@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Datetime from "react-datetime";
+import Datetime from 'react-datetime';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
@@ -8,13 +8,17 @@ import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import profile from 'assets/jss/material-kit-react/views/profilePage';
 import Card from 'components/MaterialKitComponents/Card/Card';
 import CardBody from 'components/MaterialKitComponents/Card/CardBody';
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 import Button from 'components/MaterialKitComponents/CustomButtons/Button';
 import Select from '@material-ui/core/Select';
-import Paginations from "components/MaterialKitComponents/Pagination/Pagination";
-import { cardTitle, cardLink, cardSubtitle } from "assets/jss/material-kit-react";
-import Slider from "nouislider";
+import Paginations from 'components/MaterialKitComponents/Pagination/Pagination';
+import {
+  cardTitle,
+  cardLink,
+  cardSubtitle,
+} from 'assets/jss/material-kit-react';
+import Slider from 'nouislider';
 
 const styles = {
   ...profile,
@@ -22,8 +26,8 @@ const styles = {
   cardLink,
   cardSubtitle,
   textLeft: {
-    textAlign: "left"
-  }
+    textAlign: 'left',
+  },
 };
 
 const useStyles = makeStyles(styles);
@@ -41,8 +45,7 @@ function ItemListings() {
     // console.log(name, value)
     if (name === 'sortBy') {
       setSortBy(value);
-    }
-    else if (name === 'unit') {
+    } else if (name === 'unit') {
       console.log(value);
       setUnit(value);
       document.getElementById('sliderRegular').noUiSlider.updateOptions({
@@ -54,15 +57,14 @@ function ItemListings() {
           },
         },
       });
-    }
-    else if (name === 'category') {
+    } else if (name === 'category') {
       setCategory(value);
     }
   };
 
   const onDateChangeHandler = (date) => {
     setExpiry(date);
-  }
+  };
 
   useEffect(() => {
     const distanceSlider = document.getElementById('sliderRegular');
@@ -88,8 +90,10 @@ function ItemListings() {
         density: 10,
       },
     });
-    // set the Distance State when slider value changed 
-    distanceSlider.noUiSlider.on('change', () => setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, '')));
+    // set the Distance State when slider value changed
+    distanceSlider.noUiSlider.on('change', () =>
+      setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, ''))
+    );
   }, []);
 
   return (
@@ -98,30 +102,40 @@ function ItemListings() {
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={4} md={3} container spacing={1}>
-              <GridItem xs={12} sm={12} md={12} >
+              <GridItem xs={12} sm={12} md={12}>
                 <h4 className={classes.filterTitle}>Filters</h4>
                 <InputLabel className={classes.filterLabel}>Unit</InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
                   <Select
                     native
                     value={unit}
-                    onChange={event => onChangeHandler(event)}
+                    onChange={(event) => onChangeHandler(event)}
                     name="unit"
                   >
                     <option value={'Miles'}>In Miles</option>
                     <option value={'Kilometers'}>In Kilometers</option>
                   </Select>
                 </FormControl>
-                <InputLabel className={classes.filterLabel}>Distance</InputLabel>
+                <InputLabel className={classes.filterLabel}>
+                  Distance
+                </InputLabel>
                 <FormControl fullWidth>
-                  <div className="slider-primary" id="sliderRegular" className={classes.slider} name="slider" onChange={event => onChangeHandler(event)} />
+                  <div
+                    className="slider-primary"
+                    id="sliderRegular"
+                    className={classes.slider}
+                    name="slider"
+                    onChange={(event) => onChangeHandler(event)}
+                  />
                 </FormControl>
-                <InputLabel className={classes.filterLabel}>Category</InputLabel>
+                <InputLabel className={classes.filterLabel}>
+                  Category
+                </InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
                   <Select
                     native
                     value={category}
-                    onChange={event => onChangeHandler(event)}
+                    onChange={(event) => onChangeHandler(event)}
                     name="category"
                   >
                     <option aria-label="None" value="" />
@@ -134,21 +148,29 @@ function ItemListings() {
                   Expiry Date
                 </InputLabel>
                 <FormControl fullWidth>
-                  <Datetime className={classes.bottomFilter}
-                    inputProps={{ placeholder: "Select Expiry date.." }}
+                  <Datetime
+                    className={classes.bottomFilter}
+                    inputProps={{ placeholder: 'Select Expiry date..' }}
                     name="expiry"
                     value={expiry}
                     onChange={onDateChangeHandler}
                   />
                 </FormControl>
                 <FormControl fullWidth>
-                  <Button fullWidth size='md' color='rose'>
+                  <Button fullWidth size="md" color="rose">
                     Apply Filters
-                    </Button>
+                  </Button>
                 </FormControl>
               </GridItem>
             </GridItem>
-            <GridItem xs={12} sm={8} md={9} container direction="row" spacing={1}>
+            <GridItem
+              xs={12}
+              sm={8}
+              md={9}
+              container
+              direction="row"
+              spacing={1}
+            >
               <GridItem xs={12} sm={12} md={8}>
                 <h6>18 ITEMS FOUND</h6>
               </GridItem>
@@ -158,14 +180,13 @@ function ItemListings() {
                   <Select
                     native
                     value={sortBy}
-                    onChange={event => onChangeHandler(event)}
+                    onChange={(event) => onChangeHandler(event)}
                     name="sortBy"
                   >
                     <option aria-label="None" value="" />
                     <option value={'Distance'}>Sort by: Distance</option>
                     <option value={'Expiry'}>Sort by: Expiry Date</option>
                   </Select>
-
                 </FormControl>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
@@ -174,13 +195,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -192,13 +214,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -210,13 +233,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -228,13 +252,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -246,13 +271,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -264,13 +290,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -282,13 +309,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -300,13 +328,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -318,13 +347,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -336,13 +366,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -354,13 +385,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -372,13 +404,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -390,13 +423,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -408,13 +442,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -426,13 +461,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -444,13 +480,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -462,13 +499,14 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
@@ -480,29 +518,37 @@ function ItemListings() {
                     <h4 className={classes.cardTitle}>Card Title</h4>
                     <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
                     <p>
-                      Some quick example text to build on the card title and content
-
+                      Some quick example text to build on the card title and
+                      content
                     </p>
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}>
+                      onClick={(e) => e.preventDefault()}
+                    >
                       View Item
                     </a>
                   </CardBody>
                 </Card>
               </GridItem>
             </GridItem>
-            <GridItem xs={12} sm={12} md={12} container spacing={1} direction="row-reverse">
+            <GridItem
+              xs={12}
+              sm={12}
+              md={12}
+              container
+              spacing={1}
+              direction="row-reverse"
+            >
               <Paginations
                 pages={[
-                  { text: "PREV" },
+                  { text: 'PREV' },
                   { active: true, text: 1 },
                   { text: 2 },
                   { text: 3 },
                   { text: 4 },
                   { text: 5 },
-                  { text: "NEXT" }
+                  { text: 'NEXT' },
                 ]}
                 color="primary"
               />
@@ -510,7 +556,7 @@ function ItemListings() {
           </GridContainer>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 

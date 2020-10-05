@@ -1,60 +1,81 @@
-/* eslint-disable react/jsx-tag-spacing */
-/* eslint-disable react/jsx-filename-extension */
-import React from 'react';
-// @material-ui/core components
-// import { makeStyles } from '@material-ui/core/styles';
-
-// @material-ui/icons
-// import Chat from '@material-ui/icons/Chat';
-// import VerifiedUser from '@material-ui/icons/VerifiedUser';
-// import Fingerprint from '@material-ui/icons/Fingerprint';
-// import Face from '@material-ui/icons/Face';
-// import Build from '@material-ui/icons/Build';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // core components
+import { makeStyles } from '@material-ui/core/styles';
+//import styles from 'assets/jss/Items/views/MyItemListings';
+import styles from 'assets/jss/material-kit-react/views/loginPage';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import MyItemListing from 'components/Items/MyItemListing';
-import ListingsDropdown from 'components/Layout/ListingsDropdown';
+import ListingsDropdown from 'components/Items/ListingsDropdown';
 import Button from 'components/CustomButtons/Button';
-import ListingsPagination from '../Layout/ListingsPagination';
+import ListingsPaginations from 'components/Items/ListingsPaginations';
 
-// import styles from 'assets/jss/Items/views/MyItemListings';
 // import Divider from '@material-ui/core/Divider';
 
 // const useStyles = makeStyles(styles);
 
 export default function MyItemListings({ type, myitems }) {
-  // const classes = useStyles();
+  const [items, setItems] = useState(myitems);
+
+  const classes = makeStyles(styles);
+  const paginationColSize = type === 'provide' ? 6 : 12;
+
+  const sortItems = (menuItem) => {
+    const newItems = [...items];
+
+    if (menuItem === 'Category') {
+      newItems.sort((a, b) => {
+        if (a.category > b.category) {
+          return 1;
+        }
+        if (b.category > a.category) {
+          return -1;
+        }
+        return 0;
+      });
+    } else {
+      //  Sort By Expiry Date
+      newItems.sort((a, b) => {
+        if (a.expiryDate > b.expiryDate) {
+          return 1;
+        }
+        if (b.expiryDate > a.expiryDate) {
+          return -1;
+        }
+        return 0;
+      });
+    }
+
+    console.log('Sorted Items:', newItems);
+
+    setItems(newItems);
+  };
 
   return (
-    <div /* {className={classes.section} } */>
+    <div>
       <GridContainer>
         <GridItem align="right">
-          <ListingsDropdown />
+          <ListingsDropdown sortItems={sortItems} />
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
-          {myitems.map((myitem) => (
-            <MyItemListing key={myitem.itemId} type={type} myitem={myitem} />
+          {items.map((myItem) => (
+            <MyItemListing key={myItem.itemId} type={type} myitem={myItem} />
           ))}
         </GridItem>
         {type === 'provide' && (
-          <GridItem xs={6} align="left">
-            <Button type="button" color="rose">
-              Add Item
-            </Button>
+          <GridItem xs={6} sm={6} align="left">
+            <Link to="/addedititem" className={classes.link}>
+              <Button type="button" color="rose" to="/addedititem">
+                Add Item
+              </Button>
+            </Link>
           </GridItem>
         )}
-        {type === 'provide' && (
-          <GridItem xs={6} align="right">
-            <ListingsPagination />
-          </GridItem>
-        )}
-        {type !== 'provide' && (
-          <GridItem xs={12} align="right">
-            <ListingsPagination />
-          </GridItem>
-        )}
+        <GridItem xs={paginationColSize} sm={paginationColSize} align="right">
+          <ListingsPaginations />
+        </GridItem>
       </GridContainer>
     </div>
   );
