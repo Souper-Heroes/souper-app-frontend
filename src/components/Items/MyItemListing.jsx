@@ -73,7 +73,10 @@ export default function MyItemListing({ type, myitem }) {
             </Grid>
             <GridContainer xs={12} sm item spacing={0} direction="column">
               <GridItem align="left" xs={12} className={classes.cell}>
-                <Link to="/itemview" className={classes.link}>
+                <Link
+                  to={{ pathname: '/itemview', item: { item } }}
+                  className={classes.link}
+                >
                   <Typography gutterBottom variant="body1">
                     <strong>{myitem.description}</strong>
                   </Typography>
