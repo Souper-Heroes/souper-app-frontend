@@ -7,7 +7,7 @@ import LoginPage from 'containers/Login/Login';
 import RegisterPage from 'components/Login/RegisterPage';
 import LandingPage from 'views/LandingPage/LandingPage';
 import ItemListPage from 'components/Items/ItemListPage';
-import ItemListings from 'components/Items/ItemListings';
+import ItemListings from 'containers/Items/ItemListings';
 
 import Profile from 'containers/Profile/Profile';
 import Forgotten from 'components/Login/Forgotten';
@@ -52,6 +52,6 @@ function App() {
       </Switch>
     </BrowserRouter>
   );
-};
+}
 
 export default App;
