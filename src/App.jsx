@@ -34,7 +34,7 @@ function App() {
             path="/itemview"
             render={() => (
               <ItemViewPage
-                userId={data.otherUserProfileId}
+                userid={data.otherUserProfileId}
                 item={data['userItems'][0]}
               />
             )}
