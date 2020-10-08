@@ -31,14 +31,17 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import './index.css';
 import App from './App';
-import {store, persistor} from './store';
+import { store, persistor, rrfProps } from './store';
 import * as serviceWorker from './serviceWorker';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 
 ReactDOM.render(
   <Provider store={store}>
+    <ReactReduxFirebaseProvider {...rrfProps}>
       <PersistGate loading={null} persistor={persistor}>
-          <App />
+        <App />
       </PersistGate>
+    </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById('root')
 );

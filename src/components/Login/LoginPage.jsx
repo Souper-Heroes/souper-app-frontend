@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,17 +23,17 @@ const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
   const history = useHistory();
-  useEffect(() => {
-    if (props.isLogged) {
-      history.push('/');
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (props.isLogged) {
+  //     history.push('/');
+  //   }
+  // }, []);
   const emailRef = React.useRef(null);
   const passRef = React.useRef(null);
   const handleClick = async () => {
     await props.login(emailRef.current.value, passRef.current.value);
-    await props.check();
-    history.push('/dashboard');
+    // await props.check();
+    // history.push('/dashboard');
   };
 
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
@@ -41,13 +41,14 @@ export default function LoginPage(props) {
     setCardAnimation('');
   }, 700);
   const classes = useStyles();
+  const { authError } = props;
   return (
     <div>
       <div
         style={{
           backgroundImage: `url(${image})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'top center',
+          backgroundPosition: 'top center'
         }}
       >
         <div className={classes.container}>
@@ -92,7 +93,7 @@ export default function LoginPage(props) {
                       labelText="Email"
                       id="email"
                       formControlProps={{
-                        fullWidth: true,
+                        fullWidth: true
                       }}
                       inputProps={{
                         type: 'email',
@@ -101,14 +102,14 @@ export default function LoginPage(props) {
                           <InputAdornment position="end">
                             <Email className={classes.inputIconsColor} />
                           </InputAdornment>
-                        ),
+                        )
                       }}
                     />
                     <CustomInput
                       labelText="Password"
                       id="pass"
                       formControlProps={{
-                        fullWidth: true,
+                        fullWidth: true
                       }}
                       inputProps={{
                         type: 'password',
@@ -120,19 +121,29 @@ export default function LoginPage(props) {
                             </Icon>
                           </InputAdornment>
                         ),
-                        autoComplete: 'off',
+                        autoComplete: 'off'
                       }}
                     />
                   </CardBody>
                   <GridContainer justify="center">
                     <Link to="/forgotten" className={classes.link}>
-                      <Button simple color="info" size="lg" to="/ForgottenPassword">
+                      <Button
+                        simple
+                        color="info"
+                        size="lg"
+                        to="/ForgottenPassword"
+                      >
                         FORGOTTEN PASSWORD?
                       </Button>
                     </Link>
                   </GridContainer>
                   <CardFooter className={classes.cardFooter}>
-                    <Button fullWidth size="lg" color="rose" onClick={handleClick}>
+                    <Button
+                      fullWidth
+                      size="lg"
+                      color="rose"
+                      onClick={handleClick}
+                    >
                       Log in
                     </Button>
                   </CardFooter>
@@ -143,6 +154,7 @@ export default function LoginPage(props) {
                       </Button>
                     </CardFooter>
                   </Link>
+                  {authError ? <p>{authError}</p> : null}
                 </form>
               </Card>
             </GridItem>
