@@ -14,7 +14,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 
 const useStyles = makeStyles(styles);
 
-export default function WorkSection() {
+export default function Profile(props) {
   const [distance, setDistance] = React.useState('miles');
   const classes = useStyles();
   const imageClasses = classNames(
@@ -56,12 +56,16 @@ export default function WorkSection() {
     setDistance(event.target.value);
   };
 
+  const changeTitle = () => {
+    props.updateMessage(distance);
+  };
+
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div className={classes.container}>
         <GridContainer justify="center">
           <GridItem cs={12} sm={12} md={8}>
-            <h2 className={classes.title}>Profile</h2>
+            <h2 className={classes.title} onClick={() => changeTitle()}>Profile {props.message} </h2>
             <form>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
