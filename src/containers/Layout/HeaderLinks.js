@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import HeaderLinks from 'components/Layout/HeaderLinks';
-import { logout } from 'actions';
+import { logout } from 'actions/auth';
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout())
