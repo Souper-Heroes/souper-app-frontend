@@ -12,20 +12,21 @@ import moment from 'moment';
 
 const useStyles = makeStyles(styles);
 
-export default function ItemViewPage({ userId, item }) {
+export default function ItemViewPage({ userid, item }) {
   const [currentItem, setCurrentItem] = useState(item);
   const [isDisableAmendBtn, setIsDisableAmendBtn] = useState(true);
 
   const [collectionStartDateTime, setCollectionStartDateTime] = useState(
-    moment(item.preferredCollectStartTime)
+    moment(currentItem.preferredCollectStartTime)
   );
   const [collectionEndDateTime, setCollectionEndDateTime] = useState(
-    moment(item.preferredCollectEndTime)
+    moment(currentItem.preferredCollectEndTime)
   );
 
   const classes = useStyles();
   // TODO Default for now for testing but will get passed from props
-  //const userId = 2;
+  //const userid = props.location.userId;
+  //const userid = 1;
 
   const handleOnClickReserve = () => {
     //console.log(`Clicked Reserve Account, do something with DisplayName: `);
@@ -55,18 +56,24 @@ export default function ItemViewPage({ userId, item }) {
 
     if (
       type === 'start'
-        ? newDate.isSame(moment(item.preferredCollectStartTime)) &&
-          collectionEndDateTime.isSame(moment(item.preferredCollectEndTime))
-        : newDate.isSame(moment(item.preferredCollectEndTime)) &&
-          collectionStartDateTime.isSame(moment(item.preferredCollectStartTime))
+        ? newDate.isSame(moment(currentItem.preferredCollectStartTime)) &&
+          collectionEndDateTime.isSame(
+            moment(currentItem.preferredCollectEndTime)
+          )
+        : newDate.isSame(moment(currentItem.preferredCollectEndTime)) &&
+          collectionStartDateTime.isSame(
+            moment(currentItem.preferredCollectStartTime)
+          )
     ) {
       // Nothing has changed
       // console.log(
       //  `Handle Date Change2, do something with ${type} ${collectionStartDateTime} ${collectionStartDateTime.isValid()}`
       // );
       type === 'start'
-        ? setCollectionStartDateTime(moment(item.preferredCollectStartTime))
-        : setCollectionEndDateTime(moment(item.preferredCollectEndTime));
+        ? setCollectionStartDateTime(
+            moment(currentItem.preferredCollectStartTime)
+          )
+        : setCollectionEndDateTime(moment(currentItem.preferredCollectEndTime));
       setIsDisableAmendBtn(true);
       return;
     }
@@ -241,7 +248,7 @@ export default function ItemViewPage({ userId, item }) {
                     lg={6}
                     className={classes.output}
                   >
-                    {userId !== currentItem.collectUserId && (
+                    {userid !== currentItem.collectUserId && (
                       <Typography
                         variant="body2"
                         color="textPrimary"
@@ -253,7 +260,7 @@ export default function ItemViewPage({ userId, item }) {
                         )}
                       </Typography>
                     )}
-                    {userId === currentItem.collectUserId && (
+                    {userid === currentItem.collectUserId && (
                       <>
                         <FormControl>
                           <Datetime
@@ -300,7 +307,7 @@ export default function ItemViewPage({ userId, item }) {
                     lg={6}
                     className={classes.label}
                   >
-                    {userId !== currentItem.collectUserId && (
+                    {userid !== currentItem.collectUserId && (
                       <Typography
                         variant="body2"
                         color="textPrimary"
@@ -312,7 +319,7 @@ export default function ItemViewPage({ userId, item }) {
                         )}
                       </Typography>
                     )}
-                    {userId === currentItem.collectUserId && (
+                    {userid === currentItem.collectUserId && (
                       <>
                         <FormControl>
                           <Datetime

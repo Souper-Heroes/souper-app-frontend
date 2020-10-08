@@ -17,7 +17,7 @@ import moment from 'moment';
 
 // const useStyles = makeStyles(styles);
 
-export default function MyItemListings({ type, myitems }) {
+export default function MyItemListings({ userProfile, type, myitems }) {
   const [items, setItems] = useState(myitems);
 
   const classes = makeStyles(styles);
@@ -62,7 +62,12 @@ export default function MyItemListings({ type, myitems }) {
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
           {items.map((myItem) => (
-            <MyItemListing key={myItem.itemId} type={type} myitem={myItem} />
+            <MyItemListing
+              userProfile={userProfile}
+              key={myItem.itemId}
+              type={type}
+              myitem={myItem}
+            />
           ))}
         </GridItem>
         {type === 'provide' && (
