@@ -40,16 +40,7 @@ function App() {
               />
             )}
           />
-          <Route
-            path="/itemlist"
-            component={ItemListPage}
-            /*render={() => (
-              <ItemListPage
-                userProfile={data['userProfile']}
-                userItems={data['userItems']}
-              />
-            )}*/
-          />
+          <Route path="/itemlist" component={ItemListPage} />
           <Route path="/profile" component={Profile} />
           <Route path="/landing" component={LandingPage} />
           <Route path="/dashboard" component={ItemListings} />
