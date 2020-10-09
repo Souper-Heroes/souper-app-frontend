@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,6 +6,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
 import Email from '@material-ui/icons/Email';
+// @material Typography
+import Danger from '../MaterialKitComponents/Typography/Danger';
 // core components
 import GridContainer from '../MaterialKitComponents/Grid/GridContainer';
 import GridItem from '../MaterialKitComponents/Grid/GridItem';
@@ -24,14 +26,17 @@ const useStyles = makeStyles(styles);
 export default function LoginPage(props) {
   // console.log(props);
   const history = useHistory();
+  const didMountRef = useRef(false);
   useEffect(() => {
-    console.log(props);
-    if (props.isLogged) {
-      history.push('/dashboard');
-    }
+    if (didMountRef.current) {
+      if (props.isLogged) {
+        history.push('/dashboard');
+      }
+    } else didMountRef.current = true;
   });
-  const emailRef = React.useRef(null);
-  const passRef = React.useRef(null);
+
+  const emailRef = useRef(null);
+  const passRef = useRef(null);
   const handleClick = async () => {
     await props.login(emailRef.current.value, passRef.current.value);
     // await props.check();
@@ -91,6 +96,7 @@ export default function LoginPage(props) {
                     </div>
                   </CardHeader>
                   <CardBody>
+                    {authError ? <Danger>{authError}</Danger> : null}
                     <CustomInput
                       labelText="Email"
                       id="email"
@@ -156,7 +162,6 @@ export default function LoginPage(props) {
                       </Button>
                     </CardFooter>
                   </Link>
-                  {authError ? <p>{authError}</p> : null}
                 </form>
               </Card>
             </GridItem>
