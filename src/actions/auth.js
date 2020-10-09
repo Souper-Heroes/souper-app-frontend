@@ -1,6 +1,6 @@
-import axios from 'axios';
+// import axios from 'axios';
 
-const SOUP_API = 'https://souper-app-backend.herokuapp.com';
+// const SOUP_API = 'https://souper-app-backend.herokuapp.com';
 
 // export const login = (email, password) => ({
 //     type: types.LOGIN,
@@ -16,39 +16,102 @@ const SOUP_API = 'https://souper-app-backend.herokuapp.com';
 //     payload: axios.get(`${SOUP_API}/check`, {headers: { Authorization: getState().auth.jwt}})
 // }));
 
-export const types = {
-  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-  LOGIN_ERROR: 'LOGIN_ERROR',
-  LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
-  CHECK: 'CHECK'
-};
+import { myFirebase } from '../firebase/firebase';
 
-export const login = (email, password) => {
-  return (dispatch, getState, { getFirebase }) => {
-    const firebase = getFirebase();
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        dispatch({ type: types.LOGIN_SUCCESS });
-      })
-      .catch(err => {
-        console.log(err);
-        dispatch({ type: types.LOGIN_ERROR, err });
-      });
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
+
+export const VERIFY_REQUEST = 'VERIFY_REQUEST';
+export const VERIFY_SUCCESS = 'VERIFY_SUCCESS';
+
+const requestLogin = () => {
+  return {
+    type: LOGIN_REQUEST
   };
 };
 
-export const logout = () => {
-  return (dispatch, getState, { getFirebase }) => {
-    const firebase = getFirebase();
-
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        dispatch({ type: types.LOGOUT_SUCCESS });
-      });
+const receiveLogin = user => {
+  return {
+    type: LOGIN_SUCCESS,
+    user
   };
+};
+
+const loginError = () => {
+  return {
+    type: LOGIN_FAILURE
+  };
+};
+
+const requestLogout = () => {
+  return {
+    type: LOGOUT_REQUEST
+  };
+};
+
+const receiveLogout = () => {
+  return {
+    type: LOGOUT_SUCCESS
+  };
+};
+
+const logoutError = () => {
+  return {
+    type: LOGOUT_FAILURE
+  };
+};
+
+const verifyRequest = () => {
+  return {
+    type: VERIFY_REQUEST
+  };
+};
+
+const verifySuccess = () => {
+  return {
+    type: VERIFY_SUCCESS
+  };
+};
+
+export const loginUser = (email, password) => dispatch => {
+  dispatch(requestLogin());
+  myFirebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(user => {
+      dispatch(receiveLogin(user));
+    })
+    .catch(error => {
+      //Do something with the error if you want!
+      dispatch(loginError());
+    });
+};
+
+export const logoutUser = () => dispatch => {
+  dispatch(requestLogout());
+  myFirebase
+    .auth()
+    .signOut()
+    .then(() => {
+      dispatch(receiveLogout());
+    })
+    .catch(error => {
+      //Do something with the error if you want!
+      dispatch(logoutError());
+    });
+};
+
+export const verifyAuth = () => dispatch => {
+  dispatch(verifyRequest());
+  myFirebase.auth().onAuthStateChanged(user => {
+    if (user !== null) {
+      dispatch(receiveLogin(user));
+    }
+    dispatch(verifySuccess());
+  });
 };

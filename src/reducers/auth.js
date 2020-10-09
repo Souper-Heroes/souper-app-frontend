@@ -1,58 +1,78 @@
-// import { types } from 'actions';
+import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
+  VERIFY_REQUEST,
+  VERIFY_SUCCESS
+} from '../actions/auth';
 
-// const initialState = { jwt: '', message: '', isLogged: false };
-
-// const auth = (state = { ...initialState }, action) => {
-//   switch (action.type) {
-//     case `${types.LOGIN}_FULFILLED`:
-//       return { ...state, jwt: action.payload.data.token, isLogged: true };
-//     case `${types.CHECK}_FULFILLED`:
-//       return { ...state, message: action.payload.data.message };
-//     case types.LOGOUT:
-//       return { ...initialState };
-//     default:
-//       if (
-//         state.isLogged &&
-//         action.type.includes('_REJECTED') &&
-//         [401, 403].includes(action.payload.response.status)
-//       ) {
-//         return { ...initialState };
-//       }
-//   }
-//   return state;
-// };
-
-// export default auth;
-const initialState = {
-  authError: null,
-  isLogged: false
-};
-
-const auth = (state = { ...initialState }, action) => {
+export default (
+  state = {
+    isLoggingIn: false,
+    isLoggingOut: false,
+    isVerifying: false,
+    loginError: false,
+    logoutError: false,
+    isAuthenticated: false,
+    user: {}
+  },
+  action
+) => {
   switch (action.type) {
-    case 'LOGIN_ERROR':
-      console.log('login error');
+    case LOGIN_REQUEST:
       return {
         ...state,
-        authError: 'Login Failed'
+        isLoggingIn: true,
+        loginError: false
       };
-    case 'LOGIN_SUCCESS':
-      console.log('login success');
+    case LOGIN_SUCCESS:
       return {
         ...state,
-        isLogged: true,
-        authError: null
+        isLoggingIn: false,
+        isAuthenticated: true,
+        user: action.user
       };
-    case 'LOGOUT_SUCCESS':
-      console.log('signout success');
+    case LOGIN_FAILURE:
       return {
         ...state,
-        isLogged: false,
-        authError: null
+        isLoggingIn: false,
+        isAuthenticated: false,
+        loginError: true
+      };
+    case LOGOUT_REQUEST:
+      return {
+        ...state,
+        isLoggingOut: true,
+        logoutError: false
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isLoggingOut: false,
+        isAuthenticated: false,
+        user: {}
+      };
+    case LOGOUT_FAILURE:
+      return {
+        ...state,
+        isLoggingOut: false,
+        logoutError: true
+      };
+    case VERIFY_REQUEST:
+      return {
+        ...state,
+        isVerifying: true,
+        verifyingError: false
+      };
+    case VERIFY_SUCCESS:
+      return {
+        ...state,
+        isVerifying: false
       };
     default:
       return state;
   }
 };
-
-export default auth;

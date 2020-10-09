@@ -1,9 +1,8 @@
 import firebase from 'firebase/app';
-import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/firestore';
 
-// Initialize Firebase
-export const config = {
+const firebaseConfig = {
   apiKey: 'AIzaSyDflmiKPEv1rDmF6xBwVXINbqxHphElC8M',
   authDomain: 'souperheroes-32ce8.firebaseapp.com',
   databaseURL: 'https://souperheroes-32ce8.firebaseio.com',
@@ -13,7 +12,6 @@ export const config = {
   appId: '1:709415909284:web:64ab5ba5a35bc2856bb331'
 };
 
-firebase.initializeApp(config);
-firebase.firestore();
-
-export default firebase;
+export const myFirebase = firebase.initializeApp(firebaseConfig);
+const baseDb = myFirebase.firestore();
+export const db = baseDb;
