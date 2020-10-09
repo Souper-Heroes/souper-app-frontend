@@ -36,11 +36,7 @@ export default function AddEditItem({ userItems }) {
     console.log(e.target.value);
     setTitle(e.target.value);
   };
-  const [category, setCategory] = useState('1');
-  const handleCategoryChange = e => {
-    console.log(e.target.value);
-    setCategory(e.target.value);
-  };
+
   const [description, setDescription] = useState('');
   const handleDescriptionChange = e => {
     console.log(e.target.value);
@@ -77,15 +73,10 @@ export default function AddEditItem({ userItems }) {
     setChecked(toggle);
   };
 
-  const [zchecked, zsetChecked] = useState();
-  const handleCategoryToggle = (option, selected) => {
-    if (selected) {
-      option.checked = false;
-    } else {
-      option.checked = true;
-    }
-    console.log(option.title, option.checked);
-    zsetChecked(option.checked);
+  const [availability, setAvailability] = useState('');
+  const handleAvailChange = e => {
+    console.log(e.target.value);
+    setAvailability(e.target.value);
   };
 
   // An attempt at makign the data stick about for a bit
@@ -96,17 +87,16 @@ export default function AddEditItem({ userItems }) {
 
     // Create a new task object
     const newItem = {
-      itemId: 1000 + items.length + 1, // Mongo DB will assign an ID
-      provideUserId: 1, // TODO Get from profile
+      itemId: 1000 + items.length + 1, // DB will assign an ID
+      provideUserId: 1, // TODO Get from userProfile
       collectUserId: null,
       photoId: '1117', // TODO Get from DropZone
       title,
-      category, // TODO Use an array number instead of string here?
       description,
+      //category, // TODO Get from CatCheckBox
       expiry,
       location,
-      preferredProvideTime: '05/10/2020 4PM-6PM',
-      preferredCollectTime: '',
+      availability,
     };
     // ## TODO ## set all fields to '' or equivalent.
     // Add the new task to the array
@@ -196,7 +186,7 @@ export default function AddEditItem({ userItems }) {
                   inputProps={{
                     placeholder:
                       'e.g. Weekdays between 9 and 5pm, and all day Sunday',
-                    onChange: event => handleTitleChange(event),
+                    onChange: event => handleAvailChange(event),
                   }}
                   formControlProps={{
                     fullWidth: true,
