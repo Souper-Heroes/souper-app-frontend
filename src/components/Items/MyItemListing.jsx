@@ -22,7 +22,7 @@ import moment from 'moment';
 
 const useStyles = makeStyles(styles);
 
-export default function MyItemListing({ type, myitem }) {
+export default function MyItemListing({ type, myitem, deleteItem }) {
   const [item, setItem] = useState(myitem);
   const [itemType, setType] = useState(type);
 
@@ -48,6 +48,7 @@ export default function MyItemListing({ type, myitem }) {
     console.log(
       `Clicked Delete button, do something with item: ${item.itemId}, Title: ${item.description}`
     );
+    deleteItem(item.itemId);
   };
 
   const handleOnClickAgreeCup = (event) => {

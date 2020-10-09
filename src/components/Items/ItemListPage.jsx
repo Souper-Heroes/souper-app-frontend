@@ -6,34 +6,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import styles from 'assets/jss/material-kit-react/views/profilePage';
-import TabListings from 'components/Items/TabListings';
-import MyItemListings from 'components/Items/MyItemListings';
+import MyItemListings from 'containers/Items/MyItemListings';
 import CustomTabs from 'components/MaterialKitComponents/CustomTabs/CustomTabs';
 
 const useStyles = makeStyles(styles);
 
 export default function ItemListPage(props) {
-  /* const [items, setItems] = useState(userItems);
-  const [profile, setProfile] = useState(userProfile); */
-
   const classes = useStyles();
-  const history = useHistory();
-
-  //console.log(props);
-
-  function getUserItems(type, userId, userItems) {
-    let filteredItems = [];
-
-    if (type === 'provide') {
-      filteredItems = userItems.filter((item) => item.provideUserId === userId);
-    } else {
-      filteredItems = userItems.filter((item) => item.collectUserId === userId);
-    }
-    return filteredItems;
-  }
-
-  const itemsToProvide = getUserItems('provide', props.userId, props.userItems);
-  const itemsToCollect = getUserItems('collect', props.userId, props.userItems);
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
@@ -46,15 +25,11 @@ export default function ItemListPage(props) {
               tabs={[
                 {
                   tabName: 'Listings',
-                  tabContent: (
-                    <MyItemListings type="provide" myitems={itemsToProvide} />
-                  ),
+                  tabContent: <MyItemListings type="provide" />,
                 },
                 {
                   tabName: 'Collections',
-                  tabContent: (
-                    <MyItemListings type="collect" myitems={itemsToCollect} />
-                  ),
+                  tabContent: <MyItemListings type="collect" />,
                 },
               ]}
             />
