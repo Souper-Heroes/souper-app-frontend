@@ -41,13 +41,14 @@ function App() {
             )}
           />
           <Route
-            path="/itemlist"
-            render={() => (
+            path="/myitemlist"
+            component={ItemListPage}
+            /*render={() => (
               <ItemListPage
                 userProfile={data['userProfile']}
                 userItems={data['userItems']}
               />
-            )}
+            )}*/
           />
           <Route path="/profile" component={Profile} />
           <Route path="/landing" component={LandingPage} />
@@ -57,6 +58,6 @@ function App() {
       </Switch>
     </BrowserRouter>
   );
-};
+}
 
 export default App;
