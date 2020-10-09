@@ -64,9 +64,7 @@ function DropZone() {
         onClick={fileInputClicked}
       >
         <div>
-          {(imgData && (
-            <img className="food-img-container" src={imgData} />
-          )) || (
+          {(imgData && <img className="image-display" src={imgData} />) || (
             <div className="drop-message">
               <div className="upload-icon" />
               <input
