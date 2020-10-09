@@ -82,8 +82,6 @@ material-kit-react
 ├── ISSUE_TEMPLATE.md
 ├── LICENSE.md
 ├── README.md
-├── bower.json
-├── gulpfile.js
 ├── jsconfig.json
 ├── package.json
 ├── Documentation

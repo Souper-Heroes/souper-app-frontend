@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,6 +7,7 @@ import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
 import Email from '@material-ui/icons/Email';
 // core components
+import PropTypes from 'prop-types';
 import GridContainer from '../MaterialKitComponents/Grid/GridContainer';
 import GridItem from '../MaterialKitComponents/Grid/GridItem';
 import Button from '../MaterialKitComponents/CustomButtons/Button';
@@ -152,3 +153,9 @@ export default function LoginPage(props) {
     </div>
   );
 }
+
+LoginPage.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
+  login: PropTypes.bool.isRequired,
+  check: PropTypes.bool.isRequired,
+};
