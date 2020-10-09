@@ -13,11 +13,12 @@ import Button from 'components/CustomButtons/Button';
 import ListingsPaginations from 'components/Items/ListingsPaginations';
 
 import moment from 'moment';
+import profilePageStyle from 'assets/jss/material-kit-react/views/profilePage';
 // import Divider from '@material-ui/core/Divider';
 
 // const useStyles = makeStyles(styles);
 
-export default function MyItemListings({ userProfile, type, myitems }) {
+export default function MyItemListings({ type, myitems }) {
   const [items, setItems] = useState(myitems);
 
   const classes = makeStyles(styles);
@@ -62,12 +63,7 @@ export default function MyItemListings({ userProfile, type, myitems }) {
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
           {items.map((myItem) => (
-            <MyItemListing
-              userProfile={userProfile}
-              key={myItem.itemId}
-              type={type}
-              myitem={myItem}
-            />
+            <MyItemListing key={myItem.itemId} type={type} myitem={myItem} />
           ))}
         </GridItem>
         {type === 'provide' && (

@@ -6,7 +6,7 @@ import ItemViewPage from 'components/Items/ItemViewPage';
 import LoginPage from 'containers/Login/Login';
 import RegisterPage from 'components/Login/RegisterPage';
 import LandingPage from 'views/LandingPage/LandingPage';
-import ItemListPage from 'components/Items/ItemListPage';
+import ItemListPage from 'containers/Items/ItemListPage';
 import ItemListings from 'components/Items/ItemListings';
 
 import Profile from 'containers/Profile/Profile';
@@ -41,7 +41,7 @@ function App() {
             )}
           />
           <Route
-            path="/myitemlist"
+            path="/itemlist"
             component={ItemListPage}
             /*render={() => (
               <ItemListPage

@@ -5,12 +5,12 @@ import { itemlist } from 'actions';
 // 2nd parameter to this function holds our component props
 const mapStateToProps = (state) => ({
   userItems: state.itemlist.userItems,
-  userId: state.itemlist.userProfile.userId,
+  userId: state.itemlist.userId,
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//  itemlist: () => dispatch(itemlist()),
-// });
+const mapDispatchToProps = (dispatch) => ({
+  itemlist: () => dispatch(itemlist()),
+});
 
 //export default connect(mapStateToProps, mapDispatchToProps)(TabListings);
-export default connect(null, mapStateToProps)(ItemListPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemListPage);
