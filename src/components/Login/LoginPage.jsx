@@ -22,18 +22,19 @@ import image from '../../assets/img/board.jpg';
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
+  // console.log(props);
   const history = useHistory();
-  // useEffect(() => {
-  //   if (props.isLogged) {
-  //     history.push('/');
-  //   }
-  // }, []);
+  useEffect(() => {
+    console.log(props);
+    if (props.isLogged) {
+      history.push('/dashboard');
+    }
+  });
   const emailRef = React.useRef(null);
   const passRef = React.useRef(null);
   const handleClick = async () => {
     await props.login(emailRef.current.value, passRef.current.value);
     // await props.check();
-    // history.push('/dashboard');
   };
 
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
@@ -42,6 +43,7 @@ export default function LoginPage(props) {
   }, 700);
   const classes = useStyles();
   const { authError } = props;
+
   return (
     <div>
       <div

@@ -5,7 +5,7 @@ import { login } from 'actions/auth';
 
 const mapStateToProps = state => ({
   authError: state.auth.authError,
-  isLogged: state.auth.isLogged
+  isLogged: !state.firebase.auth.isEmpty
 });
 
 const mapDispatchToProps = dispatch => ({

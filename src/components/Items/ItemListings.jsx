@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import { connect } from 'react-redux';
+import { Redirect, useHistory } from 'react-router-dom';
 
 import profile from 'assets/jss/material-kit-react/views/profilePage';
 import Card from 'components/MaterialKitComponents/Card/Card';
@@ -34,8 +35,11 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 function ItemListings(props) {
-  console.log(props);
+  // console.log(props);
+  const history = useHistory();
+  const { items, auth } = props;
   const classes = useStyles();
+
   const [sortBy, setSortBy] = useState('Distance');
   const [distance, setDistance] = useState(2);
   const [unit, setUnit] = useState('Miles');
@@ -562,9 +566,4 @@ function ItemListings(props) {
   );
 }
 
-const mapStateToProps = state => {
-  console.log(state);
-  return {};
-};
-
-export default connect(mapStateToProps)(ItemListings);
+export default ItemListings;
