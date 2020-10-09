@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
@@ -16,58 +17,47 @@ export default function ItemListPage(props) {
   const [profile, setProfile] = useState(userProfile); */
 
   const classes = useStyles();
+  const history = useHistory();
 
-  console.log(props);
+  //console.log(props);
 
-  /* function getUserItems(type, userProfileId, userItems) {
+  function getUserItems(type, userId, userItems) {
     let filteredItems = [];
 
     if (type === 'provide') {
-      filteredItems = userItems.filter(
-        (item) => item.provideUserId === userProfileId
-      );
+      filteredItems = userItems.filter((item) => item.provideUserId === userId);
     } else {
-      filteredItems = userItems.filter(
-        (item) => item.collectUserId === userProfileId
-      );
+      filteredItems = userItems.filter((item) => item.collectUserId === userId);
     }
     return filteredItems;
   }
 
-  const itemsToProvide = getUserItems('provide', userProfile.userId, userItems);
-  const itemsToCollect = getUserItems('collect', userProfile.userId, userItems); */
+  const itemsToProvide = getUserItems('provide', props.userId, props.userItems);
+  const itemsToCollect = getUserItems('collect', props.userId, props.userItems);
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div className={classes.container}>
         <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={8} lg={8}>
-            {/*} <CustomTabs
+            <CustomTabs
               headerColor="rose"
               plainTabs
               tabs={[
                 {
                   tabName: 'Listings',
                   tabContent: (
-                    <MyItemListings
-                      userProfile={userProfile}
-                      type="provide"
-                      myitems={itemsToProvide}
-                    />
+                    <MyItemListings type="provide" myitems={itemsToProvide} />
                   ),
                 },
                 {
                   tabName: 'Collections',
                   tabContent: (
-                    <MyItemListings
-                      userProfile={userProfile}
-                      type="collect"
-                      myitems={itemsToCollect}
-                    />
+                    <MyItemListings type="collect" myitems={itemsToCollect} />
                   ),
                 },
               ]}
-            />  */}
+            />
           </GridItem>
         </GridContainer>
       </div>
