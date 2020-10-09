@@ -26,13 +26,10 @@ const useStyles = makeStyles(styles);
 export default function LoginPage(props) {
   // console.log(props);
   const history = useHistory();
-  const didMountRef = useRef(false);
   useEffect(() => {
-    if (didMountRef.current) {
-      if (props.isLogged) {
-        history.push('/dashboard');
-      }
-    } else didMountRef.current = true;
+    if (props.isLogged) {
+      history.push('/dashboard');
+    }
   });
 
   const emailRef = useRef(null);
