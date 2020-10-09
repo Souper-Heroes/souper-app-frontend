@@ -40,11 +40,16 @@ const auth = (state = { ...initialState }, action) => {
       console.log('login success');
       return {
         ...state,
+        isLogged: true,
         authError: null
       };
-    case 'SIGNOUT_SUCCESS':
+    case 'LOGOUT_SUCCESS':
       console.log('signout success');
-      return state;
+      return {
+        ...state,
+        isLogged: false,
+        authError: null
+      };
     default:
       return state;
   }

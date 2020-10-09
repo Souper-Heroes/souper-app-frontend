@@ -17,7 +17,7 @@ const SOUP_API = 'https://souper-app-backend.herokuapp.com';
 // }));
 
 export const types = {
-  LOGIN: 'LOGIN_SUCCESS',
+  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   LOGIN_ERROR: 'LOGIN_ERROR',
   LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
   CHECK: 'CHECK'
@@ -34,6 +34,7 @@ export const login = (email, password) => {
         dispatch({ type: types.LOGIN_SUCCESS });
       })
       .catch(err => {
+        console.log(err);
         dispatch({ type: types.LOGIN_ERROR, err });
       });
   };
