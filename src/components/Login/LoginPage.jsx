@@ -29,6 +29,9 @@ export default function LoginPage({ loginError, isAuthenticated, login }) {
   const passRef = useRef(null);
   const classes = useStyles();
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
   setTimeout(() => {
     setCardAnimation('');
   }, 700);
@@ -36,7 +39,6 @@ export default function LoginPage({ loginError, isAuthenticated, login }) {
   const handleClick = async () => {
     await login(emailRef.current.value, passRef.current.value);
   };
-  console.log(isAuthenticated);
 
   return (
     <div>
