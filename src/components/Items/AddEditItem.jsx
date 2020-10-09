@@ -6,8 +6,6 @@ import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 
 // Material Kit components
 import Button from 'components/MaterialKitComponents/CustomButtons/Button';
@@ -23,33 +21,12 @@ import FormControl from '@material-ui/core/FormControl';
 // TODO - this uses files from views will have to get styles from somewhere else
 import styles from 'assets/jss/material-kit-react/views/profilePage';
 
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
-
 // DropZone imports
 import DropZone from '../dropzone/DropZone';
-
-const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
+// Food categories check boxes
+import CatCheckBox from './CatCheckBox';
 
 const useStyles = makeStyles(styles);
-
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-const categories = [
-  { title: 'Nuts', checked: null },
-  { title: 'Fruit', checked: null },
-  { title: 'Dairy', checked: null },
-  { title: 'Fish', checked: null },
-  { title: 'Meat', checked: null },
-  { title: 'Cereal', checked: null },
-  { title: 'Fresh', checked: null },
-  { title: 'Cooked', checked: null },
-  { title: 'Raw', checked: null },
-  { title: 'Frozen', checked: null },
-  { title: 'Dried', checked: null },
-  { title: 'Tinned', checked: null },
-  { title: 'Packet', checked: null },
-];
 
 export default function AddEditItem({ userItems }) {
   const classes = useStyles();
@@ -171,35 +148,7 @@ export default function AddEditItem({ userItems }) {
                   fullWidth: true,
                 }}
               />
-              <div>
-                <Autocomplete
-                  multiple
-                  id="checkboxes"
-                  options={categories}
-                  disableCloseOnSelect
-                  getOptionLabel={option => option.title}
-                  renderOption={(option, { selected }) => (
-                    <React.Fragment>
-                      <Checkbox
-                        icon={icon}
-                        checkedIcon={checkedIcon}
-                        style={{ marginRight: 8 }}
-                        checked={selected}
-                        onChange={e => handleCategoryToggle(option, selected)}
-                      />
-                      {option.title}
-                    </React.Fragment>
-                  )}
-                  renderInput={params => (
-                    <TextField
-                      {...params}
-                      variant="outlined"
-                      label="Category"
-                      placeholder="Choose all that apply"
-                    />
-                  )}
-                />
-              </div>
+              <CatCheckBox />
             </GridItem>
           </GridContainer>
           <GridContainer justify="center">
