@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
 import LoginPage from 'components/Login/LoginPage';
-import { login } from 'actions/auth';
+import { loginUser } from 'actions/auth';
 // import { login, check } from 'actions';
 
 const mapStateToProps = state => ({
-  authError: state.auth.authError,
-  isLogged: !state.firebase.auth.isEmpty
+  isLoggingIn: state.auth.isLoggingIn,
+  loginError: state.auth.loginError,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: (email, password) => dispatch(login(email, password))
-  //   check: () => dispatch(check())
+  login: (email, password) => dispatch(loginUser(email, password))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

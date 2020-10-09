@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -23,28 +24,19 @@ import image from '../../assets/img/board.jpg';
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage(props) {
-  // console.log(props);
-  const history = useHistory();
-  useEffect(() => {
-    if (props.isLogged) {
-      history.push('/dashboard');
-    }
-  });
-
+export default function LoginPage({ loginError, isAuthenticated, login }) {
   const emailRef = useRef(null);
   const passRef = useRef(null);
-  const handleClick = async () => {
-    await props.login(emailRef.current.value, passRef.current.value);
-    // await props.check();
-  };
-
+  const classes = useStyles();
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
   setTimeout(() => {
     setCardAnimation('');
   }, 700);
-  const classes = useStyles();
-  const { authError } = props;
+
+  const handleClick = async () => {
+    await login(emailRef.current.value, passRef.current.value);
+  };
+  console.log(isAuthenticated);
 
   return (
     <div>
@@ -93,7 +85,9 @@ export default function LoginPage(props) {
                     </div>
                   </CardHeader>
                   <CardBody>
-                    {authError ? <Danger>{authError}</Danger> : null}
+                    {loginError ? (
+                      <Danger>Incorrect email or Password</Danger>
+                    ) : null}
                     <CustomInput
                       labelText="Email"
                       id="email"
