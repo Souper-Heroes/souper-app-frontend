@@ -27,6 +27,8 @@ import 'assets/scss/material-kit-react.scss?v=1.9.0';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useSelector } from 'react-redux';
+import { isLoaded } from 'react-redux-firebase';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import './index.css';
@@ -35,11 +37,19 @@ import { store, persistor, rrfProps } from './store';
 import * as serviceWorker from './serviceWorker';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 
+function AuthIsLoaded({ children }) {
+  const auth = useSelector(state => state.firebase.auth);
+  if (!isLoaded(auth)) return <div>splash screen...</div>;
+  return children;
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
       <PersistGate loading={null} persistor={persistor}>
-        <App />
+        <AuthIsLoaded>
+          <App />
+        </AuthIsLoaded>
       </PersistGate>
     </ReactReduxFirebaseProvider>
   </Provider>,
