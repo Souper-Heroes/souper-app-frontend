@@ -10,4 +10,3 @@ const message = (state = 'Hello Redux!', action) => {
 };
 
 export default message;
-
