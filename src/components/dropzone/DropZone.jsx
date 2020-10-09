@@ -63,20 +63,22 @@ function DropZone() {
         onDrop={fileDrop}
         onClick={fileInputClicked}
       >
-        <div className="food-picture">
-          <img className="playerProfilePic_home_tile" src={imgData} />
-        </div>
-
-        <div className="drop-message">
-          <div className="upload-icon" />
-          <input
-            ref={fileInputRef}
-            className="file-input"
-            type="file"
-            multiple
-            onChange={fileSelected}
-          />
-          Drag & Drop files here or click to upload
+        <div>
+          {(imgData && (
+            <img className="food-img-container" src={imgData} />
+          )) || (
+            <div className="drop-message">
+              <div className="upload-icon" />
+              <input
+                ref={fileInputRef}
+                className="file-input"
+                type="file"
+                multiple
+                onChange={fileSelected}
+              />
+              Drag & Drop files here or click to upload
+            </div>
+          )}
         </div>
       </div>
     </div>
