@@ -12,16 +12,13 @@ const initialState = {
 const itemlist = (state = { initialState }, action) => {
   switch (action.type) {
     case types.ITEMLIST:
-      //get previous state object here annd concatenate new object
-      //return { ...state, items: action.items };
-      //console.log('state:', state);
+      // get previous state object here annd concatenate new object
+      // TODO
       return state.itemlist;
     case types.ADDITEM:
-      //get previous state object here annd concatenate new object
       return { ...state, userItems: [...state.userItems, action.item] };
 
     case types.DELETEITEM:
-      //get previous state object here annd concatenate new object
       return {
         ...state,
         userItems: [
@@ -29,8 +26,6 @@ const itemlist = (state = { initialState }, action) => {
         ],
       };
     case types.SORTITEM:
-      //let newItems = [...state.userItems];
-
       if (action.menuItem === 'Category') {
         return {
           ...state,
@@ -60,10 +55,6 @@ const itemlist = (state = { initialState }, action) => {
         };
       }
 
-    /*case `${types.CHECK}_FULFILLED`:
-      return { ...state, message: action.payload.data.message };
-    case types.LOGOUT:
-      return { ...initialState }; */
     default:
       return { ...initialState };
   }
