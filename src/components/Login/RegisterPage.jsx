@@ -40,17 +40,15 @@ export default function RegisterPage({ registerInputs }) {
   }, 700);
   const classes = useStyles();
 
-  const checkTermsAndConds = (checkedValue) => {
-    setcheckedTermsAndConds(checkedValue);
-  };
+  const checkTermsAndConds = checkedValue => setcheckedTermsAndConds(checkedValue);
 
   const handleOnClickCreateAcc = () => {
-    //console.log(
+    // console.log(
     //  `Clicked Create Account, do something with DisplayName: ${displayName}, Email: ${email}, Passowrd: ${password}`
-    //);
+    // );
   };
 
-  const handleInputChange = (event) => {
+  const handleInputChange = event => {
     const { id, value } = event.currentTarget;
 
     if (id === 'name') {
@@ -85,7 +83,7 @@ export default function RegisterPage({ registerInputs }) {
                         href="#pablo"
                         target="_blank"
                         color="transparent"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={e => e.preventDefault()}
                       >
                         <i className="fab fa-twitter" />
                       </Button>
@@ -94,7 +92,7 @@ export default function RegisterPage({ registerInputs }) {
                         href="#pablo"
                         target="_blank"
                         color="transparent"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={e => e.preventDefault()}
                       >
                         <i className="fab fa-facebook" />
                       </Button>
@@ -103,14 +101,14 @@ export default function RegisterPage({ registerInputs }) {
                         href="#pablo"
                         target="_blank"
                         color="transparent"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={e => e.preventDefault()}
                       >
                         <i className="fab fa-google-plus-g" />
                       </Button>
                     </div>
                   </CardHeader>
                   <CardBody>
-                    {registerInputs.map((input) => (
+                    {registerInputs.map(input => (
                       <CustomInput
                         labelText={input.label}
                         id={input.id}
@@ -122,7 +120,7 @@ export default function RegisterPage({ registerInputs }) {
                           id: `${input.id}`,
                           type: `${input.type}`,
 
-                          onChange: (event) => handleInputChange(event),
+                          onChange: event => handleInputChange(event),
 
                           endAdornment: (
                             <InputAdornment position="start">
@@ -147,7 +145,8 @@ export default function RegisterPage({ registerInputs }) {
                       checkTermsAndConds={checkTermsAndConds}
                     >
                       <Link to="/register">
-                        <strong>Terms And Conditions</strong>{' '}
+                        <strong>Terms And Conditions</strong>
+                        {' '}
                       </Link>
                     </CheckboxTermsAndConds>
                     <Link to="/profile">

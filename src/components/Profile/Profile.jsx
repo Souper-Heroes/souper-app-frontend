@@ -48,24 +48,18 @@ export default function Profile(props) {
       label: '5',
     },
   ];
-
-  const valuetext = (value) => {
-    return `${value} Miles`;
-  };
-  const handleChange = (event) => {
-    setDistance(event.target.value);
-  };
-
-  const changeTitle = () => {
-    props.updateMessage(distance);
-  };
+  const valuetext = value => `${value} Miles`;
+  const handleChange = event => setDistance(event.target.value);
+  const changeTitle = () => props.updateMessage(distance);
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div className={classes.container}>
         <GridContainer justify="center">
           <GridItem cs={12} sm={12} md={8}>
-            <h2 className={classes.title} onClick={() => changeTitle()}>Profile {props.message} </h2>
+            <h2 className={classes.title} onClick={() => changeTitle()}>
+              Profile {props.message}
+            </h2>
             <form>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
@@ -129,6 +123,7 @@ export default function Profile(props) {
                 <GridItem xs={12} sm={12} md={6}>
                   <img
                     src={profileImage}
+                    alt="profile"
                     className={imageClasses}
                     style={{ width: 250, height: 250 }}
                   />
