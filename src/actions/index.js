@@ -7,9 +7,10 @@ export const types = {
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',
   CHECK: 'CHECK',
-  ITEMVIEW: 'VIEWITEM',
   ITEMLIST: 'ITEMLIST',
   ADDITEM: 'ADDITEM',
+  DELETEITEM: 'DELETEITEM',
+  SORTITEM: 'SORTITEM',
 };
 
 export const login = (email, password) => ({
@@ -39,7 +40,17 @@ export const itemlist = () => ({
   type: types.ITEMLIST,
 });
 
-export const itemview = (item) => ({
+export const itemadd = (item) => ({
   type: types.ADDITEM,
   item,
+});
+
+export const deleteItem = (itemId) => ({
+  type: types.DELETEITEM,
+  itemId,
+});
+
+export const sortByItem = (menuItem) => ({
+  type: types.SORTITEM,
+  menuItem,
 });

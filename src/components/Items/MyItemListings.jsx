@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 // core components
 import { makeStyles } from '@material-ui/core/styles';
-//import styles from 'assets/jss/Items/views/MyItemListings';
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
@@ -13,19 +12,43 @@ import Button from 'components/CustomButtons/Button';
 import ListingsPaginations from 'components/Items/ListingsPaginations';
 
 import moment from 'moment';
-import profilePageStyle from 'assets/jss/material-kit-react/views/profilePage';
-// import Divider from '@material-ui/core/Divider';
 
-// const useStyles = makeStyles(styles);
+export default function MyItemListings(props) {
+  const history = useHistory();
+  useEffect(() => {
+    // if (props.isLogged) {
+    //   history.push('/');
+    // }
+  }, []);
 
-export default function MyItemListings({ type, myitems }) {
-  const [items, setItems] = useState(myitems);
-
+  //console.log('PROPS:', props);
+  const { type, userId, userItems } = props;
   const classes = makeStyles(styles);
   const paginationColSize = type === 'provide' ? 6 : 12;
 
+  /*
+  function getUserItems(type, userId, userItems) {
+    let filteredItems = [];
+
+    if (type === 'provide') {
+      filteredItems = userItems.filter((item) => item.provideUserId === userId);
+    } else {
+      // collect
+      filteredItems = userItems.filter((item) => item.collectUserId === userId);
+    }
+    return filteredItems;
+  } */
+  // const [items, setItems] = useState(getUserItems(type, userId, userItems));
+
+  const sortItems = (menuItem) => {
+    props.sortByItem(menuItem);
+  };
+
+  /*
   const sortItems = (menuItem) => {
     const newItems = [...items];
+
+    props.sortByItem(menuItem);
 
     if (menuItem === 'Category') {
       newItems.sort((a, b) => {
@@ -49,10 +72,12 @@ export default function MyItemListings({ type, myitems }) {
         return 0;
       });
     }
-
     // console.log('Sorted Items:', newItems);
+  };*/
 
-    setItems(newItems);
+  const deleteItem = async (itemId) => {
+    //console.log(`Clicked Delete button, delete item with itemId: ${itemId}`);
+    await props.deleteItem(itemId);
   };
 
   return (
@@ -62,9 +87,28 @@ export default function MyItemListings({ type, myitems }) {
           <ListingsDropdown sortItems={sortItems} />
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
-          {items.map((myItem) => (
-            <MyItemListing key={myItem.itemId} type={type} myitem={myItem} />
-          ))}
+          {/* items.map((myItem) => (
+            <MyItemListing
+              key={myItem.itemId}
+              type={type}
+              myitem={myItem}
+              deleteItem={deleteItem}
+            />
+          )) */}
+          {props.userItems
+            .filter((item) =>
+              type === 'provide'
+                ? item.provideUserId === userId
+                : item.collectUserId === userId
+            )
+            .map((myItem) => (
+              <MyItemListing
+                key={myItem.itemId}
+                type={type}
+                myitem={myItem}
+                deleteItem={deleteItem}
+              />
+            ))}
         </GridItem>
         {type === 'provide' && (
           <GridItem xs={6} sm={6} align="left">

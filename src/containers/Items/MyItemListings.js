@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
-import ItemListPage from 'components/Items/ItemListPage';
+import MyItemListings from 'components/Items/MyItemListings';
 import { itemlist } from 'actions';
+import { deleteItem } from 'actions';
+import { sortByItem } from 'actions';
 
 // 2nd parameter to this function holds our component props
 const mapStateToProps = (state) => ({
@@ -10,6 +12,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   itemlist: () => dispatch(itemlist()),
+  deleteItem: (itemId) => dispatch(deleteItem(itemId)),
+  sortByItem: (menuItem) => dispatch(sortByItem(menuItem)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemListPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MyItemListings);
