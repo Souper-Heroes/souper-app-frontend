@@ -49,9 +49,10 @@ const loginError = () => {
   };
 };
 
-const signUpError = () => {
+const signUpError = message => {
   return {
-    type: SIGNUP_FAILURE
+    type: SIGNUP_FAILURE,
+    message
   };
 };
 
@@ -127,8 +128,7 @@ export const signUp = (email, password, displayName) => dispatch => {
       dispatch(receiveLogin(user));
     })
     .catch(error => {
-      console.log(error);
-      dispatch(signUpError());
+      dispatch(signUpError(error.message));
     });
 };
 
