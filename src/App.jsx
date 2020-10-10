@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Layout from 'containers/Layout/Layout';
 import TestData from 'assets/data/TestData.json';
 import ItemViewPage from 'components/Items/ItemViewPage';
 import LoginPage from 'containers/Login/Login';
-import RegisterPage from 'components/Login/RegisterPage';
-import LandingPage from 'views/LandingPage/LandingPage';
+import RegisterPage from 'containers/Login/Register';
 import ItemListPage from 'components/Items/ItemListPage';
 import ItemListings from 'containers/Items/ItemListings';
 import Profile from 'containers/Profile/Profile';
@@ -42,8 +40,12 @@ function App(props) {
           />
         )}
       />
-      <Route path="/profile" component={Profile} />
-      <Route path="/landing" component={LandingPage} />
+      <ProtectedRoute
+        path="/profile"
+        component={Profile}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
       <ProtectedRoute
         exact
         path="/dashboard"
@@ -51,7 +53,12 @@ function App(props) {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
-      <Route path="/addEditItem" component={AddEditItem} />
+      <ProtectedRoute
+        path="/addEditItem"
+        component={AddEditItem}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
     </Switch>
   );
 }
