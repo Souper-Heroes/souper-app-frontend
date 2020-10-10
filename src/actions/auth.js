@@ -16,7 +16,7 @@
 //     payload: axios.get(`${SOUP_API}/check`, {headers: { Authorization: getState().auth.jwt}})
 // }));
 
-import { myFirebase } from '../firebase/firebase';
+import { myFirebase, generateUserDocument } from '../firebase/firebase';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -88,6 +88,20 @@ export const loginUser = (email, password) => dispatch => {
     })
     .catch(error => {
       //Do something with the error if you want!
+      dispatch(loginError());
+    });
+};
+
+export const signUp = (email, password, displayName) => dispatch => {
+  dispatch(requestLogin());
+  myFirebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(user => {
+      dispatch(receiveLogin(user));
+    })
+    .catch(error => {
+      console.log(error);
       dispatch(loginError());
     });
 };

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import LoginPage from 'components/Login/LoginPage';
-import { loginUser } from 'actions/auth';
+import RegisterPage from 'components/Login/RegisterPage';
+import { signUp } from 'actions/auth';
 import PropTypes from 'prop-types';
 
 const mapStateToProps = state => ({
@@ -10,13 +10,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: (email, password) => dispatch(loginUser(email, password))
+  signUp: (email, password, displayName) =>
+    dispatch(signUp(email, password, displayName))
 });
 
-LoginPage.propTypes = {
+RegisterPage.propTypes = {
   isLoggingIn: PropTypes.bool.isRequired,
   loginError: PropTypes.bool.isRequired,
   isAuthenticated: PropTypes.bool.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);

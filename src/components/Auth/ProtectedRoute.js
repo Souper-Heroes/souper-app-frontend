@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import Layout from 'containers/Layout/Layout';
 
 const ProtectedRoute = ({
   component: Component,
@@ -13,7 +14,9 @@ const ProtectedRoute = ({
       isVerifying ? (
         <div />
       ) : isAuthenticated ? (
-        <Component {...props} />
+        <Layout>
+          <Component {...props} />
+        </Layout>
       ) : (
         <Redirect
           to={{

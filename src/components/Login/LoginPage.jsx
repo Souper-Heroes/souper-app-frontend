@@ -31,6 +31,7 @@ export default function LoginPage({ loginError, isAuthenticated, login }) {
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />;
   }
+
   setTimeout(() => {
     setCardAnimation('');
   }, 700);

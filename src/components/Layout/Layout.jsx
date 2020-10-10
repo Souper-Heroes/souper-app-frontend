@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Header from 'components/Layout/Header';
 import HeaderLinks from 'containers/Layout/HeaderLinks';
 import { Restaurant } from '@material-ui/icons';
@@ -11,7 +11,6 @@ const Layout = props => {
       <Header
         brand={<Restaurant />}
         color="rose"
-        leftLinks={''}
         rightLinks={<HeaderLinks />}
         fixed
       />
