@@ -23,7 +23,12 @@ import image from '../../assets/img/board.jpg';
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage({ loginError, isAuthenticated, login }) {
+export default function LoginPage({
+  loginError,
+  isAuthenticated,
+  login,
+  loginWithGoogle
+}) {
   const emailRef = useRef(null);
   const passRef = useRef(null);
   const classes = useStyles();
@@ -36,8 +41,11 @@ export default function LoginPage({ loginError, isAuthenticated, login }) {
     setCardAnimation('');
   }, 700);
 
-  const handleClick = async () => {
+  const handleSubmit = async () => {
     await login(emailRef.current.value, passRef.current.value);
+  };
+  const handleLoginWithGoogle = async () => {
+    await loginWithGoogle();
   };
 
   return (
@@ -80,7 +88,7 @@ export default function LoginPage({ loginError, isAuthenticated, login }) {
                         href="#pablo"
                         target="_blank"
                         color="transparent"
-                        onClick={e => e.preventDefault()}
+                        onClick={handleLoginWithGoogle}
                       >
                         <i className="fab fa-google-plus-g" />
                       </Button>
@@ -143,7 +151,7 @@ export default function LoginPage({ loginError, isAuthenticated, login }) {
                       fullWidth
                       size="lg"
                       color="rose"
-                      onClick={handleClick}
+                      onClick={handleSubmit}
                     >
                       Log in
                     </Button>

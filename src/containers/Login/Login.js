@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import LoginPage from 'components/Login/LoginPage';
-import { loginUser } from 'actions/auth';
+import { loginUser, loginWithGoogle } from 'actions/auth';
 import PropTypes from 'prop-types';
 
 const mapStateToProps = state => ({
@@ -10,7 +10,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: (email, password) => dispatch(loginUser(email, password))
+  login: (email, password) => dispatch(loginUser(email, password)),
+  loginWithGoogle: () => dispatch(loginWithGoogle())
 });
 
 LoginPage.propTypes = {
