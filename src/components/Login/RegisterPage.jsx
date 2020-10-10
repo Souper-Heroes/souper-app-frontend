@@ -34,7 +34,8 @@ export default function RegisterPage({
   signUpError,
   isAuthenticated,
   registerInputs,
-  signUp
+  signUp,
+  loginWithGoogle
 }) {
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
   const [checkedTermsAndConds, setcheckedTermsAndConds] = useState(true);
@@ -55,6 +56,9 @@ export default function RegisterPage({
 
   const handleSubmit = async () => {
     await signUp(email, password, displayName);
+  };
+  const handleLoginWithGoogle = async () => {
+    await loginWithGoogle();
   };
 
   const handleInputChange = event => {
@@ -110,7 +114,7 @@ export default function RegisterPage({
                         href="#pablo"
                         target="_blank"
                         color="transparent"
-                        onClick={e => e.preventDefault()}
+                        onClick={handleLoginWithGoogle}
                       >
                         <i className="fab fa-google-plus-g" />
                       </Button>
