@@ -28,7 +28,8 @@ export default (
       return {
         ...state,
         isLoggingIn: true,
-        loginError: false
+        loginError: false,
+        signUpError: null
       };
     case LOGIN_SUCCESS:
       return {
@@ -42,7 +43,8 @@ export default (
         ...state,
         isLoggingIn: false,
         isAuthenticated: false,
-        loginError: true
+        loginError: true,
+        signUpError: null
       };
     case SIGNUP_FAILURE:
       return {
@@ -50,7 +52,7 @@ export default (
         isLoggingIn: false,
         isAuthenticated: false,
         loginError: false,
-        signUpError: true
+        signUpError: action.message
       };
     case LOGOUT_REQUEST:
       return {

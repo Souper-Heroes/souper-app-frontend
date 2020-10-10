@@ -117,9 +117,7 @@ export default function RegisterPage({
                     </div>
                   </CardHeader>
                   <CardBody>
-                    {signUpError ? (
-                      <Danger>Error creating account</Danger>
-                    ) : null}
+                    {signUpError ? <Danger>{signUpError}</Danger> : null}
                     {registerInputs.map(input => (
                       <CustomInput
                         labelText={input.label}
