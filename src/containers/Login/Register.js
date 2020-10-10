@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const mapStateToProps = state => ({
   isLoggingIn: state.auth.isLoggingIn,
-  loginError: state.auth.loginError,
+  signUpError: state.auth.signUpError,
   isAuthenticated: state.auth.isAuthenticated
 });
 
@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => ({
 
 RegisterPage.propTypes = {
   isLoggingIn: PropTypes.bool.isRequired,
-  loginError: PropTypes.bool.isRequired,
+  signUpError: PropTypes.bool.isRequired,
   isAuthenticated: PropTypes.bool.isRequired
 };
 
