@@ -98,6 +98,11 @@ export const signUp = (email, password, displayName) => dispatch => {
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(user => {
+      user.user.updateProfile({
+        displayName
+      });
+    })
+    .then(user => {
       dispatch(receiveLogin(user));
     })
     .catch(error => {
