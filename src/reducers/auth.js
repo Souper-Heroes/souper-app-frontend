@@ -2,6 +2,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  SIGNUP_FAILURE,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
@@ -15,6 +16,7 @@ export default (
     isLoggingOut: false,
     isVerifying: false,
     loginError: false,
+    signUpError: false,
     logoutError: false,
     isAuthenticated: false,
     user: {}
@@ -41,6 +43,14 @@ export default (
         isLoggingIn: false,
         isAuthenticated: false,
         loginError: true
+      };
+    case SIGNUP_FAILURE:
+      return {
+        ...state,
+        isLoggingIn: false,
+        isAuthenticated: false,
+        loginError: false,
+        signUpError: true
       };
     case LOGOUT_REQUEST:
       return {

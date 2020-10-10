@@ -31,7 +31,7 @@ import image from 'assets/img/board.jpg';
 const useStyles = makeStyles(styles);
 
 export default function RegisterPage({
-  loginError,
+  signUpError,
   isAuthenticated,
   registerInputs,
   signUp
@@ -117,7 +117,7 @@ export default function RegisterPage({
                     </div>
                   </CardHeader>
                   <CardBody>
-                    {loginError ? (
+                    {signUpError ? (
                       <Danger>Error creating account</Danger>
                     ) : null}
                     {registerInputs.map(input => (

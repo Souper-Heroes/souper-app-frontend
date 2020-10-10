@@ -21,6 +21,7 @@ import { myFirebase, generateUserDocument } from '../firebase/firebase';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
@@ -45,6 +46,12 @@ const receiveLogin = user => {
 const loginError = () => {
   return {
     type: LOGIN_FAILURE
+  };
+};
+
+const signUpError = () => {
+  return {
+    type: SIGNUP_FAILURE
   };
 };
 
@@ -107,7 +114,7 @@ export const signUp = (email, password, displayName) => dispatch => {
     })
     .catch(error => {
       console.log(error);
-      dispatch(loginError());
+      dispatch(signUpError());
     });
 };
 
