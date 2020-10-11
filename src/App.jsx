@@ -13,6 +13,7 @@ import Forgotten from 'components/Login/Forgotten';
 import ResetPassword from 'components/Login/ResetPassword';
 import AddEditItem from 'components/Items/AddEditItem';
 import ProtectedRoute from 'components/Routing/ProtectedRoute';
+import * as ROUTES from 'components/Routing/routes';
 
 function App(props) {
   const [data] = useState(TestData);
@@ -22,23 +23,24 @@ function App(props) {
     <Router>
       <Switch>
         <Route exact path="/">
-          <Redirect to="/login" />
+          <Redirect to={ROUTES.LOGIN} />
         </Route>
-        <Route path="/login" component={LoginPage} />
+        <Route exact path={ROUTES.LOGIN} component={LoginPage} />
         <Route
-          path="/register"
+          exact
+          path={ROUTES.REGISTER}
           render={() => (
             <RegisterPage registerInputs={data['registerInputs']} />
           )}
         />
-        <Route path="/forgotten" component={Forgotten} />
-        <Route path="/reset" component={ResetPassword} />
+        <Route exact path={ROUTES.FORGOTTEN_PASSWORD} component={Forgotten} />
+        <Route exact path={ROUTES.REST_PASSWORD} component={ResetPassword} />
         <Route
-          path="/itemview"
+          path={ROUTES.ITEM_VIEW}
           render={() => <ItemViewPage item={data['userItems'][0]} />}
         />
         <Route
-          path="/itemlist"
+          path={ROUTES.ITEM_LIST}
           render={() => (
             <ItemListPage
               userProfile={data['userProfile']}
@@ -47,20 +49,20 @@ function App(props) {
           )}
         />
         <ProtectedRoute
-          path="/profile"
+          path={ROUTES.PROFILE}
           component={Profile}
           isAuthenticated={isAuthenticated}
           isVerifying={isVerifying}
         />
         <ProtectedRoute
           exact
-          path="/dashboard"
+          path={ROUTES.DASHBOARD}
           component={ItemListings}
           isAuthenticated={isAuthenticated}
           isVerifying={isVerifying}
         />
         <ProtectedRoute
-          path="/addEditItem"
+          path={ROUTES.ADD_EDIT_ITEM}
           component={AddEditItem}
           isAuthenticated={isAuthenticated}
           isVerifying={isVerifying}

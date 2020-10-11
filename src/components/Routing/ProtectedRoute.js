@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Layout from 'containers/Layout/Layout';
+import * as ROUTES from './routes';
 
 const ProtectedRoute = ({
   component: Component,
@@ -20,7 +21,7 @@ const ProtectedRoute = ({
       ) : (
         <Redirect
           to={{
-            pathname: '/login',
+            pathname: `${ROUTES.LOGIN}`,
             state: { from: props.location }
           }}
         />
