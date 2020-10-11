@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import ItemListings from 'components/Items/ItemListings';
+import { getToken } from 'actions/auth';
 
 const mapStateToProps = state => ({
   isLoggingIn: state.auth.isLoggingIn,
@@ -7,4 +8,8 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps)(ItemListings);
+const mapDispatchToProps = dispatch => ({
+  getToken: () => dispatch(getToken())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ItemListings);

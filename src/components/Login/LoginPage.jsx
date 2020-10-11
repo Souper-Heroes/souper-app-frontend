@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -23,34 +23,35 @@ import image from '../../assets/img/board.jpg';
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage({
-  loginError,
-  isAuthenticated,
-  login,
-  loginWithGoogle
-}) {
+export default function LoginPage({ loginError, login, loginWithGoogle }) {
+  const history = useHistory();
   const emailRef = useRef(null);
   const passRef = useRef(null);
   const classes = useStyles();
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
-  if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
-  }
 
   setTimeout(() => {
     setCardAnimation('');
   }, 700);
 
-  const handleSubmit = async () => {
-    await login(emailRef.current.value, passRef.current.value);
-  };
-  const handleLoginWithGoogle = async () => {
-    await loginWithGoogle();
+  const handleSubmit = async event => {
+    const { name } = event.currentTarget;
+    let authenticated = false;
+    if (name === 'login') {
+      authenticated = await login(
+        emailRef.current.value,
+        passRef.current.value
+      );
+    } else if (name === 'loginWithGoogle') {
+      authenticated = await loginWithGoogle();
+    }
+    if (authenticated) history.push('/dashboard');
   };
 
   return (
     <div>
       <div
+        className={classes.pageHeader}
         style={{
           backgroundImage: `url(${image})`,
           backgroundSize: 'cover',
@@ -68,7 +69,6 @@ export default function LoginPage({
                       <Button
                         justIcon
                         href="#pablo"
-                        target="_blank"
                         color="transparent"
                         onClick={e => e.preventDefault()}
                       >
@@ -77,7 +77,6 @@ export default function LoginPage({
                       <Button
                         justIcon
                         href="#pablo"
-                        target="_blank"
                         color="transparent"
                         onClick={e => e.preventDefault()}
                       >
@@ -85,10 +84,9 @@ export default function LoginPage({
                       </Button>
                       <Button
                         justIcon
-                        href="#pablo"
-                        target="_blank"
+                        name="loginWithGoogle"
                         color="transparent"
-                        onClick={handleLoginWithGoogle}
+                        onClick={handleSubmit}
                       >
                         <i className="fab fa-google-plus-g" />
                       </Button>
@@ -149,6 +147,7 @@ export default function LoginPage({
                   <CardFooter className={classes.cardFooter}>
                     <Button
                       fullWidth
+                      name="login"
                       size="lg"
                       color="rose"
                       onClick={handleSubmit}

@@ -34,8 +34,7 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-function ItemListings(props) {
-  const { items } = props;
+function ItemListings({ items, getToken }) {
   const classes = useStyles();
 
   const [sortBy, setSortBy] = useState('Distance');
@@ -43,6 +42,10 @@ function ItemListings(props) {
   const [unit, setUnit] = useState('Miles');
   const [category, setCategory] = useState('');
   const [expiry, setExpiry] = useState('');
+
+  const handleGetToken = async () => {
+    await getToken();
+  };
 
   const onChangeHandler = event => {
     const { name, value } = event.currentTarget;
@@ -161,7 +164,12 @@ function ItemListings(props) {
                   />
                 </FormControl>
                 <FormControl fullWidth>
-                  <Button fullWidth size="md" color="rose">
+                  <Button
+                    fullWidth
+                    size="md"
+                    color="rose"
+                    onClick={handleGetToken}
+                  >
                     Apply Filters
                   </Button>
                 </FormControl>

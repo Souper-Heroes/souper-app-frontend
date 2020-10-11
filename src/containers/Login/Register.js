@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
 
 RegisterPage.propTypes = {
   isLoggingIn: PropTypes.bool.isRequired,
-  signUpError: PropTypes.bool.isRequired,
+  signUpError: PropTypes.bool,
   isAuthenticated: PropTypes.bool.isRequired
 };
 
