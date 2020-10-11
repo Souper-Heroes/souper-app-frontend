@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import * as ROUTES from 'components/Routing/routes';
 
 import PropTypes from 'prop-types';
 // @material-ui/core components
@@ -60,7 +61,7 @@ export default function RegisterPage({
     } else if (name === 'loginWithGoogle') {
       authenticated = await loginWithGoogle();
     }
-    if (authenticated) history.push('/dashboard');
+    if (authenticated) history.push(ROUTES.DASHBOARD);
   };
 
   const handleInputChange = event => {

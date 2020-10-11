@@ -139,15 +139,17 @@ export const signUp = (email, password, displayName) => dispatch => {
 
 export const logoutUser = () => dispatch => {
   dispatch(requestLogout());
-  myFirebase
+  return myFirebase
     .auth()
     .signOut()
     .then(() => {
       dispatch(receiveLogout());
+      return true;
     })
     .catch(error => {
       // Do something with the error
       dispatch(logoutError());
+      return false;
     });
 };
 

@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import * as ROUTES from 'components/Routing/routes';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -45,7 +46,7 @@ export default function LoginPage({ loginError, login, loginWithGoogle }) {
     } else if (name === 'loginWithGoogle') {
       authenticated = await loginWithGoogle();
     }
-    if (authenticated) history.push('/dashboard');
+    if (authenticated) history.push(ROUTES.DASHBOARD);
   };
 
   return (
