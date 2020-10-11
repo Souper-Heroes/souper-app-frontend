@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TestData from 'assets/data/TestData.json';
@@ -21,6 +21,9 @@ function App(props) {
   return (
     <Router>
       <Switch>
+        <Route exact path="/">
+          <Redirect to="/login" />
+        </Route>
         <Route path="/login" component={LoginPage} />
         <Route
           path="/register"
@@ -28,7 +31,6 @@ function App(props) {
             <RegisterPage registerInputs={data['registerInputs']} />
           )}
         />
-
         <Route path="/forgotten" component={Forgotten} />
         <Route path="/reset" component={ResetPassword} />
         <Route
