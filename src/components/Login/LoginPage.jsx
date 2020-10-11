@@ -8,7 +8,7 @@ import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
 import Email from '@material-ui/icons/Email';
 // @material Typography
-import Danger from '../MaterialKitComponents/Typography/Danger';
+import Danger from 'components/MaterialKitComponents/Typography/Danger';
 // core components
 import GridContainer from '../MaterialKitComponents/Grid/GridContainer';
 import GridItem from '../MaterialKitComponents/Grid/GridItem';
