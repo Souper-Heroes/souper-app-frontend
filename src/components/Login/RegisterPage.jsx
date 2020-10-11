@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 // @material-ui/core components
@@ -10,8 +10,6 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
 import Email from '@material-ui/icons/Email';
-// @material Typography
-import Danger from '../MaterialKitComponents/Typography/Danger';
 // import People from "@material-ui/icons/People";
 import Face from '@material-ui/icons/Face';
 // core components
@@ -27,12 +25,13 @@ import CheckboxTermsAndConds from 'components/Login/CheckboxTermsAndConds';
 import SouperFooter from 'components/Layout/SouperFooter';
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import image from 'assets/img/board.jpg';
+// @material Typography
+import Danger from '../MaterialKitComponents/Typography/Danger';
 
 const useStyles = makeStyles(styles);
 
 export default function RegisterPage({
   signUpError,
-  isAuthenticated,
   registerInputs,
   signUp,
   loginWithGoogle
@@ -43,9 +42,8 @@ export default function RegisterPage({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const classes = useStyles();
-  if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
-  }
+  const history = useHistory();
+
   setTimeout(() => {
     setCardAnimation('');
   }, 700);
@@ -54,11 +52,15 @@ export default function RegisterPage({
     setcheckedTermsAndConds(checkedValue);
   };
 
-  const handleSubmit = async () => {
-    await signUp(email, password, displayName);
-  };
-  const handleLoginWithGoogle = async () => {
-    await loginWithGoogle();
+  const handleSubmit = async event => {
+    const { name } = event.currentTarget;
+    let authenticated = false;
+    if (name === 'signUp') {
+      authenticated = await signUp(email, password, displayName);
+    } else if (name === 'loginWithGoogle') {
+      authenticated = await loginWithGoogle();
+    }
+    if (authenticated) history.push('/dashboard');
   };
 
   const handleInputChange = event => {
@@ -93,8 +95,6 @@ export default function RegisterPage({
                     <div className={classes.socialLine}>
                       <Button
                         justIcon
-                        href="#pablo"
-                        target="_blank"
                         color="transparent"
                         onClick={e => e.preventDefault()}
                       >
@@ -102,8 +102,6 @@ export default function RegisterPage({
                       </Button>
                       <Button
                         justIcon
-                        href="#pablo"
-                        target="_blank"
                         color="transparent"
                         onClick={e => e.preventDefault()}
                       >
@@ -111,10 +109,9 @@ export default function RegisterPage({
                       </Button>
                       <Button
                         justIcon
-                        href="#pablo"
-                        target="_blank"
+                        name="loginWithGoogle"
                         color="transparent"
-                        onClick={handleLoginWithGoogle}
+                        onClick={handleSubmit}
                       >
                         <i className="fab fa-google-plus-g" />
                       </Button>
@@ -166,6 +163,7 @@ export default function RegisterPage({
                     <Button
                       disabled={checkedTermsAndConds}
                       fullWidth
+                      name="signUp"
                       size="lg"
                       color="rose"
                       onClick={handleSubmit}

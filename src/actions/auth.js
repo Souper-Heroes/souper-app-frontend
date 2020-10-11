@@ -88,35 +88,38 @@ const verifySuccess = () => {
 
 export const loginUser = (email, password) => dispatch => {
   dispatch(requestLogin());
-  myFirebase
+  return myFirebase
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(user => {
       dispatch(receiveLogin(user));
+      return true;
     })
     .catch(error => {
-      //Do something with the error if you want!
       dispatch(loginError());
+      return false;
     });
 };
 
 export const loginWithGoogle = () => dispatch => {
   dispatch(requestLogin());
-  myFirebase
+  return myFirebase
     .auth()
     .signInWithPopup(googleProvider)
     .then(user => {
       dispatch(receiveLogin(user));
+      return true;
     })
     .catch(error => {
-      console.log(error);
+      // Do something with the error
       dispatch(signUpError());
+      return false;
     });
 };
 
 export const signUp = (email, password, displayName) => dispatch => {
   dispatch(requestLogin());
-  myFirebase
+  return myFirebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(user => {
@@ -126,9 +129,11 @@ export const signUp = (email, password, displayName) => dispatch => {
     })
     .then(user => {
       dispatch(receiveLogin(user));
+      return true;
     })
     .catch(error => {
       dispatch(signUpError(error.message));
+      return false;
     });
 };
 
@@ -141,7 +146,7 @@ export const logoutUser = () => dispatch => {
       dispatch(receiveLogout());
     })
     .catch(error => {
-      //Do something with the error if you want!
+      // Do something with the error
       dispatch(logoutError());
     });
 };
@@ -154,4 +159,17 @@ export const verifyAuth = () => dispatch => {
     }
     dispatch(verifySuccess());
   });
+};
+
+export const getToken = () => dispatch => {
+  dispatch(requestLogin());
+  myFirebase
+    .auth()
+    .currentUser.getIdToken()
+    .then(idToken => {
+      console.log(idToken);
+    })
+    .catch(error => {
+      dispatch(signUpError(error.message));
+    });
 };

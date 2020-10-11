@@ -15,7 +15,7 @@ import CardFooter from 'components/MaterialKitComponents/Card/CardFooter';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage';
-import image from 'assets/img/citrus-fruit.jpg';
+import image from '../../assets/img/board.jpg';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(styles);
@@ -36,7 +36,6 @@ export default function Forgotten() {
           backgroundPosition: 'top center'
         }}
       >
-
         <div className={classes.container}>
           <GridContainer justify="center">
             <GridItem xs={10} sm={8} md={4}>
@@ -75,13 +74,16 @@ export default function Forgotten() {
                     </div>
                   </CardHeader>
                   <CardBody>
-                    <h3>Forgotten your password?</h3>
-                    <p>Enter the email address that you used to register. We'll send you an email with a link to reset your password.</p>
+                    <h4>Forgotten your password?</h4>
+                    <p>
+                      Enter the email address that you used to register. We'll
+                      send you an email with a link to reset your password.
+                    </p>
                     <CustomInput
                       labelText="Email..."
                       id="email"
                       formControlProps={{
-                        fullWidth: true,
+                        fullWidth: true
                       }}
                       inputProps={{
                         type: 'email',
@@ -89,14 +91,14 @@ export default function Forgotten() {
                           <InputAdornment position="end">
                             <Email className={classes.inputIconsColor} />
                           </InputAdornment>
-                        ),
+                        )
                       }}
                     />
                     <CustomInput
                       labelText="Confirm email"
                       id="email"
                       formControlProps={{
-                        fullWidth: true,
+                        fullWidth: true
                       }}
                       inputProps={{
                         type: 'email',
@@ -104,15 +106,27 @@ export default function Forgotten() {
                           <InputAdornment position="end">
                             <Email className={classes.inputIconsColor} />
                           </InputAdornment>
-                        ),
+                        )
                       }}
                     />
-
                   </CardBody>
                   <Link to="/reset">
                     <CardFooter className={classes.cardFooter}>
-                      <Button fullWidth to="#TODO_Send email" variant="contained" color="rose" size="lg">
+                      <Button
+                        fullWidth
+                        to="#TODO_Send email"
+                        variant="contained"
+                        color="rose"
+                        size="lg"
+                      >
                         Reset
+                      </Button>
+                    </CardFooter>
+                  </Link>
+                  <Link to="/login">
+                    <CardFooter className={classes.cardFooter}>
+                      <Button fullWidth size="lg" color="info">
+                        Log In
                       </Button>
                     </CardFooter>
                   </Link>
