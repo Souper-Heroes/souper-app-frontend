@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TestData from 'assets/data/TestData.json';
 import ItemViewPage from 'components/Items/ItemViewPage';
@@ -18,48 +19,52 @@ function App(props) {
   const { isAuthenticated, isVerifying } = props;
 
   return (
-    <Switch>
-      <Route path="/login" component={LoginPage} />
-      <Route
-        path="/register"
-        render={() => <RegisterPage registerInputs={data['registerInputs']} />}
-      />
+    <Router>
+      <Switch>
+        <Route path="/login" component={LoginPage} />
+        <Route
+          path="/register"
+          render={() => (
+            <RegisterPage registerInputs={data['registerInputs']} />
+          )}
+        />
 
-      <Route path="/forgotten" component={Forgotten} />
-      <Route path="/reset" component={ResetPassword} />
-      <Route
-        path="/itemview"
-        render={() => <ItemViewPage item={data['userItems'][0]} />}
-      />
-      <Route
-        path="/itemlist"
-        render={() => (
-          <ItemListPage
-            userProfile={data['userProfile']}
-            userItems={data['userItems']}
-          />
-        )}
-      />
-      <ProtectedRoute
-        path="/profile"
-        component={Profile}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-      <ProtectedRoute
-        exact
-        path="/dashboard"
-        component={ItemListings}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-      <ProtectedRoute
-        path="/addEditItem"
-        component={AddEditItem}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-    </Switch>
+        <Route path="/forgotten" component={Forgotten} />
+        <Route path="/reset" component={ResetPassword} />
+        <Route
+          path="/itemview"
+          render={() => <ItemViewPage item={data['userItems'][0]} />}
+        />
+        <Route
+          path="/itemlist"
+          render={() => (
+            <ItemListPage
+              userProfile={data['userProfile']}
+              userItems={data['userItems']}
+            />
+          )}
+        />
+        <ProtectedRoute
+          path="/profile"
+          component={Profile}
+          isAuthenticated={isAuthenticated}
+          isVerifying={isVerifying}
+        />
+        <ProtectedRoute
+          exact
+          path="/dashboard"
+          component={ItemListings}
+          isAuthenticated={isAuthenticated}
+          isVerifying={isVerifying}
+        />
+        <ProtectedRoute
+          path="/addEditItem"
+          component={AddEditItem}
+          isAuthenticated={isAuthenticated}
+          isVerifying={isVerifying}
+        />
+      </Switch>
+    </Router>
   );
 }
 
