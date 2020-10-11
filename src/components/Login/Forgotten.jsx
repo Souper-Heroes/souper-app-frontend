@@ -15,7 +15,7 @@ import CardFooter from 'components/MaterialKitComponents/Card/CardFooter';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage';
-import image from '../../assets/img/board.jpg';
+import image from 'assets/img/board.jpg';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(styles);

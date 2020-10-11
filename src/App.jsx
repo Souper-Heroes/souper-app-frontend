@@ -34,7 +34,7 @@ function App(props) {
           )}
         />
         <Route exact path={ROUTES.FORGOTTEN_PASSWORD} component={Forgotten} />
-        <Route exact path={ROUTES.REST_PASSWORD} component={ResetPassword} />
+        <Route exact path={ROUTES.RESET_PASSWORD} component={ResetPassword} />
         <Route
           path={ROUTES.ITEM_VIEW}
           render={() => <ItemViewPage item={data['userItems'][0]} />}

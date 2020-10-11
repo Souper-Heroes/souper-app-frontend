@@ -27,7 +27,7 @@ import SouperFooter from 'components/Layout/SouperFooter';
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import image from 'assets/img/board.jpg';
 // @material Typography
-import Danger from '../MaterialKitComponents/Typography/Danger';
+import Danger from 'components/MaterialKitComponents/Typography/Danger';
 
 const useStyles = makeStyles(styles);
 
