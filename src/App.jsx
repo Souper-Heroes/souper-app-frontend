@@ -12,7 +12,7 @@ import Profile from 'containers/Profile/Profile';
 import Forgotten from 'components/Login/Forgotten';
 import ResetPassword from 'components/Login/ResetPassword';
 import AddEditItem from 'components/Items/AddEditItem';
-import ProtectedRoute from 'components/routing/ProtectedRoute';
+import ProtectedRoute from 'components/Routing/ProtectedRoute';
 
 function App(props) {
   const [data] = useState(TestData);
