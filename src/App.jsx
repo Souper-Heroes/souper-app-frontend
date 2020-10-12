@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Layout from 'containers/Layout/Layout';
 import TestData from 'assets/data/TestData.json';
-import ItemViewPage from 'components/Items/ItemViewPage';
+import ItemViewPage from 'containers/Items/ItemViewPage';
 import LoginPage from 'containers/Login/Login';
 import RegisterPage from 'components/Login/RegisterPage';
 import LandingPage from 'views/LandingPage/LandingPage';
@@ -31,15 +31,7 @@ function App() {
         <Route path="/forgotten" component={Forgotten} />
         <Route path="/reset" component={ResetPassword} />
         <Layout>
-          <Route
-            path="/itemview"
-            render={() => (
-              <ItemViewPage
-                userid={data.otherUserProfileId}
-                item={data['userItems'][0]}
-              />
-            )}
-          />
+          <Route path="/itemview" component={ItemViewPage} />
           <Route path="/itemlist" component={ItemListPage} />
           <Route path="/profile" component={Profile} />
           <Route path="/landing" component={LandingPage} />
