@@ -7,6 +7,7 @@ import moment from 'moment';
 const initialState = {
   userItems: TestData.userItems,
   userId: TestData.userProfiles[0].userId,
+  item: TestData.userItems[2],
 };
 
 const itemlist = (state = { initialState }, action) => {

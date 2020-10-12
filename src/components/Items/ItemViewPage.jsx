@@ -12,15 +12,22 @@ import moment from 'moment';
 
 const useStyles = makeStyles(styles);
 
-export default function ItemViewPage({ userid, item }) {
-  const [currentItem, setCurrentItem] = useState(item);
+export default function ItemViewPage(props) {
+  //const [currentItem, setCurrentItem] = useState(item);
   const [isDisableAmendBtn, setIsDisableAmendBtn] = useState(true);
 
+  // const [collectionStartDateTime, setCollectionStartDateTime] = useState(
+  //  moment(currentItem.preferredCollectStartTime)
+  // );
   const [collectionStartDateTime, setCollectionStartDateTime] = useState(
-    moment(currentItem.preferredCollectStartTime)
+    moment(props.item.preferredCollectStartTime)
   );
+  // const [collectionEndDateTime, setCollectionEndDateTime] = useState(
+  //  moment(currentItem.preferredCollectEndTime)
+  // );
+
   const [collectionEndDateTime, setCollectionEndDateTime] = useState(
-    moment(currentItem.preferredCollectEndTime)
+    moment(props.item.preferredCollectEndTime)
   );
 
   const classes = useStyles();
@@ -33,11 +40,14 @@ export default function ItemViewPage({ userid, item }) {
   };
 
   const handleOnClickAmendTime = () => {
-    let newItem = currentItem;
+    //let newItem = currentItem;
+    let newItem = props.item;
 
     newItem.preferredCollectStartTime = collectionStartDateTime;
     newItem.preferredCollectEndTime = collectionEndDateTime;
-    setCurrentItem(newItem);
+
+    // TODO
+    //setCurrentItem(newItem);
     setIsDisableAmendBtn(true);
     // console.log(
     //  `Handle Date Change3, do something with ${collectionStartDateTime} ${collectionStartDateTime.isValid()}`
@@ -56,13 +66,13 @@ export default function ItemViewPage({ userid, item }) {
 
     if (
       type === 'start'
-        ? newDate.isSame(moment(currentItem.preferredCollectStartTime)) &&
+        ? newDate.isSame(moment(props.item.preferredCollectStartTime)) &&
           collectionEndDateTime.isSame(
-            moment(currentItem.preferredCollectEndTime)
+            moment(props.item.preferredCollectEndTime)
           )
-        : newDate.isSame(moment(currentItem.preferredCollectEndTime)) &&
+        : newDate.isSame(moment(props.item.preferredCollectEndTime)) &&
           collectionStartDateTime.isSame(
-            moment(currentItem.preferredCollectStartTime)
+            moment(props.item.preferredCollectStartTime)
           )
     ) {
       // Nothing has changed
@@ -71,9 +81,9 @@ export default function ItemViewPage({ userid, item }) {
       // );
       type === 'start'
         ? setCollectionStartDateTime(
-            moment(currentItem.preferredCollectStartTime)
+            moment(props.item.preferredCollectStartTime)
           )
-        : setCollectionEndDateTime(moment(currentItem.preferredCollectEndTime));
+        : setCollectionEndDateTime(moment(props.item.preferredCollectEndTime));
       setIsDisableAmendBtn(true);
       return;
     }
@@ -110,7 +120,7 @@ export default function ItemViewPage({ userid, item }) {
             </GridItem>
             <GridItem xs={12} sm={12} md={12}>
               <Typography align="center" variant="body1" gutterBottom>
-                <strong>{currentItem.description}</strong>
+                <strong>{props.item.description}</strong>
               </Typography>
             </GridItem>
             <GridContainer align="center">
@@ -144,7 +154,7 @@ export default function ItemViewPage({ userid, item }) {
                       align="left"
                       gutterBottom
                     >
-                      {currentItem.category}
+                      {props.item.category}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -179,7 +189,7 @@ export default function ItemViewPage({ userid, item }) {
                       align="left"
                       gutterBottom
                     >
-                      {currentItem.location}
+                      {props.item.location}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -216,7 +226,7 @@ export default function ItemViewPage({ userid, item }) {
                       align="left"
                       gutterBottom
                     >
-                      {currentItem.expiryDate}
+                      {props.item.expiryDate}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -248,7 +258,7 @@ export default function ItemViewPage({ userid, item }) {
                     lg={6}
                     className={classes.output}
                   >
-                    {userid !== currentItem.collectUserId && (
+                    {props.userId !== props.item.collectUserId && (
                       <Typography
                         variant="body2"
                         color="textPrimary"
@@ -260,7 +270,7 @@ export default function ItemViewPage({ userid, item }) {
                         )}
                       </Typography>
                     )}
-                    {userid === currentItem.collectUserId && (
+                    {props.userId === props.item.collectUserId && (
                       <>
                         <FormControl>
                           <Datetime
@@ -272,7 +282,10 @@ export default function ItemViewPage({ userid, item }) {
                             }
                             inputProps={{
                               placeholder: `${moment(
-                                currentItem.preferredCollectStartTime
+                                props.item.preferredCollectStartTime !==
+                                  undefined
+                                  ? props.item.preferredCollectStartTime
+                                  : ''
                               ).format('Do MMM YY hh:mm')}`,
                             }}
                           />
@@ -307,7 +320,7 @@ export default function ItemViewPage({ userid, item }) {
                     lg={6}
                     className={classes.label}
                   >
-                    {userid !== currentItem.collectUserId && (
+                    {props.userId !== props.item.collectUserId && (
                       <Typography
                         variant="body2"
                         color="textPrimary"
@@ -319,7 +332,7 @@ export default function ItemViewPage({ userid, item }) {
                         )}
                       </Typography>
                     )}
-                    {userid === currentItem.collectUserId && (
+                    {props.userId === props.item.collectUserId && (
                       <>
                         <FormControl>
                           <Datetime
@@ -331,7 +344,9 @@ export default function ItemViewPage({ userid, item }) {
                             }
                             inputProps={{
                               placeholder: `${moment(
-                                collectionEndDateTime
+                                props.item.preferredCollectEndTime !== undefined
+                                  ? props.item.preferredCollectEndTime
+                                  : ''
                               ).format('Do MMM YY hh:mm')}`,
                             }}
                           />
