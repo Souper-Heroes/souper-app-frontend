@@ -3,10 +3,10 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TestData from 'assets/data/TestData.json';
-import ItemViewPage from 'components/Items/ItemViewPage';
+import ItemViewPage from 'containers/Items/ItemViewPage';
 import LoginPage from 'containers/Login/Login';
 import RegisterPage from 'containers/Login/Register';
-import ItemListPage from 'components/Items/ItemListPage';
+import ItemListPage from 'containers/Items/ItemListPage';
 import ItemListings from 'containers/Items/ItemListings';
 import Profile from 'containers/Profile/Profile';
 import Forgotten from 'components/Login/Forgotten';
@@ -29,24 +29,21 @@ function App(props) {
         <Route
           exact
           path={ROUTES.REGISTER}
-          render={() => (
-            <RegisterPage registerInputs={data['registerInputs']} />
-          )}
+          render={() => <RegisterPage registerInputs={data.registerInputs} />}
         />
         <Route exact path={ROUTES.FORGOTTEN_PASSWORD} component={Forgotten} />
         <Route exact path={ROUTES.RESET_PASSWORD} component={ResetPassword} />
-        <Route
+        <ProtectedRoute
           path={ROUTES.ITEM_VIEW}
-          render={() => <ItemViewPage item={data['userItems'][0]} />}
+          component={ItemViewPage}
+          isAuthenticated={isAuthenticated}
+          isVerifying={isVerifying}
         />
-        <Route
+        <ProtectedRoute
           path={ROUTES.ITEM_LIST}
-          render={() => (
-            <ItemListPage
-              userProfile={data['userProfile']}
-              userItems={data['userItems']}
-            />
-          )}
+          component={ItemListPage}
+          isAuthenticated={isAuthenticated}
+          isVerifying={isVerifying}
         />
         <ProtectedRoute
           path={ROUTES.PROFILE}
