@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => ({
   items: state.item.items,
   // item: state.item ? state.item.items[ownProps.match.params.id] : null,
 
-  // TODO **** Note can't match using datatype match (i.e ===) but can match on value (==)
+  // TODO **** Note can't match using datatype matching (i.e ===) but can match on value (==)
   item: state.item.items
     ? state.item.items.find(itemToFind => {
         return itemToFind.itemId == ownProps.match.params.id;
