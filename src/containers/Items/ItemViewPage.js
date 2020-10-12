@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import ItemViewPage from 'components/Items/ItemViewPage';
 import { updateCollectionDates } from 'actions/item';
-// import { getToken } from 'actions/item';
 
 const mapStateToProps = (state, ownProps) => ({
   isLoggingIn: state.auth.isLoggingIn,
