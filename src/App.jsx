@@ -47,7 +47,15 @@ function App() {
           <Route path="/profile" component={Profile} />
           <Route path="/landing" component={LandingPage} />
           <Route path="/dashboard" component={ItemListings} />
-          <Route path="/addEditItem" component={AddEditItem} />
+          <Route
+            path="/additem"
+            render={() => (
+              <AddEditItem
+                userProfile={data['userProfile']}
+                userItems={data['userItems']}
+              />
+            )}
+          />
         </Layout>
       </Switch>
     </BrowserRouter>
