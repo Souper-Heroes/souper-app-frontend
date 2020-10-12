@@ -5,11 +5,11 @@ import { getToken } from 'actions/auth';
 const mapStateToProps = state => ({
   isLoggingIn: state.auth.isLoggingIn,
   loginError: state.auth.loginError,
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 const mapDispatchToProps = dispatch => ({
-  getToken: () => dispatch(getToken())
+  getToken: () => dispatch(getToken()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemListings);
