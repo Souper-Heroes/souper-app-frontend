@@ -12,21 +12,21 @@ function getUserItems(type, userProfileId, userItems) {
 
   if (type === 'provide') {
     filteredItems = userItems.filter(
-      (item) => item.provideUserId === userProfileId
+      item => item.provideUserId === userProfileId
     );
   } else {
     filteredItems = userItems.filter(
-      (item) => item.collectUserId === userProfileId
+      item => item.collectUserId === userProfileId
     );
   }
   return filteredItems;
 }
 
-export default function TabListings({ userProfile, userItems }) {
+export default function TabListings({ userItems }) {
   const classes = useStyles();
 
-  const itemsToProvide = getUserItems('provide', userProfile.userId, userItems);
-  const itemsToCollect = getUserItems('collect', userProfile.userId, userItems);
+  const itemsToProvide = getUserItems('provide', 1, userItems.items);
+  const itemsToCollect = getUserItems('collect', 1, userItems.items);
 
   return (
     <div className={classes.section}>

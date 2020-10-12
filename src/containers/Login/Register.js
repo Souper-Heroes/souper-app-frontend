@@ -1,23 +1,24 @@
 import { connect } from 'react-redux';
-import LoginPage from 'components/Login/LoginPage';
-import { loginUser, loginWithGoogle } from 'actions/auth';
+import RegisterPage from 'components/Login/RegisterPage';
+import { signUp, loginWithGoogle } from 'actions/auth';
 import PropTypes from 'prop-types';
 
 const mapStateToProps = state => ({
   isLoggingIn: state.auth.isLoggingIn,
-  loginError: state.auth.loginError,
+  signUpError: state.auth.signUpError,
   isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: (email, password) => dispatch(loginUser(email, password)),
+  signUp: (email, password, displayName) =>
+    dispatch(signUp(email, password, displayName)),
   loginWithGoogle: () => dispatch(loginWithGoogle())
 });
 
-LoginPage.propTypes = {
+RegisterPage.propTypes = {
   isLoggingIn: PropTypes.bool.isRequired,
-  loginError: PropTypes.bool.isRequired,
+  signUpError: PropTypes.bool,
   isAuthenticated: PropTypes.bool.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);
