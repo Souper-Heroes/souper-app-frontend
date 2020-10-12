@@ -28,7 +28,7 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
 
   const classes = useStyles();
 
-  const GetCollectionMsg = (type) => {
+  const GetCollectionMsg = type => {
     let message = null;
     if (type === 'provide') {
       message = 'Being Collected:';
@@ -43,7 +43,7 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
     );
   };
 
-  const handleOnClickDelete = (event) => {
+  const handleOnClickDelete = event => {
     // TODO
     console.log(
       `Clicked Delete button, do something with item: ${item.itemId}, Title: ${item.description}`
@@ -51,7 +51,7 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
     deleteItem(item.itemId);
   };
 
-  const handleOnClickAgreeCup = (event) => {
+  const handleOnClickAgreeCup = event => {
     // TODO
     console.log(
       `Clicked Cup button, do something with item: ${item.itemId}, Title: ${item.description}`
@@ -64,7 +64,7 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
         <Paper className={classes.paper} spacing={1}>
           <GridContainer spacing={2}>
             <Grid item>
-              <Link to="/itemview" className={classes.link}>
+              <Link to={'/itemview/' + myitem.itemId} className={classes.link}>
                 <ButtonBase className={classes.image}>
                   <img
                     className={classes.img}
@@ -76,7 +76,10 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
             </Grid>
             <GridContainer xs={12} sm item spacing={0} direction="column">
               <GridItem align="left" xs={12} className={classes.cell}>
-                <Link to="/itemview" className={classes.link}>
+                <Link
+                  to={'/itemview/' + myitem.itemId}
+                  className={classes.link}
+                >
                   <Typography gutterBottom variant="body1">
                     <strong>{myitem.description}</strong>
                   </Typography>

@@ -1,15 +1,16 @@
 import { connect } from 'react-redux';
 import ItemListPage from 'components/Items/ItemListPage';
-import { itemlist } from 'actions';
+// import { getToken } from 'actions/item';
 
-// 2nd parameter to this function holds our component props
-const mapStateToProps = (state, ownProps) => ({
-  userItems: state.itemlist.userItems,
+const mapStateToProps = state => ({
+  isLoggingIn: state.auth.isLoggingIn,
+  isAuthenticated: state.auth.isAuthenticated,
+  items: state.item,
   userId: state.itemlist.userId,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  itemlist: () => dispatch(itemlist()),
+const mapDispatchToProps = dispatch => ({
+  //   getToken: () => dispatch(getToken())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemListPage);
