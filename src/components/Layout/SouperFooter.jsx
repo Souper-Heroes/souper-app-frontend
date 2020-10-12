@@ -28,12 +28,17 @@ function SouperFooter() {
           </a>
         </div>
         <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()}, made with
-          <Favorite className={classes.icon} />
-          by
-          <a href="https://github.com/Souper-Heroes" target="_blank">
-            The Souper Heroe
-          </a> for a better web.
+          &copy; {1900 + new Date().getYear()}, made with{' '}
+          <Favorite className={classes.icon} /> by
+          <a
+            href="https://github.com/Souper-Heroes"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {' '}
+            The Souper Heroes{' '}
+          </a>{' '}
+          for a better web.
         </div>
       </div>
     </footer>

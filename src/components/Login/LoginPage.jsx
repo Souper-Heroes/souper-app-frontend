@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react';
+// BEFORE import React, { useEffect } from 'react';
+import React, { useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import * as ROUTES from 'components/Routing/routes';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
 import Email from '@material-ui/icons/Email';
+// @material Typography
+import Danger from 'components/MaterialKitComponents/Typography/Danger';
 // core components
 import PropTypes from 'prop-types';
 import GridContainer from '../MaterialKitComponents/Grid/GridContainer';
@@ -22,33 +26,51 @@ import image from '../../assets/img/board.jpg';
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage(props) {
+export default function LoginPage({ loginError, login, loginWithGoogle }) {
   const history = useHistory();
-  useEffect(() => {
+  const emailRef = React.useRef(null);
+  const passRef = React.useRef(null);
+  const classes = useStyles();
+  const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
+
+  setTimeout(() => {
+    setCardAnimation('');
+  }, 700);
+
+  /* BEFORE useEffect(() => {
     if (props.isLogged) {
       history.push('/');
     }
   }, []);
-  const emailRef = React.useRef(null);
-  const passRef = React.useRef(null);
+
   const handleClick = async () => {
     await props.login(emailRef.current.value, passRef.current.value);
     await props.check();
     history.push('/dashboard');
+  };*/
+
+  const handleSubmit = async event => {
+    const { name } = event.currentTarget;
+    let authenticated = false;
+    if (name === 'login') {
+      authenticated = await login(
+        emailRef.current.value,
+        passRef.current.value
+      );
+    } else if (name === 'loginWithGoogle') {
+      authenticated = await loginWithGoogle();
+    }
+    if (authenticated) history.push(ROUTES.DASHBOARD);
   };
 
-  const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
-  setTimeout(() => {
-    setCardAnimation('');
-  }, 700);
-  const classes = useStyles();
   return (
     <div>
       <div
+        className={classes.pageHeader}
         style={{
           backgroundImage: `url(${image})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'top center',
+          backgroundPosition: 'top center'
         }}
       >
         <div className={classes.container}>
@@ -62,7 +84,6 @@ export default function LoginPage(props) {
                       <Button
                         justIcon
                         href="#pablo"
-                        target="_blank"
                         color="transparent"
                         onClick={e => e.preventDefault()}
                       >
@@ -71,7 +92,6 @@ export default function LoginPage(props) {
                       <Button
                         justIcon
                         href="#pablo"
-                        target="_blank"
                         color="transparent"
                         onClick={e => e.preventDefault()}
                       >
@@ -79,21 +99,23 @@ export default function LoginPage(props) {
                       </Button>
                       <Button
                         justIcon
-                        href="#pablo"
-                        target="_blank"
+                        name="loginWithGoogle"
                         color="transparent"
-                        onClick={e => e.preventDefault()}
+                        onClick={handleSubmit}
                       >
                         <i className="fab fa-google-plus-g" />
                       </Button>
                     </div>
                   </CardHeader>
                   <CardBody>
+                    {loginError ? (
+                      <Danger>Incorrect email or Password</Danger>
+                    ) : null}
                     <CustomInput
                       labelText="Email"
                       id="email"
                       formControlProps={{
-                        fullWidth: true,
+                        fullWidth: true
                       }}
                       inputProps={{
                         type: 'email',
@@ -102,14 +124,14 @@ export default function LoginPage(props) {
                           <InputAdornment position="end">
                             <Email className={classes.inputIconsColor} />
                           </InputAdornment>
-                        ),
+                        )
                       }}
                     />
                     <CustomInput
                       labelText="Password"
                       id="pass"
                       formControlProps={{
-                        fullWidth: true,
+                        fullWidth: true
                       }}
                       inputProps={{
                         type: 'password',
@@ -121,19 +143,30 @@ export default function LoginPage(props) {
                             </Icon>
                           </InputAdornment>
                         ),
-                        autoComplete: 'off',
+                        autoComplete: 'off'
                       }}
                     />
                   </CardBody>
                   <GridContainer justify="center">
                     <Link to="/forgotten" className={classes.link}>
-                      <Button simple color="info" size="lg" to="/ForgottenPassword">
+                      <Button
+                        simple
+                        color="info"
+                        size="lg"
+                        to="/ForgottenPassword"
+                      >
                         FORGOTTEN PASSWORD?
                       </Button>
                     </Link>
                   </GridContainer>
                   <CardFooter className={classes.cardFooter}>
-                    <Button fullWidth size="lg" color="rose" onClick={handleClick}>
+                    <Button
+                      fullWidth
+                      name="login"
+                      size="lg"
+                      color="rose"
+                      onClick={handleSubmit}
+                    >
                       Log in
                     </Button>
                   </CardFooter>
@@ -154,8 +187,8 @@ export default function LoginPage(props) {
   );
 }
 
-LoginPage.propTypes = {
+/*LoginPage.propTypes = {
   isLogged: PropTypes.bool.isRequired,
   login: PropTypes.bool.isRequired,
   check: PropTypes.bool.isRequired,
-};
+};*/
