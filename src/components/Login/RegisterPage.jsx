@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-filename-extension */
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import * as ROUTES from 'components/Routing/routes';
 
 import PropTypes from 'prop-types';
 // @material-ui/core components
@@ -25,32 +26,45 @@ import CheckboxTermsAndConds from 'components/Login/CheckboxTermsAndConds';
 import SouperFooter from 'components/Layout/SouperFooter';
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import image from 'assets/img/board.jpg';
+// @material Typography
+import Danger from 'components/MaterialKitComponents/Typography/Danger';
 
 const useStyles = makeStyles(styles);
 
-export default function RegisterPage({ registerInputs }) {
+export default function RegisterPage({
+  signUpError,
+  registerInputs,
+  signUp,
+  loginWithGoogle
+}) {
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
   const [checkedTermsAndConds, setcheckedTermsAndConds] = useState(true);
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const classes = useStyles();
+  const history = useHistory();
 
   setTimeout(() => {
     setCardAnimation('');
   }, 700);
-  const classes = useStyles();
 
-  const checkTermsAndConds = (checkedValue) => {
+  const checkTermsAndConds = checkedValue => {
     setcheckedTermsAndConds(checkedValue);
   };
 
-  const handleOnClickCreateAcc = () => {
-    //console.log(
-    //  `Clicked Create Account, do something with DisplayName: ${displayName}, Email: ${email}, Passowrd: ${password}`
-    //);
+  const handleSubmit = async event => {
+    const { name } = event.currentTarget;
+    let authenticated = false;
+    if (name === 'signUp') {
+      authenticated = await signUp(email, password, displayName);
+    } else if (name === 'loginWithGoogle') {
+      authenticated = await loginWithGoogle();
+    }
+    if (authenticated) history.push(ROUTES.DASHBOARD);
   };
 
-  const handleInputChange = (event) => {
+  const handleInputChange = event => {
     const { id, value } = event.currentTarget;
 
     if (id === 'name') {
@@ -69,7 +83,7 @@ export default function RegisterPage({ registerInputs }) {
         style={{
           backgroundImage: `url(${image})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'top center',
+          backgroundPosition: 'top center'
         }}
       >
         <div className={classes.container}>
@@ -82,47 +96,43 @@ export default function RegisterPage({ registerInputs }) {
                     <div className={classes.socialLine}>
                       <Button
                         justIcon
-                        href="#pablo"
-                        target="_blank"
                         color="transparent"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={e => e.preventDefault()}
                       >
                         <i className="fab fa-twitter" />
                       </Button>
                       <Button
                         justIcon
-                        href="#pablo"
-                        target="_blank"
                         color="transparent"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={e => e.preventDefault()}
                       >
                         <i className="fab fa-facebook" />
                       </Button>
                       <Button
                         justIcon
-                        href="#pablo"
-                        target="_blank"
+                        name="loginWithGoogle"
                         color="transparent"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={handleSubmit}
                       >
                         <i className="fab fa-google-plus-g" />
                       </Button>
                     </div>
                   </CardHeader>
                   <CardBody>
-                    {registerInputs.map((input) => (
+                    {signUpError ? <Danger>{signUpError}</Danger> : null}
+                    {registerInputs.map(input => (
                       <CustomInput
                         labelText={input.label}
                         id={input.id}
                         key={input.id}
                         formControlProps={{
-                          fullWidth: true,
+                          fullWidth: true
                         }}
                         inputProps={{
                           id: `${input.id}`,
                           type: `${input.type}`,
 
-                          onChange: (event) => handleInputChange(event),
+                          onChange: event => handleInputChange(event),
 
                           endAdornment: (
                             <InputAdornment position="start">
@@ -138,7 +148,7 @@ export default function RegisterPage({ registerInputs }) {
                                 </Icon>
                               )}
                             </InputAdornment>
-                          ),
+                          )
                         }}
                       />
                     ))}
@@ -150,17 +160,17 @@ export default function RegisterPage({ registerInputs }) {
                         <strong>Terms And Conditions</strong>{' '}
                       </Link>
                     </CheckboxTermsAndConds>
-                    <Link to="/profile">
-                      <Button
-                        disabled={checkedTermsAndConds}
-                        fullWidth
-                        size="lg"
-                        color="rose"
-                        onClick={handleOnClickCreateAcc}
-                      >
-                        Create Account
-                      </Button>
-                    </Link>
+
+                    <Button
+                      disabled={checkedTermsAndConds}
+                      fullWidth
+                      name="signUp"
+                      size="lg"
+                      color="rose"
+                      onClick={handleSubmit}
+                    >
+                      Create Account
+                    </Button>
                   </CardBody>
                   <Link to="/login">
                     <CardFooter className={classes.cardFooter}>
@@ -181,5 +191,5 @@ export default function RegisterPage({ registerInputs }) {
 }
 
 RegisterPage.propTypes = {
-  registerInputs: PropTypes.array,
+  registerInputs: PropTypes.array
 };
