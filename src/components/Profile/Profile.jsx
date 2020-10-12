@@ -11,6 +11,7 @@ import Slider from '@material-ui/core/Slider';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(styles);
 
@@ -147,3 +148,8 @@ export default function Profile(props) {
     </div>
   );
 }
+
+Profile.propTypes = {
+  updateMessage: PropTypes.func.isRequired,
+  message: PropTypes.string.isRequired
+};

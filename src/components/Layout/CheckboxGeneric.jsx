@@ -11,8 +11,7 @@ import styles from 'assets/jss/material-kit-react/customCheckboxRadioSwitch';
 
 const useStyles = makeStyles(styles);
 
-export default function CheckboxGeneric( { handleToggle, children } ) {
-
+export default function CheckboxGeneric({ handleToggle, children }) {
   const classes = useStyles();
 
   const wrapperDiv = classNames(
@@ -24,7 +23,7 @@ export default function CheckboxGeneric( { handleToggle, children } ) {
     <div>
       <div className={wrapperDiv}>
         <FormControlLabel
-          control={
+          control={(
             <Checkbox
               tabIndex={-1}
               onClick={() => handleToggle()}
@@ -32,7 +31,7 @@ export default function CheckboxGeneric( { handleToggle, children } ) {
               icon={<Check className={classes.uncheckedIcon} />}
               classes={{ checked: classes.checked }}
             />
-          }
+          )}
           classes={{ label: classes.label }}
           label={children}
         />

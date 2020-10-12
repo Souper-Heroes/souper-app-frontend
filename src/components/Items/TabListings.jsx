@@ -12,11 +12,11 @@ function getUserItems(type, userProfileId, userItems) {
 
   if (type === 'provide') {
     filteredItems = userItems.filter(
-      (item) => item.provideUserId === userProfileId
+      item => item.provideUserId === userProfileId
     );
   } else {
     filteredItems = userItems.filter(
-      (item) => item.collectUserId === userProfileId
+      item => item.collectUserId === userProfileId
     );
   }
   return filteredItems;
