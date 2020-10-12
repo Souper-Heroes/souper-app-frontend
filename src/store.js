@@ -1,14 +1,19 @@
-import {applyMiddleware, createStore} from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import reduxPromiseMiddleware from 'redux-promise-middleware';
-import {composeWithDevTools} from 'redux-devtools-extension';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import reduxThunk from 'redux-thunk';
-import { persistStore } from 'redux-persist';
 import rootReducer from './reducers';
+
+import { verifyAuth } from './actions/auth';
 
 const middleware = [reduxPromiseMiddleware, reduxThunk];
 
-export const store = createStore(rootReducer, composeWithDevTools(
-    applyMiddleware(...middleware)
-));
-
-export const persistor = persistStore(store);
+export default function configureStore(persistedState) {
+  const store = createStore(
+    rootReducer,
+    persistedState,
+    composeWithDevTools(applyMiddleware(...middleware))
+  );
+  store.dispatch(verifyAuth());
+  return store;
+}

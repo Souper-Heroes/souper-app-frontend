@@ -4,13 +4,10 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 // @material-ui components
 import { makeStyles } from '@material-ui/core/styles';
-import { Select } from '@material-ui/core';
-import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 // Material Kit components
-import Parallax from 'components/MaterialKitComponents/Parallax/Parallax';
 import Button from 'components/MaterialKitComponents/CustomButtons/Button';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
@@ -26,33 +23,27 @@ import styles from 'assets/jss/material-kit-react/views/profilePage';
 
 // DropZone imports
 import DropZone from '../dropzone/DropZone';
+// Food categories check boxes
+import CatCheckBox from './CatCheckBox';
 
 const useStyles = makeStyles(styles);
 
 export default function AddEditItem({ userItems }) {
   const classes = useStyles();
-  const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
   const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('1');
-  const [description, setDescription] = useState('');
-  const [expiry, setExpiry] = useState('');
-
-  const [items, setItems] = useState(userItems);
-
-  const handleTitleChange = (e) => {
+  const handleTitleChange = e => {
     console.log(e.target.value);
     setTitle(e.target.value);
   };
-  const handleCategoryChange = (e) => {
-    console.log(e.target.value);
-    setCategory(e.target.value);
-  };
-  const handleDescriptionChange = (e) => {
+
+  const [description, setDescription] = useState('');
+  const handleDescriptionChange = e => {
     console.log(e.target.value);
     setDescription(e.target.value);
   };
-  const handleExpiryChange = (value) => {
+  const [expiry, setExpiry] = useState('');
+  const handleExpiryChange = value => {
     const newDate = value._d.toLocaleDateString('en-GB');
     console.log(newDate);
     setExpiry(newDate);
@@ -60,7 +51,7 @@ export default function AddEditItem({ userItems }) {
 
   // Set to postcode found in profile here
   const [location, setzLocation] = useState('');
-  const handleLocationChange = (e) => {
+  const handleLocationChange = e => {
     console.log(e.target.value);
     setzLocation(e.target.value);
   };
@@ -82,24 +73,30 @@ export default function AddEditItem({ userItems }) {
     setChecked(toggle);
   };
 
+  const [availability, setAvailability] = useState('');
+  const handleAvailChange = e => {
+    console.log(e.target.value);
+    setAvailability(e.target.value);
+  };
+
   // An attempt at makign the data stick about for a bit
-  const addNewItem = (e) => {
+  const [items, setItems] = useState(userItems);
+  const addNewItem = e => {
     // Create a copy of the tasks array
     const updatedItems = items.slice();
 
     // Create a new task object
     const newItem = {
-      itemId: 1000 + items.length + 1, // Mongo DB will assign an ID
-      provideUserId: 1, // TODO Get from profile
+      itemId: 1000 + items.length + 1, // DB will assign an ID
+      provideUserId: 1, // TODO Get from userProfile
       collectUserId: null,
       photoId: '1117', // TODO Get from DropZone
-      title: title,
-      category: category, // TODO Use an array number instead of string here?
-      description: description,
-      expiry: expiry,
-      location: location,
-      preferredProvideTime: '05/10/2020 4PM-6PM',
-      preferredCollectTime: '',
+      title,
+      description,
+      //category, // TODO Get from CatCheckBox
+      expiry,
+      location,
+      availability,
     };
     // ## TODO ## set all fields to '' or equivalent.
     // Add the new task to the array
@@ -123,7 +120,7 @@ export default function AddEditItem({ userItems }) {
                 id="float"
                 inputProps={{
                   placeholder: 'Give your item a name',
-                  onChange: (event) => handleTitleChange(event),
+                  onChange: event => handleTitleChange(event),
                 }}
                 formControlProps={{
                   fullWidth: true,
@@ -135,28 +132,13 @@ export default function AddEditItem({ userItems }) {
                 inputProps={{
                   placeholder:
                     'Describe your item, has it been opened or dropped?',
-                  onChange: (event) => handleDescriptionChange(event),
+                  onChange: event => handleDescriptionChange(event),
                 }}
                 formControlProps={{
                   fullWidth: true,
                 }}
               />
-              <div>
-                <Select
-                  fullWidth
-                  labelId="label"
-                  id="select"
-                  onChange={handleCategoryChange}
-                  value={category}
-                >
-                  <MenuItem value="1">Fresh produce</MenuItem>
-                  <MenuItem value="2">Tinned goods</MenuItem>
-                  <MenuItem value="3">Nuts</MenuItem>
-                  <MenuItem value="4">Packet</MenuItem>
-                  <MenuItem value="5">Frozen</MenuItem>
-                  <MenuItem value="6">Meat</MenuItem>
-                </Select>
-              </div>
+              <CatCheckBox />
             </GridItem>
           </GridContainer>
           <GridContainer justify="center">
@@ -182,7 +164,7 @@ export default function AddEditItem({ userItems }) {
                 name="location"
                 inputProps={{
                   placeholder: 'Enter a Postcode',
-                  onChange: (event) => handleLocationChange(event),
+                  onChange: event => handleLocationChange(event),
                   value: `${location}`,
                 }}
                 formControlProps={{
@@ -198,35 +180,18 @@ export default function AddEditItem({ userItems }) {
             </GridItem>
             <GridItem xs={12} sm={6} container spacing={1} direction="row">
               <GridItem xs={12}>
-                <h4 xs={12} md={12} style={{ float: 'left' }}>
-                  Available collection time
-                </h4>
-              </GridItem>
-              <GridItem xs={12} md={6}>
-                <InputLabel style={{ float: 'left' }} className={classes.label}>
-                  From:
-                </InputLabel>
-                <br />
-                <FormControl fullWidth>
-                  <Datetime
-                    inputProps={{
-                      placeholder: 'Enter the time you are availble from',
-                    }}
-                  />
-                </FormControl>
-              </GridItem>
-              <GridItem xs={12} md={6}>
-                <InputLabel style={{ float: 'left' }} className={classes.label}>
-                  Till:
-                </InputLabel>
-                <br />
-                <FormControl fullWidth>
-                  <Datetime
-                    inputProps={{
-                      placeholder: 'Enter the time you are availble till',
-                    }}
-                  />
-                </FormControl>
+                <CustomInput
+                  labelText="Available collection times"
+                  id="float"
+                  inputProps={{
+                    placeholder:
+                      'e.g. Weekdays between 9 and 5pm, and all day Sunday',
+                    onChange: event => handleAvailChange(event),
+                  }}
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                />
               </GridItem>
               <GridItem fullWidth align="right">
                 <Button color="danger" size="lg">
@@ -235,7 +200,7 @@ export default function AddEditItem({ userItems }) {
                 <Button
                   color="success"
                   size="lg"
-                  onClick={(event) => addNewItem(event)}
+                  onClick={event => addNewItem(event)}
                 >
                   Save
                 </Button>

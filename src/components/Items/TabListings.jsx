@@ -22,11 +22,11 @@ function getUserItems(type, userProfileId, userItems) {
   return filteredItems;
 }
 
-export default function TabListings({ userProfile, userItems }) {
+export default function TabListings({ userItems }) {
   const classes = useStyles();
 
-  const itemsToProvide = getUserItems('provide', userProfile.userId, userItems);
-  const itemsToCollect = getUserItems('collect', userProfile.userId, userItems);
+  const itemsToProvide = getUserItems('provide', 1, userItems.items);
+  const itemsToCollect = getUserItems('collect', 1, userItems.items);
 
   return (
     <div className={classes.section}>
@@ -38,14 +38,14 @@ export default function TabListings({ userProfile, userItems }) {
             tabName: 'Listings',
             tabContent: (
               <MyItemListings type="provide" myitems={itemsToProvide} />
-            ),
+            )
           },
           {
             tabName: 'Collections',
             tabContent: (
               <MyItemListings type="collect" myitems={itemsToCollect} />
-            ),
-          },
+            )
+          }
         ]}
       />
     </div>

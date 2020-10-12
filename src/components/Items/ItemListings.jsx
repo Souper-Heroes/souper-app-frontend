@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
+import { Redirect, useHistory } from 'react-router-dom';
 
 import profile from 'assets/jss/material-kit-react/views/profilePage';
 import Card from 'components/MaterialKitComponents/Card/Card';
@@ -13,10 +14,11 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from 'components/MaterialKitComponents/CustomButtons/Button';
 import Select from '@material-ui/core/Select';
 import Paginations from 'components/MaterialKitComponents/Pagination/Pagination';
+
 import {
   cardTitle,
   cardLink,
-  cardSubtitle,
+  cardSubtitle
 } from 'assets/jss/material-kit-react';
 import Slider from 'nouislider';
 
@@ -26,21 +28,26 @@ const styles = {
   cardLink,
   cardSubtitle,
   textLeft: {
-    textAlign: 'left',
-  },
+    textAlign: 'left'
+  }
 };
 
 const useStyles = makeStyles(styles);
 
-function ItemListings() {
+function ItemListings({ items, getToken }) {
   const classes = useStyles();
+
   const [sortBy, setSortBy] = useState('Distance');
   const [distance, setDistance] = useState(2);
   const [unit, setUnit] = useState('Miles');
   const [category, setCategory] = useState('');
   const [expiry, setExpiry] = useState('');
 
-  const onChangeHandler = (event) => {
+  const handleGetToken = async () => {
+    await getToken();
+  };
+
+  const onChangeHandler = event => {
     const { name, value } = event.currentTarget;
     // console.log(name, value)
     if (name === 'sortBy') {
@@ -54,15 +61,15 @@ function ItemListings() {
           from: Number,
           to: function (val) {
             return val.toFixed(2) + ` ${value === 'Miles' ? 'mi' : 'km'}`;
-          },
-        },
+          }
+        }
       });
     } else if (name === 'category') {
       setCategory(value);
     }
   };
 
-  const onDateChangeHandler = (date) => {
+  const onDateChangeHandler = date => {
     setExpiry(date);
   };
 
@@ -75,20 +82,20 @@ function ItemListings() {
         from: Number,
         to: function (value) {
           return value.toFixed(2) + ` ${unit === 'Miles' ? 'mi' : 'km'}`;
-        },
+        }
       },
       keyboardSupport: true,
       connect: [true, false],
       range: {
         min: 0,
-        max: 5,
+        max: 5
       },
       tooltips: true,
       pips: {
         mode: 'steps',
         stepped: true,
-        density: 10,
-      },
+        density: 10
+      }
     });
     // set the Distance State when slider value changed
     distanceSlider.noUiSlider.on('change', () =>
@@ -109,7 +116,7 @@ function ItemListings() {
                   <Select
                     native
                     value={unit}
-                    onChange={(event) => onChangeHandler(event)}
+                    onChange={event => onChangeHandler(event)}
                     name="unit"
                   >
                     <option value={'Miles'}>In Miles</option>
@@ -125,7 +132,7 @@ function ItemListings() {
                     id="sliderRegular"
                     className={classes.slider}
                     name="slider"
-                    onChange={(event) => onChangeHandler(event)}
+                    onChange={event => onChangeHandler(event)}
                   />
                 </FormControl>
                 <InputLabel className={classes.filterLabel}>
@@ -135,7 +142,7 @@ function ItemListings() {
                   <Select
                     native
                     value={category}
-                    onChange={(event) => onChangeHandler(event)}
+                    onChange={event => onChangeHandler(event)}
                     name="category"
                   >
                     <option aria-label="None" value="" />
@@ -157,7 +164,12 @@ function ItemListings() {
                   />
                 </FormControl>
                 <FormControl fullWidth>
-                  <Button fullWidth size="md" color="rose">
+                  <Button
+                    fullWidth
+                    size="md"
+                    color="rose"
+                    onClick={handleGetToken}
+                  >
                     Apply Filters
                   </Button>
                 </FormControl>
@@ -180,7 +192,7 @@ function ItemListings() {
                   <Select
                     native
                     value={sortBy}
-                    onChange={(event) => onChangeHandler(event)}
+                    onChange={event => onChangeHandler(event)}
                     name="sortBy"
                   >
                     <option aria-label="None" value="" />
@@ -201,7 +213,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -220,7 +232,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -239,7 +251,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -258,7 +270,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -277,7 +289,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -296,7 +308,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -315,7 +327,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -334,7 +346,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -353,7 +365,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -372,7 +384,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -391,7 +403,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -410,7 +422,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -429,7 +441,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -448,7 +460,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -467,7 +479,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -486,7 +498,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -505,7 +517,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -524,7 +536,7 @@ function ItemListings() {
                     <a
                       href="#pablo"
                       className={classes.cardLink}
-                      onClick={(e) => e.preventDefault()}
+                      onClick={e => e.preventDefault()}
                     >
                       View Item
                     </a>
@@ -548,7 +560,7 @@ function ItemListings() {
                   { text: 3 },
                   { text: 4 },
                   { text: 5 },
-                  { text: 'NEXT' },
+                  { text: 'NEXT' }
                 ]}
                 color="primary"
               />

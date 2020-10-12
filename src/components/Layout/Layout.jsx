@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from 'components/Layout/Header';
 import HeaderLinks from 'containers/Layout/HeaderLinks';
@@ -14,21 +14,15 @@ const Layout = props => {
       history.push('/login');
     }
   });
-
   return (
     <div>
       <Header
         brand={<Restaurant />}
-        color='rose'
-        leftLinks={''}
+        color="rose"
         rightLinks={<HeaderLinks />}
         fixed
       />
-      <Parallax
-        small
-        filter
-        image={require('assets/img/citrus-fruit.jpg')}
-      />
+      <Parallax small filter image={require('assets/img/citrus-fruit.jpg')} />
       {props.children}
       <SouperFooter />
     </div>
@@ -38,4 +32,5 @@ const Layout = props => {
 Layout.propTypes = {
   isLogged: PropTypes.bool.isRequired
 };
+
 export default Layout;
