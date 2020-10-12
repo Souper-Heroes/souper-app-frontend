@@ -1,4 +1,4 @@
-import { types } from 'actions';
+import { types } from 'actions/message';
 
 const message = (state = 'Hello Redux!', action) => {
   switch (action.type) {
@@ -10,4 +10,3 @@ const message = (state = 'Hello Redux!', action) => {
 };
 
 export default message;
-

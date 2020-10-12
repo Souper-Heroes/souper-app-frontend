@@ -15,15 +15,17 @@ import { Face } from '@material-ui/icons';
 import CustomDropdown from '../CustomDropdown/CustomDropdown';
 
 import styles from 'assets/jss/material-kit-react/components/headerLinksStyle';
+import * as ROUTES from 'components/Routing/routes';
 
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
   const history = useHistory();
+  let logmeout = false;
   const logout = async () => {
-    await props.logout();
-    history.push('/login');
+    logmeout = await props.logout();
+    if (logmeout) history.push(ROUTES.LOGIN);
   };
   return (
     <List className={classes.list}>
@@ -33,25 +35,25 @@ export default function HeaderLinks(props) {
           buttonText="Account"
           buttonProps={{
             className: classes.navLink,
-            color: 'transparent',
+            color: 'transparent'
           }}
           buttonIcon={Face}
           dropdownList={[
-            <Link to="/profile" className={classes.dropdownLink}>
+            <Link to={ROUTES.PROFILE} className={classes.dropdownLink}>
               My Account
             </Link>,
-            <Link to="/dashboard" className={classes.dropdownLink}>
+            <Link to={ROUTES.DASHBOARD} className={classes.dropdownLink}>
               Dashboard
             </Link>,
-            <Link to="/itemlist" className={classes.dropdownLink}>
+            <Link to={ROUTES.ITEM_LIST} className={classes.dropdownLink}>
               My Items
             </Link>,
-            <Link to="/addEditItem" className={classes.dropdownLink}>
+            <Link to={ROUTES.ADD_EDIT_ITEM} className={classes.dropdownLink}>
               Add Items
             </Link>,
             <a onClick={logout} className={classes.dropdownLink}>
               Logout
-            </a>,
+            </a>
           ]}
         />
       </ListItem>
