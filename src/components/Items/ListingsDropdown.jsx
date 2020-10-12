@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import CustomDropdown from 'components/MaterialKitComponents/CustomDropdown/CustomDropdown';
 
-export default function ListingsDropdown() {
+export default function ListingsDropdown({ sortItems }) {
+  const [sortBy, setSortBy] = useState('Sort By');
+  const [menuItem, setMenuItem] = useState('');
+
+  const handleOnClickDropdown = (menuItem) => {
+    //console.log(menuItem);
+    setMenuItem(menuItem);
+    setSortBy(`Sorted By ${menuItem}`);
+    sortItems(menuItem);
+  };
+
   return (
-    // eslint-disable-next-line react/jsx-filename-extension
     <CustomDropdown
       hoverColor="rose"
       dropdownHeader="Sort By"
-      buttonText="Sort By"
+      buttonText={sortBy}
+      onClick={(menuItem) => handleOnClickDropdown(menuItem)}
       buttonProps={{
         round: true,
         color: 'rose',

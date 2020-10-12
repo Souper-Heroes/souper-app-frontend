@@ -22,7 +22,7 @@ const item = {
 
 test('renders MyItemListings with AddItem Button', () => {
   const { getByText } = render(
-    <MyItemListings key={item.ItemId} type='provide' myitems={[item]} />
+    <MyItemListings key={item.ItemId} type="provide" myitems={[item]} />
   );
 
   const linkAddItem = getByText(/Add Item/i);
