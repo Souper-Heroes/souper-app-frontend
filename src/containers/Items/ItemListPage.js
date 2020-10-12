@@ -6,7 +6,6 @@ const mapStateToProps = state => ({
   isLoggingIn: state.auth.isLoggingIn,
   isAuthenticated: state.auth.isAuthenticated,
   items: state.item,
-  userId: state.itemlist.userId,
 });
 
 const mapDispatchToProps = dispatch => ({
