@@ -1,70 +1,72 @@
 import { myFirebase, googleProvider } from '../firebase/firebase';
 
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
+export const types = {
+  LOGIN_REQUEST: 'LOGIN_REQUEST',
+  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
+  LOGIN_FAILURE: 'LOGIN_FAILURE',
+  SIGNUP_FAILURE: 'SIGNUP_FAILURE',
 
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
+  LOGOUT_REQUEST: 'LOGOUT_REQUEST',
+  LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
+  LOGOUT_FAILURE: 'LOGOUT_FAILURE',
 
-export const VERIFY_REQUEST = 'VERIFY_REQUEST';
-export const VERIFY_SUCCESS = 'VERIFY_SUCCESS';
+  VERIFY_REQUEST: 'VERIFY_REQUEST',
+  VERIFY_SUCCESS: 'VERIFY_SUCCESS'
+};
 
 const requestLogin = () => {
   return {
-    type: LOGIN_REQUEST
+    type: types.LOGIN_REQUEST
   };
 };
 
 const receiveLogin = user => {
   return {
-    type: LOGIN_SUCCESS,
+    type: types.LOGIN_SUCCESS,
     user
   };
 };
 
 const loginError = () => {
   return {
-    type: LOGIN_FAILURE
+    type: types.LOGIN_FAILURE
   };
 };
 
 const signUpError = message => {
   return {
-    type: SIGNUP_FAILURE,
+    type: types.SIGNUP_FAILURE,
     message
   };
 };
 
 const requestLogout = () => {
   return {
-    type: LOGOUT_REQUEST
+    type: types.LOGOUT_REQUEST
   };
 };
 
 const receiveLogout = () => {
   return {
-    type: LOGOUT_SUCCESS
+    type: types.LOGOUT_SUCCESS
   };
 };
 
 const logoutError = () => {
   return {
-    type: LOGOUT_FAILURE
+    type: types.LOGOUT_FAILURE
   };
 };
 
 const verifyRequest = () => {
   return {
-    type: VERIFY_REQUEST
+    type: types.VERIFY_REQUEST
   };
 };
 
 const verifySuccess = () => {
   return {
-    type: VERIFY_SUCCESS
+    type: types.VERIFY_SUCCESS
   };
 };
 
@@ -146,7 +148,6 @@ export const verifyAuth = () => dispatch => {
 };
 
 export const getToken = () => dispatch => {
-  dispatch(requestLogin());
   myFirebase
     .auth()
     .currentUser.getIdToken()
@@ -154,6 +155,6 @@ export const getToken = () => dispatch => {
       console.log(idToken);
     })
     .catch(error => {
-      dispatch(signUpError(error.message));
+      // do something with error
     });
 };

@@ -1,14 +1,4 @@
-import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  SIGNUP_FAILURE,
-  LOGOUT_REQUEST,
-  LOGOUT_SUCCESS,
-  LOGOUT_FAILURE,
-  VERIFY_REQUEST,
-  VERIFY_SUCCESS
-} from '../actions/auth';
+import { types } from '../actions/auth';
 
 export default (
   state = {
@@ -24,21 +14,21 @@ export default (
   action
 ) => {
   switch (action.type) {
-    case LOGIN_REQUEST:
+    case types.LOGIN_REQUEST:
       return {
         ...state,
         isLoggingIn: true,
         loginError: false,
         signUpError: null
       };
-    case LOGIN_SUCCESS:
+    case types.LOGIN_SUCCESS:
       return {
         ...state,
         isLoggingIn: false,
         isAuthenticated: true,
         user: action.user
       };
-    case LOGIN_FAILURE:
+    case types.LOGIN_FAILURE:
       return {
         ...state,
         isLoggingIn: false,
@@ -46,7 +36,7 @@ export default (
         loginError: true,
         signUpError: null
       };
-    case SIGNUP_FAILURE:
+    case types.SIGNUP_FAILURE:
       return {
         ...state,
         isLoggingIn: false,
@@ -54,32 +44,32 @@ export default (
         loginError: false,
         signUpError: action.message
       };
-    case LOGOUT_REQUEST:
+    case types.LOGOUT_REQUEST:
       return {
         ...state,
         isLoggingOut: true,
         logoutError: false
       };
-    case LOGOUT_SUCCESS:
+    case types.LOGOUT_SUCCESS:
       return {
         ...state,
         isLoggingOut: false,
         isAuthenticated: false,
         user: {}
       };
-    case LOGOUT_FAILURE:
+    case types.LOGOUT_FAILURE:
       return {
         ...state,
         isLoggingOut: false,
         logoutError: true
       };
-    case VERIFY_REQUEST:
+    case types.VERIFY_REQUEST:
       return {
         ...state,
         isVerifying: true,
         verifyingError: false
       };
-    case VERIFY_SUCCESS:
+    case types.VERIFY_SUCCESS:
       return {
         ...state,
         isVerifying: false
