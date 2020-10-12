@@ -22,7 +22,7 @@ export default function MyItemListings({ type, myitems }) {
   const classes = makeStyles(styles);
   const paginationColSize = type === 'provide' ? 6 : 12;
 
-  const sortItems = (menuItem) => {
+  const sortItems = menuItem => {
     const newItems = [...items];
 
     if (menuItem === 'Category') {
@@ -60,7 +60,7 @@ export default function MyItemListings({ type, myitems }) {
           <ListingsDropdown sortItems={sortItems} />
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
-          {items.map((myItem) => (
+          {items.map(myItem => (
             <MyItemListing key={myItem.itemId} type={type} myitem={myItem} />
           ))}
         </GridItem>

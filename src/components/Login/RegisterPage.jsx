@@ -179,6 +179,10 @@ export default function RegisterPage({ registerInputs }) {
   );
 }
 
+RegisterPage.defaultProps = {
+  registerInputs: []
+};
+
 RegisterPage.propTypes = {
   registerInputs: PropTypes.array,
 };
