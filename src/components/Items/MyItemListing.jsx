@@ -1,11 +1,8 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable global-require */
-/* eslint-disable jsx-quotes */
-/* eslint-disable react/jsx-filename-extension */
-import React from 'react';
+import React, { useState } from 'react';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
+import styles from 'assets/jss/Items/views/MyItemListing';
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -21,128 +18,260 @@ import EmojiEvent from '@material-ui/icons/EmojiEvents';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    margin: 'auto',
-    minWidth: '900',
-    alignItems: 'left',
-    justify: 'left',
-  },
-  image: {
-    width: 128,
-    height: 128,
-  },
-  img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '80%',
-    maxHeight: '80%',
-  },
-
-  box: {
-    margin: 'auto',
-  },
-}));
-
-const GetCollectionMsg = (type, time) => {
-  if (time === null) {
-    return null;
-  }
-
-  let message = null;
-  if (type === 'provide') {
-    message = `Being Collected: ${time}`;
-  } else {
-    message = `To Collect: ${time}`;
-  }
-
-  return (
-    <Typography variant='body2' color='textPrimary' gutterBottom>
-      {message}
-    </Typography>
-  );
-};
+const useStyles = makeStyles(styles);
 
 export default function MyItemListing({ type, myitem }) {
+  const [item, setItem] = useState(myitem);
+  const [itemType, setType] = useState(type);
+
   const classes = useStyles();
 
+  const GetCollectionMsg = (type) => {
+    let message = null;
+    if (type === 'provide') {
+      message = 'Being Collected:';
+    } else {
+      message = 'To Collect:';
+    }
+
+    return (
+      <Typography variant="body2" color="textSecondary" gutterBottom>
+        {message}
+      </Typography>
+    );
+  };
+
+  const handleOnClickDelete = (event) => {
+    // TODO
+    console.log(
+      `Clicked Delete button, do something with item: ${item.itemId}, Title: ${item.description}`
+    );
+  };
+
+  const handleOnClickAgreeCup = (event) => {
+    // TODO
+    console.log(
+      `Clicked Cup button, do something with item: ${item.itemId}, Title: ${item.description}`
+    );
+  };
+
   return (
-    <GridContainer spacing={2}>
+    <GridContainer spacing={1}>
       <GridItem>
-        <Paper className={classes.paper} spacing={2}>
-          <GridContainer spacing={2}>
+        <Paper className={classes.paper} spacing={1}>
+          <GridContainer spacing={1}>
             <Grid item>
-              <ButtonBase className={classes.image}>
-                <img
-                  className={classes.img}
-                  alt='complex'
-                  src={require('assets/img/purple-banana.jpg')}
-                />
-              </ButtonBase>
+              <Link to="/itemview" className={classes.link}>
+                <ButtonBase className={classes.image}>
+                  <img
+                    className={classes.img}
+                    alt="complex"
+                    src={require('assets/img/purple-banana.jpg')}
+                  />
+                </ButtonBase>
+              </Link>
             </Grid>
-            <GridContainer align='left' item xs={12} sm container>
-              <GridItem xs container direction='column' spacing={2}>
-                <GridItem xs={12}>
-                  <a href='#'>
-                    <Typography gutterBottom variant='body1'>
-                      <strong>{myitem.description}</strong>
-                    </Typography>
-                  </a>
-                  <GridContainer align='left' item xs={12} container>
-                    <GridItem xs={12} sm={6} md={6} lg={6}>
-                      <Typography
-                        variant='body2'
-                        color='textPrimary'
-                        gutterBottom
+            <GridContainer xs={12} sm item spacing={0} direction="column">
+              <GridItem align="left" xs={12} className={classes.cell}>
+                <Link to="/itemview" className={classes.link}>
+                  <Typography gutterBottom variant="body1">
+                    <strong>{myitem.description}</strong>
+                  </Typography>
+                </Link>
+                <GridContainer className={classes.container}>
+                  <GridItem
+                    xs={12}
+                    sm={6}
+                    md={6}
+                    lg={6}
+                    className={classes.cell}
+                  >
+                    <GridContainer
+                      direction="row"
+                      className={classes.container}
+                    >
+                      <GridItem
+                        xs={5}
+                        sm={5}
+                        md={5}
+                        lg={5}
+                        className={classes.cell}
                       >
-                        Category:
-                        {myitem.category}
-                      </Typography>
-                    </GridItem>
-                    <GridItem xs={12} sm={6} md={6} lg={6}>
-                      <Typography
-                        variant='body2'
-                        color='textPrimary'
-                        gutterBottom
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          gutterBottom
+                        >
+                          Category:
+                        </Typography>
+                      </GridItem>
+                      <GridItem
+                        xs={7}
+                        sm={7}
+                        md={7}
+                        lg={7}
+                        align="left"
+                        className={classes.cell}
                       >
-                        Location:
-                        {myitem.location}
-                      </Typography>
-                    </GridItem>
-                  </GridContainer>
-                  <GridContainer align='left' item xs={12} container>
-                    <GridItem xs={12} sm={6} md={6} lg={6}>
-                      <Typography
-                        variant='body2'
-                        color='textPrimary'
-                        gutterBottom
+                        <Typography
+                          variant="body2"
+                          color="textPrimary"
+                          gutterBottom
+                          align="left"
+                        >
+                          {myitem.category}
+                        </Typography>
+                      </GridItem>
+                    </GridContainer>
+                  </GridItem>
+                  <GridItem
+                    xs={12}
+                    sm={6}
+                    md={6}
+                    lg={6}
+                    className={classes.cell}
+                  >
+                    <GridContainer
+                      direction="row"
+                      className={classes.container}
+                    >
+                      <GridItem
+                        xs={5}
+                        sm={5}
+                        md={5}
+                        lg={5}
+                        className={classes.cell}
                       >
-                        <strong>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          gutterBottom
+                        >
+                          Location:
+                        </Typography>
+                      </GridItem>
+                      <GridItem
+                        xs={7}
+                        sm={7}
+                        md={7}
+                        lg={7}
+                        align="left"
+                        className={classes.cell}
+                      >
+                        <Typography
+                          variant="body2"
+                          color="textPrimary"
+                          gutterBottom
+                          align="left"
+                        >
+                          {myitem.location}
+                        </Typography>
+                      </GridItem>
+                    </GridContainer>
+                  </GridItem>
+                </GridContainer>
+                <GridContainer className={classes.container}>
+                  <GridItem
+                    xs={12}
+                    sm={6}
+                    md={6}
+                    lg={6}
+                    className={classes.cell}
+                  >
+                    <GridContainer
+                      direction="row"
+                      className={classes.container}
+                    >
+                      <GridItem
+                        xs={5}
+                        sm={5}
+                        md={5}
+                        lg={5}
+                        className={classes.cell}
+                      >
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          gutterBottom
+                        >
                           Expires:
+                        </Typography>
+                      </GridItem>
+                      <GridItem
+                        xs={7}
+                        sm={7}
+                        md={7}
+                        lg={7}
+                        align="left"
+                        className={classes.cell}
+                      >
+                        <Typography
+                          variant="body2"
+                          color="textPrimary"
+                          gutterBottom
+                          align="left"
+                        >
                           {myitem.expiryDate}
-                        </strong>
-                      </Typography>
-                    </GridItem>
-                    <GridItem xs={12} sm={6} md={6} lg={6}>
-                      {GetCollectionMsg(type, myitem.preferredCollectStartTime)}
-                    </GridItem>
-                  </GridContainer>
-                </GridItem>
+                        </Typography>
+                      </GridItem>
+                    </GridContainer>
+                  </GridItem>
+                  <GridItem
+                    xs={12}
+                    sm={6}
+                    md={6}
+                    lg={6}
+                    className={classes.cell}
+                  >
+                    <GridContainer
+                      direction="row"
+                      className={classes.container}
+                    >
+                      <GridItem
+                        xs={5}
+                        sm={5}
+                        md={5}
+                        lg={5}
+                        className={classes.cell}
+                      >
+                        {myitem.preferredCollectStartTime !== null &&
+                          GetCollectionMsg(itemType)}
+                      </GridItem>
+                      <GridItem
+                        xs={7}
+                        sm={7}
+                        md={7}
+                        lg={7}
+                        align="left"
+                        className={classes.cell}
+                      >
+                        {myitem.preferredCollectStartTime !== null && (
+                          <Typography
+                            variant="body2"
+                            color="textPrimary"
+                            gutterBottom
+                            align="left"
+                          >
+                            {myitem.preferredCollectStartTime}
+                          </Typography>
+                        )}
+                      </GridItem>
+                    </GridContainer>
+                  </GridItem>
+                </GridContainer>
               </GridItem>
-              <GridItem align='right'>
-                <Button>
+              <GridItem xs={12} align="right">
+                <Button onClick={handleOnClickAgreeCup}>
                   <EmojiEvent />
                 </Button>
-                {type === 'provide' && (
-                  <Button>
-                    <Edit />
-                  </Button>
+                {itemType === 'provide' && (
+                  <Link to="/addedititem/" className={classes.link}>
+                    <Button>
+                      <Edit />
+                    </Button>
+                  </Link>
                 )}
-                <Button>
+                <Button onClick={handleOnClickDelete}>
                   <Delete />
                 </Button>
               </GridItem>

@@ -2,13 +2,13 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
-import MyListingsPage from './MyListingsPage';
+import ItemListPage from './ItemListPage';
 
 const item = {
-  itemId: '2',
+  itemId: 2,
   photoId: '#1112',
-  provideUserId: '1',
-  collectUserId: '3',
+  provideUserId: 1,
+  collectUserId: 3,
   category: 'Nuts',
   description: 'Bag of Cashew Nuts',
   expiryDate: '24/10/2020',
@@ -20,9 +20,9 @@ const item = {
   reservedItem: 'false',
 };
 
-test('renders MyListingsPage', () => {
+test('renders ItemListPage', () => {
   const { getByText } = render(
-    <MyListingsPage key={item.ItemId} type='collect' myitems={[item]} />
+    <ItemListPage key={item.ItemId} type='collect' myitems={[item]} />
   );
 
   const linkMyListings = getByText(/TabListings/i);

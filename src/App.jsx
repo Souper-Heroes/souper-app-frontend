@@ -1,28 +1,33 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Layout from 'components/Layout/Layout';
+import Layout from 'containers/Layout/Layout';
 import TestData from 'assets/data/TestData.json';
 import ItemViewPage from 'components/Items/ItemViewPage';
-import LoginPage from 'components/Login/LoginPage';
+import LoginPage from 'containers/Login/Login';
 import RegisterPage from 'components/Login/RegisterPage';
 import LandingPage from 'views/LandingPage/LandingPage';
+import ItemListPage from 'components/Items/ItemListPage';
 import ItemListings from 'components/Items/ItemListings';
 
-import Profile from './components/Profile/Profile';
-import Forgotten from './components/Login/Forgotten';
-import ResetPassword from './components/Login/ResetPassword';
-import AddEditItem from './components/Items/AddEditItem';
+import Profile from 'containers/Profile/Profile';
+import Forgotten from 'components/Login/Forgotten';
+import ResetPassword from 'components/Login/ResetPassword';
+import AddEditItem from 'components/Items/AddEditItem';
 
 function App() {
-  const [data, setData] = useState(TestData);
+  const [data] = useState(TestData);
 
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/login" component={LoginPage} />
-        <Route path="/register">
-          <RegisterPage registerInputs={data['registerInputs']} />
-        </Route>
+        <Route
+          path="/register"
+          render={() => (
+            <RegisterPage registerInputs={data['registerInputs']} />
+          )}
+        />
+
         <Route path="/forgotten" component={Forgotten} />
         <Route path="/reset" component={ResetPassword} />
         <Layout>
@@ -31,9 +36,9 @@ function App() {
             render={() => <ItemViewPage item={data['userItems'][0]} />}
           />
           <Route
-            path="/mylistings"
+            path="/itemlist"
             render={() => (
-              <ItemViewPage
+              <ItemListPage
                 userProfile={data['userProfile']}
                 userItems={data['userItems']}
               />
@@ -55,6 +60,6 @@ function App() {
       </Switch>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
