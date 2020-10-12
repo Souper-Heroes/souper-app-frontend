@@ -34,7 +34,7 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-function ItemListings({ items, getToken }) {
+function ItemListings({ getItems }) {
   const classes = useStyles();
 
   const [sortBy, setSortBy] = useState('Distance');
@@ -43,8 +43,8 @@ function ItemListings({ items, getToken }) {
   const [category, setCategory] = useState('');
   const [expiry, setExpiry] = useState('');
 
-  const handleGetToken = async () => {
-    await getToken();
+  const handleGetItems = async () => {
+    await getItems();
   };
 
   const onChangeHandler = event => {
@@ -168,7 +168,7 @@ function ItemListings({ items, getToken }) {
                     fullWidth
                     size="md"
                     color="rose"
-                    onClick={handleGetToken}
+                    onClick={handleGetItems}
                   >
                     Apply Filters
                   </Button>
