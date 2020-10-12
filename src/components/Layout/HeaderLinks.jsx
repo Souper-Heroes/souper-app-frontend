@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import React from 'react';
 // react components for routing our app without refresh
-import { Link , useHistory} from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,28 +30,28 @@ export default function HeaderLinks(props) {
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
-          buttonText='Account'
+          buttonText="Account"
           buttonProps={{
             className: classes.navLink,
             color: 'transparent',
           }}
           buttonIcon={Face}
           dropdownList={[
-            <Link to='/profile' className={classes.dropdownLink}>
+            <Link to="/profile" className={classes.dropdownLink}>
               My Account
             </Link>,
-            <Link to='/dashboard' className={classes.dropdownLink}>
+            <Link to="/dashboard" className={classes.dropdownLink}>
               Dashboard
             </Link>,
-            <Link to='/itemlist' className={classes.dropdownLink}>
+            <Link to="/itemlist" className={classes.dropdownLink}>
               My Items
             </Link>,
-            <Link to='/addEditItem' className={classes.dropdownLink}>
+            <Link to="/addEditItem" className={classes.dropdownLink}>
               Add Items
             </Link>,
-            <a onClick={logout}  className={classes.dropdownLink}>
+            <a onClick={logout} className={classes.dropdownLink}>
               Logout
-            </a>
+            </a>,
           ]}
         />
       </ListItem>
