@@ -18,9 +18,11 @@ import EmojiEvent from '@material-ui/icons/EmojiEvents';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 
+import moment from 'moment';
+
 const useStyles = makeStyles(styles);
 
-export default function MyItemListing({ type, myitem }) {
+export default function MyItemListing({ type, myitem, deleteItem }) {
   const [item, setItem] = useState(myitem);
   const [itemType, setType] = useState(type);
 
@@ -46,6 +48,7 @@ export default function MyItemListing({ type, myitem }) {
     console.log(
       `Clicked Delete button, do something with item: ${item.itemId}, Title: ${item.description}`
     );
+    deleteItem(item.itemId);
   };
 
   const handleOnClickAgreeCup = event => {
@@ -59,7 +62,7 @@ export default function MyItemListing({ type, myitem }) {
     <GridContainer spacing={1}>
       <GridItem>
         <Paper className={classes.paper} spacing={1}>
-          <GridContainer spacing={1}>
+          <GridContainer spacing={2}>
             <Grid item>
               <Link to={'/itemview/' + myitem.itemId} className={classes.link}>
                 <ButtonBase className={classes.image}>
@@ -214,7 +217,7 @@ export default function MyItemListing({ type, myitem }) {
                           gutterBottom
                           align="left"
                         >
-                          {myitem.expiryDate}
+                          {moment(myitem.expiryDate).format('Do MMM YY')}
                         </Typography>
                       </GridItem>
                     </GridContainer>
@@ -255,7 +258,13 @@ export default function MyItemListing({ type, myitem }) {
                             gutterBottom
                             align="left"
                           >
-                            {myitem.preferredCollectStartTime}
+                            {moment(myitem.preferredCollectStartTime).format(
+                              'Do MMM YY HH:MM'
+                            )}
+                            -
+                            {moment(myitem.preferredCollectEndTime).format(
+                              'HH:MM'
+                            )}
                           </Typography>
                         )}
                       </GridItem>
