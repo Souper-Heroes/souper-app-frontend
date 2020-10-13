@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import configureStore from '../store';
 import { myFirebase } from '../firebase/firebase';
 
 let SOUP_API = '';
@@ -23,6 +22,7 @@ api.interceptors.request.use(async config => {
     .auth()
     .currentUser.getIdToken()
     .then(async idToken => {
+      console.log(idToken);
       return idToken;
     })
     .catch(error => {
@@ -30,23 +30,5 @@ api.interceptors.request.use(async config => {
     });
   return config;
 });
-
-/**
- intercept any error responses from the api
- and check if the firebase token is no longer valid.
- ie. Token has expired or user is no longer
- authenticated.
- logout the user if the token has expired
-**/
-
-// api.interceptors.response.use(
-//   res => res,
-//   err => {
-//     if (err.response.status === 401) {
-//       configureStore().dispatch({ type: 'LOGOUT_REQUEST' });
-//     }
-//     return Promise.reject(err);
-//   }
-// );
 
 export default api;
