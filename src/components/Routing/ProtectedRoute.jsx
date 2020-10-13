@@ -34,6 +34,8 @@ const ProtectedRoute = ({
 ProtectedRoute.propTypes = {
   isAuthenticated: PropTypes.bool,
   isVerifying: PropTypes.bool,
+  // component: PropTypes.node,
+  location: PropTypes.string
 };
 
 export default ProtectedRoute;

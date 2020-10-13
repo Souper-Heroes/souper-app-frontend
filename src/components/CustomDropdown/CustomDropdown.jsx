@@ -178,7 +178,7 @@ CustomDropdown.propTypes = {
   buttonText: PropTypes.node,
   buttonIcon: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   dropdownList: PropTypes.instanceOf(Array),
-  buttonProps: PropTypes.object,
+  buttonProps: PropTypes.instanceOf(Object),
   dropup: PropTypes.bool,
   dropdownHeader: PropTypes.node,
   rtlActive: PropTypes.bool,

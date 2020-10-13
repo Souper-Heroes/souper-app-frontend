@@ -53,5 +53,6 @@ export default function CheckboxTermsAndConds({
 }
 
 CheckboxTermsAndConds.propTypes = {
-  children: PropTypes.node.isRequired
+  checkTermsAndConds: PropTypes.bool,
+  children: PropTypes.node
 };
