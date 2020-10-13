@@ -65,7 +65,9 @@ export default function Profile(props) {
       <div className={classes.container}>
         <GridContainer justify="center">
           <GridItem cs={12} sm={12} md={8}>
-            <h2 className={classes.title} onClick={() => changeTitle()}>Profile {props.message} </h2>
+            <h2 className={classes.title} onClick={() => changeTitle()}>
+              Profile {props.message}{' '}
+            </h2>
             <form>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
