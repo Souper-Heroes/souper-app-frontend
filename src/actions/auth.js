@@ -12,61 +12,43 @@ export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 export const VERIFY_REQUEST = 'VERIFY_REQUEST';
 export const VERIFY_SUCCESS = 'VERIFY_SUCCESS';
 
-const requestLogin = () => {
-  return {
-    type: LOGIN_REQUEST
-  };
-};
+const requestLogin = () => ({
+  type: LOGIN_REQUEST
+});
 
-const receiveLogin = user => {
-  return {
-    type: LOGIN_SUCCESS,
-    user
-  };
-};
+const receiveLogin = user => ({
+  type: LOGIN_SUCCESS,
+  user
+});
 
-const loginError = () => {
-  return {
-    type: LOGIN_FAILURE
-  };
-};
+const loginError = () => ({
+  type: LOGIN_FAILURE
+});
 
-const signUpError = message => {
-  return {
-    type: SIGNUP_FAILURE,
-    message
-  };
-};
+const signUpError = message => ({
+  type: SIGNUP_FAILURE,
+  message
+});
 
-const requestLogout = () => {
-  return {
-    type: LOGOUT_REQUEST
-  };
-};
+const requestLogout = () => ({
+  type: LOGOUT_REQUEST
+});
 
-const receiveLogout = () => {
-  return {
-    type: LOGOUT_SUCCESS
-  };
-};
+const receiveLogout = () => ({
+  type: LOGOUT_SUCCESS
+});
 
-const logoutError = () => {
-  return {
-    type: LOGOUT_FAILURE
-  };
-};
+const logoutError = () => ({
+  type: LOGOUT_FAILURE
+});
 
-const verifyRequest = () => {
-  return {
-    type: VERIFY_REQUEST
-  };
-};
+const verifyRequest = () => ({
+  type: VERIFY_REQUEST
+});
 
-const verifySuccess = () => {
-  return {
-    type: VERIFY_SUCCESS
-  };
-};
+const verifySuccess = () => ({
+  type: VERIFY_SUCCESS
+});
 
 export const loginUser = (email, password) => dispatch => {
   dispatch(requestLogin());
@@ -77,7 +59,7 @@ export const loginUser = (email, password) => dispatch => {
       dispatch(receiveLogin(user));
       return true;
     })
-    .catch(error => {
+    .catch(() => {
       dispatch(loginError());
       return false;
     });
@@ -92,7 +74,7 @@ export const loginWithGoogle = () => dispatch => {
       dispatch(receiveLogin(user));
       return true;
     })
-    .catch(error => {
+    .catch(() => {
       // Do something with the error
       dispatch(signUpError());
       return false;
@@ -128,7 +110,7 @@ export const logoutUser = () => dispatch => {
       dispatch(receiveLogout());
       return true;
     })
-    .catch(error => {
+    .catch(() => {
       // Do something with the error
       dispatch(logoutError());
       return false;
@@ -147,12 +129,9 @@ export const verifyAuth = () => dispatch => {
 
 export const getToken = () => dispatch => {
   dispatch(requestLogin());
-  myFirebase
+  return myFirebase
     .auth()
     .currentUser.getIdToken()
-    .then(idToken => {
-      console.log(idToken);
-    })
     .catch(error => {
       dispatch(signUpError(error.message));
     });

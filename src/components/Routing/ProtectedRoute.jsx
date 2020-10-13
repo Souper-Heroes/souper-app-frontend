@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Layout from 'containers/Layout/Layout';
+import PropTypes from 'prop-types';
 import * as ROUTES from './routes';
 
 const ProtectedRoute = ({
@@ -29,5 +30,10 @@ const ProtectedRoute = ({
     }
   />
 );
+
+ProtectedRoute.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  isVerifying: PropTypes.bool,
+};
 
 export default ProtectedRoute;

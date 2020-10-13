@@ -21,11 +21,13 @@ const useStyles = makeStyles(styles);
 export default function CustomTabs(props) {
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, value) => {
-    setValue(value);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
   const classes = useStyles();
-  const { headerColor, plainTabs, tabs, title, rtlActive } = props;
+  const {
+    headerColor, plainTabs, tabs, title, rtlActive
+  } = props;
   const cardTitle = classNames({
     [classes.cardTitle]: true,
     [classes.cardTitleRTL]: rtlActive,
@@ -43,16 +45,13 @@ export default function CustomTabs(props) {
           }}
         >
           {tabs.map((prop, key) => {
-            var icon = {};
+            const icon = {};
             if (prop.tabIcon) {
-              icon = {
-                icon:
-                  typeof prop.tabIcon === 'string' ? (
-                    <Icon>{prop.tabIcon}</Icon>
-                  ) : (
-                    <prop.tabIcon />
-                  ),
-              };
+              icon.icon = typeof prop.tabIcon === 'string' ? (
+                <Icon>{prop.tabIcon}</Icon>
+              ) : (
+                <prop.tabIcon />
+              );
             }
             return (
               <Tab
@@ -95,10 +94,10 @@ CustomTabs.propTypes = {
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
       tabName: PropTypes.string.isRequired,
-      tabIcon: PropTypes.object,
+      tabIcon: PropTypes.instanceOf(Object),
       tabContent: PropTypes.node.isRequired,
     })
-  ),
+  ).isRequired,
   rtlActive: PropTypes.bool,
   plainTabs: PropTypes.bool,
 };

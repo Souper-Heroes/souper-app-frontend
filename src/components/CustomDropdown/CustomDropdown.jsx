@@ -101,12 +101,8 @@ export default function CustomDropdown(props) {
         disablePortal
         placement={
           dropup
-            ? left
-              ? 'top-start'
-              : 'top'
-            : left
-              ? 'bottom-start'
-              : 'bottom'
+            ? `top${left ? '-start' : ''}`
+            : `bottom${left ? '-start' : ''}`
         }
         className={classNames({
           [classes.popperClose]: !anchorEl,
@@ -181,7 +177,7 @@ CustomDropdown.propTypes = {
   ]),
   buttonText: PropTypes.node,
   buttonIcon: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  dropdownList: PropTypes.array,
+  dropdownList: PropTypes.instanceOf(Array),
   buttonProps: PropTypes.object,
   dropup: PropTypes.bool,
   dropdownHeader: PropTypes.node,

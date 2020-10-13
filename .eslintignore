@@ -2,4 +2,5 @@ public/
 build/
 node_modules/
 src/assets
-src/components/MaterialKitComponents
+src/serviceWorker.js
+src/**/*.css

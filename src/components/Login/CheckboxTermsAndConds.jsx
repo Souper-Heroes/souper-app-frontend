@@ -1,15 +1,14 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 // material-ui components
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 // @material-ui/icons
 import Check from '@material-ui/icons/Check';
-
 import styles from 'assets/jss/material-kit-react/customCheckboxRadioSwitch';
-import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(styles);
 
@@ -54,5 +53,5 @@ export default function CheckboxTermsAndConds({
 }
 
 CheckboxTermsAndConds.propTypes = {
-  checkTermsAndConds: PropTypes.bool.isRequired
+  children: PropTypes.node.isRequired
 };

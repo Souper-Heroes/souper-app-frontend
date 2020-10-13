@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
-import MyItemListings from './MyItemListings';
+import MyItemListings from 'components/Items/MyItemListings';
 
 const item = {
   itemId: '2',

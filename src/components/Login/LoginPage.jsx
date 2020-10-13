@@ -1,7 +1,8 @@
 // BEFORE import React, { useEffect } from 'react';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import * as ROUTES from 'components/Routing/routes';
+import PropTypes from 'prop-types';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -11,7 +12,6 @@ import Email from '@material-ui/icons/Email';
 // @material Typography
 import Danger from 'components/MaterialKitComponents/Typography/Danger';
 // core components
-import PropTypes from 'prop-types';
 import GridContainer from '../MaterialKitComponents/Grid/GridContainer';
 import GridItem from '../MaterialKitComponents/Grid/GridItem';
 import Button from '../MaterialKitComponents/CustomButtons/Button';
@@ -28,26 +28,14 @@ const useStyles = makeStyles(styles);
 
 export default function LoginPage({ loginError, login, loginWithGoogle }) {
   const history = useHistory();
-  const emailRef = React.useRef(null);
-  const passRef = React.useRef(null);
+  const emailRef = useRef(null);
+  const passRef = useRef(null);
   const classes = useStyles();
-  const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
+  const [cardAnimaton, setCardAnimation] = useState('cardHidden');
 
   setTimeout(() => {
     setCardAnimation('');
   }, 700);
-
-  /* BEFORE useEffect(() => {
-    if (props.isLogged) {
-      history.push('/');
-    }
-  }, []);
-
-  const handleClick = async () => {
-    await props.login(emailRef.current.value, passRef.current.value);
-    await props.check();
-    history.push('/dashboard');
-  };*/
 
   const handleSubmit = async event => {
     const { name } = event.currentTarget;
@@ -187,8 +175,8 @@ export default function LoginPage({ loginError, login, loginWithGoogle }) {
   );
 }
 
-/*LoginPage.propTypes = {
-  isLogged: PropTypes.bool.isRequired,
-  login: PropTypes.bool.isRequired,
-  check: PropTypes.bool.isRequired,
-};*/
+LoginPage.propTypes = {
+  loginError: PropTypes.bool,
+  login: PropTypes.bool,
+  loginWithGoogle: PropTypes.bool,
+};

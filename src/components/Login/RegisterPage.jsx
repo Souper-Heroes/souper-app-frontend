@@ -189,10 +189,9 @@ export default function RegisterPage({
   );
 }
 
-RegisterPage.defaultProps = {
-  registerInputs: []
-};
-
 RegisterPage.propTypes = {
-  registerInputs: PropTypes.array
+  signUpError: PropTypes.bool,
+  signUp: PropTypes.bool,
+  loginWithGoogle: PropTypes.bool,
+  registerInputs: PropTypes.instanceOf(Array)
 };

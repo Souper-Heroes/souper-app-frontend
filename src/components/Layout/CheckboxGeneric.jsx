@@ -8,6 +8,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Check from '@material-ui/icons/Check';
 
 import styles from 'assets/jss/material-kit-react/customCheckboxRadioSwitch';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(styles);
 
@@ -39,3 +40,8 @@ export default function CheckboxGeneric({ handleToggle, children }) {
     </div>
   );
 }
+
+CheckboxGeneric.propTypes = {
+  handleToggle: PropTypes.func,
+  children: PropTypes.node,
+};

@@ -11,11 +11,10 @@ import Slider from '@material-ui/core/Slider';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
-import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(styles);
 
-export default function Profile(props) {
+export default function Profile() {
   const [distance, setDistance] = React.useState('miles');
   const classes = useStyles();
   const imageClasses = classNames(
@@ -51,15 +50,14 @@ export default function Profile(props) {
   ];
   const valuetext = value => `${value} Miles`;
   const handleChange = event => setDistance(event.target.value);
-  const changeTitle = () => props.updateMessage(distance);
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div className={classes.container}>
         <GridContainer justify="center">
           <GridItem cs={12} sm={12} md={8}>
-            <h2 className={classes.title} onClick={() => changeTitle()}>
-              Profile {props.message}
+            <h2 className={classes.title}>
+              Profile
             </h2>
             <form>
               <GridContainer>
@@ -148,8 +146,3 @@ export default function Profile(props) {
     </div>
   );
 }
-
-Profile.propTypes = {
-  updateMessage: PropTypes.func.isRequired,
-  message: PropTypes.string.isRequired
-};

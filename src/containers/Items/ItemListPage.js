@@ -8,8 +8,8 @@ const mapStateToProps = state => ({
   items: state.item
 });
 
-const mapDispatchToProps = dispatch => ({
-  //   getToken: () => dispatch(getToken())
-});
+/* const mapDispatchToProps = dispatch => ({
+  getToken: () => dispatch(getToken())
+}); */
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemListPage);
+export default connect(mapStateToProps)(ItemListPage);
