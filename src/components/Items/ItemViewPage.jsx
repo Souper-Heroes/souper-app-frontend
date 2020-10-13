@@ -49,7 +49,12 @@ export default function ItemViewPage(props) {
   };
 
   const handleCollectionDateChange = (type, event) => {
+    // console.log('You picked date:', event);
+
     const newDate = moment(event);
+
+    // console.log('converted newDate', newDate);
+
     if (!newDate.isValid()) throw new Error('Invalid Date passed');
     // console.log(
     //  `Handle Date Change1, do something with ${type} ${newDate} ${newDate.isValid()}`
