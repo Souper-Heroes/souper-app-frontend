@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => ({
   item: state.item ? state.item.items[ownProps.match.params.id] : null
 });
 
-const mapDispatchToProps = dispatch => ({
-  //   getToken: () => dispatch(getToken())
-});
+/* const mapDispatchToProps = dispatch => ({
+  getToken: () => dispatch(getToken())
+}); */
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemViewPage);
+export default connect(mapStateToProps)(ItemViewPage);

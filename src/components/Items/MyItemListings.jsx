@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 // core components
 import { makeStyles } from '@material-ui/core/styles';
-//import styles from 'assets/jss/Items/views/MyItemListings';
+// import styles from 'assets/jss/Items/views/MyItemListings';
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
@@ -11,6 +11,7 @@ import MyItemListing from 'components/Items/MyItemListing';
 import ListingsDropdown from 'components/Items/ListingsDropdown';
 import Button from 'components/CustomButtons/Button';
 import ListingsPaginations from 'components/Items/ListingsPaginations';
+import PropTypes from 'prop-types';
 
 // import Divider from '@material-ui/core/Divider';
 
@@ -48,7 +49,7 @@ export default function MyItemListings({ type, myitems }) {
       });
     }
 
-    console.log('Sorted Items:', newItems);
+    // console.log('Sorted Items:', newItems);
 
     setItems(newItems);
   };
@@ -80,3 +81,8 @@ export default function MyItemListings({ type, myitems }) {
     </div>
   );
 }
+
+MyItemListings.propTypes = {
+  type: PropTypes.string.isRequired,
+  myitems: PropTypes.instanceOf(Array).isRequired
+};

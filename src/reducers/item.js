@@ -147,8 +147,6 @@ const initialState = {
   ]
 };
 
-const item = (state = { ...initialState }, action) => {
-  return state;
-};
+const item = (state = { ...initialState }) => state;
 
 export default item;

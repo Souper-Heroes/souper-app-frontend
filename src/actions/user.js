@@ -1,6 +1,6 @@
-import axios from 'axios';
+// import axios from 'axios';
 
-const SOUP_API = 'https://souper-app-backend.herokuapp.com';
+// const SOUP_API = 'https://souper-app-backend.herokuapp.com';
 
 // export const login = (email, password) => ({
 //     type: types.LOGIN,

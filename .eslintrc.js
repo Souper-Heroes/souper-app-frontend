@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    jest: true
   },
   settings: {
     "import/resolver": {
@@ -34,6 +35,13 @@ module.exports = {
     "comma-dangle": 0,
     "max-len": [2, 150],
     "arrow-parens": [2, "as-needed"],
-    "react/jsx-props-no-spreading": 0
+    "react/jsx-props-no-spreading": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/no-unescaped-entities": 0,
+    "no-alert": 0,
+    "react/no-array-index-key": 0,
+    "react/require-default-props": 0
   },
 };

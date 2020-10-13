@@ -1,11 +1,12 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import styles from 'assets/jss/material-kit-react/views/profilePage';
 import TabListings from 'components/Items/TabListings';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(styles);
 
