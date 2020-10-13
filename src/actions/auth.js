@@ -110,7 +110,6 @@ export const loginUser = (email, password) => dispatch => {
     })
     .then(user => {
       dispatch(receiveLogin(user));
-      dispatch(loadUser());
     })
     .catch(error => {
       dispatch(loginError());
