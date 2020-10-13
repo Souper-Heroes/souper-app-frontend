@@ -9,7 +9,9 @@ export default (
     signUpError: false,
     logoutError: false,
     isAuthenticated: false,
-    user: {}
+    user: {},
+    userLoaded: {},
+    userLoadedError: false
   },
   action
 ) => {
@@ -27,6 +29,16 @@ export default (
         isLoggingIn: false,
         isAuthenticated: true,
         user: action.user
+      };
+    case types.USER_LOADED:
+      return {
+        ...state,
+        userLoaded: action.user
+      };
+    case types.USER_LOAD_FAILURE:
+      return {
+        ...state,
+        userLoadedError: true
       };
     case types.LOGIN_FAILURE:
       return {
