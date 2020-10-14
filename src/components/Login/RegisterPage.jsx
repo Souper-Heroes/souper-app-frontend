@@ -159,7 +159,7 @@ export default function RegisterPage({
                       checkTermsAndConds={checkTermsAndConds}
                     >
                       <Link to="/register">
-                        <strong>Terms And Conditions</strong>{' '}
+                        <strong>Terms And Conditions</strong>
                       </Link>
                     </CheckboxTermsAndConds>
 

@@ -2,7 +2,10 @@ import api from '../utils/api';
 
 export const types = {
   GET_ITEMS: 'GET_ITEMS',
-  GET_ITEMS_ERROR: 'GET_ITEMS_ERROR'
+  GET_ITEMS_ERROR: 'GET_ITEMS_ERROR',
+  DELETEITEM: 'DELETEITEM',
+  SORTITEM: 'SORTITEM',
+  UPDATE_COLLECTDATES: 'UPDATE_COLLECTDATES'
 };
 
 export const getItems = () => async dispatch => {
@@ -21,3 +24,26 @@ export const getItems = () => async dispatch => {
     });
   }
 };
+
+export const deleteItem = itemId => ({
+  type: types.DELETEITEM,
+  itemId
+});
+
+export const sortByItem = menuItem => ({
+  type: types.SORTITEM,
+  menuItem
+});
+
+export const updateCollectionDates = (
+  itemId,
+  collectionStartDateTime,
+  collectionEndDateTime
+) => ({
+  //
+  type: types.UPDATE_COLLECTDATES,
+  itemId,
+  collectionStartDateTime,
+  collectionEndDateTime,
+  success: true
+});
