@@ -44,6 +44,7 @@ module.exports = {
     "react/no-array-index-key": 0,
     "react/require-default-props": 0,
     "no-underscore-dangle": 0,
-    "func-names": 0
+    "func-names": 0,
+    "no-restricted-syntax": 0
   },
 };

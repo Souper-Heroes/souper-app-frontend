@@ -12,9 +12,7 @@ const mapStateToProps = (state, ownProps) => ({
 
   // TODO **** Note can't match using datatype matching (i.e ===) but can match on value (==)
   item: state.item.items
-    ? state.item.items.find(itemToFind => {
-        return itemToFind.itemId == ownProps.match.params.id;
-      })
+    ? state.item.items.find(itemToFind => itemToFind.itemId === ownProps.match.params.id)
     : null,
 });
 
@@ -24,14 +22,13 @@ const mapDispatchToProps = dispatch => ({
     itemId,
     collectionStartDateTime,
     collectionEndDateTime
-  ) =>
-    dispatch(
-      updateCollectionDates(
-        itemId,
-        collectionStartDateTime,
-        collectionEndDateTime
-      )
-    ),
+  ) => dispatch(
+    updateCollectionDates(
+      itemId,
+      collectionStartDateTime,
+      collectionEndDateTime
+    )
+  ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemViewPage);

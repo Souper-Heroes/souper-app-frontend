@@ -58,7 +58,7 @@ function ItemListings({ getToken }) {
         start: `${distance}`,
         format: {
           from: Number,
-          to: val => val.toFixed(2) + ` ${value === 'Miles' ? 'mi' : 'km'}`
+          to: val => `${val.toFixed(2)} ${value === 'Miles' ? 'mi' : 'km'}`
         }
       });
     } else if (name === 'category') {
@@ -77,7 +77,7 @@ function ItemListings({ getToken }) {
       start: `${distance}`,
       format: {
         from: Number,
-        to: value => value.toFixed(2) + ` ${unit === 'Miles' ? 'mi' : 'km'}`
+        to: value => `${value.toFixed(2)} ${unit === 'Miles' ? 'mi' : 'km'}`
       },
       keyboardSupport: true,
       connect: [true, false],

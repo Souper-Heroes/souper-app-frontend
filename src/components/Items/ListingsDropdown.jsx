@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 
 export default function ListingsDropdown({ sortItems }) {
   const [sortBy, setSortBy] = useState('Sort By');
-  const [menuItem, setMenuItem] = useState('');
+  // const [menuItem, setMenuItem] = useState('');
 
   const handleOnClickDropdown = menuItem => {
     // console.log(menuItem);
-    setMenuItem(menuItem);
+    // setMenuItem(menuItem);
     setSortBy(`Sorted By ${menuItem}`);
     sortItems(menuItem);
   };
