@@ -278,7 +278,10 @@ export default function MyItemListing({
                   <EmojiEvent />
                 </Button>
                 {itemType === 'provide' && (
-                  <Link to="/addedititem/" className={classes.link}>
+                  <Link
+                    to={'/addedititem/' + myitem._id}
+                    className={classes.link}
+                  >
                     <Button>
                       <Edit />
                     </Button>
