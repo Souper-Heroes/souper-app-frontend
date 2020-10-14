@@ -56,7 +56,8 @@ export default function MyItemListings(props) {
 
 MyItemListings.propTypes = {
   type: PropTypes.string,
-  uuid: PropTypes.string,
+  // TODO uuid: PropTypes.string,
+  uuid: PropTypes.number,
   items: PropTypes.instanceOf(Array),
   deleteItem: PropTypes.func,
   sortByItem: PropTypes.func

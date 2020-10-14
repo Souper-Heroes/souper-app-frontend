@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -27,17 +27,13 @@ const categories = [
   { title: 'Packet', checked: null },
 ];
 
-export default function CatCheckBox(props) {
-  const [zchecked, zsetChecked] = useState();
+export default function CatCheckBox() {
+  /* const [zchecked, zsetChecked] = useState();
   const handleCategoryToggle = (option, selected) => {
-    if (selected) {
-      option.checked = false;
-    } else {
-      option.checked = true;
-    }
+    option.checked = !selected;
     console.log(option.title, option.checked);
     zsetChecked(option.checked);
-  };
+  }; */
 
   return (
     <div>
@@ -48,16 +44,16 @@ export default function CatCheckBox(props) {
         disableCloseOnSelect
         getOptionLabel={option => option.title}
         renderOption={(option, { selected }) => (
-          <React.Fragment>
+          <>
             <Checkbox
               icon={icon}
               checkedIcon={checkedIcon}
               style={{ marginRight: 8 }}
               checked={selected}
-              onChange={e => handleCategoryToggle(option, selected)}
+              // onChange={() => handleCategoryToggle(option, selected)}
             />
             {option.title}
-          </React.Fragment>
+          </>
         )}
         renderInput={params => (
           <TextField

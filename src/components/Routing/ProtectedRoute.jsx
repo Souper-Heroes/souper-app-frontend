@@ -9,33 +9,32 @@ const ProtectedRoute = ({
   isAuthenticated,
   isVerifying,
   ...rest
-}) => (
-  <Route
-    {...rest}
-    render={props =>
-      isVerifying ? (
-        <div />
-      ) : isAuthenticated ? (
-        <Layout>
-          <Component {...props} />
-        </Layout>
-      ) : (
-        <Redirect
-          to={{
-            pathname: `${ROUTES.LOGIN}`,
-            state: { from: props.location }
-          }}
-        />
-      )
+}) => {
+  const getComponent = props => {
+    let component;
+    if (isVerifying) {
+      component = <div />;
+    } else if (isAuthenticated) {
+      component = (<Layout><Component {...props} /></Layout>);
+    } else {
+      component = (<Redirect to={{ pathname: `${ROUTES.LOGIN}`, state: { from: props.location } }} />);
     }
-  />
-);
+    return component;
+  };
+
+  return (
+    <Route
+      {...rest}
+      render={props => getComponent(props)}
+    />
+  );
+};
 
 ProtectedRoute.propTypes = {
   isAuthenticated: PropTypes.bool,
   isVerifying: PropTypes.bool,
-  // component: PropTypes.node,
-  // location: PropTypes.string
+  component: PropTypes.instanceOf(Object),
+  location: PropTypes.instanceOf(Object)
 };
 
 export default ProtectedRoute;

@@ -163,8 +163,7 @@ const item = (state = { ...initialState }, action) => {
             if (myItem.itemId === action.itemId) {
               // console.log( 'FOUND MY ITEM:', myItem.preferredCollectStartTime, action);
               const updItem = myItem;
-              updItem.preferredCollectStartTime =
-                action.collectionStartDateTime;
+              updItem.preferredCollectStartTime = action.collectionStartDateTime;
               updItem.preferredCollectEndTime = action.collectionStartDateTime;
               return updItem;
             }
