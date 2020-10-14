@@ -274,7 +274,10 @@ export default function MyItemListing({
                 </GridContainer>
               </GridItem>
               <GridItem xs={12} align="right">
-                <Button onClick={handleOnClickAgreeCup}>
+                <Button
+                  onClick={handleOnClickAgreeCup}
+                  color={myitem.c_user_id === null ? 'default' : 'secondary'}
+                >
                   <EmojiEvent />
                 </Button>
                 {itemType === 'provide' && (
