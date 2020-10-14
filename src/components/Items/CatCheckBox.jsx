@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -27,13 +27,14 @@ const categories = [
   { title: 'Packet' },
 ];
 
-export default function CatCheckBox({ category }) {
-  const [checked, setChecked] = useState();
+// export default function CatCheckBox({ category }) {
+export default function CatCheckBox() {
+  /* const [checked, setChecked] = useState();
 
   const onTagsChange = (event, values) => {
     category = values;
     setChecked(values);
-  };
+  }; */
 
   return (
     <div>
@@ -42,7 +43,7 @@ export default function CatCheckBox({ category }) {
         id="checkboxes"
         options={categories}
         disableCloseOnSelect
-        onChange={onTagsChange}
+        // onChange={onTagsChange}
         getOptionLabel={option => option.title}
         renderOption={(option, { selected }) => (
           <>

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import * as ROUTES from 'components/Routing/routes';
 import PropTypes from 'prop-types';
@@ -25,7 +25,9 @@ import image from '../../assets/img/board.jpg';
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage({ loginError, login, loginWithGoogle, isAuthenticated }) {
+export default function LoginPage({
+  loginError, login, loginWithGoogle, isAuthenticated
+}) {
   const emailRef = useRef(null);
   const passRef = useRef(null);
   const classes = useStyles();
@@ -176,4 +178,5 @@ LoginPage.propTypes = {
   loginError: PropTypes.bool,
   login: PropTypes.bool,
   loginWithGoogle: PropTypes.bool,
+  isAuthenticated: PropTypes.bool
 };

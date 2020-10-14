@@ -18,7 +18,7 @@ export const getItems = () => async dispatch => {
     });
   } catch (err) {
     // do something with error
-    console.log(err);
+    // console.log(err);
     dispatch({
       type: types.GET_ITEMS_ERROR
     });
