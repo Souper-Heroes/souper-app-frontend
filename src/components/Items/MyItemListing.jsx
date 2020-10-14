@@ -22,7 +22,12 @@ import moment from 'moment';
 
 const useStyles = makeStyles(styles);
 
-export default function MyItemListing({ type, myitem, deleteItem }) {
+export default function MyItemListing({
+  type,
+  myitem,
+  deleteItem,
+  unreserveItem,
+}) {
   const [item, setItem] = useState(myitem);
   const [itemType, setType] = useState(type);
 
@@ -48,7 +53,12 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
     console.log(
       `Clicked Delete button, do something with item: ${item.itemId}, Title: ${item.description}`
     );
-    deleteItem(item._id);
+    if (type === 'provide') {
+      deleteItem(item._id);
+    } else {
+      // Unreserve the item
+      unreserveItem('dummyId', item._id);
+    }
   };
 
   const handleOnClickAgreeCup = event => {

@@ -25,6 +25,11 @@ export default function MyItemListings(props) {
     await props.deleteItem(_id);
   };
 
+  const unreserveItem = async (_id, itemId) => {
+    // console.log(`Clicked Delete button for collector, unreseve item with _id: ${_id}`);
+    await props.unreserveItem(_id, itemId);
+  };
+
   const getItems = () => {
     return items.filter(myItem =>
       type === 'provide'
@@ -46,6 +51,7 @@ export default function MyItemListings(props) {
               type={type}
               myitem={myItem}
               deleteItem={deleteItem}
+              unreserveItem={unreserveItem}
             />
           ))}
         </GridItem>
