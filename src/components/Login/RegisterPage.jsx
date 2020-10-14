@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import * as ROUTES from 'components/Routing/routes';
 
 import PropTypes from 'prop-types';
@@ -35,7 +35,8 @@ export default function RegisterPage({
   signUpError,
   registerInputs,
   signUp,
-  loginWithGoogle
+  loginWithGoogle,
+  isAuthenticated
 }) {
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
   const [checkedTermsAndConds, setcheckedTermsAndConds] = useState(true);
@@ -43,7 +44,6 @@ export default function RegisterPage({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const classes = useStyles();
-  const history = useHistory();
 
   setTimeout(() => {
     setCardAnimation('');
@@ -53,14 +53,16 @@ export default function RegisterPage({
 
   const handleSubmit = async event => {
     const { name } = event.currentTarget;
-    let authenticated = false;
-    if (name === 'signUp') {
-      authenticated = await signUp(email, password, displayName);
+    if (name === 'login') {
+      signUp(email, password, displayName);
     } else if (name === 'loginWithGoogle') {
-      authenticated = await loginWithGoogle();
+      loginWithGoogle();
     }
-    if (authenticated) history.push(ROUTES.DASHBOARD);
   };
+
+  if (isAuthenticated) {
+    return <Redirect to={ROUTES.DASHBOARD} />;
+  }
 
   const handleInputChange = event => {
     const { id, value } = event.currentTarget;
