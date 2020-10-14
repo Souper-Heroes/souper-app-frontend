@@ -195,5 +195,6 @@ RegisterPage.propTypes = {
   signUpError: PropTypes.bool,
   signUp: PropTypes.bool,
   loginWithGoogle: PropTypes.bool,
+  isAuthenticated: PropTypes.bool,
   registerInputs: PropTypes.instanceOf(Array)
 };

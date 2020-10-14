@@ -82,7 +82,7 @@ export default function AddEditItem({ userItems }) {
 
   // An attempt at makign the data stick about for a bit
   const [items, setItems] = useState(userItems);
-  const [category, setCategory] = useState(userItems);
+  const [category] = useState(userItems);
   const addNewItem = () => {
     // Create a copy of the tasks array
     const updatedItems = items.slice();
@@ -95,7 +95,7 @@ export default function AddEditItem({ userItems }) {
       photoId: '1117', // TODO Get from DropZone
       title,
       description,
-      category: category, //category from CatCheckBox
+      category, // category from CatCheckBox
       expiry,
       location,
       availability,
