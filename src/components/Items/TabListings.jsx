@@ -37,15 +37,23 @@ export default function TabListings({ userItems }) {
           {
             tabName: 'Listings',
             tabContent: (
-              <MyItemListings type="provide" myitems={itemsToProvide} />
-            )
+              <MyItemListings
+                userProfile={userProfile}
+                type="provide"
+                myitems={itemsToProvide}
+              />
+            ),
           },
           {
             tabName: 'Collections',
             tabContent: (
-              <MyItemListings type="collect" myitems={itemsToCollect} />
-            )
-          }
+              <MyItemListings
+                userProfile={userProfile}
+                type="collect"
+                myitems={itemsToCollect}
+              />
+            ),
+          },
         ]}
       />
     </div>
