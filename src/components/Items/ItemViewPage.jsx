@@ -5,41 +5,39 @@ import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import Button from 'components/CustomButtons/Button';
 import Typography from '@material-ui/core/Typography';
-import Datetime from 'react-datetime';
-import FormControl from '@material-ui/core/FormControl';
 import styles from 'assets/jss/Items/views/ItemViewPage';
 import moment from 'moment';
+//import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
+//import Datetime from 'react-datetime';
+//import FormControl from '@material-ui/core/FormControl';
+//import { TextField } from '@material-ui/core';
 
 const useStyles = makeStyles(styles);
 
 export default function ItemViewPage(props) {
   // console.log('VIEW PAGE PROPS', props);
-  const { uuid, item } = props;
+  const { _id, item } = props;
 
   const [isDisableAmendBtn, setIsDisableAmendBtn] = useState(true);
 
-  const [collectionStartDateTime, setCollectionStartDateTime] = useState(
-    item.preferredCollectStartTime
-  );
-
-  const [collectionEndDateTime, setCollectionEndDateTime] = useState(
-    item.preferredCollectEndTime
-  );
+  const [availability, setAvailability] = useState(item.availability);
 
   const classes = useStyles();
 
   const handleOnClickReserve = () => {
     // console.log(`Clicked Reserve Account, do something with DisplayName: `);
+    props.reserveItem(_id, item._id);
+  };
+
+  const handleOnClickUnreserve = () => {
+    // console.log(`Clicked Reserve Account, do something with DisplayName: `);
+    props.unreserveItem(_id, item._id);
   };
 
   const handleOnClickAmendTime = () => {
     // Update backend with new amended dates
 
-    props.updateCollectionDates(
-      item.itemId,
-      collectionStartDateTime.toISOString(),
-      collectionEndDateTime.toISOString()
-    );
+    props.updateCollectionDates(item._id, availability);
 
     setIsDisableAmendBtn(true);
   };
@@ -51,51 +49,36 @@ export default function ItemViewPage(props) {
   const handleCollectionDateChange = (type, event) => {
     // console.log('You picked date:', event);
 
-    const newDate = moment(event);
+    const newDate = event;
 
     // console.log('converted newDate', newDate);
 
-    if (!newDate.isValid()) throw new Error('Invalid Date passed');
+    //if (!newDate.isValid()) throw new Error('Invalid Date passed');
     // console.log(
     //  `Handle Date Change1, do something with ${type} ${newDate} ${newDate.isValid()}`
     // );
 
-    if (
-      type === 'start'
-        ? newDate.isSame(moment(item.preferredCollectStartTime)) &&
-          collectionEndDateTime.isSame(moment(item.preferredCollectEndTime))
-        : newDate.isSame(moment(item.preferredCollectEndTime)) &&
-          collectionStartDateTime.isSame(moment(item.preferredCollectStartTime))
-    ) {
+    if (newDate === item.availability) {
       // Nothing has changed
       // console.log(
-      //  `Handle Date Change2, do something with ${type} ${collectionStartDateTime} ${collectionStartDateTime.isValid()}`
+      //  `Handle Date Change2, do something with ${type} ${availability}`
       // );
-      if (type === 'start') {
-        setCollectionStartDateTime(newDate);
-      } else {
-        setCollectionEndDateTime(newDate);
-      }
+      setAvailability(newDate);
       // Disable Amend button as nothing has changed compared with the backend
       setIsDisableAmendBtn(true);
       return;
     }
 
     // Dates have changed so provide option to update the backend with Amend Button displayed
-    if (type === 'start') {
-      setCollectionStartDateTime(newDate);
-    } else {
-      setCollectionEndDateTime(newDate);
-    }
-
+    setAvailability(newDate);
     setIsDisableAmendBtn(false);
   };
 
   // console.log(
   //   'CollectStartTime:',
-  //   collectionStartDateTime,
+  //   availability,
   //   'PropStartTime:',
-  //   props.item.preferredCollectStartTime
+  //   props.item.availability
   // );
 
   return (
@@ -229,14 +212,11 @@ export default function ItemViewPage(props) {
                       align="left"
                       gutterBottom
                     >
-                      {moment(item.expiryDate).format('Do MMM YYYY')}
+                      {moment(item.expiry_date).format('Do MMM YYYY')}
                     </Typography>
                   </GridItem>
                 </GridContainer>
               </GridItem>
-              <GridItem xs={6} sm={6} md={6} lg={6} />
-            </GridContainer>
-            <GridContainer align="center">
               <GridItem xs={6} sm={6} md={6} lg={6}>
                 <GridContainer align="left" spacing={0} direction="column">
                   <GridItem
@@ -251,7 +231,15 @@ export default function ItemViewPage(props) {
                       color="textSecondary"
                       align="left"
                     >
-                      Start Time Slot:
+                      Collection Details:
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textPrimary"
+                      align="left"
+                      gutterBottom
+                    >
+                      {availability}
                     </Typography>
                   </GridItem>
                   <GridItem
@@ -260,118 +248,7 @@ export default function ItemViewPage(props) {
                     md={6}
                     lg={6}
                     className={classes.output}
-                  >
-                    {uuid !== item.collectUserId && (
-                      <Typography
-                        variant="body2"
-                        color="textPrimary"
-                        align="left"
-                        gutterBottom
-                      >
-                        {moment(collectionStartDateTime).isValid()
-                          ? moment(collectionStartDateTime).format(
-                              'Do MMM YY hh:mm '
-                            )
-                          : ''}
-                      </Typography>
-                    )}
-                    {uuid === item.collectUserId && (
-                      <>
-                        <FormControl>
-                          <Datetime
-                            value={
-                              moment(collectionStartDateTime).isValid()
-                                ? moment(collectionStartDateTime).format(
-                                    'Do MMM YY hh:mm'
-                                  )
-                                : ''
-                            }
-                            onChange={event =>
-                              handleCollectionDateChange('start', event)
-                            }
-                            inputProps={{
-                              placeholder: moment(
-                                item.preferredCollectStartTime
-                              ).isValid()
-                                ? `${moment(
-                                    item.preferredCollectStartTime
-                                  ).format('Do MMM YY hh:mm')}`
-                                : '',
-                            }}
-                          />
-                        </FormControl>
-                      </>
-                    )}
-                  </GridItem>
-                </GridContainer>
-              </GridItem>
-              <GridItem xs={6} sm={6} md={6} lg={6}>
-                <GridContainer align="right" spacing={0} direction="column">
-                  <GridItem
-                    xs={6}
-                    sm={6}
-                    md={6}
-                    lg={6}
-                    className={classes.label}
-                  >
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      align="left"
-                    >
-                      End Time Slot:
-                    </Typography>
-                  </GridItem>
-                  <GridItem
-                    align="left"
-                    xs={6}
-                    sm={6}
-                    md={6}
-                    lg={6}
-                    className={classes.label}
-                  >
-                    {uuid !== item.collectUserId && (
-                      <Typography
-                        variant="body2"
-                        color="textPrimary"
-                        align="left"
-                        gutterBottom
-                      >
-                        {moment(collectionEndDateTime).isValid()
-                          ? moment(collectionEndDateTime).format(
-                              'Do MMM YY hh:mm'
-                            )
-                          : ''}
-                      </Typography>
-                    )}
-                    {uuid === item.collectUserId && (
-                      <>
-                        <FormControl>
-                          <Datetime
-                            value={
-                              moment(collectionEndDateTime).isValid()
-                                ? moment(collectionEndDateTime).format(
-                                    'Do MMM YY hh:mm'
-                                  )
-                                : ''
-                            }
-                            onChange={event =>
-                              handleCollectionDateChange('end', event)
-                            }
-                            inputProps={{
-                              placeholder: moment(
-                                item.preferredCollectEndTime
-                              ).isValid()
-                                ? `${moment(
-                                    item.preferredCollectEndTime
-                                  ).format('Do MMM YY hh:mm')}`
-                                : '',
-                            }}
-                          />
-                        </FormControl>
-                      </>
-                    )}
-                  </GridItem>
+                  />
                 </GridContainer>
               </GridItem>
             </GridContainer>
@@ -400,14 +277,26 @@ export default function ItemViewPage(props) {
                   </Button>
                 </GridItem>
                 <GridItem xs={6} sm={6} align="left">
-                  <Button
-                    className={classes.button_label}
-                    color="success"
-                    size="sm"
-                    onClick={handleOnClickReserve}
-                  >
-                    Reserve
-                  </Button>
+                  {item.c_user_id === null && (
+                    <Button
+                      className={classes.button_label}
+                      color="success"
+                      size="sm"
+                      onClick={handleOnClickReserve}
+                    >
+                      Reserve
+                    </Button>
+                  )}
+                  {_id === item.c_user_id && (
+                    <Button
+                      className={classes.button_label}
+                      color="success"
+                      size="sm"
+                      onClick={handleOnClickUnreserve}
+                    >
+                      Unreserve
+                    </Button>
+                  )}
                 </GridItem>
               </GridItem>
             </GridItem>
@@ -417,3 +306,39 @@ export default function ItemViewPage(props) {
     </div>
   );
 }
+
+/* TODO Logic to amend item if you are collecting
+ {_id !== item.c_user_id && (
+                      <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        align="left"
+                        gutterBottom
+                      >
+                        {availability}
+                      </Typography>
+                    )}
+                    {_id === item.c_user_id && (
+                      <CustomInput
+                        id="Collection Availability"
+                        inputProps={{
+                          placeholder: `${availability}`,
+                        }}
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                      />
+                    )} */
+
+/* form control input
+<FormControl>
+                          <Datetime
+                            value={availability}
+                            onChange={event =>
+                              handleCollectionDateChange('start', event)
+                            }
+                            inputProps={{
+                              placeholder: item.availability,
+                            }}
+                          />
+                          </FormControl> */

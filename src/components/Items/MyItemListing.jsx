@@ -48,7 +48,7 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
     console.log(
       `Clicked Delete button, do something with item: ${item.itemId}, Title: ${item.description}`
     );
-    deleteItem(item.itemId);
+    deleteItem(item._id);
   };
 
   const handleOnClickAgreeCup = event => {
@@ -64,7 +64,7 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
         <Paper className={classes.paper} spacing={1}>
           <GridContainer spacing={2}>
             <Grid item>
-              <Link to={'/itemview/' + myitem.itemId} className={classes.link}>
+              <Link to={'/itemview/' + myitem._id} className={classes.link}>
                 <ButtonBase className={classes.image}>
                   <img
                     className={classes.img}
@@ -76,10 +76,7 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
             </Grid>
             <GridContainer xs={12} sm item spacing={0} direction="column">
               <GridItem align="left" xs={12} className={classes.cell}>
-                <Link
-                  to={'/itemview/' + myitem.itemId}
-                  className={classes.link}
-                >
+                <Link to={'/itemview/' + myitem._id} className={classes.link}>
                   <Typography gutterBottom variant="body1">
                     <strong>{myitem.description}</strong>
                   </Typography>
@@ -217,7 +214,7 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
                           gutterBottom
                           align="left"
                         >
-                          {moment(myitem.expiryDate).format('Do MMM YY')}
+                          {moment(myitem.expiry_date).format('Do MMM YY')}
                         </Typography>
                       </GridItem>
                     </GridContainer>
@@ -240,7 +237,7 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
                         lg={5}
                         className={classes.cell}
                       >
-                        {myitem.preferredCollectStartTime !== null &&
+                        {myitem.availability !== null &&
                           GetCollectionMsg(itemType)}
                       </GridItem>
                       <GridItem
@@ -251,20 +248,14 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
                         align="left"
                         className={classes.cell}
                       >
-                        {myitem.preferredCollectStartTime !== null && (
+                        {myitem.availability !== null && (
                           <Typography
                             variant="body2"
                             color="textPrimary"
                             gutterBottom
                             align="left"
                           >
-                            {moment(myitem.preferredCollectStartTime).format(
-                              'Do MMM YY HH:MM'
-                            )}
-                            -
-                            {moment(myitem.preferredCollectEndTime).format(
-                              'HH:MM'
-                            )}
+                            {myitem.availability}
                           </Typography>
                         )}
                       </GridItem>
