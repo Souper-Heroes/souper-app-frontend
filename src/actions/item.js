@@ -2,11 +2,13 @@ export const types = {
   DELETEITEM: 'DELETEITEM',
   SORTITEM: 'SORTITEM',
   UPDATE_COLLECTDATES: 'UPDATE_COLLECTDATES',
+  RESERVE_ITEM: 'RESERVE_ITEM',
+  UNRESERVE_ITEM: 'UNRESERVE_ITEM',
 };
 
-export const deleteItem = itemId => ({
+export const deleteItem = _id => ({
   type: types.DELETEITEM,
-  itemId,
+  _id,
 });
 
 export const sortByItem = menuItem => ({
@@ -14,15 +16,21 @@ export const sortByItem = menuItem => ({
   menuItem,
 });
 
-export const updateCollectionDates = (
-  itemId,
-  collectionStartDateTime,
-  collectionEndDateTime
-) => ({
-  //
+export const updateCollectionDates = (_id, availability) => ({
   type: types.UPDATE_COLLECTDATES,
-  itemId,
-  collectionStartDateTime,
-  collectionEndDateTime,
+  _id,
+  availability,
   success: true,
+});
+
+export const reserveItem = (_id, itemId) => ({
+  type: types.RESERVE_ITEM,
+  _id,
+  itemId,
+});
+
+export const unreserveItem = (_id, itemId) => ({
+  type: types.UNRESERVE_ITEM,
+  _id,
+  itemId,
 });

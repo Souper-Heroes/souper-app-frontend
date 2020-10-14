@@ -20,32 +20,34 @@ export default function MyItemListings(props) {
     props.sortByItem(menuItem);
   };
 
-  const deleteItem = async itemId => {
-    // console.log(`Clicked Delete button, delete item with itemId: ${itemId}`);
-    await props.deleteItem(itemId);
+  const deleteItem = async _id => {
+    // console.log(`Clicked Delete button, delete item with _id: ${_id}`);
+    await props.deleteItem(_id);
+  };
+
+  const getItems = () => {
+    return items.filter(myItem =>
+      type === 'provide'
+        ? myItem.user_id === props._id
+        : myItem.c_user_id === props._id
+    );
   };
 
   return (
     <div>
       <GridContainer>
         <GridItem align="right">
-          <ListingsDropdown sortItems={sortItems} />
+          {getItems().length > 0 && <ListingsDropdown sortItems={sortItems} />}
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
-          {items
-            .filter(item =>
-              type === 'provide'
-                ? item.provideUserId === props.uuid
-                : item.collectUserId === props.uuid
-            )
-            .map(myItem => (
-              <MyItemListing
-                key={myItem.itemId}
-                type={type}
-                myitem={myItem}
-                deleteItem={deleteItem}
-              />
-            ))}
+          {getItems().map(myItem => (
+            <MyItemListing
+              key={myItem._id}
+              type={type}
+              myitem={myItem}
+              deleteItem={deleteItem}
+            />
+          ))}
         </GridItem>
         {type === 'provide' && (
           <GridItem xs={6} sm={6} align="left">
@@ -57,7 +59,7 @@ export default function MyItemListings(props) {
           </GridItem>
         )}
         <GridItem xs={paginationColSize} sm={paginationColSize} align="right">
-          <ListingsPaginations />
+          {getItems().length > 0 && <ListingsPaginations />}
         </GridItem>
       </GridContainer>
     </div>
