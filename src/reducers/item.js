@@ -102,7 +102,7 @@ const initialState = {
     {
       _id: '9',
       user_id: '1',
-      c_user_id: '2',
+      c_user_id: null,
       title: 'Potatoes',
       category: 'Baked Goods',
       description: 'Half a bag of Potatoes roots growing',
