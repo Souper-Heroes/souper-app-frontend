@@ -12,31 +12,27 @@ const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const categories = [
-  { title: 'Nuts', checked: null },
-  { title: 'Fruit', checked: null },
-  { title: 'Dairy', checked: null },
-  { title: 'Fish', checked: null },
-  { title: 'Meat', checked: null },
-  { title: 'Cereal', checked: null },
-  { title: 'Fresh', checked: null },
-  { title: 'Cooked', checked: null },
-  { title: 'Raw', checked: null },
-  { title: 'Frozen', checked: null },
-  { title: 'Dried', checked: null },
-  { title: 'Tinned', checked: null },
-  { title: 'Packet', checked: null },
+  { title: 'Nuts' },
+  { title: 'Fruit' },
+  { title: 'Dairy' },
+  { title: 'Fish' },
+  { title: 'Meat' },
+  { title: 'Cereal' },
+  { title: 'Fresh' },
+  { title: 'Cooked' },
+  { title: 'Raw' },
+  { title: 'Frozen' },
+  { title: 'Dried' },
+  { title: 'Tinned' },
+  { title: 'Packet' },
 ];
 
-export default function CatCheckBox(props) {
-  const [zchecked, zsetChecked] = useState();
-  const handleCategoryToggle = (option, selected) => {
-    if (selected) {
-      option.checked = false;
-    } else {
-      option.checked = true;
-    }
-    console.log(option.title, option.checked);
-    zsetChecked(option.checked);
+export default function CatCheckBox({ category }) {
+  const [checked, setChecked] = useState();
+
+  const onTagsChange = (event, values) => {
+    category = values;
+    setChecked(values);
   };
 
   return (
@@ -46,6 +42,7 @@ export default function CatCheckBox(props) {
         id="checkboxes"
         options={categories}
         disableCloseOnSelect
+        onChange={onTagsChange}
         getOptionLabel={option => option.title}
         renderOption={(option, { selected }) => (
           <React.Fragment>
@@ -54,7 +51,7 @@ export default function CatCheckBox(props) {
               checkedIcon={checkedIcon}
               style={{ marginRight: 8 }}
               checked={selected}
-              onChange={e => handleCategoryToggle(option, selected)}
+              // onChange={e => handleCategoryToggle(option, selected)}
             />
             {option.title}
           </React.Fragment>
