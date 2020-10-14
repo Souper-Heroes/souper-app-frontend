@@ -12,9 +12,6 @@ const mapStateToProps = (state, ownProps) => ({
   _id: '1', // TODO Get the actual uuid from firebase of the logged in user
   id: ownProps.match.params.id,
   items: state.item.items,
-  // item: state.item ? state.item.items[ownProps.match.params.id] : null,
-
-  // TODO **** Note can't match using datatype matching (i.e ===) but can match on value (==)
   item: state.item.items
     ? state.item.items.find(
         itemToFind => itemToFind._id === ownProps.match.params.id
@@ -23,7 +20,6 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  //   getToken: () => dispatch(getToken())
   updateCollectionDates: (_id, availiability) =>
     dispatch(updateCollectionDates(_id, availiability)),
   unreserveItem: (_id, itemId) => dispatch(unreserveItem(_id, itemId)),
