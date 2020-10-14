@@ -17,7 +17,7 @@ const initialState = {
       preferredProvideEndTime: '2020-10-23T18:00:00Z',
       preferredCollectStartTime: '2020-10-23T16:00:00Z',
       preferredCollectEndTime: '2020-10-23T18:00:00Z',
-      reservedItem: 'false',
+      reservedItem: 'false'
     },
     {
       itemId: 2,
@@ -33,7 +33,7 @@ const initialState = {
       preferredProvideEndTime: '2020-10-24T17:30:00Z',
       preferredCollectStartTime: null,
       preferredCollectEndTime: null,
-      reservedItem: 'false',
+      reservedItem: 'false'
     },
     {
       itemId: 3,
@@ -49,7 +49,7 @@ const initialState = {
       preferredProvideEndTime: '2020-12-15T17:30:00Z',
       preferredCollectStartTime: null,
       preferredCollectEndTime: null,
-      reservedItem: 'false',
+      reservedItem: 'false'
     },
     {
       itemId: 4,
@@ -65,7 +65,7 @@ const initialState = {
       preferredProvideEndTime: '2020-06-28T19:30:00Z',
       preferredCollectStartTime: null,
       preferredCollectEndTime: null,
-      reservedItem: 'false',
+      reservedItem: 'false'
     },
     {
       itemId: 5,
@@ -81,7 +81,7 @@ const initialState = {
       preferredProvideEndTime: '2020-12-26T15:00:00Z',
       preferredCollectStartTime: '2020-12-26T16:30:00Z',
       preferredCollectEndTime: '2020-12-26T22:00:00Z',
-      reservedItem: 'false',
+      reservedItem: 'false'
     },
     {
       itemId: 6,
@@ -97,7 +97,7 @@ const initialState = {
       preferredProvideEndTime: '2020-12-02T20:00:00Z',
       preferredCollectStartTime: null,
       preferredCollectEndTime: null,
-      reservedItem: 'false',
+      reservedItem: 'false'
     },
     {
       itemId: 7,
@@ -113,7 +113,7 @@ const initialState = {
       preferredProvideEndTime: '2020-12-24T20:00:00Z',
       preferredCollectStartTime: null,
       preferredCollectEndTime: null,
-      reservedItem: 'false',
+      reservedItem: 'false'
     },
     {
       itemId: 8,
@@ -129,7 +129,7 @@ const initialState = {
       preferredProvideEndTime: '2020-12-26T20:00:00Z',
       preferredCollectStartTime: '2020-12-26T10:00:00Z',
       preferredCollectEndTime: '2020-12-26T22:00:00Z',
-      reservedItem: 'false',
+      reservedItem: 'false'
     },
     {
       itemId: 9,
@@ -145,13 +145,22 @@ const initialState = {
       preferredProvideEndTime: '2020-04-22T15:00:00Z',
       preferredCollectStartTime: null,
       preferredCollectEndTime: null,
-      reservedItem: 'false',
-    },
-  ],
+      reservedItem: 'false'
+    }
+  ]
 };
 
-const item = (state = { ...initialState }, action) => {
-  switch (action.type) {
+export default (state = initialState, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case types.GET_ITEMS:
+      return {
+        items: payload
+      };
+    case types.GET_ITEMS_ERROR:
+      return {
+        items: payload
+      };
     case types.UPDATE_COLLECTDATES:
       return {
         // TODO should call axios api function to update bbackend with new preferred Collect time for item
@@ -169,17 +178,17 @@ const item = (state = { ...initialState }, action) => {
               return updItem;
             }
             return myItem;
-          }),
+          })
           // items: [...state.items.filter(item => item.itemId === action.itemId).map(),],
         ],
-        success: true,
+        success: true
       };
     case types.DELETEITEM:
       return {
         ...state,
         items: [
-          ...state.items.filter(myItem => myItem.itemId !== action.itemId),
-        ],
+          ...state.items.filter(myItem => myItem.itemId !== action.itemId)
+        ]
       };
     case types.SORTITEM:
       if (action.menuItem === 'Category') {
@@ -193,7 +202,7 @@ const item = (state = { ...initialState }, action) => {
               return -1;
             }
             return 0;
-          }),
+          })
         };
       }
       //  Sort By Expiry Date
@@ -207,7 +216,7 @@ const item = (state = { ...initialState }, action) => {
             return -1;
           }
           return 0;
-        }),
+        })
       };
 
     default:
@@ -215,5 +224,3 @@ const item = (state = { ...initialState }, action) => {
   }
   // return state;
 };
-
-export default item;
