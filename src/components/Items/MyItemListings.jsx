@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 // core components
 import { makeStyles } from '@material-ui/core/styles';
-// import styles from 'assets/jss/Items/views/MyItemListings';
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
@@ -13,45 +12,18 @@ import Button from 'components/CustomButtons/Button';
 import ListingsPaginations from 'components/Items/ListingsPaginations';
 import PropTypes from 'prop-types';
 
-// import Divider from '@material-ui/core/Divider';
-
-// const useStyles = makeStyles(styles);
-
-export default function MyItemListings({ type, myitems }) {
-  const [items, setItems] = useState(myitems);
-
+export default function MyItemListings(props) {
+  const { type, items } = props;
   const classes = makeStyles(styles);
   const paginationColSize = type === 'provide' ? 6 : 12;
 
   const sortItems = menuItem => {
-    const newItems = [...items];
+    props.sortByItem(menuItem);
+  };
 
-    if (menuItem === 'Category') {
-      newItems.sort((a, b) => {
-        if (a.category > b.category) {
-          return 1;
-        }
-        if (b.category > a.category) {
-          return -1;
-        }
-        return 0;
-      });
-    } else {
-      //  Sort By Expiry Date
-      newItems.sort((a, b) => {
-        if (a.expiryDate > b.expiryDate) {
-          return 1;
-        }
-        if (b.expiryDate > a.expiryDate) {
-          return -1;
-        }
-        return 0;
-      });
-    }
-
-    // console.log('Sorted Items:', newItems);
-
-    setItems(newItems);
+  const deleteItem = async itemId => {
+    // console.log(`Clicked Delete button, delete item with itemId: ${itemId}`);
+    await props.deleteItem(itemId);
   };
 
   return (
@@ -61,9 +33,9 @@ export default function MyItemListings({ type, myitems }) {
           <ListingsDropdown sortItems={sortItems} />
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
-          {items.map(myItem => (
-            <MyItemListing key={myItem.itemId} type={type} myitem={myItem} />
-          ))}
+          {items
+            .filter(item => props.uuid === (type === 'provide' ? item.provideUserId : item.collectUserId))
+            .map(myItem => (<MyItemListing key={myItem.itemId} type={type} myitem={myItem} deleteItem={deleteItem} />))}
         </GridItem>
         {type === 'provide' && (
           <GridItem xs={6} sm={6} align="left">
@@ -83,6 +55,9 @@ export default function MyItemListings({ type, myitems }) {
 }
 
 MyItemListings.propTypes = {
-  type: PropTypes.string.isRequired,
-  myitems: PropTypes.instanceOf(Array).isRequired
+  type: PropTypes.string,
+  uuid: PropTypes.string,
+  items: PropTypes.instanceOf(Array),
+  deleteItem: PropTypes.func,
+  sortByItem: PropTypes.func
 };

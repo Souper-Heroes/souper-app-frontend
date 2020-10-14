@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 
 import CustomDropdown from 'components/MaterialKitComponents/CustomDropdown/CustomDropdown';
+import PropTypes from 'prop-types';
 
 export default function ListingsDropdown({ sortItems }) {
   const [sortBy, setSortBy] = useState('Sort By');
   const [menuItem, setMenuItem] = useState('');
 
-  const handleOnClickDropdown = (menuItem) => {
-    //console.log(menuItem);
+  const handleOnClickDropdown = menuItem => {
+    // console.log(menuItem);
     setMenuItem(menuItem);
     setSortBy(`Sorted By ${menuItem}`);
     sortItems(menuItem);
@@ -18,7 +19,7 @@ export default function ListingsDropdown({ sortItems }) {
       hoverColor="rose"
       dropdownHeader="Sort By"
       buttonText={sortBy}
-      onClick={(menuItem) => handleOnClickDropdown(menuItem)}
+      onClick={menuItem => handleOnClickDropdown(menuItem)}
       buttonProps={{
         round: true,
         color: 'rose',
@@ -26,11 +27,15 @@ export default function ListingsDropdown({ sortItems }) {
       dropdownList={[
         'Expiry Date',
         'Category',
-        //{ divider: true },
-        //'Separated link',
-        //{ divider: true },
-        //'One more separated link',
+        // { divider: true },
+        // 'Separated link',
+        // { divider: true },
+        // 'One more separated link',
       ]}
     />
   );
 }
+
+ListingsDropdown.propTypes = {
+  sortItems: PropTypes.func,
+};
