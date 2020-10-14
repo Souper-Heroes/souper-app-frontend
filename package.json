@@ -9,7 +9,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint:check": "eslint ./src/** --no-error-on-unmatched-pattern",
+    "lint:check": "eslint ./src/** --ext=js,jsx --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./src/** --ext=js,jsx --fix;  exit 0",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
     "build-package-css": "node-sass src/assets/scss/material-kit-react.scss dist/material-kit-react.css",
