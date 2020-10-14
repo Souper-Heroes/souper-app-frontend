@@ -5,7 +5,7 @@ import ItemListPage from 'components/Items/ItemListPage';
 const mapStateToProps = state => ({
   isLoggingIn: state.auth.isLoggingIn,
   isAuthenticated: state.auth.isAuthenticated,
-  items: state.item
+  items: state.item,
 });
 
 /* const mapDispatchToProps = dispatch => ({
