@@ -49,7 +49,7 @@ jobs:
       - run:
           name: run lint
           command: |
-            npm run lint
+            npm run lint:check
 
 workflows:
   version: 2.1
