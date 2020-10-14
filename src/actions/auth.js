@@ -1,89 +1,141 @@
 import { myFirebase, googleProvider } from '../firebase/firebase';
+import api from '../utils/api';
 
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
+export const types = {
+  LOGIN_REQUEST: 'LOGIN_REQUEST',
+  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
+  LOGIN_FAILURE: 'LOGIN_FAILURE',
+  SIGNUP_FAILURE: 'SIGNUP_FAILURE',
 
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
+  USER_LOADED: 'USER_LOADED',
+  USER_LOAD_FAILURE: 'USER_LOAD_FAILURE',
 
-export const VERIFY_REQUEST = 'VERIFY_REQUEST';
-export const VERIFY_SUCCESS = 'VERIFY_SUCCESS';
+  LOGOUT_REQUEST: 'LOGOUT_REQUEST',
+  LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
+  LOGOUT_FAILURE: 'LOGOUT_FAILURE',
 
-const requestLogin = () => ({
-  type: LOGIN_REQUEST
-});
+  VERIFY_REQUEST: 'VERIFY_REQUEST',
+  VERIFY_SUCCESS: 'VERIFY_SUCCESS'
+};
 
-const receiveLogin = user => ({
-  type: LOGIN_SUCCESS,
-  user
-});
+const requestLogin = () => {
+  return {
+    type: types.LOGIN_REQUEST
+  };
+};
 
-const loginError = () => ({
-  type: LOGIN_FAILURE
-});
+const receiveLogin = user => {
+  return {
+    type: types.LOGIN_SUCCESS,
+    user
+  };
+};
 
-const signUpError = message => ({
-  type: SIGNUP_FAILURE,
-  message
-});
+const userLoaded = user => {
+  return {
+    type: types.USER_LOADED,
+    user
+  };
+};
 
-const requestLogout = () => ({
-  type: LOGOUT_REQUEST
-});
+const userLoadError = () => {
+  return {
+    type: types.USER_LOAD_FAILURE
+  };
+};
 
-const receiveLogout = () => ({
-  type: LOGOUT_SUCCESS
-});
+const loginError = () => {
+  return {
+    type: types.LOGIN_FAILURE
+  };
+};
 
-const logoutError = () => ({
-  type: LOGOUT_FAILURE
-});
+const signUpError = message => {
+  return {
+    type: types.SIGNUP_FAILURE,
+    message
+  };
+};
 
-const verifyRequest = () => ({
-  type: VERIFY_REQUEST
-});
+const requestLogout = () => {
+  return {
+    type: types.LOGOUT_REQUEST
+  };
+};
 
-const verifySuccess = () => ({
-  type: VERIFY_SUCCESS
-});
+const receiveLogout = () => {
+  return {
+    type: types.LOGOUT_SUCCESS
+  };
+};
+
+const logoutError = () => {
+  return {
+    type: types.LOGOUT_FAILURE
+  };
+};
+
+const verifyRequest = () => {
+  return {
+    type: types.VERIFY_REQUEST
+  };
+};
+
+const verifySuccess = () => {
+  return {
+    type: types.VERIFY_SUCCESS
+  };
+};
+
+// Load User
+export const loadUser = () => async dispatch => {
+  try {
+    let res = await api.get('/users');
+    if (!res.data) {
+      res = await api.post('/users');
+    }
+    dispatch(userLoaded(res.data));
+  } catch (err) {
+    dispatch(userLoadError());
+  }
+};
 
 export const loginUser = (email, password) => dispatch => {
   dispatch(requestLogin());
-  return myFirebase
+  myFirebase
     .auth()
     .signInWithEmailAndPassword(email, password)
+    .then(() => {
+      dispatch(loadUser());
+    })
     .then(user => {
       dispatch(receiveLogin(user));
-      return true;
     })
-    .catch(() => {
+    .catch(error => {
       dispatch(loginError());
-      return false;
     });
 };
 
 export const loginWithGoogle = () => dispatch => {
   dispatch(requestLogin());
-  return myFirebase
+  myFirebase
     .auth()
     .signInWithPopup(googleProvider)
+    .then(() => {
+      dispatch(loadUser());
+    })
     .then(user => {
       dispatch(receiveLogin(user));
-      return true;
     })
-    .catch(() => {
+    .catch(error => {
       // Do something with the error
       dispatch(signUpError());
-      return false;
     });
 };
 
 export const signUp = (email, password, displayName) => dispatch => {
   dispatch(requestLogin());
-  return myFirebase
+  myFirebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(user => {
@@ -93,27 +145,23 @@ export const signUp = (email, password, displayName) => dispatch => {
     })
     .then(user => {
       dispatch(receiveLogin(user));
-      return true;
     })
     .catch(error => {
       dispatch(signUpError(error.message));
-      return false;
     });
 };
 
 export const logoutUser = () => dispatch => {
   dispatch(requestLogout());
-  return myFirebase
+  myFirebase
     .auth()
     .signOut()
     .then(() => {
       dispatch(receiveLogout());
-      return true;
     })
-    .catch(() => {
+    .catch(error => {
       // Do something with the error
       dispatch(logoutError());
-      return false;
     });
 };
 
@@ -125,14 +173,4 @@ export const verifyAuth = () => dispatch => {
     }
     dispatch(verifySuccess());
   });
-};
-
-export const getToken = () => dispatch => {
-  dispatch(requestLogin());
-  return myFirebase
-    .auth()
-    .currentUser.getIdToken()
-    .catch(error => {
-      dispatch(signUpError(error.message));
-    });
 };
