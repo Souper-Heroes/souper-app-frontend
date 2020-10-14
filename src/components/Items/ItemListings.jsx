@@ -87,7 +87,7 @@ function ItemListings({ getItems }) {
       },
       tooltips: true,
       pips: {
-        mode: 'steps',
+        mode: "steps",
         stepped: true,
         density: 10
       }
