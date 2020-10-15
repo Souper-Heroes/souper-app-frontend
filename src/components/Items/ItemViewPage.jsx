@@ -15,12 +15,9 @@ const useStyles = makeStyles(styles);
 export default function ItemViewPage(props) {
   // console.log('VIEW PAGE PROPS', props);
   const { _id, item } = props;
-
   const [isDisableAmendBtn, setIsDisableAmendBtn] = useState(true);
-  // const [availability, setAvailability] = useState(item.availability);
 
   const classes = useStyles();
-
   const handleOnClickReserve = () => {
     // console.log(`Clicked Reserve Account, do something with DisplayName: `);
     props.reserveItem(_id, item._id);
