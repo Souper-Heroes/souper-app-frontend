@@ -13,14 +13,13 @@ const mapStateToProps = (state, ownProps) => ({
   id: ownProps.match.params.id,
   items: state.item.items,
   item: state.item.items
-    ? state.item.items.find(
-        itemToFind => itemToFind._id === ownProps.match.params.id
-      )
+    ? state.item.items.find(i => i._id === ownProps.match.params.id)
     : null,
 });
 
 const mapDispatchToProps = dispatch => ({
   updateCollectionDates: (_id, availiability) =>
+    // eslint-disable-next-line implicit-arrow-linebreak
     dispatch(updateCollectionDates(_id, availiability)),
   unreserveItem: (_id, itemId) => dispatch(unreserveItem(_id, itemId)),
   reserveItem: (_id, itemId) => dispatch(reserveItem(_id, itemId)),
