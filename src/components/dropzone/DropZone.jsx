@@ -22,28 +22,15 @@ function DropZone() {
     return true;
   };
 
-  const fileDrop = e => {
-    e.preventDefault();
-    const files = e.dataTransfer.files;
-    if (files.length) {
-      handleFiles(files);
-    }
-  };
   const fileInputClicked = () => {
     fileInputRef.current.click();
-  };
-
-  const fileSelected = event => {
-    if (fileInputRef.current.files.length) {
-      handleFiles(fileInputRef.current.files);
-    }
   };
 
   const [imgData, setImgData] = useState(null);
 
   const handleFiles = files => {
     if (validateFile(files[0])) {
-      //setPicture(files[0]);
+      // setPicture(files[0]);
       const reader = new FileReader();
       reader.addEventListener('load', () => {
         setImgData(reader.result);
@@ -51,6 +38,20 @@ function DropZone() {
       reader.readAsDataURL(files[0]);
     }
     // ## TODO - tell the user the file is invalid
+  };
+
+  const fileDrop = e => {
+    e.preventDefault();
+    const { files } = e.dataTransfer;
+    if (files.length) {
+      handleFiles(files);
+    }
+  };
+
+  const fileSelected = () => {
+    if (fileInputRef.current.files.length) {
+      handleFiles(fileInputRef.current.files);
+    }
   };
 
   return (
@@ -64,7 +65,7 @@ function DropZone() {
         onClick={fileInputClicked}
       >
         <div>
-          {(imgData && <img className="image-display" src={imgData} />) || (
+          {(imgData && <img className="image-display" alt="display" src={imgData} />) || (
             <div className="drop-message">
               <div className="upload-icon" />
               <input

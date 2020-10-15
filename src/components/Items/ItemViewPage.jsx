@@ -6,11 +6,9 @@ import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import Button from 'components/CustomButtons/Button';
 import Typography from '@material-ui/core/Typography';
 import styles from 'assets/jss/Items/views/ItemViewPage';
+import banana from 'assets/img/purple-banana.jpg';
 import moment from 'moment';
-//import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
-//import Datetime from 'react-datetime';
-//import FormControl from '@material-ui/core/FormControl';
-//import { TextField } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(styles);
 
@@ -90,7 +88,7 @@ export default function ItemViewPage(props) {
               <img
                 className={classes.img}
                 alt="item of food"
-                src={require('assets/img/purple-banana.jpg')}
+                src={banana}
                 justify="center"
               />
             </GridItem>

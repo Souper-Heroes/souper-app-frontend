@@ -19,6 +19,8 @@ import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 
 import moment from 'moment';
+import PropTypes from 'prop-types';
+import banana from 'assets/img/purple-banana.jpg';
 
 const useStyles = makeStyles(styles);
 
@@ -33,9 +35,9 @@ export default function MyItemListing({
 
   const classes = useStyles();
 
-  const GetCollectionMsg = type => {
+  const GetCollectionMsg = newType => {
     let message = null;
-    if (type === 'provide') {
+    if (newType === 'provide') {
       message = 'Being Collected:';
     } else {
       message = 'To Collect:';
@@ -48,8 +50,8 @@ export default function MyItemListing({
     );
   };
 
-  const handleOnClickDelete = event => {
-    // TODO
+  const handleOnClickDelete = () => {
+    /* TODO
     console.log(
       `Clicked Delete button, do something with item: ${item.itemId}, Title: ${item.description}`
     );
@@ -61,11 +63,11 @@ export default function MyItemListing({
     }
   };
 
-  const handleOnClickAgreeCup = event => {
-    // TODO
+  const handleOnClickAgreeCup = () => {
+    /* TODO
     console.log(
       `Clicked Cup button, do something with item: ${item.itemId}, Title: ${item.description}`
-    );
+    ); */
   };
 
   return (
@@ -76,11 +78,7 @@ export default function MyItemListing({
             <Grid item>
               <Link to={'/itemview/' + myitem._id} className={classes.link}>
                 <ButtonBase className={classes.image}>
-                  <img
-                    className={classes.img}
-                    alt="complex"
-                    src={require('assets/img/purple-banana.jpg')}
-                  />
+                  <img className={classes.img} alt="complex" src={banana} />
                 </ButtonBase>
               </Link>
             </Grid>
@@ -301,3 +299,9 @@ export default function MyItemListing({
     </GridContainer>
   );
 }
+
+MyItemListing.propTypes = {
+  type: PropTypes.string,
+  myitem: PropTypes.instanceOf(Object),
+  deleteItem: PropTypes.func,
+};

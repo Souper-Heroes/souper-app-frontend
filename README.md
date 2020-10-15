@@ -52,7 +52,7 @@ This new design has elements that have been the result of research regarding ink
 | --- | --- | ---  |
 | [![Buttons](https://github.com/creativetimofficial/public-assets/blob/master/material-kit-react/buttons.png?raw=true)](https://demos.creative-tim.com/material-kit/#/)  | [![Inputs](https://github.com/creativetimofficial/public-assets/blob/master/material-kit-react/inputs.png?raw=true)](https://demos.creative-tim.com/material-kit-react/#/)  | [![Navbar](https://github.com/creativetimofficial/public-assets/blob/master/material-kit-react/navbars.png?raw=true)](https://demos.creative-tim.com/material-kit-react/#/)  
 
-| Login Page | Landing Page | Profile Page  |
+| Login Page | Landing Page | ' Page  |
 | --- | --- | ---  |
 | [![Login Page](https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-kit-react/login-page.png)](https://demos.creative-tim.com/material-kit/#/login-page)  | [![Landing Page](https://github.com/creativetimofficial/public-assets/blob/master/material-kit-react/landing-page.png?raw=true)](https://demos.creative-tim.com/material-kit-react/#/landing-page)  | [![Profile Page](https://github.com/creativetimofficial/public-assets/blob/master/material-kit-react/profile-page.png?raw=true)](https://demos.creative-tim.com/material-kit/#/profile-page)  
 
@@ -82,8 +82,6 @@ material-kit-react
 ├── ISSUE_TEMPLATE.md
 ├── LICENSE.md
 ├── README.md
-├── bower.json
-├── gulpfile.js
 ├── jsconfig.json
 ├── package.json
 ├── Documentation

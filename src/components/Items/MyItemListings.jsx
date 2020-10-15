@@ -10,6 +10,7 @@ import MyItemListing from 'components/Items/MyItemListing';
 import ListingsDropdown from 'components/Items/ListingsDropdown';
 import Button from 'components/CustomButtons/Button';
 import ListingsPaginations from 'components/Items/ListingsPaginations';
+import PropTypes from 'prop-types';
 
 export default function MyItemListings(props) {
   const { type, items } = props;
@@ -71,3 +72,12 @@ export default function MyItemListings(props) {
     </div>
   );
 }
+
+MyItemListings.propTypes = {
+  type: PropTypes.string,
+  // TODO uuid: PropTypes.string,
+  uuid: PropTypes.number,
+  items: PropTypes.instanceOf(Array),
+  deleteItem: PropTypes.func,
+  sortByItem: PropTypes.func,
+};
