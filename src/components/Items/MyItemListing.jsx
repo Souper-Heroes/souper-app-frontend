@@ -54,7 +54,7 @@ export default function MyItemListing({
     /* TODO
     console.log(
       `Clicked Delete button, do something with item: ${item.itemId}, Title: ${item.description}`
-    );
+    ); */
     if (type === 'provide') {
       deleteItem(item._id);
     } else {
