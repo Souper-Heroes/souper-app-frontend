@@ -114,8 +114,17 @@ const initialState = {
   ],
 };
 
-const item = (state = { ...initialState }, action) => {
-  switch (action.type) {
+export default (state = initialState, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case types.GET_ITEMS:
+      return {
+        items: payload,
+      };
+    case types.GET_ITEMS_ERROR:
+      return {
+        items: payload,
+      };
     case types.UPDATE_COLLECTDATES:
       return {
         // TODO should call axios api function to update bbackend with new preferred Collect time for item
@@ -207,5 +216,3 @@ const item = (state = { ...initialState }, action) => {
   }
   // return state;
 };
-
-export default item;
