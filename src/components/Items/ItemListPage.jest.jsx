@@ -22,7 +22,7 @@ const item = {
 
 test('renders ItemListPage', () => {
   const { getByText } = render(
-    <ItemListPage key={item.ItemId} type='collect' myitems={[item]} />
+    <ItemListPage key={item.ItemId} type="collect" myitems={[item]} />
   );
 
   const linkMyListings = getByText(/TabListings/i);

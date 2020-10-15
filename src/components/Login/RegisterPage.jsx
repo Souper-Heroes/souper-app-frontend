@@ -49,9 +49,7 @@ export default function RegisterPage({
     setCardAnimation('');
   }, 700);
 
-  const checkTermsAndConds = checkedValue => {
-    setcheckedTermsAndConds(checkedValue);
-  };
+  const checkTermsAndConds = checkedValue => setcheckedTermsAndConds(checkedValue);
 
   const handleSubmit = async event => {
     const { name } = event.currentTarget;
@@ -160,6 +158,7 @@ export default function RegisterPage({
                     >
                       <Link to="/register">
                         <strong>Terms And Conditions</strong>
+                        {' '}
                       </Link>
                     </CheckboxTermsAndConds>
 
@@ -193,5 +192,9 @@ export default function RegisterPage({
 }
 
 RegisterPage.propTypes = {
-  registerInputs: PropTypes.array
+  signUpError: PropTypes.bool,
+  signUp: PropTypes.bool,
+  loginWithGoogle: PropTypes.bool,
+  isAuthenticated: PropTypes.bool,
+  registerInputs: PropTypes.instanceOf(Array)
 };

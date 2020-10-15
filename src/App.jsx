@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import {
+  Route, Switch, Redirect, BrowserRouter as Router
+} from 'react-router-dom';
 import { connect } from 'react-redux';
 import TestData from 'assets/data/TestData.json';
 import ItemViewPage from 'containers/Items/ItemViewPage';
@@ -14,6 +15,7 @@ import ResetPassword from 'components/Login/ResetPassword';
 import AddEditItem from 'components/Items/AddEditItem';
 import ProtectedRoute from 'components/Routing/ProtectedRoute';
 import * as ROUTES from 'components/Routing/routes';
+import PropTypes from 'prop-types';
 
 function App(props) {
   const [data] = useState(TestData);
@@ -68,6 +70,11 @@ function App(props) {
     </Router>
   );
 }
+
+App.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  isVerifying: PropTypes.bool
+};
 
 function mapStateToProps(state) {
   return {
