@@ -18,74 +18,52 @@ export const types = {
   VERIFY_SUCCESS: 'VERIFY_SUCCESS'
 };
 
-const requestLogin = () => {
-  return {
-    type: types.LOGIN_REQUEST
-  };
-};
+const requestLogin = () => ({
+  type: types.LOGIN_REQUEST
+});
 
-const receiveLogin = user => {
-  return {
-    type: types.LOGIN_SUCCESS,
-    user
-  };
-};
+const receiveLogin = user => ({
+  type: types.LOGIN_SUCCESS,
+  user
+});
 
-const userLoaded = user => {
-  return {
-    type: types.USER_LOADED,
-    user
-  };
-};
+const userLoaded = user => ({
+  type: types.USER_LOADED,
+  user
+});
 
-const userLoadError = () => {
-  return {
-    type: types.USER_LOAD_FAILURE
-  };
-};
+const userLoadError = () => ({
+  type: types.USER_LOAD_FAILURE
+});
 
-const loginError = () => {
-  return {
-    type: types.LOGIN_FAILURE
-  };
-};
+const loginError = () => ({
+  type: types.LOGIN_FAILURE
+});
 
-const signUpError = message => {
-  return {
-    type: types.SIGNUP_FAILURE,
-    message
-  };
-};
+const signUpError = message => ({
+  type: types.SIGNUP_FAILURE,
+  message
+});
 
-const requestLogout = () => {
-  return {
-    type: types.LOGOUT_REQUEST
-  };
-};
+const requestLogout = () => ({
+  type: types.LOGOUT_REQUEST
+});
 
-const receiveLogout = () => {
-  return {
-    type: types.LOGOUT_SUCCESS
-  };
-};
+const receiveLogout = () => ({
+  type: types.LOGOUT_SUCCESS
+});
 
-const logoutError = () => {
-  return {
-    type: types.LOGOUT_FAILURE
-  };
-};
+const logoutError = () => ({
+  type: types.LOGOUT_FAILURE
+});
 
-const verifyRequest = () => {
-  return {
-    type: types.VERIFY_REQUEST
-  };
-};
+const verifyRequest = () => ({
+  type: types.VERIFY_REQUEST
+});
 
-const verifySuccess = () => {
-  return {
-    type: types.VERIFY_SUCCESS
-  };
-};
+const verifySuccess = () => ({
+  type: types.VERIFY_SUCCESS
+});
 
 // Load User
 export const loadUser = () => async dispatch => {
@@ -111,7 +89,7 @@ export const loginUser = (email, password) => dispatch => {
     .then(user => {
       dispatch(receiveLogin(user));
     })
-    .catch(error => {
+    .catch(() => {
       dispatch(loginError());
     });
 };
@@ -127,7 +105,7 @@ export const loginWithGoogle = () => dispatch => {
     .then(user => {
       dispatch(receiveLogin(user));
     })
-    .catch(error => {
+    .catch(() => {
       // Do something with the error
       dispatch(signUpError());
     });
@@ -159,7 +137,7 @@ export const logoutUser = () => dispatch => {
     .then(() => {
       dispatch(receiveLogout());
     })
-    .catch(error => {
+    .catch(() => {
       // Do something with the error
       dispatch(logoutError());
     });

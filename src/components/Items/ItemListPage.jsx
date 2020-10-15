@@ -10,7 +10,7 @@ import CustomTabs from 'components/MaterialKitComponents/CustomTabs/CustomTabs';
 
 const useStyles = makeStyles(styles);
 
-export default function ItemListPage(props) {
+export default function ItemListPage() {
   const classes = useStyles();
 
   return (

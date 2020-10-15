@@ -10,6 +10,7 @@ import MyItemListing from 'components/Items/MyItemListing';
 import ListingsDropdown from 'components/Items/ListingsDropdown';
 import Button from 'components/CustomButtons/Button';
 import ListingsPaginations from 'components/Items/ListingsPaginations';
+import PropTypes from 'prop-types';
 
 export default function MyItemListings(props) {
   const { type, items } = props;
@@ -33,19 +34,8 @@ export default function MyItemListings(props) {
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
           {items
-            .filter(item =>
-              type === 'provide'
-                ? item.provideUserId === props.uuid
-                : item.collectUserId === props.uuid
-            )
-            .map(myItem => (
-              <MyItemListing
-                key={myItem.itemId}
-                type={type}
-                myitem={myItem}
-                deleteItem={deleteItem}
-              />
-            ))}
+            .filter(item => props.uuid === (type === 'provide' ? item.provideUserId : item.collectUserId))
+            .map(myItem => (<MyItemListing key={myItem.itemId} type={type} myitem={myItem} deleteItem={deleteItem} />))}
         </GridItem>
         {type === 'provide' && (
           <GridItem xs={6} sm={6} align="left">
@@ -63,3 +53,12 @@ export default function MyItemListings(props) {
     </div>
   );
 }
+
+MyItemListings.propTypes = {
+  type: PropTypes.string,
+  // TODO uuid: PropTypes.string,
+  uuid: PropTypes.number,
+  items: PropTypes.instanceOf(Array),
+  deleteItem: PropTypes.func,
+  sortByItem: PropTypes.func
+};

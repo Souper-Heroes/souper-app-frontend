@@ -1,9 +1,10 @@
 import React from 'react';
-// @material-ui/core components
+// @material-ui/core componentsuserItems
 import { makeStyles } from '@material-ui/core/styles';
 import styles from 'assets/jss/Items/views/TabListings';
 import MyItemListings from 'components/Items/MyItemListings';
 import CustomTabs from 'components/MaterialKitComponents/CustomTabs/CustomTabs';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(styles);
 
@@ -38,7 +39,7 @@ export default function TabListings({ userItems }) {
             tabName: 'Listings',
             tabContent: (
               <MyItemListings
-                userProfile={userProfile}
+                // userProfile={userProfile}
                 type="provide"
                 myitems={itemsToProvide}
               />
@@ -48,7 +49,7 @@ export default function TabListings({ userItems }) {
             tabName: 'Collections',
             tabContent: (
               <MyItemListings
-                userProfile={userProfile}
+                // userProfile={}
                 type="collect"
                 myitems={itemsToCollect}
               />
@@ -59,3 +60,9 @@ export default function TabListings({ userItems }) {
     </div>
   );
 }
+
+TabListings.propTypes = {
+  userItems: PropTypes.shape({
+    items: PropTypes.instanceOf(Array).isRequired
+  }).isRequired,
+};
