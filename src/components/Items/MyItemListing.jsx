@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import styles from 'assets/jss/Items/views/MyItemListing';
@@ -30,9 +30,6 @@ export default function MyItemListing({
   deleteItem,
   unreserveItem,
 }) {
-  const [item, setItem] = useState(myitem);
-  const [itemType, setType] = useState(type);
-
   const classes = useStyles();
 
   const GetCollectionMsg = newType => {
@@ -56,10 +53,10 @@ export default function MyItemListing({
       `Clicked Delete button, do something with item: ${item.itemId}, Title: ${item.description}`
     ); */
     if (type === 'provide') {
-      deleteItem(item._id);
+      deleteItem(myitem._id);
     } else {
       // Unreserve the item
-      unreserveItem('dummyId', item._id);
+      unreserveItem('dummyId', myitem._id);
     }
   };
 
@@ -245,8 +242,7 @@ export default function MyItemListing({
                         lg={5}
                         className={classes.cell}
                       >
-                        {myitem.availability !== null &&
-                          GetCollectionMsg(itemType)}
+                        {myitem.availability !== null && GetCollectionMsg(type)}
                       </GridItem>
                       <GridItem
                         xs={7}
@@ -278,7 +274,7 @@ export default function MyItemListing({
                 >
                   <EmojiEvent />
                 </Button>
-                {itemType === 'provide' && (
+                {type === 'provide' && (
                   <Link
                     to={'/addedititem/' + myitem._id}
                     className={classes.link}
