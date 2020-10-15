@@ -17,8 +17,7 @@ export default function ItemViewPage(props) {
   const { _id, item } = props;
 
   const [isDisableAmendBtn, setIsDisableAmendBtn] = useState(true);
-
-  const [availability, setAvailability] = useState(item.availability);
+  //const [availability, setAvailability] = useState(item.availability);
 
   const classes = useStyles();
 
@@ -35,41 +34,13 @@ export default function ItemViewPage(props) {
   const handleOnClickAmendTime = () => {
     // Update backend with new amended dates
 
-    props.updateCollectionDates(item._id, availability);
+    props.updateCollectionDates(item._id, item.availability);
 
     setIsDisableAmendBtn(true);
   };
 
   const handleOnClickCancel = () => {
     // console.log(`Clicked Cancel Account, do something with DisplayName: `);
-  };
-
-  const handleCollectionDateChange = (type, event) => {
-    // console.log('You picked date:', event);
-
-    const newDate = event;
-
-    // console.log('converted newDate', newDate);
-
-    //if (!newDate.isValid()) throw new Error('Invalid Date passed');
-    // console.log(
-    //  `Handle Date Change1, do something with ${type} ${newDate} ${newDate.isValid()}`
-    // );
-
-    if (newDate === item.availability) {
-      // Nothing has changed
-      // console.log(
-      //  `Handle Date Change2, do something with ${type} ${availability}`
-      // );
-      setAvailability(newDate);
-      // Disable Amend button as nothing has changed compared with the backend
-      setIsDisableAmendBtn(true);
-      return;
-    }
-
-    // Dates have changed so provide option to update the backend with Amend Button displayed
-    setAvailability(newDate);
-    setIsDisableAmendBtn(false);
   };
 
   // console.log(
@@ -237,7 +208,7 @@ export default function ItemViewPage(props) {
                       align="left"
                       gutterBottom
                     >
-                      {availability}
+                      {item.availability}
                     </Typography>
                   </GridItem>
                   <GridItem
@@ -305,6 +276,11 @@ export default function ItemViewPage(props) {
   );
 }
 
+ItemViewPage.propTypes = {
+  _id: PropTypes.string,
+  item: PropTypes.object,
+};
+
 /* TODO Logic to amend item if you are collecting
  {_id !== item.c_user_id && (
                       <Typography
@@ -339,4 +315,34 @@ export default function ItemViewPage(props) {
                               placeholder: item.availability,
                             }}
                           />
-                          </FormControl> */
+                          </FormControl> 
+                          
+                          
+                          
+const handleCollectionDateChange = (type, event) => {
+
+    const newDate = event;
+
+    // console.log('converted newDate', newDate);
+
+    //if (!newDate.isValid()) throw new Error('Invalid Date passed');
+    // console.log(
+    //  `Handle Date Change1, do something with ${type} ${newDate} ${newDate.isValid()}`
+    // );
+
+    if (newDate === item.availability) {
+      // Nothing has changed
+      // console.log(
+      //  `Handle Date Change2, do something with ${type} ${availability}`
+      // );
+      setAvailability(newDate);
+      // Disable Amend button as nothing has changed compared with the backend
+      setIsDisableAmendBtn(true);
+      return;
+    }
+
+    // Dates have changed so provide option to update the backend with Amend Button displayed
+    setAvailability(newDate);
+    setIsDisableAmendBtn(false);
+  };
+*/
