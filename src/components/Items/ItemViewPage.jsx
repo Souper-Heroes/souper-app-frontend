@@ -17,7 +17,7 @@ export default function ItemViewPage(props) {
   const { _id, item } = props;
 
   const [isDisableAmendBtn, setIsDisableAmendBtn] = useState(true);
-  //const [availability, setAvailability] = useState(item.availability);
+  // const [availability, setAvailability] = useState(item.availability);
 
   const classes = useStyles();
 
@@ -278,7 +278,10 @@ export default function ItemViewPage(props) {
 
 ItemViewPage.propTypes = {
   _id: PropTypes.string,
-  item: PropTypes.object,
+  item: PropTypes.instanceOf(Object),
+  reserveItem: PropTypes.func,
+  unreserveItem: PropTypes.func,
+  updateCollectionDates: PropTypes.func,
 };
 
 /* TODO Logic to amend item if you are collecting
@@ -315,10 +318,7 @@ ItemViewPage.propTypes = {
                               placeholder: item.availability,
                             }}
                           />
-                          </FormControl> 
-                          
-                          
-                          
+                          </FormControl>
 const handleCollectionDateChange = (type, event) => {
 
     const newDate = event;

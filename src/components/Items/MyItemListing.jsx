@@ -73,7 +73,7 @@ export default function MyItemListing({
         <Paper className={classes.paper} spacing={1}>
           <GridContainer spacing={2}>
             <Grid item>
-              <Link to={'/itemview/' + myitem._id} className={classes.link}>
+              <Link to={`/itemview/${myitem._id}`} className={classes.link}>
                 <ButtonBase className={classes.image}>
                   <img className={classes.img} alt="complex" src={banana} />
                 </ButtonBase>
@@ -81,7 +81,7 @@ export default function MyItemListing({
             </Grid>
             <GridContainer xs={12} sm item spacing={0} direction="column">
               <GridItem align="left" xs={12} className={classes.cell}>
-                <Link to={'/itemview/' + myitem._id} className={classes.link}>
+                <Link to={`/itemview/${myitem._id}`} className={classes.link}>
                   <Typography gutterBottom variant="body1">
                     <strong>{myitem.description}</strong>
                   </Typography>
@@ -276,7 +276,7 @@ export default function MyItemListing({
                 </Button>
                 {type === 'provide' && (
                   <Link
-                    to={'/addedititem/' + myitem._id}
+                    to={`/addedititem/${myitem._id}`}
                     className={classes.link}
                   >
                     <Button>
@@ -300,4 +300,5 @@ MyItemListing.propTypes = {
   type: PropTypes.string,
   myitem: PropTypes.instanceOf(Object),
   deleteItem: PropTypes.func,
+  unreserveItem: PropTypes.func,
 };

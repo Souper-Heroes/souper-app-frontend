@@ -31,13 +31,19 @@ export default function MyItemListings(props) {
     await props.unreserveItem(_id, itemId);
   };
 
-  const getItems = () => {
-    return items.filter(myItem =>
-      type === 'provide'
-        ? myItem.user_id === props._id
-        : myItem.c_user_id === props._id
-    );
-  };
+  const getItems = () =>
+    // eslint-disable-next-line array-callback-return
+    // eslint-disable-next-line implicit-arrow-linebreak
+    items.filter(myItem => {
+      if (type === 'provide') {
+        if (myItem.user_id === props._id) {
+          return myItem;
+        }
+      } else if (myItem.c_user_id === props._id) {
+        return myItem;
+      }
+      return null;
+    });
 
   return (
     <div>
@@ -75,9 +81,9 @@ export default function MyItemListings(props) {
 
 MyItemListings.propTypes = {
   type: PropTypes.string,
-  // TODO uuid: PropTypes.string,
-  uuid: PropTypes.number,
+  _id: PropTypes.string,
   items: PropTypes.instanceOf(Array),
   deleteItem: PropTypes.func,
   sortByItem: PropTypes.func,
+  unreserveItem: PropTypes.func,
 };
