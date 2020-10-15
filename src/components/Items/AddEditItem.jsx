@@ -25,6 +25,7 @@ import styles from 'assets/jss/material-kit-react/views/profilePage';
 import DropZone from '../dropzone/DropZone';
 // Food categories check boxes
 import CatCheckBox from './CatCheckBox';
+import profilePageStyle from 'assets/jss/material-kit-react/views/profilePage';
 
 const useStyles = makeStyles(styles);
 
@@ -81,6 +82,7 @@ export default function AddEditItem({ userItems }) {
 
   // An attempt at makign the data stick about for a bit
   const [items, setItems] = useState(userItems);
+  const [category, setCategory] = useState(userItems);
   const addNewItem = e => {
     // Create a copy of the tasks array
     const updatedItems = items.slice();
@@ -93,7 +95,7 @@ export default function AddEditItem({ userItems }) {
       photoId: '1117', // TODO Get from DropZone
       title,
       description,
-      //category, // TODO Get from CatCheckBox
+      category: category, //category from CatCheckBox
       expiry,
       location,
       availability,
@@ -138,7 +140,7 @@ export default function AddEditItem({ userItems }) {
                   fullWidth: true,
                 }}
               />
-              <CatCheckBox />
+              <CatCheckBox category={category} />
             </GridItem>
           </GridContainer>
           <GridContainer justify="center">

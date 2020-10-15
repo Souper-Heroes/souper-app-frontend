@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import * as ROUTES from 'components/Routing/routes';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -24,8 +24,7 @@ import image from '../../assets/img/board.jpg';
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage({ loginError, login, loginWithGoogle }) {
-  const history = useHistory();
+export default function LoginPage({ loginError, login, loginWithGoogle, isAuthenticated }) {
   const emailRef = useRef(null);
   const passRef = useRef(null);
   const classes = useStyles();
@@ -37,17 +36,16 @@ export default function LoginPage({ loginError, login, loginWithGoogle }) {
 
   const handleSubmit = async event => {
     const { name } = event.currentTarget;
-    let authenticated = false;
     if (name === 'login') {
-      authenticated = await login(
-        emailRef.current.value,
-        passRef.current.value
-      );
+      login(emailRef.current.value, passRef.current.value);
     } else if (name === 'loginWithGoogle') {
-      authenticated = await loginWithGoogle();
+      loginWithGoogle();
     }
-    if (authenticated) history.push(ROUTES.DASHBOARD);
   };
+
+  if (isAuthenticated) {
+    return <Redirect to={ROUTES.DASHBOARD} />;
+  }
 
   return (
     <div>

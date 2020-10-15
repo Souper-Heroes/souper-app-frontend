@@ -19,13 +19,11 @@ import * as ROUTES from 'components/Routing/routes';
 
 const useStyles = makeStyles(styles);
 
-export default function HeaderLinks(props) {
+export default function HeaderLinks({logout}) {
   const classes = useStyles();
   const history = useHistory();
-  let logmeout = false;
-  const logout = async () => {
-    logmeout = await props.logout();
-    if (logmeout) history.push(ROUTES.LOGIN);
+  const logmeout = async () => {
+    logout();
   };
   return (
     <List className={classes.list}>
@@ -51,7 +49,7 @@ export default function HeaderLinks(props) {
             <Link to={ROUTES.ADD_EDIT_ITEM} className={classes.dropdownLink}>
               Add Items
             </Link>,
-            <a onClick={logout} className={classes.dropdownLink}>
+            <a onClick={logmeout} className={classes.dropdownLink}>
               Logout
             </a>
           ]}
