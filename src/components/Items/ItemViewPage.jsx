@@ -8,7 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import Datetime from 'react-datetime';
 import FormControl from '@material-ui/core/FormControl';
 import styles from 'assets/jss/Items/views/ItemViewPage';
+import banana from 'assets/img/purple-banana.jpg';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(styles);
 
@@ -62,10 +64,10 @@ export default function ItemViewPage(props) {
 
     if (
       type === 'start'
-        ? newDate.isSame(moment(item.preferredCollectStartTime)) &&
-          collectionEndDateTime.isSame(moment(item.preferredCollectEndTime))
-        : newDate.isSame(moment(item.preferredCollectEndTime)) &&
-          collectionStartDateTime.isSame(moment(item.preferredCollectStartTime))
+        ? newDate.isSame(moment(item.preferredCollectStartTime))
+          && collectionEndDateTime.isSame(moment(item.preferredCollectEndTime))
+        : newDate.isSame(moment(item.preferredCollectEndTime))
+          && collectionStartDateTime.isSame(moment(item.preferredCollectStartTime))
     ) {
       // Nothing has changed
       // console.log(
@@ -107,7 +109,7 @@ export default function ItemViewPage(props) {
               <img
                 className={classes.img}
                 alt="item of food"
-                src={require('assets/img/purple-banana.jpg')}
+                src={banana}
                 justify="center"
               />
             </GridItem>
@@ -268,11 +270,13 @@ export default function ItemViewPage(props) {
                         align="left"
                         gutterBottom
                       >
-                        {moment(collectionStartDateTime).isValid()
-                          ? moment(collectionStartDateTime).format(
+                        {
+                          moment(collectionStartDateTime).isValid()
+                            ? moment(collectionStartDateTime).format(
                               'Do MMM YY hh:mm '
                             )
-                          : ''}
+                            : ''
+                        }
                       </Typography>
                     )}
                     {uuid === item.collectUserId && (
@@ -282,20 +286,18 @@ export default function ItemViewPage(props) {
                             value={
                               moment(collectionStartDateTime).isValid()
                                 ? moment(collectionStartDateTime).format(
-                                    'Do MMM YY hh:mm'
-                                  )
+                                  'Do MMM YY hh:mm'
+                                )
                                 : ''
                             }
-                            onChange={event =>
-                              handleCollectionDateChange('start', event)
-                            }
+                            onChange={event => handleCollectionDateChange('start', event)}
                             inputProps={{
                               placeholder: moment(
                                 item.preferredCollectStartTime
                               ).isValid()
                                 ? `${moment(
-                                    item.preferredCollectStartTime
-                                  ).format('Do MMM YY hh:mm')}`
+                                  item.preferredCollectStartTime
+                                ).format('Do MMM YY hh:mm')}`
                                 : '',
                             }}
                           />
@@ -339,8 +341,8 @@ export default function ItemViewPage(props) {
                       >
                         {moment(collectionEndDateTime).isValid()
                           ? moment(collectionEndDateTime).format(
-                              'Do MMM YY hh:mm'
-                            )
+                            'Do MMM YY hh:mm'
+                          )
                           : ''}
                       </Typography>
                     )}
@@ -351,20 +353,18 @@ export default function ItemViewPage(props) {
                             value={
                               moment(collectionEndDateTime).isValid()
                                 ? moment(collectionEndDateTime).format(
-                                    'Do MMM YY hh:mm'
-                                  )
+                                  'Do MMM YY hh:mm'
+                                )
                                 : ''
                             }
-                            onChange={event =>
-                              handleCollectionDateChange('end', event)
-                            }
+                            onChange={event => handleCollectionDateChange('end', event)}
                             inputProps={{
                               placeholder: moment(
                                 item.preferredCollectEndTime
                               ).isValid()
                                 ? `${moment(
-                                    item.preferredCollectEndTime
-                                  ).format('Do MMM YY hh:mm')}`
+                                  item.preferredCollectEndTime
+                                ).format('Do MMM YY hh:mm')}`
                                 : '',
                             }}
                           />
@@ -417,3 +417,20 @@ export default function ItemViewPage(props) {
     </div>
   );
 }
+
+ItemViewPage.propTypes = {
+  uuid: PropTypes.string,
+  updateCollectionDates: PropTypes.func,
+  item: PropTypes.objectOf(
+    PropTypes.shape({
+      itemId: PropTypes.string,
+      collectUserId: PropTypes.string,
+      description: PropTypes.string,
+      category: PropTypes.string,
+      location: PropTypes.string,
+      expiryDate: PropTypes.date,
+      preferredCollectStartTime: PropTypes.date,
+      preferredCollectEndTime: PropTypes.date
+    })
+  )
+};

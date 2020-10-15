@@ -20,12 +20,12 @@ import FormControl from '@material-ui/core/FormControl';
 
 // TODO - this uses files from views will have to get styles from somewhere else
 import styles from 'assets/jss/material-kit-react/views/profilePage';
+import PropTypes from 'prop-types';
 
 // DropZone imports
 import DropZone from '../dropzone/DropZone';
 // Food categories check boxes
 import CatCheckBox from './CatCheckBox';
-import profilePageStyle from 'assets/jss/material-kit-react/views/profilePage';
 
 const useStyles = makeStyles(styles);
 
@@ -34,26 +34,26 @@ export default function AddEditItem({ userItems }) {
 
   const [title, setTitle] = useState('');
   const handleTitleChange = e => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setTitle(e.target.value);
   };
 
   const [description, setDescription] = useState('');
   const handleDescriptionChange = e => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setDescription(e.target.value);
   };
   const [expiry, setExpiry] = useState('');
   const handleExpiryChange = value => {
     const newDate = value._d.toLocaleDateString('en-GB');
-    console.log(newDate);
+    // console.log(newDate);
     setExpiry(newDate);
   };
 
   // Set to postcode found in profile here
   const [location, setzLocation] = useState('');
   const handleLocationChange = e => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setzLocation(e.target.value);
   };
 
@@ -76,14 +76,14 @@ export default function AddEditItem({ userItems }) {
 
   const [availability, setAvailability] = useState('');
   const handleAvailChange = e => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setAvailability(e.target.value);
   };
 
   // An attempt at makign the data stick about for a bit
   const [items, setItems] = useState(userItems);
-  const [category, setCategory] = useState(userItems);
-  const addNewItem = e => {
+  const [category] = useState(userItems);
+  const addNewItem = () => {
     // Create a copy of the tasks array
     const updatedItems = items.slice();
 
@@ -95,7 +95,7 @@ export default function AddEditItem({ userItems }) {
       photoId: '1117', // TODO Get from DropZone
       title,
       description,
-      category: category, //category from CatCheckBox
+      category, // category from CatCheckBox
       expiry,
       location,
       availability,
@@ -103,7 +103,7 @@ export default function AddEditItem({ userItems }) {
     // ## TODO ## set all fields to '' or equivalent.
     // Add the new task to the array
     updatedItems.push(newItem);
-    console.log(newItem);
+    // console.log(newItem);
     // Update the state with the new array
     setItems(updatedItems);
   };
@@ -214,3 +214,7 @@ export default function AddEditItem({ userItems }) {
     </div>
   );
 }
+
+AddEditItem.propTypes = {
+  userItems: PropTypes.instanceOf(Array)
+};

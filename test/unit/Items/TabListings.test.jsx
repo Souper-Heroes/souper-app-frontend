@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
-import TabListings from './TabListings';
+import TabListings from 'components/Items/TabListings';
 
 const item = {
   itemId: '2',

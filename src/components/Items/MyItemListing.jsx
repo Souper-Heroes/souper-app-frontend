@@ -19,18 +19,22 @@ import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 
 import moment from 'moment';
+import PropTypes from 'prop-types';
+import banana from 'assets/img/purple-banana.jpg';
 
 const useStyles = makeStyles(styles);
 
 export default function MyItemListing({ type, myitem, deleteItem }) {
-  const [item, setItem] = useState(myitem);
-  const [itemType, setType] = useState(type);
+  // const [item, setItem] = useState(myitem);
+  // const [itemType, setType] = useState(type);
+  const [item] = useState(myitem);
+  const [itemType] = useState(type);
 
   const classes = useStyles();
 
-  const GetCollectionMsg = type => {
+  const GetCollectionMsg = newType => {
     let message = null;
-    if (type === 'provide') {
+    if (newType === 'provide') {
       message = 'Being Collected:';
     } else {
       message = 'To Collect:';
@@ -43,19 +47,19 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
     );
   };
 
-  const handleOnClickDelete = event => {
-    // TODO
+  const handleOnClickDelete = () => {
+    /* TODO
     console.log(
       `Clicked Delete button, do something with item: ${item.itemId}, Title: ${item.description}`
-    );
+    ); */
     deleteItem(item.itemId);
   };
 
-  const handleOnClickAgreeCup = event => {
-    // TODO
+  const handleOnClickAgreeCup = () => {
+    /* TODO
     console.log(
       `Clicked Cup button, do something with item: ${item.itemId}, Title: ${item.description}`
-    );
+    ); */
   };
 
   return (
@@ -64,12 +68,12 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
         <Paper className={classes.paper} spacing={1}>
           <GridContainer spacing={2}>
             <Grid item>
-              <Link to={'/itemview/' + myitem.itemId} className={classes.link}>
+              <Link to={`/itemview/${myitem.itemId}`} className={classes.link}>
                 <ButtonBase className={classes.image}>
                   <img
                     className={classes.img}
                     alt="complex"
-                    src={require('assets/img/purple-banana.jpg')}
+                    src={banana}
                   />
                 </ButtonBase>
               </Link>
@@ -77,7 +81,7 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
             <GridContainer xs={12} sm item spacing={0} direction="column">
               <GridItem align="left" xs={12} className={classes.cell}>
                 <Link
-                  to={'/itemview/' + myitem.itemId}
+                  to={`/itemview/${myitem.itemId}`}
                   className={classes.link}
                 >
                   <Typography gutterBottom variant="body1">
@@ -240,8 +244,7 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
                         lg={5}
                         className={classes.cell}
                       >
-                        {myitem.preferredCollectStartTime !== null &&
-                          GetCollectionMsg(itemType)}
+                        {myitem.preferredCollectStartTime !== null && GetCollectionMsg(itemType)}
                       </GridItem>
                       <GridItem
                         xs={7}
@@ -294,3 +297,9 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
     </GridContainer>
   );
 }
+
+MyItemListing.propTypes = {
+  type: PropTypes.string,
+  myitem: PropTypes.instanceOf(Object),
+  deleteItem: PropTypes.func,
+};

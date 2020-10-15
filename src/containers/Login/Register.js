@@ -10,8 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  signUp: (email, password, displayName) =>
-    dispatch(signUp(email, password, displayName)),
+  signUp: (email, password, displayName) => dispatch(signUp(email, password, displayName)),
   loginWithGoogle: () => dispatch(loginWithGoogle())
 });
 
