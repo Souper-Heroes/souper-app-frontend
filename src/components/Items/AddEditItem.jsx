@@ -5,7 +5,6 @@ import classNames from 'classnames';
 // @material-ui components
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 // Material Kit components
 import Button from 'components/MaterialKitComponents/CustomButtons/Button';
@@ -56,33 +55,28 @@ const useStyles = makeStyles(styles);
 export default function AddEditItem({ addItem }) {
   const classes = useStyles();
 
+  const [location, setLocation] = useState({});
+  const [availability, setAvailability] = useState('');
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [expiry, setExpiry] = useState('');
+
   const handleTitleChange = e => {
     // console.log(e.target.value);
     setTitle(e.target.value);
   };
 
-  const [description, setDescription] = useState('');
   const handleDescriptionChange = e => {
     // console.log(e.target.value);
     setDescription(e.target.value);
   };
-  const [expiry, setExpiry] = useState('');
+
   const handleExpiryChange = value => {
     const newDate = value._d.toLocaleDateString('en-GB');
     // console.log(newDate);
     setExpiry(newDate);
   };
 
-  // Set to postcode found in profile here
-  const [location, setLocation] = useState({});
-  const handleLocationChange = e => {
-    // console.log(e.target.value);
-    setLocation(e.target.value);
-  };
-
-
-  const [availability, setAvailability] = useState('');
   const handleAvailChange = e => {
     // console.log(e.target.value);
     setAvailability(e.target.value);
@@ -91,14 +85,14 @@ export default function AddEditItem({ addItem }) {
 const onSubmit = async event => {  
 
   const addedItem = await addItem({title,
-    description,
-    category: category.map((cat) => cat.title), 
-    expiry, // TODO - BUG! crashes when typed into!!
-    location: {
-      type: "Point",
-      coordinates: [-112.110492, 36.098948]
-     },
-    availability})
+                                  description,
+                                  category: category.map((cat) => cat.title), 
+                                  expiry, // TODO - BUG! crashes when typed into!!
+                                  location: {
+                                    type: "Point",
+                                    coordinates: [-112.110492, 36.098948]
+                                  },
+                                  availability})
 // reset form
     if (addedItem) {
       setTitle('');
@@ -200,14 +194,15 @@ const onTagsChange = (event, values) => {
               <CustomInput
                 labelText="Location"
                 name="location"
+                id="disabled"
                 inputProps={{
-                  value: `DT9 4LY`,
+                  disabled: true,
+                  value: `DT9 4LY`
                 }}
                 formControlProps={{
                   fullWidth: true,
                 }}
-              />
-              
+              /> 
             </GridItem>
             <GridItem xs={12} sm={6} container spacing={1} direction="row">
               <GridItem xs={12}>
