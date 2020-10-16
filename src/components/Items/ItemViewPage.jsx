@@ -178,7 +178,7 @@ export default function ItemViewPage(props) {
                       align="left"
                       gutterBottom
                     >
-                      {moment(item.expiry_date).format('Do MMM YYYY')}
+                      {moment(item.expiry).format('Do MMM YYYY')}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -243,7 +243,7 @@ export default function ItemViewPage(props) {
                   </Button>
                 </GridItem>
                 <GridItem xs={6} sm={6} align="left">
-                  {item.c_user_id === null && (
+                  {item.c_user_uid === null && (
                     <Button
                       className={classes.button_label}
                       color="success"
@@ -253,7 +253,7 @@ export default function ItemViewPage(props) {
                       Reserve
                     </Button>
                   )}
-                  {_id === item.c_user_id && (
+                  {_id === item.c_user_uid && (
                     <Button
                       className={classes.button_label}
                       color="success"
@@ -282,7 +282,7 @@ ItemViewPage.propTypes = {
 };
 
 /* TODO Logic to amend item if you are collecting
- {_id !== item.c_user_id && (
+ {_id !== item.c_user_uid && (
                       <Typography
                         variant="body2"
                         color="textPrimary"
@@ -292,7 +292,7 @@ ItemViewPage.propTypes = {
                         {availability}
                       </Typography>
                     )}
-                    {_id === item.c_user_id && (
+                    {_id === item.c_user_uid && (
                       <CustomInput
                         id="Collection Availability"
                         inputProps={{

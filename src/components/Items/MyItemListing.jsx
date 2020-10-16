@@ -127,7 +127,7 @@ export default function MyItemListing({
                           gutterBottom
                           align="left"
                         >
-                          {myitem.category}
+                          {myitem.category[0]}
                         </Typography>
                       </GridItem>
                     </GridContainer>
@@ -172,7 +172,7 @@ export default function MyItemListing({
                           gutterBottom
                           align="left"
                         >
-                          {myitem.location}
+                          {myitem.availability}
                         </Typography>
                       </GridItem>
                     </GridContainer>
@@ -219,7 +219,7 @@ export default function MyItemListing({
                           gutterBottom
                           align="left"
                         >
-                          {moment(myitem.expiry_date).format('Do MMM YY')}
+                          {moment(myitem.expiry).format('Do MMM YY')}
                         </Typography>
                       </GridItem>
                     </GridContainer>
@@ -270,7 +270,7 @@ export default function MyItemListing({
               <GridItem xs={12} align="right">
                 <Button
                   onClick={handleOnClickAgreeCup}
-                  color={myitem.c_user_id === null ? 'default' : 'secondary'}
+                  color={myitem.c_user_uid === null ? 'default' : 'secondary'}
                 >
                   <EmojiEvent />
                 </Button>
