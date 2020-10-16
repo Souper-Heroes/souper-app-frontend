@@ -2,6 +2,8 @@ import api from '../utils/api';
 
 export const types = {
   GET_ITEMS: 'GET_ITEMS',
+  GET_PROVIDER_ITEMS: 'GET_PROVIDER_ITEMS',
+  GET_COLLECTOR_ITEMS: 'GET_COLLECTOR_ITEMS',
   GET_ITEMS_ERROR: 'GET_ITEMS_ERROR',
   DELETEITEM: 'DELETEITEM',
   SORTITEM: 'SORTITEM',
@@ -16,6 +18,48 @@ export const getItems = () => async dispatch => {
 
     dispatch({
       type: types.GET_ITEMS,
+      payload: res.data,
+    });
+  } catch (err) {
+    // do something with error
+    // console.log(err);
+    dispatch({
+      type: types.GET_ITEMS_ERROR,
+    });
+  }
+};
+
+export const getProviderItems = _id => async dispatch => {
+  try {
+    //console.log('***** ABOUT TO CALL getProviderItems:', _id);
+
+    const res = await api.get(`/items/provider/${_id}`);
+
+    console.log('***** CALLED getProviderItems:', res.data);
+
+    dispatch({
+      type: types.GET_PROVIDER_ITEMS,
+      payload: res.data,
+    });
+  } catch (err) {
+    // do something with error
+    // console.log(err);
+    dispatch({
+      type: types.GET_ITEMS_ERROR,
+    });
+  }
+};
+
+export const getCollectorItems = _id => async dispatch => {
+  try {
+    //console.log('***** ABOUT TO CALL getProviderItems:', _id);
+
+    const res = await api.get(`/items/collector/${_id}`);
+
+    console.log('***** CALLED getCollectorItems:', res.data);
+
+    dispatch({
+      type: types.GET_COLLECTOR_ITEMS,
       payload: res.data,
     });
   } catch (err) {
