@@ -22,40 +22,37 @@ import Datetime from 'react-datetime';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-// TODO - this uses files from views will have to get styles from somewhere else
 import styles from 'assets/jss/material-kit-react/views/profilePage';
 import PropTypes from 'prop-types';
 
 // DropZone imports
 import DropZone from '../dropzone/DropZone';
-//import { Title } from '@material-ui/icons';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const categoryOptions = [
-  { title: 'Nuts' },
-  { title: 'Fruit' },
-  { title: 'Dairy' },
-  { title: 'Fish' },
-  { title: 'Meat' },
+  { title: 'Nuts'   },
+  { title: 'Fruit'  },
+  { title: 'Dairy'  },
+  { title: 'Fish'   },
+  { title: 'Meat'   },
   { title: 'Cereal' },
-  { title: 'Fresh' },
+  { title: 'Fresh'  },
   { title: 'Cooked' },
-  { title: 'Raw' },
+  { title: 'Raw'    },
   { title: 'Frozen' },
-  { title: 'Dried' },
+  { title: 'Dried'  },
   { title: 'Tinned' },
   { title: 'Packet' },
 ];
-
 
 const useStyles = makeStyles(styles);
 
 export default function AddEditItem({ addItem }) {
   const classes = useStyles();
 
-  const [location, setLocation] = useState({});
+  // const [location, setLocation] = useState({});
   const [availability, setAvailability] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -87,31 +84,32 @@ export default function AddEditItem({ addItem }) {
     setAvailability(e.target.value);
   };
 
-const onSubmit = async event => {  
+  const onSubmit = async event => {  
+    const addedItem = await addItem({
+      title,
+      description,
+      category: category.map((cat) => cat.title), 
+      expiry, // TODO - BUG! crashes when typed into!!
+      location: {
+        type: "Point",
+        coordinates: [-112.110492, 36.098948]
+      },
+      availability
+    })
+  // reset form
+      if (addedItem) {
+        setTitle('');
+        setDescription('');
+        setCategory([]);
+        // setLocation({});  
+        setExpiry('');  
+        setAvailability('');
+      }
+  };
 
-  const addedItem = await addItem({title,
-                                  description,
-                                  category: category.map((cat) => cat.title), 
-                                  expiry, // TODO - BUG! crashes when typed into!!
-                                  location: {
-                                    type: "Point",
-                                    coordinates: [-112.110492, 36.098948]
-                                  },
-                                  availability})
-// reset form
-    if (addedItem) {
-      setTitle('');
-      setDescription('');
-      setCategory([]);
-      setLocation({});  
-      setExpiry('');  
-      setAvailability('');
-    }
-};
-
-const onCancel = ()=>{
-  window.history.back();
-}
+  const onCancel = ()=>{
+    window.history.back();
+  }
 
   return (
     <div>
@@ -124,7 +122,6 @@ const onCancel = ()=>{
             <GridItem xs={12} sm={6} className={classes.navWrapper}>
               <CustomInput
                 labelText="Title"
-                
                 inputProps={{
                   placeholder: 'Give your item a name',
                   onChange: event => handleTitleChange(event),
@@ -161,7 +158,6 @@ const onCancel = ()=>{
                       checkedIcon={checkedIcon}
                       style={{ marginRight: 8 }}
                       checked={selected}
-                      
                     />
                     {option.title}
                   </>
