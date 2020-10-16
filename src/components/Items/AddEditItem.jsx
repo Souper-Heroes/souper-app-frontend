@@ -60,6 +60,7 @@ export default function AddEditItem({ addItem }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [expiry, setExpiry] = useState('');
+  const [category, setCategory] = useState([]);
 
   const handleTitleChange = e => {
     // console.log(e.target.value);
@@ -70,6 +71,10 @@ export default function AddEditItem({ addItem }) {
     // console.log(e.target.value);
     setDescription(e.target.value);
   };
+
+  const onTagsChange = (event, values) => {
+    setCategory(values);
+  }; 
 
   const handleExpiryChange = value => {
     const newDate = value._d.toLocaleDateString('en-GB');
@@ -104,11 +109,9 @@ const onSubmit = async event => {
     }
 };
 
-const [category, setCategory] = useState([]);
-
-const onTagsChange = (event, values) => {
-  setCategory(values);
-}; 
+const onCancel = ()=>{
+  window.history.back();
+}
 
   return (
     <div>
@@ -220,7 +223,7 @@ const onTagsChange = (event, values) => {
                 />
               </GridItem>
               <GridItem fullWidth align="right">
-                <Button color="danger" size="lg">
+                <Button color="danger" size="lg" onClick={onCancel}>
                   Cancel
                 </Button>
                 <Button
