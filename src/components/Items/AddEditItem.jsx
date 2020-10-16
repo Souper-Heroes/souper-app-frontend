@@ -92,7 +92,7 @@ export default function AddEditItem({ addItem }) {
       expiry, // TODO - BUG! crashes when typed into!!
       location: {
         type: "Point",
-        coordinates: [-112.110492, 36.098948]
+        coordinates: [-112.110492, 36.098948] // TODO - get this info from Profile
       },
       availability
     })
@@ -217,19 +217,25 @@ export default function AddEditItem({ addItem }) {
                     fullWidth: true,
                   }}
                 />
-              </GridItem>
-              <GridItem fullWidth align="right">
-                <Button color="danger" size="lg" onClick={onCancel}>
-                  Cancel
-                </Button>
-                <Button
-                  color="success"
-                  size="lg"
-                  onClick={event => onSubmit(event)}
-                >
-                  Save
-                </Button>
-              </GridItem>
+              </GridItem >
+              <GridContainer xs={12} fullWidth align="right" >
+                <GridItem xs={6} />
+                <GridItem xs={3} >
+                  <Button 
+                    color="danger" size="md" onClick={onCancel}>
+                    Cancel
+                  </Button>
+                </GridItem>
+                <GridItem xs={3} >
+                  <Button 
+                    color="success"
+                    size="md"
+                    onClick={event => onSubmit(event)}
+                  >
+                    Save
+                  </Button>
+                </GridItem>
+              </GridContainer>
             </GridItem>
           </GridContainer>
         </div>
