@@ -179,8 +179,8 @@ export default (state = initialState, action) => {
       return {
         // TODO should call axios api function to update bbackend with new preferred Collect time for item
         ...state,
-        citems: [
-          ...state.citems.map(myItem => {
+        myitems: [
+          ...state.myitems.map(myItem => {
             if (myItem._id === payload._id) {
               const updItem = myItem;
               updItem.c_user_uid = payload.c_user_id;
@@ -195,13 +195,13 @@ export default (state = initialState, action) => {
     case types.DELETEITEM:
       return {
         ...state,
-        items: [...state.items.filter(myItem => myItem._id !== action._id)],
+        mytems: [...state.myitems.filter(myItem => myItem._id !== action._id)],
       };
     case types.SORTITEM:
       if (action.menuItem === 'Category') {
         return {
           ...state,
-          items: [...state.items].sort((a, b) => {
+          myitems: [...state.myitems].sort((a, b) => {
             if (a.category > b.category) {
               return 1;
             }
@@ -212,10 +212,10 @@ export default (state = initialState, action) => {
           }),
         };
       }
-      //  Sort By Expiry Date
+      // Sort By Expiry Date
       return {
         ...state,
-        items: [...state.items].sort((a, b) => {
+        myitems: [...state.myitems].sort((a, b) => {
           if (moment(a.expiry) > moment(b.expiry)) {
             return 1;
           }
