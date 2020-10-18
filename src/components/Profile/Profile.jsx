@@ -11,6 +11,7 @@ import Slider from '@material-ui/core/Slider';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import Delete from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles(styles);
 
@@ -55,22 +56,28 @@ export default function Profile() {
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div className={classes.container}>
         <GridContainer justify="center">
-          <GridItem cs={12} sm={12} md={8}>
-            <h2 className={classes.title}>
-              Profile
-            </h2>
+          <GridItem xs={12} md={8} >
+            <div style={{ display: "flex" }}>
+              <h2 className={classes.title} >  Profile  </h2>
+              <Button justIcon  round color="rose" style={{margin: 35, marginLeft: "auto" }} ><Delete style={{color: "#FFFFFF"}}/></Button>
+            </div>
             <form>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Display name"
-                    id="displayName"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
+                <GridItem xs={12} md={6} align="center">
+                  <img
+                    src={profileImage}
+                    alt="profile"
+                    className={imageClasses}
+                    style={{ width: 250, height: 250 }}
                   />
+                  <br /><br />
+                  <Button   color="rose" size="md">
+                    CHANGE AVATAR
+                  </Button>
+                </GridItem>
+                <GridItem xs={12} md={6} align="right">
                   <CustomInput
-                    labelText="Full name"
+                    labelText="Name"
                     id="fullName"
                     formControlProps={{
                       fullWidth: true,
@@ -84,7 +91,7 @@ export default function Profile() {
                     }}
                   />
                   <CustomInput
-                    labelText="Address"
+                    labelText="First line of address"
                     id="address"
                     formControlProps={{
                       fullWidth: true,
@@ -98,7 +105,7 @@ export default function Profile() {
                     }}
                   />
                   <InputLabel id="demo-simple-select-label">
-                    Item distance
+                    Maximum distance you would travel for an item
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
@@ -118,24 +125,8 @@ export default function Profile() {
                     valueLabelDisplay="auto"
                     marks={marks}
                   />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
-                  <img
-                    src={profileImage}
-                    alt="profile"
-                    className={imageClasses}
-                    style={{ width: 250, height: 250 }}
-                  />
-                  <Button variant="contained" color="success" size="lg">
-                    CHANGE AVATAR
-                  </Button>
-                  <Button variant="contained" size="lg">
-                    DELETE ACCOUNT
-                  </Button>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
-                  <Button variant="contained" color="rose" size="lg">
-                    SAVE CHANGES
+                  <Button variant="contained" color="success" size="md">
+                    SAVE
                   </Button>
                 </GridItem>
               </GridContainer>
