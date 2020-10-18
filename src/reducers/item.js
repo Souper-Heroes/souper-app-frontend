@@ -153,9 +153,7 @@ export default (state = initialState, action) => {
         // Only new objects can be created and assigned to the state, thats why we use [...]
         items: [
           ...state.items.map(myItem => {
-            // console.log('***FOUND MY ITEM:', myItem, action);
             if (myItem._id === action._id) {
-              // console.log( 'FOUND MY ITEM:', myItem.preferredCollectStartTime, action);
               const updItem = myItem;
               updItem.availability = action.availability;
               return updItem;
