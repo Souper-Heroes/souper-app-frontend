@@ -9,24 +9,14 @@ import {
 } from 'actions/item';
 
 const mapStateToProps = (state, ownProps) => {
-  console.log("container Item:", ownProps.match.params.type === "provide" 
-        ? state.item.pitems ? state.item.pitems.find(i => i._id === ownProps.match.params.id) : null 
-        : state.item.citems ? state.item.citems.find(i => i._id === ownProps.match.params.id) : null);
-
   return {
   isLoggingIn: state.auth.isLoggingIn,
   isAuthenticated: state.auth.isAuthenticated,
-  _id: state.auth.user.uid, // TODO Get the actual uuid from firebase of the logged in user
+  _id: state.auth.user.uid, // Get the actual uuid from firebase of the logged in user
   id: ownProps.match.params.id,
-  items: state.item.items,
-  pitems: state.item.pitems,
-  citems: state.item.citems,
+  myitems: state.item.myitems,
   type: ownProps.match.params.type, 
-  item: ownProps.match.params.type === "provide" 
-        ? state.item.pitems ? state.item.pitems.find(i => i._id === ownProps.match.params.id) : null 
-        : state.item.citems ? state.item.citems.find(i => i._id === ownProps.match.params.id) : null
-  //citem: state.item.citems ? state.item.citems.find(i => i._id === ownProps.match.params.id) : null,
-  //pitem: state.item.pitems ? state.item.pitems.find(i => i._id === ownProps.match.params.id) : null,
+  item: state.item.myitems ? state.item.myitems.find(i => i._id === ownProps.match.params.id) : null 
 }};
 
 const mapDispatchToProps = dispatch => ({

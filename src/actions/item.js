@@ -3,9 +3,11 @@ import * as routes from 'components/Routing/routes';
 
 export const types = {
   GET_ITEMS: 'GET_ITEMS',
+  GET_ITEMS_ERROR: 'GET_ITEMS_ERROR',
+  GET_MY_ITEMS: 'GET_MY_ITEMS',
+  GET_MY_ITEMS_ERROR: 'GET_MY_ITEMS_ERROR',
   GET_PROVIDER_ITEMS: 'GET_PROVIDER_ITEMS',
   GET_COLLECTOR_ITEMS: 'GET_COLLECTOR_ITEMS',
-  GET_ITEMS_ERROR: 'GET_ITEMS_ERROR',
   DELETEITEM: 'DELETEITEM',
   SORTITEM: 'SORTITEM',
   UPDATE_COLLECTDATES: 'UPDATE_COLLECTDATES',
@@ -33,7 +35,7 @@ export const getItems = () => async dispatch => {
 
 export const getProviderItems = _id => async dispatch => {
   try {
-    //console.log('***** ABOUT TO CALL getProviderItems:', _id);
+    // console.log('***** ABOUT TO CALL getProviderItems:', _id);
 
     const res = await api.get(`/items/provider/${_id}`);
 
@@ -54,7 +56,7 @@ export const getProviderItems = _id => async dispatch => {
 
 export const getCollectorItems = _id => async dispatch => {
   try {
-    //console.log('***** ABOUT TO CALL getProviderItems:', _id);
+    // onsole.log('***** ABOUT TO CALL getProviderItems:', _id);
 
     const res = await api.get(`/items/collector/${_id}`);
 
@@ -69,6 +71,23 @@ export const getCollectorItems = _id => async dispatch => {
     // console.log(err);
     dispatch({
       type: types.GET_ITEMS_ERROR,
+    });
+  }
+};
+
+export const getMyItems = () => async dispatch => {
+  try {
+    const res = await api.get('/items/user_id');
+
+    dispatch({
+      type: types.GET_MY_ITEMS,
+      payload: res.data,
+    });
+  } catch (err) {
+    // do something with error
+    // console.log(err);
+    dispatch({
+      type: types.GET_MY_ITEMS_ERROR,
     });
   }
 };

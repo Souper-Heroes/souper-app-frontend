@@ -14,30 +14,19 @@ import * as routes from 'components/Routing/routes';
 
 const useStyles = makeStyles(styles);
 
-export default function ItemViewPage({ _id, id, item, type, updateCollectionDates, unreserveItem, reserveItem, history }) {
-  //console.log('ITEM VIEW PAGE PROPS', props);
-  //const { _id, citem, pitem, type, updateCollectionDates, unreserveItem, reserveItem } = props;
-  //const history = useHistory();
+export default function ItemViewPage({ _id, id, item, type, updateCollectionDates, unreserveItem, reserveItem }) {
+  // console.log('ITEM VIEW PAGE PROPS', props);
   const [isDisableAmendBtn, setIsDisableAmendBtn] = useState(true);
 
   const classes = useStyles();
 
-  //let item = null;
-  //if ( type === 'provide'){
-  //  item = pitem;
- // }
- // else {
-  //  item = citem;
-  //}
-  //citem === null ? item = pitem : item = citem;
-
-  console.log("MY VIEW PAGE ITEM:", item);
+  // console.log("MY VIEW PAGE ITEM:", item);
 
   if (item == null) { 
     return <Redirect to={routes.ITEM_LIST} />;
   }
 
-  console.log("*** ITEM:", item);
+  // console.log("*** ITEM:", item);
 
   const handleOnClickReserve = () => {
     console.log("About to reserve item._id: ", item._id);
@@ -48,29 +37,19 @@ export default function ItemViewPage({ _id, id, item, type, updateCollectionDate
     // console.log(`Clicked Reserve Account, do something with DisplayName: `);
     e.preventDefault();
     console.log("About to unreserve item._id: ", item._id);
-    unreserveItem(item._id, history);
+    unreserveItem(item._id);
 
   };
 
   const handleOnClickAmendTime = (id) => {
     // Update backend with new amended dates
-
     updateCollectionDates(id, item.availability);
-
     setIsDisableAmendBtn(true);
   };
 
   const handleOnClickCancel = () => {
     // console.log(`Clicked Cancel Account, do something with DisplayName: `);
   };
-
-  // console.log(
-  //   'CollectStartTime:',
-  //   availability,
-  //   'PropStartTime:',
-  //   props.item.availability
-  // );
-  //console.log('*** 222 ITEM VIEW PAGE PROPS 222 ****', props);
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>

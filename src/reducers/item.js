@@ -4,6 +4,8 @@ import { types } from '../actions/item';
 const initialState = {
   pitems: null,
   citems: null,
+  myitems: [],
+  loading: true,
   items: [
     {
       _id: '1',
@@ -121,7 +123,14 @@ export default (state = initialState, action) => {
   switch (type) {
     case types.GET_ITEMS:
       return {
+        ...state,
         items: payload,
+      };
+    case types.GET_MY_ITEMS:
+      return {
+        ...state,
+        myitems: payload,
+        loading: false,
       };
     case types.GET_PROVIDER_ITEMS:
       return {
@@ -161,20 +170,9 @@ export default (state = initialState, action) => {
       return {
         // TODO should call axios api function to update bbackend with new preferred Collect time for item
         ...state,
-        citems: state.citems.filter((item) => item._id !== payload._id),
+        myitems: state.myitems.filter((item) => item._id !== payload._id),
         success: true,
         citem : payload
-        //[
-        //  ...state.citems.map(myItem => {
-        //     console.log('MY payload:', payload);
-        //    if (myItem._id === payload._id) {
-        //      const updItem = myItem;
-        //      updItem.c_user_uid = payload.c_user_id;
-        //      return updItem;
-        //   }
-        //    return myItem;
-        //  }),
-        //],
         
       };
     case types.RESERVE_ITEM:
