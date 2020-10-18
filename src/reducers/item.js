@@ -146,6 +146,11 @@ export default (state = initialState, action) => {
       return {
         items: payload,
       };
+      case types.GET_DELETE_ITEM_ERROR:
+      return {
+        ...state,
+        msg: payload.msg,
+      };
     case types.UPDATE_COLLECTDATES:
       return {
         // TODO should call axios api function to update bbackend with new preferred Collect time for item
@@ -170,8 +175,7 @@ export default (state = initialState, action) => {
         ...state,
         myitems: state.myitems.filter((item) => item._id !== payload._id),
         success: true,
-        citem : payload
-        
+        citem : payload    
       };
     case types.RESERVE_ITEM:
       return {
@@ -193,7 +197,8 @@ export default (state = initialState, action) => {
     case types.DELETEITEM:
       return {
         ...state,
-        mytems: [...state.myitems.filter(myItem => myItem._id !== action._id)],
+        myitems: state.myitems.filter((item) => item._id !== action._id),
+        msg : payload.msg
       };
     case types.SORTITEM:
       if (action.menuItem === 'Category') {
