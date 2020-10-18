@@ -8,9 +8,7 @@ import {
 
 // 2nd parameter to this function holds our component props
 const mapStateToProps = (state) => ({
-  // items: state.item.items,
-  pitems: state.item.pitems,
-  citems: state.item.citems,
+  myitems: state.item.myitems,
   _id: state.auth.user.uid,
 });
 

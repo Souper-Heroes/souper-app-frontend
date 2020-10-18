@@ -14,16 +14,14 @@ import PropTypes from 'prop-types';
 
 export default function MyItemListings(props) {
   console.log('*** MY ITEM LISTINGSSSS PROPS:', props);
-  const { _id, type, pitems, citems } = props;
+  const { _id, type, myitems } = props;
 
   // console.log('*** items:', props.items);
-
-  //useEffect(() => {
+  // useEffect(() => {
   //  console.log('Calling MyItemListings UseEffect');
   //  getProviderItems(_id);
-  //}, []);
-
-  //useEffect(() => {
+  // }, []);
+  // useEffect(() => {
   //   getProviderItems(_id);
   //   getCollectorItems(_id);
   // }, [getProviderItems, getCollectorItems]);
@@ -45,29 +43,22 @@ export default function MyItemListings(props) {
     await props.unreserveItem(_id, itemId);
   };
 
-  //const getMyItems = () =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-
-  //  pitems.filter(myItem => {
-  //    if (type === 'provide') {
-  //      if (myItem.user_uid === props._id) {
-  //        return myItem;
-  //      }
-  //    } else if (myItem.c_user_uid === props._id) {
-  //      return myItem;
-  //    }
-  //    return null;
-  //  });
-  let items = null;
-  if (type === 'provide') {
-    items = pitems;
-  } else {
-    items = citems;
-  }
+  const getMyItems = () =>
+      // eslint-disable-next-line implicit-arrow-linebreak
+     myitems.filter(myItem => {
+      if (type === 'provide') {
+        if (myItem.user_uid === props._id) {
+          return myItem;
+        }
+      } else if (myItem.c_user_uid === props._id) {
+        return myItem;
+      }
+      return null;
+  });
 
   return (
     <>
-      {items == null || !items.length ? (
+      {1==2 ? (
         <div>Loading...</div>
       ) : (
         <div>
@@ -76,7 +67,7 @@ export default function MyItemListings(props) {
               <ListingsDropdown sortItems={sortItems} />
             </GridItem>
             <GridItem xs={12} sm={12} md={12}>
-              {items.map(myItem => (
+              {getMyItems().map(myItem => (
                 <MyItemListing
                   key={myItem._id}
                   type={type}
@@ -112,7 +103,6 @@ export default function MyItemListings(props) {
 MyItemListings.propTypes = {
   type: PropTypes.string,
   _id: PropTypes.string,
-  //items: PropTypes.instanceOf(Array),
   deleteItem: PropTypes.func,
   sortByItem: PropTypes.func,
   unreserveItem: PropTypes.func,

@@ -10,8 +10,10 @@ import CustomTabs from 'components/MaterialKitComponents/CustomTabs/CustomTabs';
 
 const useStyles = makeStyles(styles);
 
-export default function ItemListPage({ _id, citems, pitems }) {
+export default function ItemListPage({ _id, myitems, loading, getMyItems }) {
   const classes = useStyles();
+
+  useEffect( () => {getMyItems()}, [getMyItems])
 
   const createCollectionTabs = () => {
     const type = ["Listings", "Collections"]
@@ -19,7 +21,7 @@ export default function ItemListPage({ _id, citems, pitems }) {
 
     type.forEach(tab => {
       if (tab === "Listings" ) {
-        if (pitems.length) {
+        if (myitems.filter(item => item.user_uid === _id).length) {
           mytabs.push({
             tabName: 'Listings',
             tabContent: <MyItemListings type="provide" />,
@@ -27,7 +29,7 @@ export default function ItemListPage({ _id, citems, pitems }) {
         }
       }
       else if (tab === "Collections" ) {
-        if (citems.length) {
+        if (myitems.filter(item => item.c_user_uid === _id).length) {
         
           mytabs.push({
             tabName: 'Collections',
@@ -36,13 +38,16 @@ export default function ItemListPage({ _id, citems, pitems }) {
         }
       }     
     })
-    console.log("MY TAB",mytabs);
     return mytabs; 
   }
 
   createCollectionTabs();
 
   return (
+    <>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div className={classes.container}>
         <GridContainer justify="center">
@@ -56,5 +61,7 @@ export default function ItemListPage({ _id, citems, pitems }) {
         </GridContainer>
       </div>
     </div>
+     )}
+     </>
   );
 }
