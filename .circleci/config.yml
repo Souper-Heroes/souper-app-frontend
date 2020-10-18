@@ -74,28 +74,28 @@ jobs:
           command: |
             PKG_VERSION=v`grep '"version"' package.json | egrep -o "[0-9]+.[0-9]+.[0-9]+"`
             ~/.local/bin/aws s3 sync --quiet --delete dist/ s3://${AWS_S3_ORIGIN_BUCKET_LIVE_A}/${PKG_VERSION}/
-    publish_live_origin:
-      docker:
-        - image: circleci/node:8-stretch
-      steps:
-        - attach_workspace:
-            at: ~/
-        - run:
-            name: Copy from S3 versioned dir to latest/
-            command: |
-              PKG_VERSION=v`grep '"version"' package.json | egrep -o "[0-9]+.[0-9]+.[0-9]+"`
-              ~/.local/bin/aws s3 sync --quiet --delete s3://${AWS_S3_ORIGIN_BUCKET_LIVE_A}/${PKG_VERSION}/ s3://${AWS_S3_ORIGIN_BUCKET_LIVE_A}/latest/
-        - run:
-            name: Invalidate CloudFront caches to load latest content
-            command: |
-              # This project is served through multiple dists; iterate over a
-              # comma-separated list
-              IFS=',' read -ra DIST_IDS \<<< "$AWS_CLOUDFRONT_DIST_ID_LIVE_A"
-              for DIST_ID in "${DIST_IDS[@]}"; do
-                echo "Invalidating dist ${DIST_ID}"
-                INVALIDATION_ID=$(~/.local/bin/aws cloudfront create-invalidation --distribution-id ${DIST_ID} --paths "/shipping/*" | jq -r .Invalidation.Id)
-                ~/.local/bin/aws cloudfront wait invalidation-completed --distribution-id ${DIST_ID} --id ${INVALIDATION_ID}
-              done
+  publish_live_origin:
+    docker:
+      - image: circleci/node:8-stretch
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Copy from S3 versioned dir to latest/
+          command: |
+            PKG_VERSION=v`grep '"version"' package.json | egrep -o "[0-9]+.[0-9]+.[0-9]+"`
+            ~/.local/bin/aws s3 sync --quiet --delete s3://${AWS_S3_ORIGIN_BUCKET_LIVE_A}/${PKG_VERSION}/ s3://${AWS_S3_ORIGIN_BUCKET_LIVE_A}/latest/
+      - run:
+          name: Invalidate CloudFront caches to load latest content
+          command: |
+            # This project is served through multiple dists; iterate over a
+            # comma-separated list
+            IFS=',' read -ra DIST_IDS \<<< "$AWS_CLOUDFRONT_DIST_ID_LIVE_A"
+            for DIST_ID in "${DIST_IDS[@]}"; do
+              echo "Invalidating dist ${DIST_ID}"
+              INVALIDATION_ID=$(~/.local/bin/aws cloudfront create-invalidation --distribution-id ${DIST_ID} --paths "/shipping/*" | jq -r .Invalidation.Id)
+              ~/.local/bin/aws cloudfront wait invalidation-completed --distribution-id ${DIST_ID} --id ${INVALIDATION_ID}
+            done
 
 workflows:
   version: 2.1
