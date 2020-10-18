@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import profileImage from 'assets/img/faces/christian.jpg';
@@ -7,49 +7,70 @@ import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
 import Button from 'components/MaterialKitComponents/CustomButtons/Button';
 import styles from 'assets/jss/material-kit-react/views/profilePage';
-import Slider from '@material-ui/core/Slider';
-import MenuItem from '@material-ui/core/MenuItem';
+import Slider from 'nouislider';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from "@material-ui/core/FormControl";
 
 const useStyles = makeStyles(styles);
 
 export default function Profile() {
-  const [distance, setDistance] = React.useState('miles');
+  // const [distance, setDistance] = React.useState('miles');
+  const [distance, setDistance] = useState(2);
+  const [unit, setUnit] = useState('Miles');
+
   const classes = useStyles();
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
     classes.imgFluid
   );
-  const marks = [
-    {
-      value: 0,
-      label: '0',
-    },
-    {
-      value: 1,
-      label: '|',
-    },
-    {
-      value: 2,
-      label: '|',
-    },
-    {
-      value: 3,
-      label: '|',
-    },
-    {
-      value: 4,
-      label: '|',
-    },
-    {
-      value: 5,
-      label: '5',
-    },
-  ];
+
   const valuetext = value => `${value} Miles`;
   const handleChange = event => setDistance(event.target.value);
+
+  const onChangeHandler = event => {
+    const { name, value } = event.currentTarget;
+    // console.log(name, value)
+    if (name === 'unit') {
+      // console.log(value);
+      setUnit(value);
+      document.getElementById('sliderRegular').noUiSlider.updateOptions({
+        start: `${distance}`,
+        format: {
+          from: Number,
+          to: val => `${val.toFixed(2)} ${value === 'Miles' ? 'mi' : 'km'}`
+        }
+      });
+    }
+  };
+
+  useEffect(() => {
+    const distanceSlider = document.getElementById('sliderRegular');
+    // create distance Slider when component mounts
+    Slider.create(distanceSlider, {
+      start: `${distance}`,
+      format: {
+        from: Number,
+        to: value => `${value.toFixed(2)} ${unit === 'Miles' ? 'mi' : 'km'}`
+      },
+      keyboardSupport: true,
+      connect: [true, false],
+      range: {
+        min: 0,
+        max: 5
+      },
+      tooltips: true,
+      pips: {
+        mode: 'steps',
+        stepped: true,
+        density: 10
+      }
+    });
+    // set the Distance State when slider value changed
+    distanceSlider.noUiSlider.on('change', () => setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, '')));
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
@@ -70,22 +91,8 @@ export default function Profile() {
                     }}
                   />
                   <CustomInput
-                    labelText="Full name"
-                    id="fullName"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                  <CustomInput
                     labelText="Email"
                     id="email"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                  />
-                  <CustomInput
-                    labelText="Address"
-                    id="address"
                     formControlProps={{
                       fullWidth: true,
                     }}
@@ -97,36 +104,40 @@ export default function Profile() {
                       fullWidth: true,
                     }}
                   />
-                  <InputLabel id="demo-simple-select-label">
+                  <InputLabel style={{ marginTop: 15 }} id="demo-simple-select-label">
                     Item distance
                   </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={distance}
-                    onChange={handleChange}
-                  >
-                    <MenuItem value="miles">in Miles</MenuItem>
-                    <MenuItem value="km">in Km</MenuItem>
-                  </Select>
-                  <Slider
-                    defaultValue={20}
-                    getAriaValueText={valuetext}
-                    min={0}
-                    max={5}
-                    step={0.1}
-                    valueLabelDisplay="auto"
-                    marks={marks}
-                  />
+                  <FormControl required className={classes.formControl}>
+                    <Select
+                        native
+                        value={unit}
+                        onChange={event => onChangeHandler(event)}
+                        name="unit"
+                    >
+                      <option value="Miles">In Miles</option>
+                      <option value="Kilometers">In Kilometers</option>
+                    </Select>
+                  </FormControl>
+                  <FormControl fullWidth>
+                    <div
+                        className="slider-primary"
+                        id="sliderRegular"
+                        // className={classes.slider}
+                        name="slider"
+                        onChange={event => onChangeHandler(event)}
+                    />
+                  </FormControl>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <img
                     src={profileImage}
                     alt="profile"
                     className={imageClasses}
-                    style={{ width: 250, height: 250 }}
+                    style={{ width: 250, height: 250, marginTop: 20, marginLeft: 20}}
                   />
-                  <Button variant="contained" color="success" size="lg">
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <Button style={{ marginTop: 20 }} variant="contained" color="success" size="lg">
                     CHANGE AVATAR
                   </Button>
                   <Button variant="contained" size="lg">
