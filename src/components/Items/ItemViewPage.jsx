@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect  } from 'react-router-dom';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
@@ -9,29 +10,52 @@ import styles from 'assets/jss/Items/views/ItemViewPage';
 import banana from 'assets/img/purple-banana.jpg';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import * as routes from 'components/Routing/routes';
 
 const useStyles = makeStyles(styles);
 
-export default function ItemViewPage(props) {
-  // console.log('VIEW PAGE PROPS', props);
-  const { _id, item } = props;
+export default function ItemViewPage({ _id, id, item, type, updateCollectionDates, unreserveItem, reserveItem, history }) {
+  //console.log('ITEM VIEW PAGE PROPS', props);
+  //const { _id, citem, pitem, type, updateCollectionDates, unreserveItem, reserveItem } = props;
+  //const history = useHistory();
   const [isDisableAmendBtn, setIsDisableAmendBtn] = useState(true);
 
   const classes = useStyles();
+
+  //let item = null;
+  //if ( type === 'provide'){
+  //  item = pitem;
+ // }
+ // else {
+  //  item = citem;
+  //}
+  //citem === null ? item = pitem : item = citem;
+
+  console.log("MY VIEW PAGE ITEM:", item);
+
+  if (item == null) { 
+    return <Redirect to={routes.ITEM_LIST} />;
+  }
+
+  console.log("*** ITEM:", item);
+
   const handleOnClickReserve = () => {
-    // console.log(`Clicked Reserve Account, do something with DisplayName: `);
-    props.reserveItem(_id, item._id);
+    console.log("About to reserve item._id: ", item._id);
+    reserveItem(item._id);
   };
 
-  const handleOnClickUnreserve = () => {
+  const handleOnClickUnreserve = (e) => {
     // console.log(`Clicked Reserve Account, do something with DisplayName: `);
-    props.unreserveItem(_id, item._id);
+    e.preventDefault();
+    console.log("About to unreserve item._id: ", item._id);
+    unreserveItem(item._id, history);
+
   };
 
-  const handleOnClickAmendTime = () => {
+  const handleOnClickAmendTime = (id) => {
     // Update backend with new amended dates
 
-    props.updateCollectionDates(item._id, item.availability);
+    updateCollectionDates(id, item.availability);
 
     setIsDisableAmendBtn(true);
   };
@@ -46,6 +70,7 @@ export default function ItemViewPage(props) {
   //   'PropStartTime:',
   //   props.item.availability
   // );
+  //console.log('*** 222 ITEM VIEW PAGE PROPS 222 ****', props);
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
@@ -141,7 +166,7 @@ export default function ItemViewPage(props) {
                       align="left"
                       gutterBottom
                     >
-                      {item.location}
+                      {item.expiry}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -243,7 +268,7 @@ export default function ItemViewPage(props) {
                   </Button>
                 </GridItem>
                 <GridItem xs={6} sm={6} align="left">
-                  {item.c_user_uid === null && (
+                  {type === "collect" && item.c_user_uid === null && (
                     <Button
                       className={classes.button_label}
                       color="success"
@@ -253,7 +278,7 @@ export default function ItemViewPage(props) {
                       Reserve
                     </Button>
                   )}
-                  {_id === item.c_user_uid && (
+                  {type === "collect" && _id === item.c_user_uid && (
                     <Button
                       className={classes.button_label}
                       color="success"
@@ -268,7 +293,7 @@ export default function ItemViewPage(props) {
             </GridItem>
           </GridItem>
         </GridContainer>
-      </div>
+      </div> 
     </div>
   );
 }

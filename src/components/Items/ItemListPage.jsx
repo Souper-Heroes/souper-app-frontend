@@ -10,10 +10,37 @@ import CustomTabs from 'components/MaterialKitComponents/CustomTabs/CustomTabs';
 
 const useStyles = makeStyles(styles);
 
-export default function ItemListPage({
-  _id,
-}) {
+export default function ItemListPage({ _id, citems, pitems }) {
   const classes = useStyles();
+
+  const createCollectionTabs = () => {
+    const type = ["Listings", "Collections"]
+    let mytabs = [];
+
+    type.forEach(tab => {
+      if (tab === "Listings" ) {
+        if (pitems.length) {
+          mytabs.push({
+            tabName: 'Listings',
+            tabContent: <MyItemListings type="provide" />,
+          });
+        }
+      }
+      else if (tab === "Collections" ) {
+        if (citems.length) {
+        
+          mytabs.push({
+            tabName: 'Collections',
+            tabContent: <MyItemListings type="collect" />,
+          });
+        }
+      }     
+    })
+    console.log("MY TAB",mytabs);
+    return mytabs; 
+  }
+
+  createCollectionTabs();
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
@@ -23,16 +50,7 @@ export default function ItemListPage({
             <CustomTabs
               headerColor="rose"
               plainTabs
-              tabs={[
-                {
-                  tabName: 'Listings',
-                  tabContent: <MyItemListings type="provide" />,
-                },
-                {
-                  tabName: 'Collections',
-                  tabContent: <MyItemListings type="collect" />,
-                },
-              ]}
+              tabs={createCollectionTabs()}
             />
           </GridItem>
         </GridContainer>

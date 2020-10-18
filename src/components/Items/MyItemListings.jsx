@@ -6,14 +6,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
-import MyItemListing from 'components/Items/MyItemListing';
+import MyItemListing from 'containers/Items/MyItemListing';
 import ListingsDropdown from 'components/Items/ListingsDropdown';
 import Button from 'components/CustomButtons/Button';
 import ListingsPaginations from 'components/Items/ListingsPaginations';
 import PropTypes from 'prop-types';
 
 export default function MyItemListings(props) {
-  console.log('*** MY PROPS:', props);
+  console.log('*** MY ITEM LISTINGSSSS PROPS:', props);
   const { _id, type, pitems, citems } = props;
 
   // console.log('*** items:', props.items);
@@ -67,7 +67,7 @@ export default function MyItemListings(props) {
 
   return (
     <>
-      {items == null ? (
+      {items == null || !items.length ? (
         <div>Loading...</div>
       ) : (
         <div>

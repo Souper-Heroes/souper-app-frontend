@@ -161,33 +161,38 @@ export default (state = initialState, action) => {
       return {
         // TODO should call axios api function to update bbackend with new preferred Collect time for item
         ...state,
-        items: [
-          ...state.items.map(myItem => {
-            if (myItem._id === action.itemId) {
-              const updItem = myItem;
-              updItem.c_user_uid = null;
-              return updItem;
-            }
-            return myItem;
-          }),
-        ],
+        citems: state.citems.filter((item) => item._id !== payload._id),
         success: true,
+        citem : payload
+        //[
+        //  ...state.citems.map(myItem => {
+        //     console.log('MY payload:', payload);
+        //    if (myItem._id === payload._id) {
+        //      const updItem = myItem;
+        //      updItem.c_user_uid = payload.c_user_id;
+        //      return updItem;
+        //   }
+        //    return myItem;
+        //  }),
+        //],
+        
       };
     case types.RESERVE_ITEM:
       return {
         // TODO should call axios api function to update bbackend with new preferred Collect time for item
         ...state,
-        items: [
-          ...state.items.map(myItem => {
-            if (myItem._id === action.itemId) {
+        citems: [
+          ...state.citems.map(myItem => {
+            if (myItem._id === payload._id) {
               const updItem = myItem;
-              updItem.c_user_uid = action._id;
+              updItem.c_user_uid = payload.c_user_id;
               return updItem;
             }
             return myItem;
           }),
         ],
         success: true,
+        citem : payload
       };
     case types.DELETEITEM:
       return {

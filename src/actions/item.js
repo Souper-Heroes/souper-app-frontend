@@ -1,4 +1,5 @@
 import api from '../utils/api';
+import * as routes from 'components/Routing/routes';
 
 export const types = {
   GET_ITEMS: 'GET_ITEMS',
@@ -10,6 +11,7 @@ export const types = {
   UPDATE_COLLECTDATES: 'UPDATE_COLLECTDATES',
   RESERVE_ITEM: 'RESERVE_ITEM',
   UNRESERVE_ITEM: 'UNRESERVE_ITEM',
+  UNRESERVE_ITEM_ERROR: 'UNRESERVE_ITEM_ERROR'
 };
 
 export const getItems = () => async dispatch => {
@@ -88,14 +90,38 @@ export const updateCollectionDates = (_id, availability) => ({
   success: true,
 });
 
-export const reserveItem = (_id, itemId) => ({
-  type: types.RESERVE_ITEM,
-  _id,
-  itemId,
-});
+export const reserveItem = (_id ) => async dispatch => {
+  try {
+    const res = await api.put(`/items/reserve/${_id}`);
 
-export const unreserveItem = (_id, itemId) => ({
-  type: types.UNRESERVE_ITEM,
-  _id,
-  itemId,
-});
+    console.log('***** CALLED reserveItem:', res.data);
+    dispatch({
+      type: types.RESERVE_ITEM,
+      payload : res.data
+    });
+  } catch (err) {
+    // do something with error
+    // console.log(err);
+    dispatch({
+      type: types.GET_ITEMS_ERROR, // TODO set the correct ERROR FOR UPDATE
+    });
+  }
+};
+
+export const unreserveItem = (_id, history ) => async dispatch => {
+  try {
+    const res = await api.put(`/items/unreserve/${_id}`);
+
+    console.log('***** CALLED unreserveItem:', res.data);
+    dispatch({
+      type: types.UNRESERVE_ITEM,
+      payload : res.data
+    });
+    console.log("UnreserveItem id:", _id, "history:", history);
+    //history.push(routes.DASHBOARD);
+  } catch (err) {
+    dispatch({
+      type: types.UNRESERVE_ITEM_ERROR, // TODO set the correct ERROR FOR UPDATE
+    });
+  }
+};
