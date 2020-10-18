@@ -110,9 +110,11 @@ workflows:
             - checkout_and_build
 
       - upload_live_origin:
+          context: souper-a-builds
           requires:
             - lint
 
       - publish_live_origin:
+          context: souper-a-builds
           requires:
             - upload_live_origin
