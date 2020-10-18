@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import profileImage from 'assets/img/faces/christian.jpg';
@@ -10,12 +10,14 @@ import styles from 'assets/jss/material-kit-react/views/profilePage';
 import Slider from 'nouislider';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from "@material-ui/core/FormControl";
+import FormControl from '@material-ui/core/FormControl';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(styles);
 
-export default function Profile() {
-  // const [distance, setDistance] = React.useState('miles');
+function Profile({ initialName, email, initialPostCode }) {
+  const [name, setName] = React.useState(initialName);
+  const [postCode, setPostCode] = React.useState(initialPostCode);
   const [distance, setDistance] = useState(2);
   const [unit, setUnit] = useState('Miles');
 
@@ -26,14 +28,9 @@ export default function Profile() {
     classes.imgFluid
   );
 
-  const valuetext = value => `${value} Miles`;
-  const handleChange = event => setDistance(event.target.value);
-
   const onChangeHandler = event => {
-    const { name, value } = event.currentTarget;
-    // console.log(name, value)
-    if (name === 'unit') {
-      // console.log(value);
+    const { name: nameInput, value } = event.currentTarget;
+    if (nameInput === 'unit') {
       setUnit(value);
       document.getElementById('sliderRegular').noUiSlider.updateOptions({
         start: `${distance}`,
@@ -42,7 +39,15 @@ export default function Profile() {
           to: val => `${val.toFixed(2)} ${value === 'Miles' ? 'mi' : 'km'}`
         }
       });
+    } else if (nameInput === 'name') {
+      setName(value);
+    } else if (nameInput === 'postCode') {
+      setPostCode(value);
     }
+  };
+
+  const onSubmit = () => {
+    // console.log({ name, email, postCode, distance, unit });
   };
 
   useEffect(() => {
@@ -89,12 +94,21 @@ export default function Profile() {
                     formControlProps={{
                       fullWidth: true,
                     }}
+                    inputProps={{
+                      value: name,
+                      name: 'name',
+                      onChange: event => onChangeHandler(event)
+                    }}
                   />
                   <CustomInput
                     labelText="Email"
                     id="email"
                     formControlProps={{
                       fullWidth: true,
+                    }}
+                    inputProps={{
+                      disabled: true,
+                      value: email
                     }}
                   />
                   <CustomInput
@@ -103,16 +117,21 @@ export default function Profile() {
                     formControlProps={{
                       fullWidth: true,
                     }}
+                    inputProps={{
+                      value: postCode,
+                      name: 'postCode',
+                      onChange: event => onChangeHandler(event)
+                    }}
                   />
                   <InputLabel style={{ marginTop: 15 }} id="demo-simple-select-label">
                     Item distance
                   </InputLabel>
                   <FormControl required className={classes.formControl}>
                     <Select
-                        native
-                        value={unit}
-                        onChange={event => onChangeHandler(event)}
-                        name="unit"
+                      native
+                      value={unit}
+                      onChange={event => onChangeHandler(event)}
+                      name="unit"
                     >
                       <option value="Miles">In Miles</option>
                       <option value="Kilometers">In Kilometers</option>
@@ -120,11 +139,10 @@ export default function Profile() {
                   </FormControl>
                   <FormControl fullWidth>
                     <div
-                        className="slider-primary"
-                        id="sliderRegular"
-                        // className={classes.slider}
-                        name="slider"
-                        onChange={event => onChangeHandler(event)}
+                      className="slider-primary"
+                      id="sliderRegular"
+                      name="slider"
+                      onChange={event => onChangeHandler(event)}
                     />
                   </FormControl>
                 </GridItem>
@@ -133,7 +151,9 @@ export default function Profile() {
                     src={profileImage}
                     alt="profile"
                     className={imageClasses}
-                    style={{ width: 250, height: 250, marginTop: 20, marginLeft: 20}}
+                    style={{
+                      width: 250, height: 250, marginTop: 20, marginLeft: 20
+                    }}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
@@ -145,7 +165,7 @@ export default function Profile() {
                   </Button>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
-                  <Button variant="contained" color="rose" size="lg">
+                  <Button variant="contained" color="rose" size="lg" onClick={event => onSubmit(event)}>
                     SAVE CHANGES
                   </Button>
                 </GridItem>
@@ -157,3 +177,11 @@ export default function Profile() {
     </div>
   );
 }
+
+Profile.propTypes = {
+  initialName: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  initialPostCode: PropTypes.string.isRequired
+};
+
+export default Profile;

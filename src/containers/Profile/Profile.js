@@ -1,13 +1,10 @@
 import { connect } from 'react-redux';
 import Profile from 'components/Profile/Profile';
-import { updateMessage } from 'actions/message';
 
-const mapStateToProps = state => ({
-  message: state.message,
+const mapStateToProps = ({ user: { name, email, postCode } }) => ({
+  initialName: name,
+  email,
+  initialPostCode: postCode
 });
 
-const mapDispatchToProps = dispatch => ({
-  updateMessage: text => dispatch(updateMessage(text)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps)(Profile);
