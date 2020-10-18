@@ -15,6 +15,7 @@ import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInpu
 
 // Date time imports
 import Datetime from 'react-datetime';
+import moment from "moment";
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 
@@ -43,12 +44,17 @@ export default function AddEditItem({ userItems }) {
     // console.log(e.target.value);
     setDescription(e.target.value);
   };
-  const [expiry, setExpiry] = useState('');
+  const [expiry, setExpiry] = useState(new Date());
   const handleExpiryChange = value => {
     const newDate = value._d.toLocaleDateString('en-GB');
     // console.log(newDate);
     setExpiry(newDate);
   };
+
+  const yesterday = moment().subtract(1, "day");
+  function valid(current) {
+  return current.isAfter(yesterday);
+}
 
   // Set to postcode found in profile here
   const [location, setzLocation] = useState('');
@@ -148,37 +154,19 @@ export default function AddEditItem({ userItems }) {
               <InputLabel style={{ float: 'left' }} className={classes.label}>
                 Expiry date
               </InputLabel>
+              <br />
               <FormControl fullWidth>
                 <Datetime
                   className={classes.bottomFilter}
                   name="expiry"
-                  value={expiry}
                   timeFormat={false}
-                  inputProps={{
-                    placeholder: 'Enter the date the item will expire',
-                  }}
+                  dateFormat="DD/MM/yyyy"
+                  value={expiry}
+                  isValidDate={valid}
                   onChange={handleExpiryChange}
+                  input = {false}
                 />
               </FormControl>
-              <CustomInput
-                labelText="Location"
-                id="float"
-                name="location"
-                inputProps={{
-                  placeholder: 'Enter a Postcode',
-                  onChange: event => handleLocationChange(event),
-                  value: `${location}`,
-                }}
-                formControlProps={{
-                  fullWidth: true,
-                }}
-              />
-              <FormControlLabel
-                style={{ float: 'left' }}
-                onChange={handleToggle}
-                control={<Checkbox name="locationSameProfile" />}
-                label="Use location set in User profile?"
-              />
             </GridItem>
             <GridItem xs={12} sm={6} container spacing={1} direction="row">
               <GridItem xs={12}>
@@ -194,6 +182,25 @@ export default function AddEditItem({ userItems }) {
                     fullWidth: true,
                   }}
                 />
+                <CustomInput
+                  labelText="Location"
+                  id="float"
+                  name="location"
+                  inputProps={{
+                    placeholder: 'Enter a Postcode',
+                    onChange: event => handleLocationChange(event),
+                    value: `${location}`,
+                  }}
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                />
+              <FormControlLabel
+                style={{ float: 'left' }}
+                onChange={handleToggle}
+                control={<Checkbox name="locationSameProfile" />}
+                label="Use location set in User profile?"
+              />
               </GridItem>
               <GridItem fullWidth align="right">
                 <Button color="danger" size="lg">
