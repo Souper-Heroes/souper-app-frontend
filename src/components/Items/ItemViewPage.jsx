@@ -145,7 +145,7 @@ export default function ItemViewPage({ _id, id, item, type, updateCollectionDate
                       align="left"
                       gutterBottom
                     >
-                      {item.expiry}
+                      {item.postcode}
                     </Typography>
                   </GridItem>
                 </GridContainer>

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import MyItemListing from 'components/Items/MyItemListing';
 import {
-  //deleteItem,
+  deleteItem,
   //sortByItem,
   unreserveItem,
 } from 'actions/item';
@@ -14,6 +14,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   unreserveItem: (_id) => dispatch(unreserveItem(_id)),
+  deleteItem: (_id)  => dispatch(deleteItem(_id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyItemListing);
