@@ -25,10 +25,9 @@ import banana from 'assets/img/purple-banana.jpg';
 const useStyles = makeStyles(styles);
 
 export default function MyItemListing(props) {
-
-  //console.log('**** MY ITEM LISTING PROPS', props);
-
-  const { type, myitem, deleteItem, unreserveItem } = props;
+  const {
+    type, myitem, deleteItem, unreserveItem
+  } = props;
   const classes = useStyles();
 
   const GetCollectionMsg = newType => {
@@ -171,7 +170,7 @@ export default function MyItemListing(props) {
                           gutterBottom
                           align="left"
                         >
-                          {myitem.availability}
+                          {myitem.postcode}
                         </Typography>
                       </GridItem>
                     </GridContainer>
