@@ -85,30 +85,6 @@ export default function AddEditItem({ addItem }) {
     return current.isAfter(yesterday);
   }
 
-  // Set to postcode found in profile here
-  const [location, setzLocation] = useState('');
-  const handleLocationChange = e => {
-    // console.log(e.target.value);
-    setzLocation(e.target.value);
-  };
-
-  // If there's a location set in profile set checked to true
-  const [checked, setChecked] = useState(false);
-  const handleToggle = () => {
-    let toggle;
-    let postcode = '';
-    if (checked) {
-      postcode = '';
-      toggle = false;
-    } else {
-      // Add postcode from profile here
-      postcode = 'SP3 6RN';
-      toggle = true;
-    }
-    setzLocation(postcode);
-    setChecked(toggle);
-  };
-
   const handleAvailChange = e => {
     // console.log(e.target.value);
     setAvailability(e.target.value);
@@ -214,10 +190,9 @@ export default function AddEditItem({ addItem }) {
                   className={classes.bottomFilter}
                   name="expiry"
                   timeFormat={false}
-                  inputProps={{
-                    placeholder: 'Enter the date the item will expire',
-                    value: expiry,
-                  }}
+                  dateFormat="DD/MM/yyyy"
+                  value={expiry}
+                  isValidDate={valid}
                   onChange={handleExpiryChange}
                   input={false}
                 />
@@ -239,12 +214,11 @@ export default function AddEditItem({ addItem }) {
                 />
                 <CustomInput
                   labelText="Location"
-                  id="float"
                   name="location"
+                  id="disabled"
                   inputProps={{
-                    placeholder: 'Enter a Postcode',
-                    onChange: event => handleLocationChange(event),
-                    value: `${location}`,
+                    disabled: true,
+                    value: 'DT9 4LY',
                   }}
                   formControlProps={{
                     fullWidth: true,
