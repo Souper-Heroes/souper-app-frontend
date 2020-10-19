@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import styles from 'assets/jss/Items/views/MyItemListing';
@@ -24,12 +24,13 @@ import banana from 'assets/img/purple-banana.jpg';
 
 const useStyles = makeStyles(styles);
 
-export default function MyItemListing({ type, myitem, deleteItem }) {
-  // const [item, setItem] = useState(myitem);
-  // const [itemType, setType] = useState(type);
-  const [item] = useState(myitem);
-  const [itemType] = useState(type);
-
+export default function MyItemListing(props) {
+  const {
+    type,
+    myitem,
+    deleteItem,
+    unreserveItem
+  } = props;
   const classes = useStyles();
 
   const GetCollectionMsg = newType => {
@@ -52,7 +53,12 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
     console.log(
       `Clicked Delete button, do something with item: ${item.itemId}, Title: ${item.description}`
     ); */
-    deleteItem(item.itemId);
+    if (type === 'provide') {
+      deleteItem(myitem._id);
+    } else {
+      // Unreserve the item
+      unreserveItem(myitem._id);
+    }
   };
 
   const handleOnClickAgreeCup = () => {
@@ -68,20 +74,19 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
         <Paper className={classes.paper} spacing={1}>
           <GridContainer spacing={2}>
             <Grid item>
-              <Link to={`/itemview/${myitem.itemId}`} className={classes.link}>
+              <Link
+                to={`/itemview/${myitem._id}/${type}`}
+                className={classes.link}
+              >
                 <ButtonBase className={classes.image}>
-                  <img
-                    className={classes.img}
-                    alt="complex"
-                    src={banana}
-                  />
+                  <img className={classes.img} alt="complex" src={banana} />
                 </ButtonBase>
               </Link>
             </Grid>
             <GridContainer xs={12} sm item spacing={0} direction="column">
               <GridItem align="left" xs={12} className={classes.cell}>
                 <Link
-                  to={`/itemview/${myitem.itemId}`}
+                  to={`/itemview/${myitem._id}/${type}`}
                   className={classes.link}
                 >
                   <Typography gutterBottom variant="body1">
@@ -129,7 +134,7 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
                           gutterBottom
                           align="left"
                         >
-                          {myitem.category}
+                          {myitem.category[0]}
                         </Typography>
                       </GridItem>
                     </GridContainer>
@@ -174,7 +179,7 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
                           gutterBottom
                           align="left"
                         >
-                          {myitem.location}
+                          {myitem.availability}
                         </Typography>
                       </GridItem>
                     </GridContainer>
@@ -221,7 +226,7 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
                           gutterBottom
                           align="left"
                         >
-                          {moment(myitem.expiryDate).format('Do MMM YY')}
+                          {moment(myitem.expiry).format('Do MMM YY')}
                         </Typography>
                       </GridItem>
                     </GridContainer>
@@ -244,7 +249,7 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
                         lg={5}
                         className={classes.cell}
                       >
-                        {myitem.preferredCollectStartTime !== null && GetCollectionMsg(itemType)}
+                        {myitem.availability !== null && GetCollectionMsg(type)}
                       </GridItem>
                       <GridItem
                         xs={7}
@@ -254,20 +259,14 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
                         align="left"
                         className={classes.cell}
                       >
-                        {myitem.preferredCollectStartTime !== null && (
+                        {myitem.availability !== null && (
                           <Typography
                             variant="body2"
                             color="textPrimary"
                             gutterBottom
                             align="left"
                           >
-                            {moment(myitem.preferredCollectStartTime).format(
-                              'Do MMM YY HH:MM'
-                            )}
-                            -
-                            {moment(myitem.preferredCollectEndTime).format(
-                              'HH:MM'
-                            )}
+                            {myitem.availability}
                           </Typography>
                         )}
                       </GridItem>
@@ -276,11 +275,17 @@ export default function MyItemListing({ type, myitem, deleteItem }) {
                 </GridContainer>
               </GridItem>
               <GridItem xs={12} align="right">
-                <Button onClick={handleOnClickAgreeCup}>
+                <Button
+                  onClick={handleOnClickAgreeCup}
+                  color={myitem.c_user_uid === null ? 'default' : 'secondary'}
+                >
                   <EmojiEvent />
                 </Button>
-                {itemType === 'provide' && (
-                  <Link to="/addedititem/" className={classes.link}>
+                {type === 'provide' && (
+                  <Link
+                    to={`/addedititem/${myitem._id}`}
+                    className={classes.link}
+                  >
                     <Button>
                       <Edit />
                     </Button>
@@ -302,4 +307,5 @@ MyItemListing.propTypes = {
   type: PropTypes.string,
   myitem: PropTypes.instanceOf(Object),
   deleteItem: PropTypes.func,
+  unreserveItem: PropTypes.func
 };

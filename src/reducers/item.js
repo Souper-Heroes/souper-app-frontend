@@ -2,150 +2,118 @@ import moment from 'moment';
 import { types } from '../actions/item';
 
 const initialState = {
+  pitems: null,
+  citems: null,
+  myitems: [],
+  loading: true,
   items: [
     {
-      itemId: 1,
-      provideUserId: 1,
-      collectUserId: 2,
-      photoId: '#1111',
+      _id: '1',
+      user_uid: '1',
+      c_user_uid: '2',
       title: '5 Squashy Bananas',
-      category: 'Fruit',
+      category: ['Fruit'],
       description: 'Been in my bag, only one end is squishy.',
-      expiryDate: '2020-10-23T16:00:00Z',
+      photo: '#1111',
+      expiry: '2020-10-23T16:00:00Z',
       location: 'EN4 4QE',
-      preferredProvideStartTime: '2020-10-23T16:00:00Z',
-      preferredProvideEndTime: '2020-10-23T18:00:00Z',
-      preferredCollectStartTime: '2020-10-23T16:00:00Z',
-      preferredCollectEndTime: '2020-10-23T18:00:00Z',
-      reservedItem: 'false'
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
-      itemId: 2,
-      provideUserId: 2,
-      collectUserId: 3,
-      photoId: '#1112',
+      _id: '2',
+      user_uid: '2',
+      c_user_uid: '3',
       title: 'Cashew nuts',
-      category: 'Nuts',
+      category: ['Nuts'],
       description: 'Unopened but the packet is a bit battered',
-      expiryDate: '2020-10-24T13:00:00Z',
+      photo: '#1112',
+      expiry: '2020-10-24T13:00:00Z',
       location: 'SR5 4TQ',
-      preferredProvideStartTime: '2020-10-24T13:00:00Z',
-      preferredProvideEndTime: '2020-10-24T17:30:00Z',
-      preferredCollectStartTime: null,
-      preferredCollectEndTime: null,
-      reservedItem: 'false'
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
-      itemId: 3,
-      provideUserId: 2,
-      collectUserId: 3,
-      photoId: '#1113',
+      _id: '3',
+      user_uid: '2',
+      c_user_uid: '3',
       title: '6 Chicken Wings',
-      category: 'Meat',
+      category: ['Meat'],
       description: "Cooked yesterday, I don't want them.",
-      expiryDate: '2020-11-30T13:00:00Z',
-      location: 'EN4 4QE',
-      preferredProvideStartTime: '2020-11-24T13:00:00Z',
-      preferredProvideEndTime: '2020-12-15T17:30:00Z',
-      preferredCollectStartTime: null,
-      preferredCollectEndTime: null,
-      reservedItem: 'false'
+      photo: '#1113',
+      expiry: '2020-11-30T13:00:00Z',
+      location: 'EN4 4RE',
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
-      itemId: 4,
-      provideUserId: 1,
-      collectUserId: 2,
-      photoId: '#1114',
+      _id: '4',
+      user_uid: '1',
+      c_user_uid: '2',
       title: 'Potatoes',
-      category: 'Vegtables',
+      category: ['Vegtables'],
       description: 'Half a bag of Potatoes roots growing',
-      expiryDate: '2020-06-30T14:30:00Z',
-      location: 'DE3 7TE',
-      preferredProvideStartTime: '2020-06-28T14:30:00Z',
-      preferredProvideEndTime: '2020-06-28T19:30:00Z',
-      preferredCollectStartTime: null,
-      preferredCollectEndTime: null,
-      reservedItem: 'false'
+      photo: '#1114',
+      expiry: '2020-06-30T14:30:00Z',
+      location: 'DE3 7TQ',
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
-      itemId: 5,
-      provideUserId: 3,
-      collectUserId: null,
-      photoId: '#1115',
+      _id: '5',
+      user_uid: '3',
+      c_user_uid: null,
       title: '10 Leeks',
-      category: 'Vegetables',
+      category: ['Vegetables'],
       description: '10 Leeks picked from my garden 5 days ago',
-      expiryDate: '2020-12-29T13:00:00Z',
-      location: 'SL3 7TEC',
-      preferredProvideStartTime: '2020-12-26T13:00:00Z',
-      preferredProvideEndTime: '2020-12-26T15:00:00Z',
-      preferredCollectStartTime: '2020-12-26T16:30:00Z',
-      preferredCollectEndTime: '2020-12-26T22:00:00Z',
-      reservedItem: 'false'
+      photo: '#1115',
+      expiry: '2020-12-29T13:00:00Z',
+      location: 'SL3 7TC',
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
-      itemId: 6,
-      provideUserId: 2,
-      collectUserId: null,
-      photoId: '#1116',
+      _id: '6',
+      user_uid: '2',
+      c_user_uid: null,
       title: 'Soup',
-      category: 'Canned Food',
+      category: ['Canned Food'],
       description: '2 Tins Of Baxters Carrot And Corriander Soup',
-      expiryDate: '2020-12-03T17:30:00Z',
+      photo: '#1116',
+      expiry: '2020-12-03T17:30:00Z',
       location: 'SP3 7XE',
-      preferredProvideStartTime: '2020-12-02T17:30:00Z',
-      preferredProvideEndTime: '2020-12-02T20:00:00Z',
-      preferredCollectStartTime: null,
-      preferredCollectEndTime: null,
-      reservedItem: 'false'
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
-      itemId: 7,
-      provideUserId: 2,
-      collectUserId: 1,
-      photoId: '#1117',
+      _id: '7',
+      user_uid: '2',
+      c_user_uid: '1',
       title: 'Soup',
-      category: 'Canned Food',
+      category: ['Canned Food'],
       description: '2 Tins Of Baxters Carrot And Corriander Soup',
-      expiryDate: '2020-12-03T17:30:00Z',
-      location: 'SP3 7XE',
-      preferredProvideStartTime: '2020-12-02T16:00:00Z',
-      preferredProvideEndTime: '2020-12-24T20:00:00Z',
-      preferredCollectStartTime: null,
-      preferredCollectEndTime: null,
-      reservedItem: 'false'
+      photo: '#1117',
+      expiry: '2020-12-03T17:30:00Z',
+      location: 'SP3 7QE',
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
-      itemId: 8,
-      provideUserId: 3,
-      collectUserId: 1,
-      photoId: '#1115',
+      _id: '8',
+      user_uid: '3',
+      c_user_uid: '1',
       title: '10 Leeks',
-      category: 'Vegetables',
+      category: ['Vegetables'],
       description: '10 Leeks picked from my garden 5 days ago',
-      expiryDate: '2020-12-29T17:30:00Z',
-      location: 'SL3 7TE',
-      preferredProvideStartTime: '2020-12-26T10:30:00Z',
-      preferredProvideEndTime: '2020-12-26T20:00:00Z',
-      preferredCollectStartTime: '2020-12-26T10:00:00Z',
-      preferredCollectEndTime: '2020-12-26T22:00:00Z',
-      reservedItem: 'false'
+      photo: '#1115',
+      expiry: '2020-12-29T17:30:00Z',
+      location: 'SL3 9TE',
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
-      itemId: 9,
-      provideUserId: 1,
-      collectUserId: 2,
-      photoId: '#1114',
+      _id: '9',
+      user_uid: '1',
+      c_user_uid: null,
       title: 'Potatoes',
-      category: 'Baked Goods',
+      category: ['Baked Goods'],
       description: 'Half a bag of Potatoes roots growing',
-      expiryDate: '2020-04-30T17:30:00Z',
-      location: 'DE3 7TE',
-      preferredProvideStartTime: '2020-04-28T10:00:00Z',
-      preferredProvideEndTime: '2020-04-22T15:00:00Z',
-      preferredCollectStartTime: null,
-      preferredCollectEndTime: null,
-      reservedItem: 'false'
+      photo: '#1114',
+      expiry: '2020-04-30T17:30:00Z',
+      location: 'DE3 3TQ',
+      availability: '23rd Oct 2020 3-4PM'
     }
   ]
 };
@@ -155,7 +123,24 @@ export default (state = initialState, action) => {
   switch (type) {
     case types.GET_ITEMS:
       return {
+        ...state,
         items: payload
+      };
+    case types.GET_MY_ITEMS:
+      return {
+        ...state,
+        myitems: payload,
+        loading: false
+      };
+    case types.GET_PROVIDER_ITEMS:
+      return {
+        ...state,
+        pitems: payload
+      };
+    case types.GET_COLLECTOR_ITEMS:
+      return {
+        ...state,
+        citems: payload
       };
     case types.GET_ITEMS_ERROR:
       return {
@@ -169,25 +154,47 @@ export default (state = initialState, action) => {
         items: [
           ...state.items.map(myItem => {
             // console.log('***FOUND MY ITEM:', myItem, action);
-            if (myItem.itemId === action.itemId) {
+            if (myItem._id === action._id) {
               // console.log( 'FOUND MY ITEM:', myItem.preferredCollectStartTime, action);
               const updItem = myItem;
-              updItem.preferredCollectStartTime = action.collectionStartDateTime;
-              updItem.preferredCollectEndTime = action.collectionStartDateTime;
+              updItem.availability = action.availability;
               return updItem;
             }
             return myItem;
           })
-          // items: [...state.items.filter(item => item.itemId === action.itemId).map(),],
+          // items: [...state.items.filter(item => item._id === action._id).map(),],
         ],
         success: true
+      };
+    case types.UNRESERVE_ITEM:
+      return {
+        // TODO should call axios api function to update bbackend with new preferred Collect time for item
+        ...state,
+        myitems: state.myitems.filter(item => item._id !== payload._id),
+        success: true,
+        citem: payload
+      };
+    case types.RESERVE_ITEM:
+      return {
+        // TODO should call axios api function to update bbackend with new preferred Collect time for item
+        ...state,
+        citems: [
+          ...state.citems.map(myItem => {
+            if (myItem._id === payload._id) {
+              const updItem = myItem;
+              updItem.c_user_uid = payload.c_user_id;
+              return updItem;
+            }
+            return myItem;
+          })
+        ],
+        success: true,
+        citem: payload
       };
     case types.DELETEITEM:
       return {
         ...state,
-        items: [
-          ...state.items.filter(myItem => myItem.itemId !== action.itemId)
-        ]
+        items: [...state.items.filter(myItem => myItem._id !== action._id)]
       };
     case types.SORTITEM:
       if (action.menuItem === 'Category') {
@@ -208,10 +215,10 @@ export default (state = initialState, action) => {
       return {
         ...state,
         items: [...state.items].sort((a, b) => {
-          if (moment(a.expiryDate) > moment(b.expiryDate)) {
+          if (moment(a.expiry) > moment(b.expiry)) {
             return 1;
           }
-          if (moment(b.expiryDate) > moment(a.expiryDate)) {
+          if (moment(b.expiry) > moment(a.expiry)) {
             return -1;
           }
           return 0;
