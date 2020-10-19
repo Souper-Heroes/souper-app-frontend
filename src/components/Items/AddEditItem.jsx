@@ -32,17 +32,17 @@ const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const categoryOptions = [
-  { title: 'Nuts'   },
-  { title: 'Fruit'  },
-  { title: 'Dairy'  },
-  { title: 'Fish'   },
-  { title: 'Meat'   },
+  { title: 'Nuts' },
+  { title: 'Fruit' },
+  { title: 'Dairy' },
+  { title: 'Fish' },
+  { title: 'Meat' },
   { title: 'Cereal' },
-  { title: 'Fresh'  },
+  { title: 'Fresh' },
   { title: 'Cooked' },
-  { title: 'Raw'    },
+  { title: 'Raw' },
   { title: 'Frozen' },
-  { title: 'Dried'  },
+  { title: 'Dried' },
   { title: 'Tinned' },
   { title: 'Packet' },
 ];
@@ -71,7 +71,7 @@ export default function AddEditItem({ addItem }) {
 
   const onTagsChange = (event, values) => {
     setCategory(values);
-  }; 
+  };
 
   const handleExpiryChange = value => {
     const newDate = value._d.toLocaleDateString('en-GB');
@@ -84,32 +84,32 @@ export default function AddEditItem({ addItem }) {
     setAvailability(e.target.value);
   };
 
-  const onSubmit = async event => {  
+  const onSubmit = async () => {
     const addedItem = await addItem({
       title,
       description,
-      category: category.map((cat) => cat.title), 
-      expiry, // TODO - BUG! crashes when typed into!!
+      category: category.map(cat => cat.title),
+      expiry,
       location: {
-        type: "Point",
+        type: 'Point',
         coordinates: [-112.110492, 36.098948] // TODO - get this info from Profile
       },
       availability
-    })
-  // reset form
-      if (addedItem) {
-        setTitle('');
-        setDescription('');
-        setCategory([]);
-        // setLocation({});  
-        setExpiry('');  
-        setAvailability('');
-      }
+    });
+    // reset form
+    if (addedItem) {
+      setTitle('');
+      setDescription('');
+      setCategory([]);
+      // setLocation({});
+      setExpiry('');
+      setAvailability('');
+    }
   };
 
-  const onCancel = ()=>{
+  const onCancel = () => {
     window.history.back();
-  }
+  };
 
   return (
     <div>
@@ -148,7 +148,7 @@ export default function AddEditItem({ addItem }) {
                 id="checkboxes"
                 options={categoryOptions}
                 disableCloseOnSelect
-                onChange={onTagsChange} 
+                onChange={onTagsChange}
                 value={category}
                 getOptionLabel={option => option.title}
                 renderOption={(option, { selected }) => (
@@ -196,12 +196,12 @@ export default function AddEditItem({ addItem }) {
                 id="disabled"
                 inputProps={{
                   disabled: true,
-                  value: `DT9 4LY`
+                  value: 'DT9 4LY'
                 }}
                 formControlProps={{
                   fullWidth: true,
                 }}
-              /> 
+              />
             </GridItem>
             <GridItem xs={12} sm={6} container spacing={1} direction="row">
               <GridItem xs={12}>
@@ -217,17 +217,20 @@ export default function AddEditItem({ addItem }) {
                     fullWidth: true,
                   }}
                 />
-              </GridItem >
-              <GridContainer xs={12} fullWidth align="right" >
+              </GridItem>
+              <GridContainer xs={12} fullWidth align="right">
                 <GridItem xs={6} />
-                <GridItem xs={3} >
-                  <Button 
-                    color="danger" size="md" onClick={onCancel}>
+                <GridItem xs={3}>
+                  <Button
+                    color="danger"
+                    size="md"
+                    onClick={onCancel}
+                  >
                     Cancel
                   </Button>
                 </GridItem>
-                <GridItem xs={3} >
-                  <Button 
+                <GridItem xs={3}>
+                  <Button
                     color="success"
                     size="md"
                     onClick={event => onSubmit(event)}
@@ -245,5 +248,5 @@ export default function AddEditItem({ addItem }) {
 }
 
 AddEditItem.propTypes = {
-  userItems: PropTypes.instanceOf(Array)
+  addItem: PropTypes.instanceOf(Array)
 };

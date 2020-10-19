@@ -3,7 +3,7 @@ import api from '../utils/api';
 export const types = {
   ADD_ITEM: 'ADD_ITEM',
   ADD_ITEM_ERROR: 'ADD_ITEM_ERROR',
-  ADD_ITEM_RESET_FORM: 'ADD_ITEM_RESET_FORM', 
+  ADD_ITEM_RESET_FORM: 'ADD_ITEM_RESET_FORM',
   GET_ITEMS: 'GET_ITEMS',
   GET_ITEMS_ERROR: 'GET_ITEMS_ERROR',
   DELETEITEM: 'DELETEITEM',
@@ -27,7 +27,6 @@ export const addItem = formData => async dispatch => {
     });
     return false;
   }
-  
 };
 
 export const getItems = () => async dispatch => {
