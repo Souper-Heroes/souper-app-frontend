@@ -19,6 +19,7 @@ import TextField from '@material-ui/core/TextField';
 
 // Date time imports
 import Datetime from 'react-datetime';
+import moment from 'moment';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 
@@ -79,6 +80,11 @@ export default function AddEditItem({ addItem }) {
     setExpiry(newDate);
   };
 
+  const yesterday = moment().subtract(1, 'day');
+  function valid(current) {
+    return current.isAfter(yesterday);
+  }
+
   const handleAvailChange = e => {
     // console.log(e.target.value);
     setAvailability(e.target.value);
@@ -92,9 +98,9 @@ export default function AddEditItem({ addItem }) {
       expiry,
       location: {
         type: 'Point',
-        coordinates: [-112.110492, 36.098948] // TODO - get this info from Profile
+        coordinates: [-112.110492, 36.098948], // TODO - get this info from Profile
       },
-      availability
+      availability,
     });
     // reset form
     if (addedItem) {
@@ -125,7 +131,7 @@ export default function AddEditItem({ addItem }) {
                 inputProps={{
                   placeholder: 'Give your item a name',
                   onChange: event => handleTitleChange(event),
-                  value: title
+                  value: title,
                 }}
                 formControlProps={{
                   fullWidth: true,
@@ -137,7 +143,7 @@ export default function AddEditItem({ addItem }) {
                   placeholder:
                     'Describe your item, has it been opened or dropped?',
                   onChange: event => handleDescriptionChange(event),
-                  value: description
+                  value: description,
                 }}
                 formControlProps={{
                   fullWidth: true,
@@ -178,30 +184,19 @@ export default function AddEditItem({ addItem }) {
               <InputLabel style={{ float: 'left' }} className={classes.label}>
                 Expiry date
               </InputLabel>
+              <br />
               <FormControl fullWidth>
                 <Datetime
                   className={classes.bottomFilter}
                   name="expiry"
                   timeFormat={false}
-                  inputProps={{
-                    placeholder: 'Enter the date the item will expire',
-                    value: expiry
-                  }}
+                  dateFormat="DD/MM/yyyy"
+                  value={expiry}
+                  isValidDate={valid}
                   onChange={handleExpiryChange}
+                  input={false}
                 />
               </FormControl>
-              <CustomInput
-                labelText="Location"
-                name="location"
-                id="disabled"
-                inputProps={{
-                  disabled: true,
-                  value: 'DT9 4LY'
-                }}
-                formControlProps={{
-                  fullWidth: true,
-                }}
-              />
             </GridItem>
             <GridItem xs={12} sm={6} container spacing={1} direction="row">
               <GridItem xs={12}>
@@ -211,7 +206,19 @@ export default function AddEditItem({ addItem }) {
                     placeholder:
                       'e.g. Weekdays between 9 and 5pm, and all day Sunday',
                     onChange: event => handleAvailChange(event),
-                    value: availability
+                    value: availability,
+                  }}
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                />
+                <CustomInput
+                  labelText="Location"
+                  name="location"
+                  id="disabled"
+                  inputProps={{
+                    disabled: true,
+                    value: 'DT9 4LY',
                   }}
                   formControlProps={{
                     fullWidth: true,
@@ -221,11 +228,7 @@ export default function AddEditItem({ addItem }) {
               <GridContainer xs={12} fullWidth align="right">
                 <GridItem xs={6} />
                 <GridItem xs={3}>
-                  <Button
-                    color="danger"
-                    size="md"
-                    onClick={onCancel}
-                  >
+                  <Button color="danger" size="md" onClick={onCancel}>
                     Cancel
                   </Button>
                 </GridItem>
@@ -248,5 +251,5 @@ export default function AddEditItem({ addItem }) {
 }
 
 AddEditItem.propTypes = {
-  addItem: PropTypes.instanceOf(Array)
+  addItem: PropTypes.instanceOf(Array),
 };
