@@ -57,7 +57,7 @@ export default function Profile() {
         <GridContainer justify="center">
           <GridItem cs={12} sm={12} md={8}>
             <h2 className={classes.title}>
-              Profile1
+              Profile
             </h2>
             <form>
               <GridContainer>
