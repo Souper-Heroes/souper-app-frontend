@@ -33,19 +33,19 @@ export default function MyItemListings(props) {
     props.sortByItem(menuItem);
   };
 
-  const deleteItem = async _id => {
+  const deleteItem = async itemId => {
     // console.log(`Clicked Delete button, delete item with _id: ${_id}`);
-    await props.deleteItem(_id);
+    await props.deleteItem(itemId);
   };
 
-  const unreserveItem = async (_id) => {
+  const unreserveItem = async itemId => {
     // console.log(`Clicked Delete button for collector, unreseve item with _id: ${_id}`);
-    await props.unreserveItem(_id);
+    await props.unreserveItem(itemId);
   };
 
   const getMyItems = () =>
-      // eslint-disable-next-line implicit-arrow-linebreak
-     myitems.filter(myItem => {
+    // eslint-disable-next-line implicit-arrow-linebreak
+    myitems.filter(myItem => {
       if (type === 'provide') {
         if (myItem.user_uid === _id) {
           return myItem;
@@ -54,13 +54,11 @@ export default function MyItemListings(props) {
         return myItem;
       }
       return null;
-  });
+    });
 
   return (
     <>
-      {1==2 ? (
-        <div>Loading...</div>
-      ) : (
+      {1 === 2 ? (<div>Loading...</div>) : (
         <div>
           <GridContainer>
             <GridItem align="right">
@@ -103,8 +101,8 @@ export default function MyItemListings(props) {
 MyItemListings.propTypes = {
   type: PropTypes.string,
   _id: PropTypes.string,
+  myitems: PropTypes.instanceOf(Object),
   deleteItem: PropTypes.func,
   sortByItem: PropTypes.func,
-  unreserveItem: PropTypes.func,
-  getProviderItems: PropTypes.func,
+  unreserveItem: PropTypes.func
 };
