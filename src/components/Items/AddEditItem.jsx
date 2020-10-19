@@ -15,7 +15,7 @@ import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInpu
 
 // Date time imports
 import Datetime from 'react-datetime';
-import moment from "moment";
+import moment from 'moment';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 
@@ -51,10 +51,10 @@ export default function AddEditItem({ userItems }) {
     setExpiry(newDate);
   };
 
-  const yesterday = moment().subtract(1, "day");
+  const yesterday = moment().subtract(1, 'day');
   function valid(current) {
-  return current.isAfter(yesterday);
-}
+    return current.isAfter(yesterday);
+  }
 
   // Set to postcode found in profile here
   const [location, setzLocation] = useState('');
@@ -164,7 +164,7 @@ export default function AddEditItem({ userItems }) {
                   value={expiry}
                   isValidDate={valid}
                   onChange={handleExpiryChange}
-                  input = {false}
+                  input={false}
                 />
               </FormControl>
             </GridItem>
@@ -195,12 +195,12 @@ export default function AddEditItem({ userItems }) {
                     fullWidth: true,
                   }}
                 />
-              <FormControlLabel
-                style={{ float: 'left' }}
-                onChange={handleToggle}
-                control={<Checkbox name="locationSameProfile" />}
-                label="Use location set in User profile?"
-              />
+                <FormControlLabel
+                  style={{ float: 'left' }}
+                  onChange={handleToggle}
+                  control={<Checkbox name="locationSameProfile" />}
+                  label="Use location set in User profile?"
+                />
               </GridItem>
               <GridItem fullWidth align="right">
                 <Button color="danger" size="lg">
