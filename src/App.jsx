@@ -11,7 +11,7 @@ import ItemViewPage from 'containers/Items/ItemViewPage';
 import LoginPage from 'containers/Login/Login';
 import RegisterPage from 'containers/Login/Register';
 import ItemListPage from 'containers/Items/ItemListPage';
-import ItemMapPage from 'components/Items/ItemMapPage';
+import ItemMapPage from 'containers/Items/ItemMapPage';
 import ItemListings from 'containers/Items/ItemListings';
 import Profile from 'containers/Profile/Profile';
 import Forgotten from 'components/Login/Forgotten';
