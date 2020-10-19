@@ -24,15 +24,14 @@ import CardFooter from 'components/MaterialKitComponents/Card/CardFooter';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
 import CheckboxTermsAndConds from 'components/Login/CheckboxTermsAndConds';
 import SouperFooter from 'components/Layout/SouperFooter';
+import Alert from 'components/Alert/Alert';
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import image from 'assets/img/board.jpg';
 // @material Typography
-import Danger from 'components/MaterialKitComponents/Typography/Danger';
 
 const useStyles = makeStyles(styles);
 
 export default function RegisterPage({
-  signUpError,
   registerInputs,
   signUp,
   loginWithGoogle,
@@ -119,7 +118,7 @@ export default function RegisterPage({
                     </div>
                   </CardHeader>
                   <CardBody>
-                    {signUpError ? <Danger>{signUpError}</Danger> : null}
+                    <Alert />
                     {registerInputs.map(input => (
                       <CustomInput
                         labelText={input.label}
@@ -165,7 +164,7 @@ export default function RegisterPage({
                     <Button
                       disabled={checkedTermsAndConds}
                       fullWidth
-                      name="signUp"
+                      name="login"
                       size="lg"
                       color="rose"
                       onClick={handleSubmit}
