@@ -35,6 +35,7 @@ export default function RegisterPage({
   registerInputs,
   signUp,
   loginWithGoogle,
+  loginWithFacebook,
   isAuthenticated
 }) {
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
@@ -56,6 +57,8 @@ export default function RegisterPage({
       signUp(email, password, displayName);
     } else if (name === 'loginWithGoogle') {
       loginWithGoogle();
+    } else if (name === 'loginWithFacebook') {
+      loginWithFacebook();
     }
   };
 
@@ -102,8 +105,9 @@ export default function RegisterPage({
                       </Button>
                       <Button
                         justIcon
+                        name="loginWithFacebook"
                         color="transparent"
-                        onClick={e => e.preventDefault()}
+                        onClick={handleSubmit}
                       >
                         <i className="fab fa-facebook" />
                       </Button>
@@ -191,9 +195,9 @@ export default function RegisterPage({
 }
 
 RegisterPage.propTypes = {
-  signUpError: PropTypes.bool,
   signUp: PropTypes.bool,
-  loginWithGoogle: PropTypes.bool,
+  loginWithGoogle: PropTypes.func,
+  loginWithFacebook: PropTypes.func,
   isAuthenticated: PropTypes.bool,
   registerInputs: PropTypes.instanceOf(Array)
 };

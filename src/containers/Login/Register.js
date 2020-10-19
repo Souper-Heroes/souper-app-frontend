@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import RegisterPage from 'components/Login/RegisterPage';
-import { signUp, loginWithGoogle } from 'actions/auth';
+import { signUp, loginWithGoogle, loginWithFacebook } from 'actions/auth';
 import PropTypes from 'prop-types';
 
 const mapStateToProps = state => ({
@@ -11,7 +11,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   signUp: (email, password, displayName) => dispatch(signUp(email, password, displayName)),
-  loginWithGoogle: () => dispatch(loginWithGoogle())
+  loginWithGoogle: () => dispatch(loginWithGoogle()),
+  loginWithFacebook: () => dispatch(loginWithFacebook())
 });
 
 RegisterPage.propTypes = {
