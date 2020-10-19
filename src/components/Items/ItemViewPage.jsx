@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect  } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
@@ -14,7 +14,14 @@ import * as routes from 'components/Routing/routes';
 
 const useStyles = makeStyles(styles);
 
-export default function ItemViewPage({ _id, id, item, type, updateCollectionDates, unreserveItem, reserveItem }) {
+export default function ItemViewPage({
+  _id,
+  item,
+  type,
+  updateCollectionDates,
+  unreserveItem,
+  reserveItem
+}) {
   // console.log('ITEM VIEW PAGE PROPS', props);
   const [isDisableAmendBtn, setIsDisableAmendBtn] = useState(true);
 
@@ -22,26 +29,23 @@ export default function ItemViewPage({ _id, id, item, type, updateCollectionDate
 
   // console.log("MY VIEW PAGE ITEM:", item);
 
-  if (item == null) { 
+  if (item == null) {
     return <Redirect to={routes.ITEM_LIST} />;
   }
 
   // console.log("*** ITEM:", item);
 
   const handleOnClickReserve = () => {
-    console.log("About to reserve item._id: ", item._id);
     reserveItem(item._id);
   };
 
-  const handleOnClickUnreserve = (e) => {
+  const handleOnClickUnreserve = e => {
     // console.log(`Clicked Reserve Account, do something with DisplayName: `);
     e.preventDefault();
-    console.log("About to unreserve item._id: ", item._id);
     unreserveItem(item._id);
-
   };
 
-  const handleOnClickAmendTime = (id) => {
+  const handleOnClickAmendTime = id => {
     // Update backend with new amended dates
     updateCollectionDates(id, item.availability);
     setIsDisableAmendBtn(true);
@@ -247,7 +251,7 @@ export default function ItemViewPage({ _id, id, item, type, updateCollectionDate
                   </Button>
                 </GridItem>
                 <GridItem xs={6} sm={6} align="left">
-                  {type === "collect" && item.c_user_uid === null && (
+                  {type === 'collect' && item.c_user_uid === null && (
                     <Button
                       className={classes.button_label}
                       color="success"
@@ -257,7 +261,7 @@ export default function ItemViewPage({ _id, id, item, type, updateCollectionDate
                       Reserve
                     </Button>
                   )}
-                  {type === "collect" && _id === item.c_user_uid && (
+                  {type === 'collect' && _id === item.c_user_uid && (
                     <Button
                       className={classes.button_label}
                       color="success"
@@ -272,7 +276,7 @@ export default function ItemViewPage({ _id, id, item, type, updateCollectionDate
             </GridItem>
           </GridItem>
         </GridContainer>
-      </div> 
+      </div>
     </div>
   );
 }
@@ -280,9 +284,10 @@ export default function ItemViewPage({ _id, id, item, type, updateCollectionDate
 ItemViewPage.propTypes = {
   _id: PropTypes.string,
   item: PropTypes.instanceOf(Object),
+  type: PropTypes.string,
   reserveItem: PropTypes.func,
   unreserveItem: PropTypes.func,
-  updateCollectionDates: PropTypes.func,
+  updateCollectionDates: PropTypes.func
 };
 
 /* TODO Logic to amend item if you are collecting
