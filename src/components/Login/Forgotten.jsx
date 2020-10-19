@@ -13,6 +13,7 @@ import CardBody from 'components/MaterialKitComponents/Card/CardBody';
 import CardHeader from 'components/MaterialKitComponents/Card/CardHeader';
 import CardFooter from 'components/MaterialKitComponents/Card/CardFooter';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
+import Muted from 'components/MaterialKitComponents/Typography/Muted';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import image from 'assets/img/board.jpg';
@@ -74,11 +75,11 @@ export default function Forgotten() {
                     </div>
                   </CardHeader>
                   <CardBody>
-                    <h4>Forgotten your password?</h4>
-                    <p>
+                    <Muted>
+                      <b>Forgotten your password?</b><br />
                       Enter the email address that you used to register. We'll
                       send you an email with a link to reset your password.
-                    </p>
+                    </Muted>
                     <CustomInput
                       labelText="Email..."
                       id="email"
