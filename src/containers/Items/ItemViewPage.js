@@ -1,34 +1,31 @@
 import { connect } from 'react-redux';
 import ItemViewPage from 'components/Items/ItemViewPage';
-import { updateCollectionDates } from 'actions/item';
+
+import {
+  updateCollectionDates,
+  unreserveItem,
+  reserveItem
+} from 'actions/item';
 
 const mapStateToProps = (state, ownProps) => ({
   isLoggingIn: state.auth.isLoggingIn,
   isAuthenticated: state.auth.isAuthenticated,
-  uuid: 1, // TODO Get the actual uuid from firebase of the logged in user
+  _id: state.auth.user.uid, // Get the actual uuid from firebase of the logged in user
   id: ownProps.match.params.id,
-  items: state.item.items,
-  // item: state.item ? state.item.items[ownProps.match.params.id] : null,
-
-  // TODO **** Note can't match using datatype matching (i.e ===) but can match on value (==)
-  item: state.item.items
-    ? state.item.items.find(itemToFind => itemToFind.itemId === ownProps.match.params.id)
-    : null,
+  myitems: state.item.myitems,
+  type: ownProps.match.params.type,
+  item: state.item.myitems
+    ? state.item.myitems.find(i => i._id === ownProps.match.params.id)
+    : null
 });
 
 const mapDispatchToProps = dispatch => ({
-  //   getToken: () => dispatch(getToken())
-  updateCollectionDates: (
-    itemId,
-    collectionStartDateTime,
-    collectionEndDateTime
-  ) => dispatch(
-    updateCollectionDates(
-      itemId,
-      collectionStartDateTime,
-      collectionEndDateTime
-    )
-  ),
+  updateCollectionDates: (_id, availiability) =>
+    // eslint-disable-next-line implicit-arrow-linebreak
+    dispatch(updateCollectionDates(_id, availiability)),
+
+  unreserveItem: _id => dispatch(unreserveItem(_id)),
+  reserveItem: _id => dispatch(reserveItem(_id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemViewPage);
