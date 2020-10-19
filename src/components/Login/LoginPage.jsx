@@ -8,9 +8,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
 import Email from '@material-ui/icons/Email';
-// @material Typography
-import Danger from 'components/MaterialKitComponents/Typography/Danger';
 // core components
+import Alert from 'components/Alert/Alert';
 import GridContainer from '../MaterialKitComponents/Grid/GridContainer';
 import GridItem from '../MaterialKitComponents/Grid/GridItem';
 import Button from '../MaterialKitComponents/CustomButtons/Button';
@@ -19,6 +18,7 @@ import CardBody from '../MaterialKitComponents/Card/CardBody';
 import CardHeader from '../MaterialKitComponents/Card/CardHeader';
 import CardFooter from '../MaterialKitComponents/Card/CardFooter';
 import CustomInput from '../MaterialKitComponents/CustomInput/CustomInput';
+
 
 import styles from '../../assets/jss/material-kit-react/views/loginPage';
 import image from '../../assets/img/board.jpg';
@@ -95,9 +95,7 @@ export default function LoginPage({
                     </div>
                   </CardHeader>
                   <CardBody>
-                    {loginError ? (
-                      <Danger>Incorrect email or Password</Danger>
-                    ) : null}
+                    <Alert />
                     <CustomInput
                       labelText="Email"
                       id="email"
