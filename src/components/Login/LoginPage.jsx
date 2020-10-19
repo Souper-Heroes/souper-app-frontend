@@ -26,7 +26,7 @@ import image from '../../assets/img/board.jpg';
 const useStyles = makeStyles(styles);
 
 export default function LoginPage({
-  loginError, login, loginWithGoogle, isAuthenticated
+  login, loginWithGoogle, loginWithFacebook, isAuthenticated
 }) {
   const emailRef = useRef(null);
   const passRef = useRef(null);
@@ -43,6 +43,8 @@ export default function LoginPage({
       login(emailRef.current.value, passRef.current.value);
     } else if (name === 'loginWithGoogle') {
       loginWithGoogle();
+    } else if (name === 'loginWithFacebook') {
+      loginWithFacebook();
     }
   };
 
@@ -78,9 +80,10 @@ export default function LoginPage({
                       </Button>
                       <Button
                         justIcon
+                        name="loginWithFacebook"
                         href="#pablo"
                         color="transparent"
-                        onClick={e => e.preventDefault()}
+                        onClick={handleSubmit}
                       >
                         <i className="fab fa-facebook" />
                       </Button>
@@ -173,8 +176,8 @@ export default function LoginPage({
 }
 
 LoginPage.propTypes = {
-  loginError: PropTypes.bool,
   login: PropTypes.bool,
-  loginWithGoogle: PropTypes.bool,
-  isAuthenticated: PropTypes.bool
+  loginWithGoogle: PropTypes.func,
+  isAuthenticated: PropTypes.bool,
+  loginWithFacebook: PropTypes.func
 };
