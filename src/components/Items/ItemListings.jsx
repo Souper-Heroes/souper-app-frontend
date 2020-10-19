@@ -93,9 +93,7 @@ function ItemListings({ getItems }) {
       },
     });
     // set the Distance State when slider value changed
-    distanceSlider.noUiSlider.on('change', () =>
-      setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, ''))
-    );
+    distanceSlider.noUiSlider.on('change', () => setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, '')));
     // eslint-disable-next-line
   }, []);
 
