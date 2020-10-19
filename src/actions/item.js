@@ -2,6 +2,9 @@ import api from '../utils/api';
 import * as routes from 'components/Routing/routes';
 
 export const types = {
+  ADD_ITEM: 'ADD_ITEM',
+  ADD_ITEM_ERROR: 'ADD_ITEM_ERROR',
+  ADD_ITEM_RESET_FORM: 'ADD_ITEM_RESET_FORM',
   GET_ITEMS: 'GET_ITEMS',
   GET_ITEMS_ERROR: 'GET_ITEMS_ERROR',
   GET_MY_ITEMS: 'GET_MY_ITEMS',
@@ -14,6 +17,24 @@ export const types = {
   RESERVE_ITEM: 'RESERVE_ITEM',
   UNRESERVE_ITEM: 'UNRESERVE_ITEM',
   UNRESERVE_ITEM_ERROR: 'UNRESERVE_ITEM_ERROR'
+};
+
+export const addItem = formData => async dispatch => {
+  try {
+    const res = await api.post('/items', formData);
+    dispatch({
+      type: types.ADD_ITEM,
+      payload: res.data
+    });
+    return true;
+  } catch (err) {
+    // do something with error
+    // console.log(err);
+    dispatch({
+      type: types.ADD_ITEM_ERROR
+    });
+    return false;
+  }
 };
 
 export const getItems = () => async dispatch => {
