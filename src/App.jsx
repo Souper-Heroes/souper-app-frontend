@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Route, Switch, Redirect, BrowserRouter as Router
+  Route, Switch, Redirect, HashRouter as Router
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TestData from 'assets/data/TestData.json';
