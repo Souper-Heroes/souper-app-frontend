@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 
-  addItem: (formData) => dispatch(addItem(formData))
+  addItem: formData => dispatch(addItem(formData))
 
 });
 
