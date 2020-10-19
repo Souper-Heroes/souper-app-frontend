@@ -1,4 +1,8 @@
-import { myFirebase, googleProvider } from '../firebase/firebase';
+import {
+  myFirebase,
+  googleProvider,
+  facebookProvider
+} from '../firebase/firebase';
 import api from '../utils/api';
 import { setAlert } from './alert';
 
@@ -100,6 +104,23 @@ export const loginWithGoogle = () => dispatch => {
   myFirebase
     .auth()
     .signInWithPopup(googleProvider)
+    .then(() => {
+      dispatch(loadUser());
+    })
+    .then(user => {
+      dispatch(receiveLogin(user));
+    })
+    .catch(() => {
+      // Do something with the error
+      dispatch(signUpError());
+    });
+};
+
+export const loginWithFacebook = () => dispatch => {
+  dispatch(requestLogin());
+  myFirebase
+    .auth()
+    .signInWithPopup(facebookProvider)
     .then(() => {
       dispatch(loadUser());
     })
