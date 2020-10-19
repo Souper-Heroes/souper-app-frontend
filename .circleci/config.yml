@@ -113,16 +113,9 @@ workflows:
           context: souper-a-builds
           requires:
             - lint
-          filters:
-            branches:
-              only:
-                - master
 
       - publish_live_origin:
           context: souper-a-builds
           requires:
             - upload_live_origin
-          filters:
-            branches:
-              only:
-                - master
+
