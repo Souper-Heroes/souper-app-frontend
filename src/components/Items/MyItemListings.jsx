@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 // core components
@@ -13,7 +13,7 @@ import ListingsPaginations from 'components/Items/ListingsPaginations';
 import PropTypes from 'prop-types';
 
 export default function MyItemListings(props) {
-  console.log('*** MY ITEM LISTINGSSSS PROPS:', props);
+  // console.log('*** MY ITEM LISTING PROPS:', props);
   const { _id, type, myitems } = props;
 
   // console.log('*** items:', props.items);
@@ -33,34 +33,32 @@ export default function MyItemListings(props) {
     props.sortByItem(menuItem);
   };
 
-  const deleteItem = async _id => {
+  const deleteItem = async itemId => {
     // console.log(`Clicked Delete button, delete item with _id: ${_id}`);
-    await props.deleteItem(_id);
+    await props.deleteItem(itemId);
   };
 
-  const unreserveItem = async (_id, itemId) => {
+  const unreserveItem = async itemId => {
     // console.log(`Clicked Delete button for collector, unreseve item with _id: ${_id}`);
-    await props.unreserveItem(_id, itemId);
+    await props.unreserveItem(itemId);
   };
 
   const getMyItems = () =>
-      // eslint-disable-next-line implicit-arrow-linebreak
-     myitems.filter(myItem => {
+    // eslint-disable-next-line implicit-arrow-linebreak
+    myitems.filter(myItem => {
       if (type === 'provide') {
-        if (myItem.user_uid === props._id) {
+        if (myItem.user_uid === _id) {
           return myItem;
         }
-      } else if (myItem.c_user_uid === props._id) {
+      } else if (myItem.c_user_uid === _id) {
         return myItem;
       }
       return null;
-  });
+    });
 
   return (
     <>
-      {1==2 ? (
-        <div>Loading...</div>
-      ) : (
+      {1 === 2 ? (<div>Loading...</div>) : (
         <div>
           <GridContainer>
             <GridItem align="right">
@@ -103,8 +101,8 @@ export default function MyItemListings(props) {
 MyItemListings.propTypes = {
   type: PropTypes.string,
   _id: PropTypes.string,
+  myitems: PropTypes.instanceOf(Object),
   deleteItem: PropTypes.func,
   sortByItem: PropTypes.func,
-  unreserveItem: PropTypes.func,
-  getProviderItems: PropTypes.func,
+  unreserveItem: PropTypes.func
 };
