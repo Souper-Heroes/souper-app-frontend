@@ -56,10 +56,10 @@ export default function Profile() {
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div className={classes.container}>
         <GridContainer justify="center">
-          <GridItem xs={12} md={8} >
-            <div style={{ display: "flex" }}>
-              <h2 className={classes.title} >  Profile  </h2>
-              <Button justIcon  round color="rose" style={{margin: 35, marginLeft: "auto" }} ><Delete style={{color: "#FFFFFF"}}/></Button>
+          <GridItem xs={12} md={8}>
+            <div style={{ display: 'flex' }}>
+              <h2 className={classes.title}>  Profile  </h2>
+              <Button justIcon round color="rose" style={{ margin: 35, marginLeft: 'auto' }}><Delete style={{ color: '#FFFFFF' }} /></Button>
             </div>
             <form>
               <GridContainer>
@@ -71,7 +71,7 @@ export default function Profile() {
                     style={{ width: 250, height: 250 }}
                   />
                   <br /><br />
-                  <Button   color="rose" size="md">
+                  <Button color="rose" size="md">
                     CHANGE AVATAR
                   </Button>
                 </GridItem>
