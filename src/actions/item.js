@@ -1,12 +1,11 @@
-import api from '../utils/api';
 // import * as routes from 'components/Routing/routes';
+import api from '../utils/api';
 
 export const types = {
   GET_ITEMS: 'GET_ITEMS',
   GET_ITEMS_ERROR: 'GET_ITEMS_ERROR',
   GET_MY_ITEMS: 'GET_MY_ITEMS',
   GET_MY_ITEMS_ERROR: 'GET_MY_ITEMS_ERROR',
-  GET_DELETE_ITEM_ERROR: 'GET_DELETE_ITEM_ERROR',
   GET_PROVIDER_ITEMS: 'GET_PROVIDER_ITEMS',
   GET_COLLECTOR_ITEMS: 'GET_COLLECTOR_ITEMS',
   DELETEITEM: 'DELETEITEM',
@@ -14,7 +13,7 @@ export const types = {
   UPDATE_COLLECTDATES: 'UPDATE_COLLECTDATES',
   RESERVE_ITEM: 'RESERVE_ITEM',
   UNRESERVE_ITEM: 'UNRESERVE_ITEM',
-  UNRESERVE_ITEM_ERROR: 'UNRESERVE_ITEM_ERROR'
+  UNRESERVE_ITEM_ERROR: 'UNRESERVE_ITEM_ERROR',
 };
 
 export const getItems = () => async dispatch => {
@@ -36,7 +35,11 @@ export const getItems = () => async dispatch => {
 
 export const getProviderItems = _id => async dispatch => {
   try {
+    // console.log('***** ABOUT TO CALL getProviderItems:', _id);
+
     const res = await api.get(`/items/provider/${_id}`);
+
+    console.log('***** CALLED getProviderItems:', res.data);
 
     dispatch({
       type: types.GET_PROVIDER_ITEMS,
@@ -53,7 +56,11 @@ export const getProviderItems = _id => async dispatch => {
 
 export const getCollectorItems = _id => async dispatch => {
   try {
+    // onsole.log('***** ABOUT TO CALL getProviderItems:', _id);
+
     const res = await api.get(`/items/collector/${_id}`);
+
+    console.log('***** CALLED getCollectorItems:', res.data);
 
     dispatch({
       type: types.GET_COLLECTOR_ITEMS,
@@ -85,21 +92,10 @@ export const getMyItems = () => async dispatch => {
   }
 };
 
-export const deleteItem = _id => async dispatch => {
-   try {
-    const res = await api.delete(`/items/${_id}`);
-    
-    dispatch({
-      type: types.DELETEITEM,
-      _id,
-      payload: res.data,
-     });
-     } catch (err) {
-     dispatch({
-      type: types.GET_DELETE_ITEM_ERROR,
-    });
-  }
-};
+export const deleteItem = _id => ({
+  type: types.DELETEITEM,
+  _id,
+});
 
 export const sortByItem = menuItem => ({
   type: types.SORTITEM,
@@ -113,13 +109,14 @@ export const updateCollectionDates = (_id, availability) => ({
   success: true,
 });
 
-export const reserveItem = (_id ) => async dispatch => {
+export const reserveItem = _id => async dispatch => {
   try {
     const res = await api.put(`/items/reserve/${_id}`);
 
+    console.log('***** CALLED reserveItem:', res.data);
     dispatch({
       type: types.RESERVE_ITEM,
-      payload : res.data
+      payload: res.data,
     });
   } catch (err) {
     // do something with error
@@ -130,14 +127,16 @@ export const reserveItem = (_id ) => async dispatch => {
   }
 };
 
-export const unreserveItem = (_id, history ) => async dispatch => {
+export const unreserveItem = (_id, history) => async dispatch => {
   try {
     const res = await api.put(`/items/unreserve/${_id}`);
 
+    console.log('***** CALLED unreserveItem:', res.data);
     dispatch({
       type: types.UNRESERVE_ITEM,
-      payload : res.data
+      payload: res.data,
     });
+    console.log('UnreserveItem id:', _id, 'history:', history);
     // history.push(routes.DASHBOARD);
   } catch (err) {
     dispatch({

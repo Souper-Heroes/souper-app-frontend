@@ -25,8 +25,9 @@ import banana from 'assets/img/purple-banana.jpg';
 const useStyles = makeStyles(styles);
 
 export default function MyItemListing(props) {
-
-  const { type, myitem, deleteItem, unreserveItem } = props;
+  const {
+    type, myitem, deleteItem, unreserveItem
+  } = props;
   const classes = useStyles();
 
   const GetCollectionMsg = newType => {
