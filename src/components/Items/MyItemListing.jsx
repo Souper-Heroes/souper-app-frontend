@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { Button } from '@material-ui/core';
 
-
 // @material-ui/icons
 import Edit from '@material-ui/icons/Edit';
 import Delete from '@material-ui/icons/Delete';
@@ -23,13 +22,11 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import banana from 'assets/img/purple-banana.jpg';
 
-import GeoCode from 'react-geocode';
-
 const useStyles = makeStyles(styles);
 
 export default function MyItemListing(props) {
   const {
-    type, myitem, deleteItem, unreserveItem
+    type, myitem, deleteItem, unreserveItem // , address, getAddress, addrstatus
   } = props;
   const classes = useStyles();
 
@@ -53,6 +50,7 @@ export default function MyItemListing(props) {
     console.log(
       `Clicked Delete button, do something with item: ${item.itemId}, Title: ${item.description}`
     ); */
+
     if (type === 'provide') {
       deleteItem(myitem._id);
     } else {
@@ -66,26 +64,16 @@ export default function MyItemListing(props) {
     console.log(
       `Clicked Cup button, do something with item: ${item.itemId}, Title: ${item.description}`
     ); */
+
+    // getAddress(myitem.postcode);
+
+    // if (addrstatus === "OK") {
+    //  console.log('My Address:', address, 'addrstatus:', addrstatus);
+    // }
+    // else {
+    //  console.log('Address not found, addrstatus:', addrstatus);
+    // }
   };
-
-  GeoCode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
-  Geocode.setLanguage("en");
-  Geocode.enableDebug();
-
-  // Get latitude & longitude from address.
-  const getLocation = (code) => {
-    Geocode.fromAddress(code).then(
-      response => {
-        const { lat, lng } = response.results[0].geometry.location;
-        console.log(lat, lng);
-      },
-      error => {
-        console.error(error);
-      }
-    );
-  }
-
-  getLocation(myitem.postcode);
 
   return (
     <GridContainer spacing={1}>
@@ -321,4 +309,8 @@ MyItemListing.propTypes = {
   myitem: PropTypes.instanceOf(Object),
   deleteItem: PropTypes.func,
   unreserveItem: PropTypes.func,
+  // getAddress: PropTypes.func,
+  // address: PropTypes.instanceOf(Object),
+  // addrstatus: PropTypes.string,
+
 };

@@ -57,44 +57,40 @@ export default function MyItemListings(props) {
     });
 
   return (
-    <>
-      {1 === 2 ? (<div>Loading...</div>) : (
-        <div>
-          <GridContainer>
-            <GridItem align="right">
-              <ListingsDropdown sortItems={sortItems} />
-            </GridItem>
-            <GridItem xs={12} sm={12} md={12}>
-              {getMyItems().map(myItem => (
-                <MyItemListing
-                  key={myItem._id}
-                  type={type}
-                  myitem={myItem}
-                  deleteItem={deleteItem}
-                  unreserveItem={unreserveItem}
-                />
-              ))}
-            </GridItem>
-            {type === 'provide' && (
-              <GridItem xs={6} sm={6} align="left">
-                <Link to="/addedititem" className={classes.link}>
-                  <Button type="button" color="rose" to="/addedititem">
-                    Add Item
-                  </Button>
-                </Link>
-              </GridItem>
-            )}
-            <GridItem
-              xs={paginationColSize}
-              sm={paginationColSize}
-              align="right"
-            >
-              <ListingsPaginations />
-            </GridItem>
-          </GridContainer>
-        </div>
-      )}
-    </>
+    <div>
+      <GridContainer>
+        <GridItem align="right">
+          <ListingsDropdown sortItems={sortItems} />
+        </GridItem>
+        <GridItem xs={12} sm={12} md={12}>
+          {getMyItems().map(myItem => (
+            <MyItemListing
+              key={myItem._id}
+              type={type}
+              myitem={myItem}
+              deleteItem={deleteItem}
+              unreserveItem={unreserveItem}
+            />
+          ))}
+        </GridItem>
+        {type === 'provide' && (
+          <GridItem xs={6} sm={6} align="left">
+            <Link to="/addedititem" className={classes.link}>
+              <Button type="button" color="rose" to="/addedititem">
+                Add Item
+              </Button>
+            </Link>
+          </GridItem>
+        )}
+        <GridItem
+          xs={paginationColSize}
+          sm={paginationColSize}
+          align="right"
+        >
+          <ListingsPaginations />
+        </GridItem>
+      </GridContainer>
+    </div>
   );
 }
 

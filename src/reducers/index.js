@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage';
 import message from './message';
 import auth from './auth';
 import item from './item';
+import user from './user';
 
 const persistConfig = {
   key: 'auth',
@@ -16,8 +17,14 @@ const persistItemConfig = {
   storage,
 };
 
+const persistUserConfig = {
+  key: 'user',
+  storage,
+};
+
 export default combineReducers({
   item: persistReducer(persistItemConfig, item),
   message,
   auth: persistReducer(persistConfig, auth),
+  user: persistReducer(persistUserConfig, user)
 });

@@ -39,7 +39,7 @@ export const getProviderItems = _id => async dispatch => {
 
     const res = await api.get(`/items/provider/${_id}`);
 
-    console.log('***** CALLED getProviderItems:', res.data);
+    // console.log('***** CALLED getProviderItems:', res.data);
 
     dispatch({
       type: types.GET_PROVIDER_ITEMS,
@@ -60,7 +60,7 @@ export const getCollectorItems = _id => async dispatch => {
 
     const res = await api.get(`/items/collector/${_id}`);
 
-    console.log('***** CALLED getCollectorItems:', res.data);
+    // console.log('***** CALLED getCollectorItems:', res.data);
 
     dispatch({
       type: types.GET_COLLECTOR_ITEMS,
@@ -113,7 +113,7 @@ export const reserveItem = _id => async dispatch => {
   try {
     const res = await api.put(`/items/reserve/${_id}`);
 
-    console.log('***** CALLED reserveItem:', res.data);
+    // console.log('***** CALLED reserveItem:', res.data);
     dispatch({
       type: types.RESERVE_ITEM,
       payload: res.data,
@@ -127,16 +127,16 @@ export const reserveItem = _id => async dispatch => {
   }
 };
 
-export const unreserveItem = (_id, history) => async dispatch => {
+export const unreserveItem = _id => async dispatch => {
   try {
     const res = await api.put(`/items/unreserve/${_id}`);
 
-    console.log('***** CALLED unreserveItem:', res.data);
+    // console.log('***** CALLED unreserveItem:', res.data);
     dispatch({
       type: types.UNRESERVE_ITEM,
       payload: res.data,
     });
-    console.log('UnreserveItem id:', _id, 'history:', history);
+    // console.log('UnreserveItem id:', _id, 'history:', history);
     // history.push(routes.DASHBOARD);
   } catch (err) {
     dispatch({
