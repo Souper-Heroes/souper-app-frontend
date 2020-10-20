@@ -5,13 +5,6 @@ import {
   loginWithFacebook,
   loginWithTwitter
 } from 'actions/auth';
-import PropTypes from 'prop-types';
-
-const mapStateToProps = state => ({
-  isLoggingIn: state.auth.isLoggingIn,
-  signUpError: state.auth.signUpError,
-  isAuthenticated: state.auth.isAuthenticated
-});
 
 const mapDispatchToProps = dispatch => ({
   loginWithGoogle: () => dispatch(loginWithGoogle()),
@@ -19,10 +12,4 @@ const mapDispatchToProps = dispatch => ({
   loginWithTwitter: () => dispatch(loginWithTwitter())
 });
 
-SocialLogin.propTypes = {
-  isLoggingIn: PropTypes.bool.isRequired,
-  signUpError: PropTypes.bool,
-  isAuthenticated: PropTypes.bool.isRequired
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SocialLogin);
+export default connect(null, mapDispatchToProps)(SocialLogin);
