@@ -1,11 +1,10 @@
 import { connect } from 'react-redux';
 import ItemViewPage from 'components/Items/ItemViewPage';
-// import { useHistory } from 'react-router-dom';
 
 import {
   updateCollectionDates,
   unreserveItem,
-  reserveItem,
+  reserveItem
 } from 'actions/item';
 
 const mapStateToProps = (state, ownProps) => (
@@ -26,7 +25,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateCollectionDates(_id, availiability)),
 
   unreserveItem: _id => dispatch(unreserveItem(_id)),
-  reserveItem: _id => dispatch(reserveItem(_id)),
+  reserveItem: _id => dispatch(reserveItem(_id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemViewPage);

@@ -26,7 +26,10 @@ const useStyles = makeStyles(styles);
 
 export default function MyItemListing(props) {
   const {
-    type, myitem, deleteItem, unreserveItem // , address, getAddress, addrstatus
+    type,
+    myitem,
+    deleteItem,
+    unreserveItem
   } = props;
   const classes = useStyles();
 
@@ -81,7 +84,10 @@ export default function MyItemListing(props) {
         <Paper className={classes.paper} spacing={1}>
           <GridContainer spacing={2}>
             <Grid item>
-              <Link to={`/itemview/${myitem._id}/${type}`} className={classes.link}>
+              <Link
+                to={`/itemview/${myitem._id}/${type}`}
+                className={classes.link}
+              >
                 <ButtonBase className={classes.image}>
                   <img className={classes.img} alt="complex" src={banana} />
                 </ButtonBase>
@@ -89,7 +95,10 @@ export default function MyItemListing(props) {
             </Grid>
             <GridContainer xs={12} sm item spacing={0} direction="column">
               <GridItem align="left" xs={12} className={classes.cell}>
-                <Link to={`/itemview/${myitem._id}/${type}`} className={classes.link}>
+                <Link
+                  to={`/itemview/${myitem._id}/${type}`}
+                  className={classes.link}
+                >
                   <Typography gutterBottom variant="body1">
                     <strong>{myitem.description}</strong>
                   </Typography>
