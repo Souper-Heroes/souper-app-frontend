@@ -21,7 +21,7 @@ export default function ItemViewPage({
   type,
   updateCollectionDates,
   unreserveItem,
-  reserveItem,
+  reserveItem
 }) {
   // console.log('ITEM VIEW PAGE PROPS', props);
   const [isDisableAmendBtn, setIsDisableAmendBtn] = useState(true);
@@ -37,14 +37,12 @@ export default function ItemViewPage({
   // console.log("*** ITEM:", item);
 
   const handleOnClickReserve = () => {
-    console.log('About to reserve item._id: ', item._id);
     reserveItem(item._id);
   };
 
   const handleOnClickUnreserve = e => {
     // console.log(`Clicked Reserve Account, do something with DisplayName: `);
     e.preventDefault();
-    console.log('About to unreserve item._id: ', item._id);
     unreserveItem(item._id);
   };
 
@@ -290,7 +288,7 @@ ItemViewPage.propTypes = {
   item: PropTypes.instanceOf(Object),
   reserveItem: PropTypes.func,
   unreserveItem: PropTypes.func,
-  updateCollectionDates: PropTypes.func,
+  updateCollectionDates: PropTypes.func
 };
 
 /* TODO Logic to amend item if you are collecting

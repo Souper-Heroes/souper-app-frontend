@@ -2,8 +2,12 @@
 import api from '../utils/api';
 
 export const types = {
+  ADD_ITEM: 'ADD_ITEM',
+  ADD_ITEM_ERROR: 'ADD_ITEM_ERROR',
+  ADD_ITEM_RESET_FORM: 'ADD_ITEM_RESET_FORM',
   GET_ITEMS: 'GET_ITEMS',
   GET_ITEMS_ERROR: 'GET_ITEMS_ERROR',
+  GET_DELETE_ITEM_ERROR: 'GET_DELETE_ITEM_ERROR',
   GET_MY_ITEMS: 'GET_MY_ITEMS',
   GET_MY_ITEMS_ERROR: 'GET_MY_ITEMS_ERROR',
   GET_PROVIDER_ITEMS: 'GET_PROVIDER_ITEMS',
@@ -16,19 +20,37 @@ export const types = {
   UNRESERVE_ITEM_ERROR: 'UNRESERVE_ITEM_ERROR',
 };
 
+export const addItem = formData => async dispatch => {
+  try {
+    const res = await api.post('/items', formData);
+    dispatch({
+      type: types.ADD_ITEM,
+      payload: res.data
+    });
+    return true;
+  } catch (err) {
+    // do something with error
+    // console.log(err);
+    dispatch({
+      type: types.ADD_ITEM_ERROR
+    });
+    return false;
+  }
+};
+
 export const getItems = () => async dispatch => {
   try {
     const res = await api.get('/items');
 
     dispatch({
       type: types.GET_ITEMS,
-      payload: res.data,
+      payload: res.data
     });
   } catch (err) {
     // do something with error
     // console.log(err);
     dispatch({
-      type: types.GET_ITEMS_ERROR,
+      type: types.GET_ITEMS_ERROR
     });
   }
 };
@@ -39,17 +61,15 @@ export const getProviderItems = _id => async dispatch => {
 
     const res = await api.get(`/items/provider/${_id}`);
 
-    // console.log('***** CALLED getProviderItems:', res.data);
-
     dispatch({
       type: types.GET_PROVIDER_ITEMS,
-      payload: res.data,
+      payload: res.data
     });
   } catch (err) {
     // do something with error
     // console.log(err);
     dispatch({
-      type: types.GET_ITEMS_ERROR,
+      type: types.GET_ITEMS_ERROR
     });
   }
 };
@@ -60,17 +80,15 @@ export const getCollectorItems = _id => async dispatch => {
 
     const res = await api.get(`/items/collector/${_id}`);
 
-    // console.log('***** CALLED getCollectorItems:', res.data);
-
     dispatch({
       type: types.GET_COLLECTOR_ITEMS,
-      payload: res.data,
+      payload: res.data
     });
   } catch (err) {
     // do something with error
     // console.log(err);
     dispatch({
-      type: types.GET_ITEMS_ERROR,
+      type: types.GET_ITEMS_ERROR
     });
   }
 };
@@ -81,48 +99,58 @@ export const getMyItems = () => async dispatch => {
 
     dispatch({
       type: types.GET_MY_ITEMS,
-      payload: res.data,
+      payload: res.data
     });
   } catch (err) {
     // do something with error
     // console.log(err);
     dispatch({
-      type: types.GET_MY_ITEMS_ERROR,
+      type: types.GET_MY_ITEMS_ERROR
     });
   }
 };
 
-export const deleteItem = _id => ({
-  type: types.DELETEITEM,
-  _id,
-});
+export const deleteItem = _id => async dispatch => {
+  try {
+    const res = await api.delete(`/items/${_id}`);
+
+    dispatch({
+      type: types.DELETEITEM,
+      _id,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: types.GET_DELETE_ITEM_ERROR
+    });
+  }
+};
 
 export const sortByItem = menuItem => ({
   type: types.SORTITEM,
-  menuItem,
+  menuItem
 });
 
 export const updateCollectionDates = (_id, availability) => ({
   type: types.UPDATE_COLLECTDATES,
   _id,
   availability,
-  success: true,
+  success: true
 });
 
 export const reserveItem = _id => async dispatch => {
   try {
     const res = await api.put(`/items/reserve/${_id}`);
 
-    // console.log('***** CALLED reserveItem:', res.data);
     dispatch({
       type: types.RESERVE_ITEM,
-      payload: res.data,
+      payload: res.data
     });
   } catch (err) {
     // do something with error
     // console.log(err);
     dispatch({
-      type: types.GET_ITEMS_ERROR, // TODO set the correct ERROR FOR UPDATE
+      type: types.GET_ITEMS_ERROR // TODO set the correct ERROR FOR UPDATE
     });
   }
 };
@@ -131,16 +159,13 @@ export const unreserveItem = _id => async dispatch => {
   try {
     const res = await api.put(`/items/unreserve/${_id}`);
 
-    // console.log('***** CALLED unreserveItem:', res.data);
     dispatch({
       type: types.UNRESERVE_ITEM,
-      payload: res.data,
+      payload: res.data
     });
-    // console.log('UnreserveItem id:', _id, 'history:', history);
-    // history.push(routes.DASHBOARD);
   } catch (err) {
     dispatch({
-      type: types.UNRESERVE_ITEM_ERROR, // TODO set the correct ERROR FOR UPDATE
+      type: types.UNRESERVE_ITEM_ERROR // TODO set the correct ERROR FOR UPDATE
     });
   }
 };

@@ -13,21 +13,9 @@ import ListingsPaginations from 'components/Items/ListingsPaginations';
 import PropTypes from 'prop-types';
 
 export default function MyItemListings(props) {
-  // console.log('*** MY ITEM LISTING PROPS:', props);
   const { _id, type, myitems } = props;
-
-  // console.log('*** items:', props.items);
-  // useEffect(() => {
-  //  console.log('Calling MyItemListings UseEffect');
-  //  getProviderItems(_id);
-  // }, []);
-  // useEffect(() => {
-  //   getProviderItems(_id);
-  //   getCollectorItems(_id);
-  // }, [getProviderItems, getCollectorItems]);
-
   const classes = makeStyles(styles);
-  const paginationColSize = type === 'provide' ? 6 : 12;
+  const paginationColSize = type === 'provide' ? 6 : 6;
 
   const sortItems = menuItem => {
     props.sortByItem(menuItem);
@@ -78,6 +66,15 @@ export default function MyItemListings(props) {
             <Link to="/addedititem" className={classes.link}>
               <Button type="button" color="rose" to="/addedititem">
                 Add Item
+              </Button>
+            </Link>
+          </GridItem>
+        )}
+        {type === 'collect' && (
+          <GridItem xs={6} sm={6} align="left">
+            <Link to="/itemmap" className={classes.link}>
+              <Button type="button" color="rose" to="/addedititem">
+                Map
               </Button>
             </Link>
           </GridItem>
