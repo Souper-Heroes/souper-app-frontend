@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { Button } from '@material-ui/core';
 
+
 // @material-ui/icons
 import Edit from '@material-ui/icons/Edit';
 import Delete from '@material-ui/icons/Delete';
@@ -21,6 +22,8 @@ import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import banana from 'assets/img/purple-banana.jpg';
+
+import GeoCode from 'react-geocode';
 
 const useStyles = makeStyles(styles);
 
@@ -64,6 +67,25 @@ export default function MyItemListing(props) {
       `Clicked Cup button, do something with item: ${item.itemId}, Title: ${item.description}`
     ); */
   };
+
+  GeoCode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
+  Geocode.setLanguage("en");
+  Geocode.enableDebug();
+
+  // Get latitude & longitude from address.
+  const getLocation = (code) => {
+    Geocode.fromAddress(code).then(
+      response => {
+        const { lat, lng } = response.results[0].geometry.location;
+        console.log(lat, lng);
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
+
+  getLocation(myitem.postcode);
 
   return (
     <GridContainer spacing={1}>
