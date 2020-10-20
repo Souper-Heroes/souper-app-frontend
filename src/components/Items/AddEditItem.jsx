@@ -50,7 +50,7 @@ const categoryOptions = [
 
 const useStyles = makeStyles(styles);
 
-export default function AddEditItem({ addItem }) {
+export default function AddEditItem({ addItem, getItem }) {
   const classes = useStyles();
 
   // const [location, setLocation] = useState({});
@@ -88,6 +88,22 @@ export default function AddEditItem({ addItem }) {
   const handleAvailChange = e => {
     // console.log(e.target.value);
     setAvailability(e.target.value);
+  };
+
+  // Edit item
+  const onLoad = async () => {
+    // Get item and fill vars:
+    const gotItem = await getItem({
+      title: getItem.title,
+      description: getItem.description,
+      category: getItem.category.map(cat => cat.title),
+      expiry: moment(getItem.expiry).format('L'), // formats to DD/MM/yyyy - might not have to.
+      location: getItem.location,
+      availability: getItem.availability,
+    });
+    if (!gotItem) {
+      // Do something with the error
+    }
   };
 
   const onSubmit = async () => {
@@ -252,4 +268,5 @@ export default function AddEditItem({ addItem }) {
 
 AddEditItem.propTypes = {
   addItem: PropTypes.instanceOf(Array),
+  getItem: PropTypes.instanceOf(Array),
 };
