@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Route,
-  Switch,
-  Redirect,
-  BrowserRouter as Router,
+  Route, Switch, Redirect, HashRouter as Router
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TestData from 'assets/data/TestData.json';
@@ -16,7 +13,7 @@ import ItemListings from 'containers/Items/ItemListings';
 import Profile from 'containers/Profile/Profile';
 import Forgotten from 'components/Login/Forgotten';
 import ResetPassword from 'components/Login/ResetPassword';
-import AddEditItem from 'components/Items/AddEditItem';
+import AddEditItem from 'containers/Items/AddEditItem';
 import ProtectedRoute from 'components/Routing/ProtectedRoute';
 import * as ROUTES from 'components/Routing/routes';
 import PropTypes from 'prop-types';

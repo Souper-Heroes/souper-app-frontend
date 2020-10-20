@@ -9,7 +9,7 @@ import {
 // 2nd parameter to this function holds our component props
 const mapStateToProps = state => ({
   myitems: state.item.myitems,
-  _id: state.auth.user.uid,
+  _id: state.auth.user.uid
 });
 
 const mapDispatchToProps = dispatch => ({
