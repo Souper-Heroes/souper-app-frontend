@@ -24,6 +24,7 @@ import CardFooter from 'components/MaterialKitComponents/Card/CardFooter';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
 import CheckboxTermsAndConds from 'components/Login/CheckboxTermsAndConds';
 import SouperFooter from 'components/Layout/SouperFooter';
+import SocialLogin from 'containers/Login/SocialLogin';
 import Alert from 'components/Alert/Alert';
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import image from 'assets/img/board.jpg';
@@ -34,8 +35,6 @@ const useStyles = makeStyles(styles);
 export default function RegisterPage({
   registerInputs,
   signUp,
-  loginWithGoogle,
-  loginWithFacebook,
   isAuthenticated
 }) {
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
@@ -55,10 +54,6 @@ export default function RegisterPage({
     const { name } = event.currentTarget;
     if (name === 'login') {
       signUp(email, password, displayName);
-    } else if (name === 'loginWithGoogle') {
-      loginWithGoogle();
-    } else if (name === 'loginWithFacebook') {
-      loginWithFacebook();
     }
   };
 
@@ -95,31 +90,7 @@ export default function RegisterPage({
                 <form className={classes.form}>
                   <CardHeader color="rose" className={classes.cardHeader}>
                     <h2>Register</h2>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-twitter" />
-                      </Button>
-                      <Button
-                        justIcon
-                        name="loginWithFacebook"
-                        color="transparent"
-                        onClick={handleSubmit}
-                      >
-                        <i className="fab fa-facebook" />
-                      </Button>
-                      <Button
-                        justIcon
-                        name="loginWithGoogle"
-                        color="transparent"
-                        onClick={handleSubmit}
-                      >
-                        <i className="fab fa-google-plus-g" />
-                      </Button>
-                    </div>
+                    <SocialLogin />
                   </CardHeader>
                   <CardBody>
                     <Alert />
@@ -196,8 +167,6 @@ export default function RegisterPage({
 
 RegisterPage.propTypes = {
   signUp: PropTypes.bool,
-  loginWithGoogle: PropTypes.func,
-  loginWithFacebook: PropTypes.func,
   isAuthenticated: PropTypes.bool,
   registerInputs: PropTypes.instanceOf(Array)
 };

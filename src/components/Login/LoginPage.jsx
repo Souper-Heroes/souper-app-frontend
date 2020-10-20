@@ -10,6 +10,7 @@ import Icon from '@material-ui/core/Icon';
 import Email from '@material-ui/icons/Email';
 // core components
 import Alert from 'components/Alert/Alert';
+import SocialLogin from 'containers/Login/SocialLogin';
 import GridContainer from '../MaterialKitComponents/Grid/GridContainer';
 import GridItem from '../MaterialKitComponents/Grid/GridItem';
 import Button from '../MaterialKitComponents/CustomButtons/Button';
@@ -19,14 +20,13 @@ import CardHeader from '../MaterialKitComponents/Card/CardHeader';
 import CardFooter from '../MaterialKitComponents/Card/CardFooter';
 import CustomInput from '../MaterialKitComponents/CustomInput/CustomInput';
 
-
 import styles from '../../assets/jss/material-kit-react/views/loginPage';
 import image from '../../assets/img/board.jpg';
 
 const useStyles = makeStyles(styles);
 
 export default function LoginPage({
-  login, loginWithGoogle, loginWithFacebook, isAuthenticated
+  login, isAuthenticated
 }) {
   const emailRef = useRef(null);
   const passRef = useRef(null);
@@ -41,10 +41,6 @@ export default function LoginPage({
     const { name } = event.currentTarget;
     if (name === 'login') {
       login(emailRef.current.value, passRef.current.value);
-    } else if (name === 'loginWithGoogle') {
-      loginWithGoogle();
-    } else if (name === 'loginWithFacebook') {
-      loginWithFacebook();
     }
   };
 
@@ -69,33 +65,7 @@ export default function LoginPage({
                 <form className={classes.form}>
                   <CardHeader color="rose" className={classes.cardHeader}>
                     <h2>Login</h2>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-twitter" />
-                      </Button>
-                      <Button
-                        justIcon
-                        name="loginWithFacebook"
-                        href="#pablo"
-                        color="transparent"
-                        onClick={handleSubmit}
-                      >
-                        <i className="fab fa-facebook" />
-                      </Button>
-                      <Button
-                        justIcon
-                        name="loginWithGoogle"
-                        color="transparent"
-                        onClick={handleSubmit}
-                      >
-                        <i className="fab fa-google-plus-g" />
-                      </Button>
-                    </div>
+                    <SocialLogin />
                   </CardHeader>
                   <CardBody>
                     <Alert />
@@ -177,7 +147,5 @@ export default function LoginPage({
 
 LoginPage.propTypes = {
   login: PropTypes.bool,
-  loginWithGoogle: PropTypes.func,
-  isAuthenticated: PropTypes.bool,
-  loginWithFacebook: PropTypes.func
+  isAuthenticated: PropTypes.bool
 };
