@@ -111,7 +111,9 @@ export const loginWithGoogle = () => dispatch => {
     .then(user => {
       dispatch(receiveLogin(user));
     })
-    .catch(() => {
+    .catch(error => {
+      // eslint-disable-next-line
+      console.error({ error });
       // Do something with the error
       dispatch(loginError());
     });
