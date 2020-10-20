@@ -6,7 +6,7 @@ import Button from '../MaterialKitComponents/CustomButtons/Button';
 
 const useStyles = makeStyles(styles);
 
-export default function SocialLogin({ loginWithGoogle, loginWithFacebook }) {
+export default function SocialLogin({ loginWithGoogle, loginWithFacebook, loginWithTwitter }) {
   const classes = useStyles();
   const handleSubmit = async event => {
     const { name } = event.currentTarget;
@@ -14,6 +14,8 @@ export default function SocialLogin({ loginWithGoogle, loginWithFacebook }) {
       loginWithGoogle();
     } else if (name === 'loginWithFacebook') {
       loginWithFacebook();
+    } else if (name === 'loginWithTwitter') {
+      loginWithTwitter();
     }
   };
 
@@ -22,9 +24,10 @@ export default function SocialLogin({ loginWithGoogle, loginWithFacebook }) {
       <div className={classes.socialLine}>
         <Button
           justIcon
+          name="loginWithTwitter"
           href="#pablo"
           color="transparent"
-          onClick={e => e.preventDefault()}
+          onClick={handleSubmit}
         >
           <i className="fab fa-twitter" />
         </Button>
@@ -52,5 +55,6 @@ export default function SocialLogin({ loginWithGoogle, loginWithFacebook }) {
 
 SocialLogin.propTypes = {
   loginWithGoogle: PropTypes.func,
-  loginWithFacebook: PropTypes.func
+  loginWithFacebook: PropTypes.func,
+  loginWithTwitter: PropTypes.func
 };

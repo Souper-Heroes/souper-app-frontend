@@ -50,4 +50,9 @@ export const facebookProvider = new firebase.auth.FacebookAuthProvider().setCust
     auth_type: 'reauthenticate'
   }
 );
+export const twitterProvider = new firebase.auth.TwitterAuthProvider().setCustomParameters(
+  {
+    auth_type: 'reauthenticate'
+  }
+);
 export const db = baseDb;

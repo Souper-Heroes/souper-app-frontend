@@ -1,7 +1,8 @@
 import {
   myFirebase,
   googleProvider,
-  facebookProvider
+  facebookProvider,
+  twitterProvider
 } from '../firebase/firebase';
 import api from '../utils/api';
 import { setAlert } from './alert';
@@ -112,7 +113,7 @@ export const loginWithGoogle = () => dispatch => {
     })
     .catch(() => {
       // Do something with the error
-      dispatch(signUpError());
+      dispatch(loginError());
     });
 };
 
@@ -127,9 +128,26 @@ export const loginWithFacebook = () => dispatch => {
     .then(user => {
       dispatch(receiveLogin(user));
     })
-    .catch(() => {
-      // Do something with the error
-      dispatch(signUpError());
+    .catch(error => {
+      dispatch(setAlert(error.message, 'danger', 'text'));
+      dispatch(loginError());
+    });
+};
+
+export const loginWithTwitter = () => dispatch => {
+  dispatch(requestLogin());
+  myFirebase
+    .auth()
+    .signInWithPopup(twitterProvider)
+    .then(() => {
+      dispatch(loadUser());
+    })
+    .then(user => {
+      dispatch(receiveLogin(user));
+    })
+    .catch(error => {
+      dispatch(setAlert(error.message, 'danger', 'text'));
+      dispatch(loginError());
     });
 };
 
