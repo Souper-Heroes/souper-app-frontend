@@ -166,7 +166,7 @@ export default function RegisterPage({
 }
 
 RegisterPage.propTypes = {
-  signUp: PropTypes.bool,
+  signUp: PropTypes.func,
   isAuthenticated: PropTypes.bool,
   registerInputs: PropTypes.instanceOf(Array)
 };
