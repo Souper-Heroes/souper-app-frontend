@@ -7,6 +7,7 @@ export const types = {
   ADD_ITEM_RESET_FORM: 'ADD_ITEM_RESET_FORM',
   GET_ITEMS: 'GET_ITEMS',
   GET_ITEMS_ERROR: 'GET_ITEMS_ERROR',
+  GET_DELETE_ITEM_ERROR: 'GET_DELETE_ITEM_ERROR',
   GET_MY_ITEMS: 'GET_MY_ITEMS',
   GET_MY_ITEMS_ERROR: 'GET_MY_ITEMS_ERROR',
   GET_PROVIDER_ITEMS: 'GET_PROVIDER_ITEMS',
@@ -109,10 +110,21 @@ export const getMyItems = () => async dispatch => {
   }
 };
 
-export const deleteItem = _id => ({
-  type: types.DELETEITEM,
-  _id
-});
+export const deleteItem = _id => async dispatch => {
+  try {
+    const res = await api.delete(`/items/${_id}`);
+
+    dispatch({
+      type: types.DELETEITEM,
+      _id,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: types.GET_DELETE_ITEM_ERROR
+    });
+  }
+};
 
 export const sortByItem = menuItem => ({
   type: types.SORTITEM,

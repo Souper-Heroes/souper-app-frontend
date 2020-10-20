@@ -149,7 +149,7 @@ export default (state = initialState, action) => {
     case types.GET_DELETE_ITEM_ERROR:
       return {
         ...state,
-        msg: payload.msg,
+        msg: payload.msg
       };
     case types.UPDATE_COLLECTDATES:
       return {
