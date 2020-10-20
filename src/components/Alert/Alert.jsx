@@ -24,7 +24,7 @@ const Alert = ({ alerts }) => alerts !== null
   ));
 
 Alert.propTypes = {
-  alerts: PropTypes.array.isRequired
+  alerts: PropTypes.instanceOf(Array)
 };
 
 const mapStateToProps = state => ({
