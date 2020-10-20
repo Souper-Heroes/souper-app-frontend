@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Route, Switch, Redirect, BrowserRouter as Router
+  Route, Switch, Redirect, HashRouter as Router
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TestData from 'assets/data/TestData.json';
@@ -8,6 +8,7 @@ import ItemViewPage from 'containers/Items/ItemViewPage';
 import LoginPage from 'containers/Login/Login';
 import RegisterPage from 'containers/Login/Register';
 import ItemListPage from 'containers/Items/ItemListPage';
+import ItemMapPage from 'containers/Items/ItemMapPage';
 import ItemListings from 'containers/Items/ItemListings';
 import Profile from 'containers/Profile/Profile';
 import Forgotten from 'containers/Login/Forgotten';
@@ -65,19 +66,25 @@ function App(props) {
           isVerifying={isVerifying}
         />
       </Switch>
+      <ProtectedRoute
+        path={ROUTES.ITEM_MAP}
+        component={ItemMapPage}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
     </Router>
   );
 }
 
 App.propTypes = {
   isAuthenticated: PropTypes.bool,
-  isVerifying: PropTypes.bool
+  isVerifying: PropTypes.bool,
 };
 
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
-    isVerifying: state.auth.isVerifying
+    isVerifying: state.auth.isVerifying,
   };
 }
 

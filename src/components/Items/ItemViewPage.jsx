@@ -10,6 +10,7 @@ import styles from 'assets/jss/Items/views/ItemViewPage';
 import banana from 'assets/img/purple-banana.jpg';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+
 import * as routes from 'components/Routing/routes';
 
 const useStyles = makeStyles(styles);
@@ -149,7 +150,7 @@ export default function ItemViewPage({
                       align="left"
                       gutterBottom
                     >
-                      {item.expiry}
+                      {item.postcode}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -283,8 +284,8 @@ export default function ItemViewPage({
 
 ItemViewPage.propTypes = {
   _id: PropTypes.string,
-  item: PropTypes.instanceOf(Object),
   type: PropTypes.string,
+  item: PropTypes.instanceOf(Object),
   reserveItem: PropTypes.func,
   unreserveItem: PropTypes.func,
   updateCollectionDates: PropTypes.func

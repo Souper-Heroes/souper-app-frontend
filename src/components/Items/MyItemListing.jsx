@@ -179,7 +179,7 @@ export default function MyItemListing(props) {
                           gutterBottom
                           align="left"
                         >
-                          {myitem.availability}
+                          {myitem.postcode}
                         </Typography>
                       </GridItem>
                     </GridContainer>
