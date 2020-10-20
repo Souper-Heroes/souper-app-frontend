@@ -30,7 +30,7 @@ export default function HeaderLinks({logout, user}) {
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
-          //buttonText={`welcome, ${user.displayName}`}
+          buttonText={`welcome, ${user.display_name}`}
           buttonProps={{
             className: classes.navLink,
             color: 'transparent'

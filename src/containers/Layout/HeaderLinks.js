@@ -3,7 +3,7 @@ import HeaderLinks from 'components/Layout/HeaderLinks';
 import { logoutUser } from 'actions/auth';
 
 const mapStateToProps = state => ({
-  user: state.auth.userLoaded
+  user: state.user.user
 });
 
 const mapDispatchToProps = dispatch => ({
