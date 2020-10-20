@@ -9,10 +9,9 @@ import styles from 'assets/jss/Items/views/SimpleMapPage';
 import { makeStyles } from '@material-ui/core/styles';
 
 // const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
-export default function SimpleMapPage({ _id, userLoaded, myitems }) {
+// TODO destructure 'userLoaded' which holds the logged in users default location
+export default function SimpleMapPage({ _id, myitems }) {
   const classes = makeStyles(styles);
-
   const defaultProps = {
     center: {
       lat: 51.562908, // TODO userLoaded.location.coordinates[0], // lat: 51.562908,
@@ -37,7 +36,7 @@ export default function SimpleMapPage({ _id, userLoaded, myitems }) {
     <div style={{ height: '100vh', width: '100%' }}>
       <GoogleMapReact
         bootstrapURLKeys={{
-          key: 'AIzaSyC16r5DUFFi0KWhu4ukB4w4ygDE2HmYZd8'
+          key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
         }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
@@ -58,7 +57,7 @@ export default function SimpleMapPage({ _id, userLoaded, myitems }) {
 
 SimpleMapPage.propTypes = {
   _id: PropTypes.string,
-  userLoaded: PropTypes.instanceOf(Object),
+  // userLoaded: PropTypes.instanceOf(Object),
   myitems: PropTypes.instanceOf(Object)
 };
 
