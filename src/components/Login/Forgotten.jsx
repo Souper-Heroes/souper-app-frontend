@@ -14,6 +14,7 @@ import CardHeader from 'components/MaterialKitComponents/Card/CardHeader';
 import CardFooter from 'components/MaterialKitComponents/Card/CardFooter';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
 import Muted from 'components/MaterialKitComponents/Typography/Muted';
+import SocialLogin from 'containers/Login/SocialLogin';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import image from 'assets/img/board.jpg';
@@ -44,35 +45,7 @@ export default function Forgotten() {
                 <form className={classes.form}>
                   <CardHeader color="rose" className={classes.cardHeader}>
                     <h4>Reset Password</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-twitter" />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-facebook" />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-google-plus-g" />
-                      </Button>
-                    </div>
+                    <SocialLogin />
                   </CardHeader>
                   <CardBody>
                     <Muted>
@@ -82,21 +55,6 @@ export default function Forgotten() {
                     </Muted>
                     <CustomInput
                       labelText="Email..."
-                      id="email"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: 'email',
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                    <CustomInput
-                      labelText="Confirm email"
                       id="email"
                       formControlProps={{
                         fullWidth: true
