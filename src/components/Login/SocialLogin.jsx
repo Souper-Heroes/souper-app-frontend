@@ -25,7 +25,6 @@ export default function SocialLogin({ loginWithGoogle, loginWithFacebook, loginW
         <Button
           justIcon
           name="loginWithTwitter"
-          href="#pablo"
           color="transparent"
           onClick={handleSubmit}
         >
@@ -34,7 +33,6 @@ export default function SocialLogin({ loginWithGoogle, loginWithFacebook, loginW
         <Button
           justIcon
           name="loginWithFacebook"
-          href="#pablo"
           color="transparent"
           onClick={handleSubmit}
         >
