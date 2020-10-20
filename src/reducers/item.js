@@ -17,7 +17,7 @@ const initialState = {
       photo: '#1111',
       expiry: '2020-10-23T16:00:00Z',
       location: 'EN4 4QE',
-      availability: '23rd Oct 2020 3-4PM',
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
       _id: '2',
@@ -29,7 +29,7 @@ const initialState = {
       photo: '#1112',
       expiry: '2020-10-24T13:00:00Z',
       location: 'SR5 4TQ',
-      availability: '23rd Oct 2020 3-4PM',
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
       _id: '3',
@@ -41,7 +41,7 @@ const initialState = {
       photo: '#1113',
       expiry: '2020-11-30T13:00:00Z',
       location: 'EN4 4RE',
-      availability: '23rd Oct 2020 3-4PM',
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
       _id: '4',
@@ -53,7 +53,7 @@ const initialState = {
       photo: '#1114',
       expiry: '2020-06-30T14:30:00Z',
       location: 'DE3 7TQ',
-      availability: '23rd Oct 2020 3-4PM',
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
       _id: '5',
@@ -65,7 +65,7 @@ const initialState = {
       photo: '#1115',
       expiry: '2020-12-29T13:00:00Z',
       location: 'SL3 7TC',
-      availability: '23rd Oct 2020 3-4PM',
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
       _id: '6',
@@ -77,7 +77,7 @@ const initialState = {
       photo: '#1116',
       expiry: '2020-12-03T17:30:00Z',
       location: 'SP3 7XE',
-      availability: '23rd Oct 2020 3-4PM',
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
       _id: '7',
@@ -89,7 +89,7 @@ const initialState = {
       photo: '#1117',
       expiry: '2020-12-03T17:30:00Z',
       location: 'SP3 7QE',
-      availability: '23rd Oct 2020 3-4PM',
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
       _id: '8',
@@ -101,7 +101,7 @@ const initialState = {
       photo: '#1115',
       expiry: '2020-12-29T17:30:00Z',
       location: 'SL3 9TE',
-      availability: '23rd Oct 2020 3-4PM',
+      availability: '23rd Oct 2020 3-4PM'
     },
     {
       _id: '9',
@@ -113,9 +113,9 @@ const initialState = {
       photo: '#1114',
       expiry: '2020-04-30T17:30:00Z',
       location: 'DE3 3TQ',
-      availability: '23rd Oct 2020 3-4PM',
-    },
-  ],
+      availability: '23rd Oct 2020 3-4PM'
+    }
+  ]
 };
 
 export default (state = initialState, action) => {
@@ -124,27 +124,27 @@ export default (state = initialState, action) => {
     case types.GET_ITEMS:
       return {
         ...state,
-        items: payload,
+        items: payload
       };
     case types.GET_MY_ITEMS:
       return {
         ...state,
         myitems: payload,
-        loading: false,
+        loading: false
       };
     case types.GET_PROVIDER_ITEMS:
       return {
         ...state,
-        pitems: payload,
+        pitems: payload
       };
     case types.GET_COLLECTOR_ITEMS:
       return {
         ...state,
-        citems: payload,
+        citems: payload
       };
     case types.GET_ITEMS_ERROR:
       return {
-        items: payload,
+        items: payload
       };
     case types.GET_DELETE_ITEM_ERROR:
       return {
@@ -164,10 +164,10 @@ export default (state = initialState, action) => {
               return updItem;
             }
             return myItem;
-          }),
+          })
           // items: [...state.items.filter(item => item._id === action._id).map(),],
         ],
-        success: true,
+        success: true
       };
     case types.UNRESERVE_ITEM:
       return {
@@ -189,7 +189,7 @@ export default (state = initialState, action) => {
               return updItem;
             }
             return myItem;
-          }),
+          })
         ],
         success: true,
         citem: payload
@@ -212,7 +212,7 @@ export default (state = initialState, action) => {
               return -1;
             }
             return 0;
-          }),
+          })
         };
       }
       // Sort By Expiry Date
@@ -226,7 +226,7 @@ export default (state = initialState, action) => {
             return -1;
           }
           return 0;
-        }),
+        })
       };
 
     default:

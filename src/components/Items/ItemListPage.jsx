@@ -12,7 +12,10 @@ import PropTypes from 'prop-types';
 const useStyles = makeStyles(styles);
 
 export default function ItemListPage({
-  _id, myitems, loading, getMyItems
+  _id,
+  myitems,
+  loading,
+  getMyItems
 }) {
   const classes = useStyles();
 
@@ -29,14 +32,14 @@ export default function ItemListPage({
         if (myitems.filter(item => item.user_uid === _id).length) {
           mytabs.push({
             tabName: 'Listings',
-            tabContent: <MyItemListings type="provide" />,
+            tabContent: <MyItemListings type="provide" />
           });
         }
       } else if (tab === 'Collections') {
         if (myitems.filter(item => item.c_user_uid === _id).length) {
           mytabs.push({
             tabName: 'Collections',
-            tabContent: <MyItemListings type="collect" />,
+            tabContent: <MyItemListings type="collect" />
           });
         }
       }
@@ -68,8 +71,8 @@ export default function ItemListPage({
 }
 
 ItemListPage.propTypes = {
-  _id: PropTypes.string,
-  myitems: PropTypes.instanceOf(Object),
-  loading: PropTypes.bool,
-  getMyItems: PropTypes.func,
+  _id: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+  getMyItems: PropTypes.func.isRequired,
+  myitems: PropTypes.instanceOf(Object)
 };
