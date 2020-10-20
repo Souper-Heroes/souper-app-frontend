@@ -25,7 +25,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles(styles);
 
-export default function Forgotten({isAuthenticated, passwordReset}) {
+export default function Forgotten({ isAuthenticated, passwordReset }) {
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
   const [email, setEmail] = useState('');
   setTimeout(() => {
