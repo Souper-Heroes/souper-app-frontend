@@ -146,6 +146,11 @@ export default (state = initialState, action) => {
       return {
         items: payload
       };
+    case types.GET_DELETE_ITEM_ERROR:
+      return {
+        ...state,
+        msg: payload.msg
+      };
     case types.UPDATE_COLLECTDATES:
       return {
         // TODO should call axios api function to update bbackend with new preferred Collect time for item
@@ -153,9 +158,7 @@ export default (state = initialState, action) => {
         // Only new objects can be created and assigned to the state, thats why we use [...]
         items: [
           ...state.items.map(myItem => {
-            // console.log('***FOUND MY ITEM:', myItem, action);
             if (myItem._id === action._id) {
-              // console.log( 'FOUND MY ITEM:', myItem.preferredCollectStartTime, action);
               const updItem = myItem;
               updItem.availability = action.availability;
               return updItem;
@@ -178,8 +181,8 @@ export default (state = initialState, action) => {
       return {
         // TODO should call axios api function to update bbackend with new preferred Collect time for item
         ...state,
-        citems: [
-          ...state.citems.map(myItem => {
+        myitems: [
+          ...state.myitems.map(myItem => {
             if (myItem._id === payload._id) {
               const updItem = myItem;
               updItem.c_user_uid = payload.c_user_id;
@@ -194,13 +197,14 @@ export default (state = initialState, action) => {
     case types.DELETEITEM:
       return {
         ...state,
-        items: [...state.items.filter(myItem => myItem._id !== action._id)]
+        myitems: state.myitems.filter(item => item._id !== action._id),
+        msg: payload.msg
       };
     case types.SORTITEM:
       if (action.menuItem === 'Category') {
         return {
           ...state,
-          items: [...state.items].sort((a, b) => {
+          myitems: [...state.myitems].sort((a, b) => {
             if (a.category > b.category) {
               return 1;
             }
@@ -211,10 +215,10 @@ export default (state = initialState, action) => {
           })
         };
       }
-      //  Sort By Expiry Date
+      // Sort By Expiry Date
       return {
         ...state,
-        items: [...state.items].sort((a, b) => {
+        myitems: [...state.myitems].sort((a, b) => {
           if (moment(a.expiry) > moment(b.expiry)) {
             return 1;
           }
