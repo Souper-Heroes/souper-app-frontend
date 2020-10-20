@@ -1,6 +1,10 @@
 import { connect } from 'react-redux';
 import SocialLogin from 'components/Login/SocialLogin';
-import { loginWithGoogle, loginWithFacebook } from 'actions/auth';
+import {
+  loginWithGoogle,
+  loginWithFacebook,
+  loginWithTwitter
+} from 'actions/auth';
 import PropTypes from 'prop-types';
 
 const mapStateToProps = state => ({
@@ -11,7 +15,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loginWithGoogle: () => dispatch(loginWithGoogle()),
-  loginWithFacebook: () => dispatch(loginWithFacebook())
+  loginWithFacebook: () => dispatch(loginWithFacebook()),
+  loginWithTwitter: () => dispatch(loginWithTwitter())
 });
 
 SocialLogin.propTypes = {
