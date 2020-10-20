@@ -6,6 +6,7 @@ import {
 } from '../firebase/firebase';
 import api from '../utils/api';
 import { setAlert } from './alert';
+import { userLoaded, userLoadError } from './user';
 
 export const types = {
   LOGIN_REQUEST: 'LOGIN_REQUEST',
@@ -31,15 +32,6 @@ const requestLogin = () => ({
 const receiveLogin = user => ({
   type: types.LOGIN_SUCCESS,
   user
-});
-
-const userLoaded = user => ({
-  type: types.USER_LOADED,
-  user
-});
-
-const userLoadError = () => ({
-  type: types.USER_LOAD_FAILURE
 });
 
 const loginError = () => ({
@@ -71,11 +63,11 @@ const verifySuccess = () => ({
 });
 
 // Load User
-export const loadUser = () => async dispatch => {
+export const loadUser = user => async dispatch => {
   try {
     let res = await api.get('/users');
     if (!res.data) {
-      res = await api.post('/users');
+      res = await api.post('/users', user.user);
     }
     dispatch(userLoaded(res.data));
   } catch (err) {
@@ -88,8 +80,8 @@ export const loginUser = (email, password) => dispatch => {
   myFirebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(() => {
-      dispatch(loadUser());
+    .then(user => {
+      dispatch(loadUser(user));
     })
     .then(user => {
       dispatch(receiveLogin(user));
@@ -105,8 +97,8 @@ export const loginWithGoogle = () => dispatch => {
   myFirebase
     .auth()
     .signInWithPopup(googleProvider)
-    .then(() => {
-      dispatch(loadUser());
+    .then(user => {
+      dispatch(loadUser(user));
     })
     .then(user => {
       dispatch(receiveLogin(user));
@@ -124,8 +116,8 @@ export const loginWithFacebook = () => dispatch => {
   myFirebase
     .auth()
     .signInWithPopup(facebookProvider)
-    .then(() => {
-      dispatch(loadUser());
+    .then(user => {
+      dispatch(loadUser(user));
     })
     .then(user => {
       dispatch(receiveLogin(user));
@@ -141,8 +133,8 @@ export const loginWithTwitter = () => dispatch => {
   myFirebase
     .auth()
     .signInWithPopup(twitterProvider)
-    .then(() => {
-      dispatch(loadUser());
+    .then(user => {
+      dispatch(loadUser(user));
     })
     .then(user => {
       dispatch(receiveLogin(user));
