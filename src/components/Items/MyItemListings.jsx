@@ -6,25 +6,43 @@ import { makeStyles } from '@material-ui/core/styles';
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
-import MyItemListing from 'components/Items/MyItemListing';
+import MyItemListing from 'containers/Items/MyItemListing';
 import ListingsDropdown from 'components/Items/ListingsDropdown';
 import Button from 'components/CustomButtons/Button';
 import ListingsPaginations from 'components/Items/ListingsPaginations';
 import PropTypes from 'prop-types';
 
 export default function MyItemListings(props) {
-  const { type, items } = props;
+  const { _id, type, myitems } = props;
   const classes = makeStyles(styles);
-  const paginationColSize = type === 'provide' ? 6 : 12;
+  const paginationColSize = type === 'provide' ? 6 : 6;
 
   const sortItems = menuItem => {
     props.sortByItem(menuItem);
   };
 
   const deleteItem = async itemId => {
-    // console.log(`Clicked Delete button, delete item with itemId: ${itemId}`);
+    // console.log(`Clicked Delete button, delete item with _id: ${_id}`);
     await props.deleteItem(itemId);
   };
+
+  const unreserveItem = async itemId => {
+    // console.log(`Clicked Delete button for collector, unreseve item with _id: ${_id}`);
+    await props.unreserveItem(itemId);
+  };
+
+  const getMyItems = () =>
+    // eslint-disable-next-line implicit-arrow-linebreak
+    myitems.filter(myItem => {
+      if (type === 'provide') {
+        if (myItem.user_uid === _id) {
+          return myItem;
+        }
+      } else if (myItem.c_user_uid === _id) {
+        return myItem;
+      }
+      return null;
+    });
 
   return (
     <div>
@@ -33,9 +51,15 @@ export default function MyItemListings(props) {
           <ListingsDropdown sortItems={sortItems} />
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
-          {items
-            .filter(item => props.uuid === (type === 'provide' ? item.provideUserId : item.collectUserId))
-            .map(myItem => (<MyItemListing key={myItem.itemId} type={type} myitem={myItem} deleteItem={deleteItem} />))}
+          {getMyItems().map(myItem => (
+            <MyItemListing
+              key={myItem._id}
+              type={type}
+              myitem={myItem}
+              deleteItem={deleteItem}
+              unreserveItem={unreserveItem}
+            />
+          ))}
         </GridItem>
         {type === 'provide' && (
           <GridItem xs={6} sm={6} align="left">
@@ -46,7 +70,20 @@ export default function MyItemListings(props) {
             </Link>
           </GridItem>
         )}
-        <GridItem xs={paginationColSize} sm={paginationColSize} align="right">
+        {type === 'collect' && (
+          <GridItem xs={6} sm={6} align="left">
+            <Link to="/itemmap" className={classes.link}>
+              <Button type="button" color="rose" to="/addedititem">
+                Map
+              </Button>
+            </Link>
+          </GridItem>
+        )}
+        <GridItem
+          xs={paginationColSize}
+          sm={paginationColSize}
+          align="right"
+        >
           <ListingsPaginations />
         </GridItem>
       </GridContainer>
@@ -56,9 +93,9 @@ export default function MyItemListings(props) {
 
 MyItemListings.propTypes = {
   type: PropTypes.string,
-  // TODO uuid: PropTypes.string,
-  uuid: PropTypes.number,
-  items: PropTypes.instanceOf(Array),
+  _id: PropTypes.string,
+  myitems: PropTypes.instanceOf(Object),
   deleteItem: PropTypes.func,
-  sortByItem: PropTypes.func
+  sortByItem: PropTypes.func,
+  unreserveItem: PropTypes.func
 };

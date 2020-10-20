@@ -11,6 +11,7 @@ import Slider from 'nouislider';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Delete from '@material-ui/icons/Delete';
 import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(styles);
@@ -81,16 +82,29 @@ function Profile({ initialName, email, initialPostCode }) {
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div className={classes.container}>
         <GridContainer justify="center">
-          <GridItem cs={12} sm={12} md={8}>
-            <h2 className={classes.title}>
-              Profile
-            </h2>
+          <GridItem xs={12} md={8}>
+            <div style={{ display: 'flex' }}>
+              <h2 className={classes.title}>  Profile  </h2>
+              <Button justIcon round color="rose" style={{ margin: 35, marginLeft: 'auto' }}><Delete style={{ color: '#FFFFFF' }} /></Button>
+            </div>
             <form>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
+                <GridItem xs={12} md={6} align="center">
+                  <img
+                    src={profileImage}
+                    alt="profile"
+                    className={imageClasses}
+                    style={{ width: 250, height: 250 }}
+                  />
+                  <br /><br />
+                  <Button color="rose" size="md">
+                    CHANGE AVATAR
+                  </Button>
+                </GridItem>
+                <GridItem xs={12} md={6} align="right">
                   <CustomInput
-                    labelText="Display name"
-                    id="displayName"
+                    labelText="Name"
+                    id="fullName"
                     formControlProps={{
                       fullWidth: true,
                     }}
@@ -112,6 +126,13 @@ function Profile({ initialName, email, initialPostCode }) {
                     }}
                   />
                   <CustomInput
+                    labelText="First line of address"
+                    id="address"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                  />
+                  <CustomInput
                     labelText="Post Code"
                     id="postCode"
                     formControlProps={{
@@ -123,8 +144,8 @@ function Profile({ initialName, email, initialPostCode }) {
                       onChange: event => onChangeHandler(event)
                     }}
                   />
-                  <InputLabel style={{ marginTop: 15 }} id="demo-simple-select-label">
-                    Item distance
+                  <InputLabel id="demo-simple-select-label" style={{ marginTop: 15 }}>
+                    Maximum distance you would travel for an item
                   </InputLabel>
                   <FormControl required className={classes.formControl}>
                     <Select
@@ -145,28 +166,8 @@ function Profile({ initialName, email, initialPostCode }) {
                       onChange={event => onChangeHandler(event)}
                     />
                   </FormControl>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
-                  <img
-                    src={profileImage}
-                    alt="profile"
-                    className={imageClasses}
-                    style={{
-                      width: 250, height: 250, marginTop: 20, marginLeft: 20
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
-                  <Button style={{ marginTop: 20 }} variant="contained" color="success" size="lg">
-                    CHANGE AVATAR
-                  </Button>
-                  <Button variant="contained" size="lg">
-                    DELETE ACCOUNT
-                  </Button>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
-                  <Button variant="contained" color="rose" size="lg" onClick={event => onSubmit(event)}>
-                    SAVE CHANGES
+                  <Button variant="contained" color="success" size="md" onClick={event => onSubmit(event)}>
+                    SAVE
                   </Button>
                 </GridItem>
               </GridContainer>
