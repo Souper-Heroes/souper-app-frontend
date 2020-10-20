@@ -6,7 +6,7 @@ import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import styles from 'assets/jss/material-kit-react/views/profilePage';
 // import MyItemListings from 'containers/Items/MyItemListings';
-import SimpleMapPage from 'containers/Items/SimpleMapPage';
+import SimpleMapPage from 'containers/Maps/SimpleMapPage';
 // import CustomTabs from 'components/MaterialKitComponents/CustomTabs/CustomTabs';
 
 const useStyles = makeStyles(styles);
