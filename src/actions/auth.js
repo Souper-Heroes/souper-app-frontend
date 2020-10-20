@@ -170,6 +170,24 @@ export const signUp = (email, password, displayName) => dispatch => {
     });
 };
 
+export const passwordReset = email => dispatch => {
+  myFirebase
+    .auth()
+    .sendPasswordResetEmail(email)
+    .then(() => {
+      dispatch(
+        setAlert(
+          'Email Sent! You should recieve an email shortly, follow the link inside to reset your password.',
+          'danger',
+          'text'
+        )
+      );
+    })
+    .catch(error => {
+      dispatch(setAlert(error.message, 'danger', 'text'));
+    });
+};
+
 export const logoutUser = () => dispatch => {
   dispatch(requestLogout());
   myFirebase

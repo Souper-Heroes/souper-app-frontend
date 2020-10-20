@@ -23,7 +23,7 @@ import CardHeader from 'components/MaterialKitComponents/Card/CardHeader';
 import CardFooter from 'components/MaterialKitComponents/Card/CardFooter';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
 import CheckboxTermsAndConds from 'components/Login/CheckboxTermsAndConds';
-import SouperFooter from 'components/Layout/SouperFooter';
+import Muted from 'components/MaterialKitComponents/Typography/Muted';
 import SocialLogin from 'containers/Login/SocialLogin';
 import Alert from 'components/Alert/Alert';
 import styles from 'assets/jss/material-kit-react/views/loginPage';
@@ -131,7 +131,7 @@ export default function RegisterPage({
                       checkTermsAndConds={checkTermsAndConds}
                     >
                       <Link to="/register">
-                        <strong>Terms And Conditions</strong>
+                        <Muted><b>Terms And Conditions</b></Muted>
                         {' '}
                       </Link>
                     </CheckboxTermsAndConds>
@@ -160,7 +160,6 @@ export default function RegisterPage({
           </GridContainer>
         </div>
       </div>
-      <SouperFooter />
     </div>
   );
 }
