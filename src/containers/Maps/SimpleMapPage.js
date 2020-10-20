@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import SimpleMapPage from 'components/Items/SimpleMapPage';
+import SimpleMapPage from 'components/Maps/SimpleMapPage';
 
 const mapStateToProps = state => ({
   isLoggingIn: state.auth.isLoggingIn,
