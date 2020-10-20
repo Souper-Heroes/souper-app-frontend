@@ -124,32 +124,32 @@ export default (state = initialState, action) => {
     case types.GET_ITEMS:
       return {
         ...state,
-        items: payload,
+        items: payload
       };
     case types.GET_MY_ITEMS:
       return {
         ...state,
         myitems: payload,
-        loading: false,
+        loading: false
       };
     case types.GET_PROVIDER_ITEMS:
       return {
         ...state,
-        pitems: payload,
+        pitems: payload
       };
     case types.GET_COLLECTOR_ITEMS:
       return {
         ...state,
-        citems: payload,
+        citems: payload
       };
     case types.GET_ITEMS_ERROR:
       return {
-        items: payload,
+        items: payload
       };
     case types.GET_DELETE_ITEM_ERROR:
       return {
         ...state,
-        msg: payload.msg,
+        msg: payload.msg
       };
     case types.UPDATE_COLLECTDATES:
       return {
@@ -167,7 +167,7 @@ export default (state = initialState, action) => {
           }),
           // items: [...state.items.filter(item => item._id === action._id).map(),],
         ],
-        success: true,
+        success: true
       };
     case types.UNRESERVE_ITEM:
       return {
