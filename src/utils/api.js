@@ -20,14 +20,11 @@ const api = axios.create({
 api.interceptors.request.use(async config => {
   config.headers['x-auth-token'] = await myFirebase
     .auth()
-    .currentUser.getIdToken();
-  /* .then(async idToken => {
-      console.log(idToken);
-      return idToken;
-    })
+    .currentUser.getIdToken()
+    .then(async idToken => idToken)
     .catch(error => {
       console.log(error);
-    }); */
+    });
   return config;
 });
 

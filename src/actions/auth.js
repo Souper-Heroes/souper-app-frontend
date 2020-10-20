@@ -1,5 +1,6 @@
 import { myFirebase, googleProvider } from '../firebase/firebase';
 import api from '../utils/api';
+import { getProviderItems, getCollectorItems } from './item';
 
 export const types = {
   LOGIN_REQUEST: 'LOGIN_REQUEST',
@@ -15,54 +16,54 @@ export const types = {
   LOGOUT_FAILURE: 'LOGOUT_FAILURE',
 
   VERIFY_REQUEST: 'VERIFY_REQUEST',
-  VERIFY_SUCCESS: 'VERIFY_SUCCESS'
+  VERIFY_SUCCESS: 'VERIFY_SUCCESS',
 };
 
 const requestLogin = () => ({
-  type: types.LOGIN_REQUEST
+  type: types.LOGIN_REQUEST,
 });
 
 const receiveLogin = user => ({
   type: types.LOGIN_SUCCESS,
-  user
+  user,
 });
 
 const userLoaded = user => ({
   type: types.USER_LOADED,
-  user
+  user,
 });
 
 const userLoadError = () => ({
-  type: types.USER_LOAD_FAILURE
+  type: types.USER_LOAD_FAILURE,
 });
 
 const loginError = () => ({
-  type: types.LOGIN_FAILURE
+  type: types.LOGIN_FAILURE,
 });
 
 const signUpError = message => ({
   type: types.SIGNUP_FAILURE,
-  message
+  message,
 });
 
 const requestLogout = () => ({
-  type: types.LOGOUT_REQUEST
+  type: types.LOGOUT_REQUEST,
 });
 
 const receiveLogout = () => ({
-  type: types.LOGOUT_SUCCESS
+  type: types.LOGOUT_SUCCESS,
 });
 
 const logoutError = () => ({
-  type: types.LOGOUT_FAILURE
+  type: types.LOGOUT_FAILURE,
 });
 
 const verifyRequest = () => ({
-  type: types.VERIFY_REQUEST
+  type: types.VERIFY_REQUEST,
 });
 
 const verifySuccess = () => ({
-  type: types.VERIFY_SUCCESS
+  type: types.VERIFY_SUCCESS,
 });
 
 // Load User
@@ -85,6 +86,8 @@ export const loginUser = (email, password) => dispatch => {
     .signInWithEmailAndPassword(email, password)
     .then(() => {
       dispatch(loadUser());
+      dispatch(getProviderItems());
+      dispatch(getCollectorItems());
     })
     .then(user => {
       dispatch(receiveLogin(user));
@@ -101,11 +104,15 @@ export const loginWithGoogle = () => dispatch => {
     .signInWithPopup(googleProvider)
     .then(() => {
       dispatch(loadUser());
+      dispatch(getProviderItems());
+      dispatch(getCollectorItems());
     })
     .then(user => {
       dispatch(receiveLogin(user));
     })
-    .catch(() => {
+    .catch(error => {
+      // eslint-disable-next-line
+      console.error({ error });
       // Do something with the error
       dispatch(signUpError());
     });
@@ -118,7 +125,7 @@ export const signUp = (email, password, displayName) => dispatch => {
     .createUserWithEmailAndPassword(email, password)
     .then(user => {
       user.user.updateProfile({
-        displayName
+        displayName,
       });
     })
     .then(user => {

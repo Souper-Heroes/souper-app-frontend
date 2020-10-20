@@ -16,7 +16,7 @@ import Paginations from 'components/MaterialKitComponents/Pagination/Pagination'
 import {
   cardTitle,
   cardLink,
-  cardSubtitle
+  cardSubtitle,
 } from 'assets/jss/material-kit-react';
 import Slider from 'nouislider';
 import PropTypes from 'prop-types';
@@ -27,8 +27,8 @@ const styles = {
   cardLink,
   cardSubtitle,
   textLeft: {
-    textAlign: 'left'
-  }
+    textAlign: 'left',
+  },
 };
 
 const useStyles = makeStyles(styles);
@@ -58,8 +58,8 @@ function ItemListings({ getItems }) {
         start: `${distance}`,
         format: {
           from: Number,
-          to: val => `${val.toFixed(2)} ${value === 'Miles' ? 'mi' : 'km'}`
-        }
+          to: val => `${val.toFixed(2)} ${value === 'Miles' ? 'mi' : 'km'}`,
+        },
       });
     } else if (name === 'category') {
       setCategory(value);
@@ -77,20 +77,20 @@ function ItemListings({ getItems }) {
       start: `${distance}`,
       format: {
         from: Number,
-        to: value => `${value.toFixed(2)} ${unit === 'Miles' ? 'mi' : 'km'}`
+        to: value => `${value.toFixed(2)} ${unit === 'Miles' ? 'mi' : 'km'}`,
       },
       keyboardSupport: true,
       connect: [true, false],
       range: {
         min: 0,
-        max: 5
+        max: 5,
       },
       tooltips: true,
       pips: {
         mode: 'steps',
         stepped: true,
-        density: 10
-      }
+        density: 10,
+      },
     });
     // set the Distance State when slider value changed
     distanceSlider.noUiSlider.on('change', () => setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, '')));
@@ -554,7 +554,7 @@ function ItemListings({ getItems }) {
                   { text: 3 },
                   { text: 4 },
                   { text: 5 },
-                  { text: 'NEXT' }
+                  { text: 'NEXT' },
                 ]}
                 color="primary"
               />

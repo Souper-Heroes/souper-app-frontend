@@ -1,104 +1,60 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import Button from 'components/CustomButtons/Button';
 import Typography from '@material-ui/core/Typography';
-import Datetime from 'react-datetime';
-import FormControl from '@material-ui/core/FormControl';
 import styles from 'assets/jss/Items/views/ItemViewPage';
 import banana from 'assets/img/purple-banana.jpg';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 
+import * as routes from 'components/Routing/routes';
+
 const useStyles = makeStyles(styles);
 
-export default function ItemViewPage(props) {
-  // console.log('VIEW PAGE PROPS', props);
-  const { uuid, item } = props;
-
+export default function ItemViewPage({
+  _id,
+  item,
+  type,
+  updateCollectionDates,
+  unreserveItem,
+  reserveItem
+}) {
+  // console.log('ITEM VIEW PAGE PROPS', props);
   const [isDisableAmendBtn, setIsDisableAmendBtn] = useState(true);
-
-  const [collectionStartDateTime, setCollectionStartDateTime] = useState(
-    item.preferredCollectStartTime
-  );
-
-  const [collectionEndDateTime, setCollectionEndDateTime] = useState(
-    item.preferredCollectEndTime
-  );
 
   const classes = useStyles();
 
+  // console.log("MY VIEW PAGE ITEM:", item);
+
+  if (item == null) {
+    return <Redirect to={routes.ITEM_LIST} />;
+  }
+
+  // console.log("*** ITEM:", item);
+
   const handleOnClickReserve = () => {
-    // console.log(`Clicked Reserve Account, do something with DisplayName: `);
+    reserveItem(item._id);
   };
 
-  const handleOnClickAmendTime = () => {
+  const handleOnClickUnreserve = e => {
+    // console.log(`Clicked Reserve Account, do something with DisplayName: `);
+    e.preventDefault();
+    unreserveItem(item._id);
+  };
+
+  const handleOnClickAmendTime = id => {
     // Update backend with new amended dates
-
-    props.updateCollectionDates(
-      item.itemId,
-      collectionStartDateTime.toISOString(),
-      collectionEndDateTime.toISOString()
-    );
-
+    updateCollectionDates(id, item.availability);
     setIsDisableAmendBtn(true);
   };
 
   const handleOnClickCancel = () => {
     // console.log(`Clicked Cancel Account, do something with DisplayName: `);
   };
-
-  const handleCollectionDateChange = (type, event) => {
-    // console.log('You picked date:', event);
-
-    const newDate = moment(event);
-
-    // console.log('converted newDate', newDate);
-
-    if (!newDate.isValid()) throw new Error('Invalid Date passed');
-    // console.log(
-    //  `Handle Date Change1, do something with ${type} ${newDate} ${newDate.isValid()}`
-    // );
-
-    if (
-      type === 'start'
-        ? newDate.isSame(moment(item.preferredCollectStartTime))
-          && collectionEndDateTime.isSame(moment(item.preferredCollectEndTime))
-        : newDate.isSame(moment(item.preferredCollectEndTime))
-          && collectionStartDateTime.isSame(moment(item.preferredCollectStartTime))
-    ) {
-      // Nothing has changed
-      // console.log(
-      //  `Handle Date Change2, do something with ${type} ${collectionStartDateTime} ${collectionStartDateTime.isValid()}`
-      // );
-      if (type === 'start') {
-        setCollectionStartDateTime(newDate);
-      } else {
-        setCollectionEndDateTime(newDate);
-      }
-      // Disable Amend button as nothing has changed compared with the backend
-      setIsDisableAmendBtn(true);
-      return;
-    }
-
-    // Dates have changed so provide option to update the backend with Amend Button displayed
-    if (type === 'start') {
-      setCollectionStartDateTime(newDate);
-    } else {
-      setCollectionEndDateTime(newDate);
-    }
-
-    setIsDisableAmendBtn(false);
-  };
-
-  // console.log(
-  //   'CollectStartTime:',
-  //   collectionStartDateTime,
-  //   'PropStartTime:',
-  //   props.item.preferredCollectStartTime
-  // );
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
@@ -194,7 +150,7 @@ export default function ItemViewPage(props) {
                       align="left"
                       gutterBottom
                     >
-                      {item.location}
+                      {item.postcode}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -231,14 +187,11 @@ export default function ItemViewPage(props) {
                       align="left"
                       gutterBottom
                     >
-                      {moment(item.expiryDate).format('Do MMM YYYY')}
+                      {moment(item.expiry).format('Do MMM YYYY')}
                     </Typography>
                   </GridItem>
                 </GridContainer>
               </GridItem>
-              <GridItem xs={6} sm={6} md={6} lg={6} />
-            </GridContainer>
-            <GridContainer align="center">
               <GridItem xs={6} sm={6} md={6} lg={6}>
                 <GridContainer align="left" spacing={0} direction="column">
                   <GridItem
@@ -253,7 +206,15 @@ export default function ItemViewPage(props) {
                       color="textSecondary"
                       align="left"
                     >
-                      Start Time Slot:
+                      Collection Details:
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textPrimary"
+                      align="left"
+                      gutterBottom
+                    >
+                      {item.availability}
                     </Typography>
                   </GridItem>
                   <GridItem
@@ -262,116 +223,7 @@ export default function ItemViewPage(props) {
                     md={6}
                     lg={6}
                     className={classes.output}
-                  >
-                    {uuid !== item.collectUserId && (
-                      <Typography
-                        variant="body2"
-                        color="textPrimary"
-                        align="left"
-                        gutterBottom
-                      >
-                        {
-                          moment(collectionStartDateTime).isValid()
-                            ? moment(collectionStartDateTime).format(
-                              'Do MMM YY hh:mm '
-                            )
-                            : ''
-                        }
-                      </Typography>
-                    )}
-                    {uuid === item.collectUserId && (
-                      <>
-                        <FormControl>
-                          <Datetime
-                            value={
-                              moment(collectionStartDateTime).isValid()
-                                ? moment(collectionStartDateTime).format(
-                                  'Do MMM YY hh:mm'
-                                )
-                                : ''
-                            }
-                            onChange={event => handleCollectionDateChange('start', event)}
-                            inputProps={{
-                              placeholder: moment(
-                                item.preferredCollectStartTime
-                              ).isValid()
-                                ? `${moment(
-                                  item.preferredCollectStartTime
-                                ).format('Do MMM YY hh:mm')}`
-                                : '',
-                            }}
-                          />
-                        </FormControl>
-                      </>
-                    )}
-                  </GridItem>
-                </GridContainer>
-              </GridItem>
-              <GridItem xs={6} sm={6} md={6} lg={6}>
-                <GridContainer align="right" spacing={0} direction="column">
-                  <GridItem
-                    xs={6}
-                    sm={6}
-                    md={6}
-                    lg={6}
-                    className={classes.label}
-                  >
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      align="left"
-                    >
-                      End Time Slot:
-                    </Typography>
-                  </GridItem>
-                  <GridItem
-                    align="left"
-                    xs={6}
-                    sm={6}
-                    md={6}
-                    lg={6}
-                    className={classes.label}
-                  >
-                    {uuid !== item.collectUserId && (
-                      <Typography
-                        variant="body2"
-                        color="textPrimary"
-                        align="left"
-                        gutterBottom
-                      >
-                        {moment(collectionEndDateTime).isValid()
-                          ? moment(collectionEndDateTime).format(
-                            'Do MMM YY hh:mm'
-                          )
-                          : ''}
-                      </Typography>
-                    )}
-                    {uuid === item.collectUserId && (
-                      <>
-                        <FormControl>
-                          <Datetime
-                            value={
-                              moment(collectionEndDateTime).isValid()
-                                ? moment(collectionEndDateTime).format(
-                                  'Do MMM YY hh:mm'
-                                )
-                                : ''
-                            }
-                            onChange={event => handleCollectionDateChange('end', event)}
-                            inputProps={{
-                              placeholder: moment(
-                                item.preferredCollectEndTime
-                              ).isValid()
-                                ? `${moment(
-                                  item.preferredCollectEndTime
-                                ).format('Do MMM YY hh:mm')}`
-                                : '',
-                            }}
-                          />
-                        </FormControl>
-                      </>
-                    )}
-                  </GridItem>
+                  />
                 </GridContainer>
               </GridItem>
             </GridContainer>
@@ -400,14 +252,26 @@ export default function ItemViewPage(props) {
                   </Button>
                 </GridItem>
                 <GridItem xs={6} sm={6} align="left">
-                  <Button
-                    className={classes.button_label}
-                    color="success"
-                    size="sm"
-                    onClick={handleOnClickReserve}
-                  >
-                    Reserve
-                  </Button>
+                  {type === 'collect' && item.c_user_uid === null && (
+                    <Button
+                      className={classes.button_label}
+                      color="success"
+                      size="sm"
+                      onClick={handleOnClickReserve}
+                    >
+                      Reserve
+                    </Button>
+                  )}
+                  {type === 'collect' && _id === item.c_user_uid && (
+                    <Button
+                      className={classes.button_label}
+                      color="success"
+                      size="sm"
+                      onClick={handleOnClickUnreserve}
+                    >
+                      Unreserve
+                    </Button>
+                  )}
                 </GridItem>
               </GridItem>
             </GridItem>
@@ -419,18 +283,73 @@ export default function ItemViewPage(props) {
 }
 
 ItemViewPage.propTypes = {
-  uuid: PropTypes.string,
-  updateCollectionDates: PropTypes.func,
-  item: PropTypes.objectOf(
-    PropTypes.shape({
-      itemId: PropTypes.string,
-      collectUserId: PropTypes.string,
-      description: PropTypes.string,
-      category: PropTypes.string,
-      location: PropTypes.string,
-      expiryDate: PropTypes.date,
-      preferredCollectStartTime: PropTypes.date,
-      preferredCollectEndTime: PropTypes.date
-    })
-  )
+  _id: PropTypes.string,
+  type: PropTypes.string,
+  item: PropTypes.instanceOf(Object),
+  reserveItem: PropTypes.func,
+  unreserveItem: PropTypes.func,
+  updateCollectionDates: PropTypes.func
 };
+
+/* TODO Logic to amend item if you are collecting
+ {_id !== item.c_user_uid && (
+                      <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        align="left"
+                        gutterBottom
+                      >
+                        {availability}
+                      </Typography>
+                    )}
+                    {_id === item.c_user_uid && (
+                      <CustomInput
+                        id="Collection Availability"
+                        inputProps={{
+                          placeholder: `${availability}`,
+                        }}
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                      />
+                    )} */
+
+/* form control input
+<FormControl>
+                          <Datetime
+                            value={availability}
+                            onChange={event =>
+                              handleCollectionDateChange('start', event)
+                            }
+                            inputProps={{
+                              placeholder: item.availability,
+                            }}
+                          />
+                          </FormControl>
+const handleCollectionDateChange = (type, event) => {
+
+    const newDate = event;
+
+    // console.log('converted newDate', newDate);
+
+    //if (!newDate.isValid()) throw new Error('Invalid Date passed');
+    // console.log(
+    //  `Handle Date Change1, do something with ${type} ${newDate} ${newDate.isValid()}`
+    // );
+
+    if (newDate === item.availability) {
+      // Nothing has changed
+      // console.log(
+      //  `Handle Date Change2, do something with ${type} ${availability}`
+      // );
+      setAvailability(newDate);
+      // Disable Amend button as nothing has changed compared with the backend
+      setIsDisableAmendBtn(true);
+      return;
+    }
+
+    // Dates have changed so provide option to update the backend with Amend Button displayed
+    setAvailability(newDate);
+    setIsDisableAmendBtn(false);
+  };
+*/

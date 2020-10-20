@@ -9,11 +9,16 @@ import user from './user';
 
 const persistConfig = {
   key: 'auth',
-  storage
+  storage,
+};
+
+const persistItemConfig = {
+  key: 'item',
+  storage,
 };
 
 export default combineReducers({
-  item,
+  item: persistReducer(persistItemConfig, item),
   message,
   auth: persistReducer(persistConfig, auth),
   user
