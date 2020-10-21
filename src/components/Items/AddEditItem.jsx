@@ -88,9 +88,10 @@ export default function AddEditItem({ addItem, id, item }) {
       catObj = addValueInObject(catObj, 'title', cat);
       catArr.push(catObj);
     });
-    console.log(catObj);
-    console.log(catArr);
-    // ABI IS HERE! need to push each obj into an array
+    console.log('THis is the catagory Object', catObj);
+    console.log('This is the catagory Array', catArr);
+
+    item.category = catArr;
   }
 
   // TODO - add location here as we don't want to change it on edit.
