@@ -47,21 +47,6 @@ export const addItem = formData => async dispatch => {
   }
 };
 
-export const getItem = _id => async dispatch => {
-  try {
-    const res = await api.get('/items/_id');
-    dispatch({
-      type: types.GET_ITEM,
-      payload: res.data,
-    });
-  } catch (err) {
-    // console.log(err);
-    dispatch({
-      type: types.GET_ITEM_ERROR,
-    });
-  }
-};
-
 export const getItems = () => async dispatch => {
   try {
     const res = await api.get('/items');
