@@ -5,7 +5,8 @@ export default (
   state = {
     user: {},
     userLoadedError: false,
-    address: null
+    address: {},
+    addrstatus: ''
   },
   action
 ) => {
@@ -29,13 +30,13 @@ export default (
       return {
         ...state,
         address: action.payload,
-        addrstatus: action.payload.status
+        addrstatus: action.payload.addrstatus
       };
     case types.GET_USER_ADDRESS_ERROR:
       return {
         ...state,
         address: action.payload,
-        addrstatus: action.payload.status
+        addrstatus: action.payload.addrstatus
       };
     default:
       return state;
