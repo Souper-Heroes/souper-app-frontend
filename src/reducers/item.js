@@ -10,11 +10,6 @@ const initialState = {
 export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case types.GET_ITEM:
-      return {
-        ...state,
-        myItem: payload,
-      };
     case types.GET_ITEMS:
       return {
         ...state,
