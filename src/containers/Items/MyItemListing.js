@@ -4,6 +4,7 @@ import {
   deleteItem,
   // sortByItem,
   unreserveItem,
+  deleteExpiredItems
 } from 'actions/item';
 
 import {
@@ -19,6 +20,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  deleteExpiredItems: _id => dispatch(deleteExpiredItems(_id)),
   unreserveItem: _id => dispatch(unreserveItem(_id)),
   deleteItem: _id => dispatch(deleteItem(_id)),
   getAddress: postcode => dispatch(getAddress(postcode))
