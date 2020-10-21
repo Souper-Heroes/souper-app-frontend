@@ -76,9 +76,8 @@ export default function AddEditItem({ addItem }) {
   };
 
   const handleExpiryChange = value => {
-    const newDate = value._d.toLocaleDateString('en-GB');
     // console.log(newDate);
-    setExpiry(newDate);
+    setExpiry(moment(value._d));
   };
 
   const yesterday = moment().subtract(1, 'day');

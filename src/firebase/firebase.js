@@ -19,4 +19,10 @@ export const googleProvider = new firebase.auth.GoogleAuthProvider().setCustomPa
     prompt: 'select_account'
   }
 );
+export const facebookProvider = new firebase.auth.FacebookAuthProvider().setCustomParameters(
+  {
+    auth_type: 'reauthenticate'
+  }
+);
+export const twitterProvider = new firebase.auth.TwitterAuthProvider();
 export const db = baseDb;
