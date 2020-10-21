@@ -1,6 +1,12 @@
-import { myFirebase, googleProvider } from '../firebase/firebase';
+import {
+  myFirebase,
+  googleProvider,
+  facebookProvider,
+  twitterProvider
+} from '../firebase/firebase';
 import api from '../utils/api';
-import { getProviderItems, getCollectorItems } from './item';
+import { setAlert } from './alert';
+import { userLoaded, userLoadError } from './user';
 
 export const types = {
   LOGIN_REQUEST: 'LOGIN_REQUEST',
@@ -16,62 +22,52 @@ export const types = {
   LOGOUT_FAILURE: 'LOGOUT_FAILURE',
 
   VERIFY_REQUEST: 'VERIFY_REQUEST',
-  VERIFY_SUCCESS: 'VERIFY_SUCCESS',
+  VERIFY_SUCCESS: 'VERIFY_SUCCESS'
 };
 
 const requestLogin = () => ({
-  type: types.LOGIN_REQUEST,
+  type: types.LOGIN_REQUEST
 });
 
 const receiveLogin = user => ({
   type: types.LOGIN_SUCCESS,
-  user,
-});
-
-const userLoaded = user => ({
-  type: types.USER_LOADED,
-  user,
-});
-
-const userLoadError = () => ({
-  type: types.USER_LOAD_FAILURE,
+  user
 });
 
 const loginError = () => ({
-  type: types.LOGIN_FAILURE,
+  type: types.LOGIN_FAILURE
 });
 
-const signUpError = message => ({
-  type: types.SIGNUP_FAILURE,
-  message,
+const signUpError = () => ({
+  type: types.SIGNUP_FAILURE
 });
 
 const requestLogout = () => ({
-  type: types.LOGOUT_REQUEST,
+  type: types.LOGOUT_REQUEST
 });
 
 const receiveLogout = () => ({
-  type: types.LOGOUT_SUCCESS,
+  type: types.LOGOUT_SUCCESS
 });
 
 const logoutError = () => ({
-  type: types.LOGOUT_FAILURE,
+  type: types.LOGOUT_FAILURE
 });
 
 const verifyRequest = () => ({
-  type: types.VERIFY_REQUEST,
+  type: types.VERIFY_REQUEST
 });
 
 const verifySuccess = () => ({
-  type: types.VERIFY_SUCCESS,
+  type: types.VERIFY_SUCCESS
 });
 
 // Load User
-export const loadUser = () => async dispatch => {
+export const loadUser = user => async dispatch => {
   try {
     let res = await api.get('/users');
     if (!res.data) {
-      res = await api.post('/users');
+      res = await api.post('/users', user.user);
     }
     dispatch(userLoaded(res.data));
   } catch (err) {
@@ -84,15 +80,14 @@ export const loginUser = (email, password) => dispatch => {
   return myFirebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(() => {
-      dispatch(loadUser());
-      dispatch(getProviderItems());
-      dispatch(getCollectorItems());
+    .then(user => {
+      dispatch(loadUser(user));
     })
     .then(user => {
       dispatch(receiveLogin(user));
     })
     .catch(() => {
+      dispatch(setAlert('incorrect email or password', 'danger', 'text'));
       dispatch(loginError());
     });
 };
@@ -102,10 +97,8 @@ export const loginWithGoogle = () => dispatch => {
   return myFirebase
     .auth()
     .signInWithPopup(googleProvider)
-    .then(() => {
-      dispatch(loadUser());
-      dispatch(getProviderItems());
-      dispatch(getCollectorItems());
+    .then(user => {
+      dispatch(loadUser(user));
     })
     .then(user => {
       dispatch(receiveLogin(user));
@@ -114,7 +107,41 @@ export const loginWithGoogle = () => dispatch => {
       // eslint-disable-next-line
       console.error({ error });
       // Do something with the error
-      dispatch(signUpError());
+      dispatch(loginError());
+    });
+};
+
+export const loginWithFacebook = () => dispatch => {
+  dispatch(requestLogin());
+  myFirebase
+    .auth()
+    .signInWithPopup(facebookProvider)
+    .then(user => {
+      dispatch(loadUser(user));
+    })
+    .then(user => {
+      dispatch(receiveLogin(user));
+    })
+    .catch(error => {
+      dispatch(setAlert(error.message, 'danger', 'text'));
+      dispatch(loginError());
+    });
+};
+
+export const loginWithTwitter = () => dispatch => {
+  dispatch(requestLogin());
+  myFirebase
+    .auth()
+    .signInWithPopup(twitterProvider)
+    .then(user => {
+      dispatch(loadUser(user));
+    })
+    .then(user => {
+      dispatch(receiveLogin(user));
+    })
+    .catch(error => {
+      dispatch(setAlert(error.message, 'danger', 'text'));
+      dispatch(loginError());
     });
 };
 
@@ -125,14 +152,33 @@ export const signUp = (email, password, displayName) => dispatch => {
     .createUserWithEmailAndPassword(email, password)
     .then(user => {
       user.user.updateProfile({
-        displayName,
+        displayName
       });
     })
     .then(user => {
       dispatch(receiveLogin(user));
     })
     .catch(error => {
-      dispatch(signUpError(error.message));
+      dispatch(signUpError());
+      dispatch(setAlert(error.message, 'danger', 'text'));
+    });
+};
+
+export const passwordReset = email => dispatch => {
+  myFirebase
+    .auth()
+    .sendPasswordResetEmail(email)
+    .then(() => {
+      dispatch(
+        setAlert(
+          'Email Sent! You should recieve an email shortly, follow the link inside to reset your password.',
+          'danger',
+          'text'
+        )
+      );
+    })
+    .catch(error => {
+      dispatch(setAlert(error.message, 'danger', 'text'));
     });
 };
 
