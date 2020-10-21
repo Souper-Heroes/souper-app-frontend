@@ -57,12 +57,19 @@ export const getItems = () => async dispatch => {
     });
   }
 };
-export const searchItems = () => async dispatch => {
+export const searchItems = filterOptions => async dispatch => {
   try {
+    console.log(filterOptions);
     dispatch({
       type: types.SEARCH_ITEMS_REQUEST
     });
-    const res = await api.get('items/search');
+    const res = await api.get('items/search', {
+      params: {
+        maxDistance: filterOptions.maxDistance,
+        latt: filterOptions.latt,
+        long: filterOptions.long
+      }
+    });
 
     dispatch({
       type: types.SEARCH_ITEMS,
@@ -73,44 +80,6 @@ export const searchItems = () => async dispatch => {
     // console.log(err);
     dispatch({
       type: types.SEARCH_ITEMS_ERROR
-    });
-  }
-};
-
-export const getProviderItems = _id => async dispatch => {
-  try {
-    // console.log('***** ABOUT TO CALL getProviderItems:', _id);
-
-    const res = await api.get(`/items/provider/${_id}`);
-
-    dispatch({
-      type: types.GET_PROVIDER_ITEMS,
-      payload: res.data
-    });
-  } catch (err) {
-    // do something with error
-    // console.log(err);
-    dispatch({
-      type: types.GET_ITEMS_ERROR
-    });
-  }
-};
-
-export const getCollectorItems = _id => async dispatch => {
-  try {
-    // onsole.log('***** ABOUT TO CALL getProviderItems:', _id);
-
-    const res = await api.get(`/items/collector/${_id}`);
-
-    dispatch({
-      type: types.GET_COLLECTOR_ITEMS,
-      payload: res.data
-    });
-  } catch (err) {
-    // do something with error
-    // console.log(err);
-    dispatch({
-      type: types.GET_ITEMS_ERROR
     });
   }
 };
