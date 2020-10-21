@@ -56,9 +56,41 @@ export default function AddEditItem({ addItem, id, item }) {
   // debug
   //if (process.env.NODE_ENV === 'production') {
 
+  // Function to add an element to an object
+  function addValueInObject(object, key, value) {
+    var res = {};
+    var textObject = JSON.stringify(object);
+    if (textObject === '{}') {
+      res = JSON.parse('{"' + key + '":"' + value + '"}');
+    } else {
+      res = JSON.parse(
+        '{' +
+          textObject.substring(1, textObject.length - 1) +
+          ',"' +
+          key +
+          '":"' +
+          value +
+          '"}'
+      );
+    }
+    return res;
+  }
   // Do item specific formatting
   if (item) {
+    // Format time so that the calendar info displays.
     item.expiry = moment(item.expiry).format('DD/MM/yyyy');
+    // Format category so that the check box drop down displays it.
+    console.log('Hello');
+    console.log(item.category);
+    let catObj = {};
+    let catArr = [];
+    item.category.forEach(cat => {
+      catObj = addValueInObject(catObj, 'title', cat);
+      catArr.push(catObj);
+    });
+    console.log(catObj);
+    console.log(catArr);
+    // ABI IS HERE! need to push each obj into an array
   }
 
   // TODO - add location here as we don't want to change it on edit.
