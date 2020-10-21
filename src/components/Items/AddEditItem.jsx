@@ -5,7 +5,6 @@ import classNames from 'classnames';
 // @material-ui components
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 // Material Kit components
 import Button from 'components/MaterialKitComponents/CustomButtons/Button';
@@ -13,99 +12,108 @@ import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
 
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+
 // Date time imports
 import Datetime from 'react-datetime';
+import moment from 'moment';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-// TODO - this uses files from views will have to get styles from somewhere else
 import styles from 'assets/jss/material-kit-react/views/profilePage';
+import PropTypes from 'prop-types';
 
 // DropZone imports
 import DropZone from '../dropzone/DropZone';
-// Food categories check boxes
-import CatCheckBox from './CatCheckBox';
-import profilePageStyle from 'assets/jss/material-kit-react/views/profilePage';
+
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
+const categoryOptions = [
+  { title: 'Nuts' },
+  { title: 'Fruit' },
+  { title: 'Dairy' },
+  { title: 'Fish' },
+  { title: 'Meat' },
+  { title: 'Cereal' },
+  { title: 'Fresh' },
+  { title: 'Cooked' },
+  { title: 'Raw' },
+  { title: 'Frozen' },
+  { title: 'Dried' },
+  { title: 'Tinned' },
+  { title: 'Packet' },
+];
 
 const useStyles = makeStyles(styles);
 
-export default function AddEditItem({ userItems }) {
+export default function AddEditItem({ addItem }) {
   const classes = useStyles();
 
+  // const [location, setLocation] = useState({});
+  const [availability, setAvailability] = useState('');
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [expiry, setExpiry] = useState('');
+  const [category, setCategory] = useState([]);
+
   const handleTitleChange = e => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setTitle(e.target.value);
   };
 
-  const [description, setDescription] = useState('');
   const handleDescriptionChange = e => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setDescription(e.target.value);
   };
-  const [expiry, setExpiry] = useState('');
+
+  const onTagsChange = (event, values) => {
+    setCategory(values);
+  };
+
   const handleExpiryChange = value => {
-    const newDate = value._d.toLocaleDateString('en-GB');
-    console.log(newDate);
-    setExpiry(newDate);
+    // console.log(newDate);
+    setExpiry(moment(value._d));
   };
 
-  // Set to postcode found in profile here
-  const [location, setzLocation] = useState('');
-  const handleLocationChange = e => {
-    console.log(e.target.value);
-    setzLocation(e.target.value);
-  };
+  const yesterday = moment().subtract(1, 'day');
+  function valid(current) {
+    return current.isAfter(yesterday);
+  }
 
-  // If there's a location set in profile set checked to true
-  const [checked, setChecked] = useState(false);
-  const handleToggle = () => {
-    let toggle;
-    let postcode = '';
-    if (checked) {
-      postcode = '';
-      toggle = false;
-    } else {
-      // Add postcode from profile here
-      postcode = 'SP3 6RN';
-      toggle = true;
-    }
-    setzLocation(postcode);
-    setChecked(toggle);
-  };
-
-  const [availability, setAvailability] = useState('');
   const handleAvailChange = e => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setAvailability(e.target.value);
   };
 
-  // An attempt at makign the data stick about for a bit
-  const [items, setItems] = useState(userItems);
-  const [category, setCategory] = useState(userItems);
-  const addNewItem = e => {
-    // Create a copy of the tasks array
-    const updatedItems = items.slice();
-
-    // Create a new task object
-    const newItem = {
-      itemId: 1000 + items.length + 1, // DB will assign an ID
-      provideUserId: 1, // TODO Get from userProfile
-      collectUserId: null,
-      photoId: '1117', // TODO Get from DropZone
+  const onSubmit = async () => {
+    const addedItem = await addItem({
       title,
       description,
-      category: category, //category from CatCheckBox
+      category: category.map(cat => cat.title),
       expiry,
-      location,
+      location: {
+        type: 'Point',
+        coordinates: [-112.110492, 36.098948], // TODO - get this info from Profile
+      },
       availability,
-    };
-    // ## TODO ## set all fields to '' or equivalent.
-    // Add the new task to the array
-    updatedItems.push(newItem);
-    console.log(newItem);
-    // Update the state with the new array
-    setItems(updatedItems);
+    });
+    // reset form
+    if (addedItem) {
+      setTitle('');
+      setDescription('');
+      setCategory([]);
+      // setLocation({});
+      setExpiry('');
+      setAvailability('');
+    }
+  };
+
+  const onCancel = () => {
+    window.history.back();
   };
 
   return (
@@ -119,10 +127,10 @@ export default function AddEditItem({ userItems }) {
             <GridItem xs={12} sm={6} className={classes.navWrapper}>
               <CustomInput
                 labelText="Title"
-                id="float"
                 inputProps={{
                   placeholder: 'Give your item a name',
                   onChange: event => handleTitleChange(event),
+                  value: title,
                 }}
                 formControlProps={{
                   fullWidth: true,
@@ -130,17 +138,44 @@ export default function AddEditItem({ userItems }) {
               />
               <CustomInput
                 labelText="Description"
-                id="float"
                 inputProps={{
                   placeholder:
                     'Describe your item, has it been opened or dropped?',
                   onChange: event => handleDescriptionChange(event),
+                  value: description,
                 }}
                 formControlProps={{
                   fullWidth: true,
                 }}
               />
-              <CatCheckBox category={category} />
+              <Autocomplete
+                multiple
+                id="checkboxes"
+                options={categoryOptions}
+                disableCloseOnSelect
+                onChange={onTagsChange}
+                value={category}
+                getOptionLabel={option => option.title}
+                renderOption={(option, { selected }) => (
+                  <>
+                    <Checkbox
+                      icon={icon}
+                      checkedIcon={checkedIcon}
+                      style={{ marginRight: 8 }}
+                      checked={selected}
+                    />
+                    {option.title}
+                  </>
+                )}
+                renderInput={params => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="Category"
+                    placeholder="Choose all that apply"
+                  />
+                )}
+              />
             </GridItem>
           </GridContainer>
           <GridContainer justify="center">
@@ -148,65 +183,64 @@ export default function AddEditItem({ userItems }) {
               <InputLabel style={{ float: 'left' }} className={classes.label}>
                 Expiry date
               </InputLabel>
+              <br />
               <FormControl fullWidth>
                 <Datetime
                   className={classes.bottomFilter}
                   name="expiry"
-                  value={expiry}
                   timeFormat={false}
-                  inputProps={{
-                    placeholder: 'Enter the date the item will expire',
-                  }}
+                  dateFormat="DD/MM/yyyy"
+                  value={expiry}
+                  isValidDate={valid}
                   onChange={handleExpiryChange}
+                  input={false}
                 />
               </FormControl>
-              <CustomInput
-                labelText="Location"
-                id="float"
-                name="location"
-                inputProps={{
-                  placeholder: 'Enter a Postcode',
-                  onChange: event => handleLocationChange(event),
-                  value: `${location}`,
-                }}
-                formControlProps={{
-                  fullWidth: true,
-                }}
-              />
-              <FormControlLabel
-                style={{ float: 'left' }}
-                onChange={handleToggle}
-                control={<Checkbox name="locationSameProfile" />}
-                label="Use location set in User profile?"
-              />
             </GridItem>
             <GridItem xs={12} sm={6} container spacing={1} direction="row">
               <GridItem xs={12}>
                 <CustomInput
                   labelText="Available collection times"
-                  id="float"
                   inputProps={{
                     placeholder:
                       'e.g. Weekdays between 9 and 5pm, and all day Sunday',
                     onChange: event => handleAvailChange(event),
+                    value: availability,
+                  }}
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                />
+                <CustomInput
+                  labelText="Location"
+                  name="location"
+                  id="disabled"
+                  inputProps={{
+                    disabled: true,
+                    value: 'DT9 4LY',
                   }}
                   formControlProps={{
                     fullWidth: true,
                   }}
                 />
               </GridItem>
-              <GridItem fullWidth align="right">
-                <Button color="danger" size="lg">
-                  Cancel
-                </Button>
-                <Button
-                  color="success"
-                  size="lg"
-                  onClick={event => addNewItem(event)}
-                >
-                  Save
-                </Button>
-              </GridItem>
+              <GridContainer xs={12} fullWidth align="right">
+                <GridItem xs={6} />
+                <GridItem xs={3}>
+                  <Button color="danger" size="md" onClick={onCancel}>
+                    Cancel
+                  </Button>
+                </GridItem>
+                <GridItem xs={3}>
+                  <Button
+                    color="success"
+                    size="md"
+                    onClick={event => onSubmit(event)}
+                  >
+                    Save
+                  </Button>
+                </GridItem>
+              </GridContainer>
             </GridItem>
           </GridContainer>
         </div>
@@ -214,3 +248,7 @@ export default function AddEditItem({ userItems }) {
     </div>
   );
 }
+
+AddEditItem.propTypes = {
+  addItem: PropTypes.instanceOf(Array),
+};

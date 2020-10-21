@@ -23,19 +23,18 @@ import CardHeader from 'components/MaterialKitComponents/Card/CardHeader';
 import CardFooter from 'components/MaterialKitComponents/Card/CardFooter';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
 import CheckboxTermsAndConds from 'components/Login/CheckboxTermsAndConds';
-import SouperFooter from 'components/Layout/SouperFooter';
+import Muted from 'components/MaterialKitComponents/Typography/Muted';
+import SocialLogin from 'containers/Login/SocialLogin';
+import Alert from 'components/Alert/Alert';
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import image from 'assets/img/board.jpg';
 // @material Typography
-import Danger from 'components/MaterialKitComponents/Typography/Danger';
 
 const useStyles = makeStyles(styles);
 
 export default function RegisterPage({
-  signUpError,
   registerInputs,
   signUp,
-  loginWithGoogle,
   isAuthenticated
 }) {
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
@@ -49,16 +48,12 @@ export default function RegisterPage({
     setCardAnimation('');
   }, 700);
 
-  const checkTermsAndConds = checkedValue => {
-    setcheckedTermsAndConds(checkedValue);
-  };
+  const checkTermsAndConds = checkedValue => setcheckedTermsAndConds(checkedValue);
 
   const handleSubmit = async event => {
     const { name } = event.currentTarget;
     if (name === 'login') {
       signUp(email, password, displayName);
-    } else if (name === 'loginWithGoogle') {
-      loginWithGoogle();
     }
   };
 
@@ -95,33 +90,10 @@ export default function RegisterPage({
                 <form className={classes.form}>
                   <CardHeader color="rose" className={classes.cardHeader}>
                     <h2>Register</h2>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-twitter" />
-                      </Button>
-                      <Button
-                        justIcon
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-facebook" />
-                      </Button>
-                      <Button
-                        justIcon
-                        name="loginWithGoogle"
-                        color="transparent"
-                        onClick={handleSubmit}
-                      >
-                        <i className="fab fa-google-plus-g" />
-                      </Button>
-                    </div>
+                    <SocialLogin />
                   </CardHeader>
                   <CardBody>
-                    {signUpError ? <Danger>{signUpError}</Danger> : null}
+                    <Alert />
                     {registerInputs.map(input => (
                       <CustomInput
                         labelText={input.label}
@@ -159,14 +131,15 @@ export default function RegisterPage({
                       checkTermsAndConds={checkTermsAndConds}
                     >
                       <Link to="/register">
-                        <strong>Terms And Conditions</strong>
+                        <Muted><b>Terms And Conditions</b></Muted>
+                        {' '}
                       </Link>
                     </CheckboxTermsAndConds>
 
                     <Button
                       disabled={checkedTermsAndConds}
                       fullWidth
-                      name="signUp"
+                      name="login"
                       size="lg"
                       color="rose"
                       onClick={handleSubmit}
@@ -187,11 +160,12 @@ export default function RegisterPage({
           </GridContainer>
         </div>
       </div>
-      <SouperFooter />
     </div>
   );
 }
 
 RegisterPage.propTypes = {
-  registerInputs: PropTypes.array
+  signUp: PropTypes.func,
+  isAuthenticated: PropTypes.bool,
+  registerInputs: PropTypes.instanceOf(Array)
 };

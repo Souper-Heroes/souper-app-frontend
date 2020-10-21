@@ -4,8 +4,6 @@ import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
-import { Redirect, useHistory } from 'react-router-dom';
-
 import profile from 'assets/jss/material-kit-react/views/profilePage';
 import Card from 'components/MaterialKitComponents/Card/Card';
 import CardBody from 'components/MaterialKitComponents/Card/CardBody';
@@ -18,9 +16,10 @@ import Paginations from 'components/MaterialKitComponents/Pagination/Pagination'
 import {
   cardTitle,
   cardLink,
-  cardSubtitle
+  cardSubtitle,
 } from 'assets/jss/material-kit-react';
 import Slider from 'nouislider';
+import PropTypes from 'prop-types';
 
 const styles = {
   ...profile,
@@ -28,8 +27,8 @@ const styles = {
   cardLink,
   cardSubtitle,
   textLeft: {
-    textAlign: 'left'
-  }
+    textAlign: 'left',
+  },
 };
 
 const useStyles = makeStyles(styles);
@@ -54,16 +53,14 @@ console.log(items);
     if (name === 'sortBy') {
       setSortBy(value);
     } else if (name === 'unit') {
-      console.log(value);
+      // console.log(value);
       setUnit(value);
       document.getElementById('sliderRegular').noUiSlider.updateOptions({
         start: `${distance}`,
         format: {
           from: Number,
-          to: function (val) {
-            return val.toFixed(2) + ` ${value === 'Miles' ? 'mi' : 'km'}`;
-          }
-        }
+          to: val => `${val.toFixed(2)} ${value === 'Miles' ? 'mi' : 'km'}`,
+        },
       });
     } else if (name === 'category') {
       setCategory(value);
@@ -81,27 +78,24 @@ console.log(items);
       start: `${distance}`,
       format: {
         from: Number,
-        to: function (value) {
-          return value.toFixed(2) + ` ${unit === 'Miles' ? 'mi' : 'km'}`;
-        }
+        to: value => `${value.toFixed(2)} ${unit === 'Miles' ? 'mi' : 'km'}`,
       },
       keyboardSupport: true,
       connect: [true, false],
       range: {
         min: 0,
-        max: 5
+        max: 5,
       },
       tooltips: true,
       pips: {
         mode: 'steps',
         stepped: true,
-        density: 10
-      }
+        density: 10,
+      },
     });
     // set the Distance State when slider value changed
-    distanceSlider.noUiSlider.on('change', () =>
-      setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, ''))
-    );
+    distanceSlider.noUiSlider.on('change', () => setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, '')));
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -120,8 +114,8 @@ console.log(items);
                     onChange={event => onChangeHandler(event)}
                     name="unit"
                   >
-                    <option value={'Miles'}>In Miles</option>
-                    <option value={'Kilometers'}>In Kilometers</option>
+                    <option value="Miles">In Miles</option>
+                    <option value="Kilometers">In Kilometers</option>
                   </Select>
                 </FormControl>
                 <InputLabel className={classes.filterLabel}>
@@ -131,7 +125,7 @@ console.log(items);
                   <div
                     className="slider-primary"
                     id="sliderRegular"
-                    className={classes.slider}
+                    // className={classes.slider}
                     name="slider"
                     onChange={event => onChangeHandler(event)}
                   />
@@ -147,9 +141,9 @@ console.log(items);
                     name="category"
                   >
                     <option aria-label="None" value="" />
-                    <option value={'Fruit'}>Fruit</option>
-                    <option value={'Tinned'}>Tinned</option>
-                    <option value={'Veg'}>Veg</option>
+                    <option value="Fruit">Fruit</option>
+                    <option value="Tinned">Tinned</option>
+                    <option value="Veg">Veg</option>
                   </Select>
                 </FormControl>
                 <InputLabel className={classes.filterLabel}>
@@ -197,8 +191,8 @@ console.log(items);
                     name="sortBy"
                   >
                     <option aria-label="None" value="" />
-                    <option value={'Distance'}>Sort by: Distance</option>
-                    <option value={'Expiry'}>Sort by: Expiry Date</option>
+                    <option value="Distance">Sort by: Distance</option>
+                    <option value="Expiry">Sort by: Expiry Date</option>
                   </Select>
                 </FormControl>
               </GridItem>
@@ -239,7 +233,7 @@ console.log(items);
                   { text: 3 },
                   { text: 4 },
                   { text: 5 },
-                  { text: 'NEXT' }
+                  { text: 'NEXT' },
                 ]}
                 color="primary"
               />
@@ -250,5 +244,9 @@ console.log(items);
     </div>
   );
 }
+
+ItemListings.propTypes = {
+  getItems: PropTypes.func,
+};
 
 export default ItemListings;
