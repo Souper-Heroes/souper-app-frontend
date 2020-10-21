@@ -15,30 +15,30 @@ import PropTypes from 'prop-types';
 export default function MyItemListings(props) {
   const { _id, type, myitems } = props;
   const classes = makeStyles(styles);
-  const paginationColSize = type === 'provide' ? 6 : 12;
+  const paginationColSize = type === 'provide' ? 6 : 6;
 
   const sortItems = menuItem => {
     props.sortByItem(menuItem);
   };
 
-  const deleteItem = async () => {
+  const deleteItem = async itemId => {
     // console.log(`Clicked Delete button, delete item with _id: ${_id}`);
-    await props.deleteItem(_id);
+    await props.deleteItem(itemId);
   };
 
   const unreserveItem = async itemId => {
     // console.log(`Clicked Delete button for collector, unreseve item with _id: ${_id}`);
-    await props.unreserveItem(_id, itemId);
+    await props.unreserveItem(itemId);
   };
 
   const getMyItems = () =>
     // eslint-disable-next-line implicit-arrow-linebreak
     myitems.filter(myItem => {
       if (type === 'provide') {
-        if (myItem.user_uid === props._id) {
+        if (myItem.user_uid === _id) {
           return myItem;
         }
-      } else if (myItem.c_user_uid === props._id) {
+      } else if (myItem.c_user_uid === _id) {
         return myItem;
       }
       return null;
@@ -70,7 +70,20 @@ export default function MyItemListings(props) {
             </Link>
           </GridItem>
         )}
-        <GridItem xs={paginationColSize} sm={paginationColSize} align="right">
+        {type === 'collect' && (
+          <GridItem xs={6} sm={6} align="left">
+            <Link to="/itemmap" className={classes.link}>
+              <Button type="button" color="rose" to="/addedititem">
+                Map
+              </Button>
+            </Link>
+          </GridItem>
+        )}
+        <GridItem
+          xs={paginationColSize}
+          sm={paginationColSize}
+          align="right"
+        >
           <ListingsPaginations />
         </GridItem>
       </GridContainer>
@@ -81,8 +94,8 @@ export default function MyItemListings(props) {
 MyItemListings.propTypes = {
   type: PropTypes.string,
   _id: PropTypes.string,
+  myitems: PropTypes.instanceOf(Object),
   deleteItem: PropTypes.func,
   sortByItem: PropTypes.func,
-  unreserveItem: PropTypes.func,
-  myitems: PropTypes.instanceOf(Object)
+  unreserveItem: PropTypes.func
 };
