@@ -11,8 +11,7 @@ import ItemListPage from 'containers/Items/ItemListPage';
 import ItemMapPage from 'containers/Items/ItemMapPage';
 import ItemListings from 'containers/Items/ItemListings';
 import Profile from 'containers/Profile/Profile';
-import Forgotten from 'components/Login/Forgotten';
-import ResetPassword from 'components/Login/ResetPassword';
+import Forgotten from 'containers/Login/Forgotten';
 import AddEditItem from 'containers/Items/AddEditItem';
 import ProtectedRoute from 'components/Routing/ProtectedRoute';
 import * as ROUTES from 'components/Routing/routes';
@@ -35,7 +34,6 @@ function App(props) {
           render={() => <RegisterPage registerInputs={data.registerInputs} />}
         />
         <Route exact path={ROUTES.FORGOTTEN_PASSWORD} component={Forgotten} />
-        <Route exact path={ROUTES.RESET_PASSWORD} component={ResetPassword} />
         <ProtectedRoute
           path={ROUTES.ITEM_VIEW}
           component={ItemViewPage}

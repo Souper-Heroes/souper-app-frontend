@@ -19,9 +19,8 @@ import * as ROUTES from 'components/Routing/routes';
 
 const useStyles = makeStyles(styles);
 
-export default function HeaderLinks({logout}) {
+export default function HeaderLinks({logout, user}) {
   const classes = useStyles();
-  const history = useHistory();
   const logmeout = async () => {
     logout();
   };
@@ -30,7 +29,7 @@ export default function HeaderLinks({logout}) {
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
-          buttonText="Account"
+          buttonText={`${user.display_name}`}
           buttonProps={{
             className: classes.navLink,
             color: 'transparent'
