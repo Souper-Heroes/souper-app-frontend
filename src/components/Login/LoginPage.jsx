@@ -1,15 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import * as ROUTES from 'components/Routing/routes';
+import PropTypes from 'prop-types';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
 import Email from '@material-ui/icons/Email';
-// @material Typography
-import Danger from 'components/MaterialKitComponents/Typography/Danger';
 // core components
+import Alert from 'components/Alert/Alert';
+import SocialLogin from 'containers/Login/SocialLogin';
 import GridContainer from '../MaterialKitComponents/Grid/GridContainer';
 import GridItem from '../MaterialKitComponents/Grid/GridItem';
 import Button from '../MaterialKitComponents/CustomButtons/Button';
@@ -24,11 +25,13 @@ import image from '../../assets/img/board.jpg';
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage({ loginError, login, loginWithGoogle, isAuthenticated }) {
+export default function LoginPage({
+  login, isAuthenticated
+}) {
   const emailRef = useRef(null);
   const passRef = useRef(null);
   const classes = useStyles();
-  const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
+  const [cardAnimaton, setCardAnimation] = useState('cardHidden');
 
   setTimeout(() => {
     setCardAnimation('');
@@ -38,8 +41,6 @@ export default function LoginPage({ loginError, login, loginWithGoogle, isAuthen
     const { name } = event.currentTarget;
     if (name === 'login') {
       login(emailRef.current.value, passRef.current.value);
-    } else if (name === 'loginWithGoogle') {
-      loginWithGoogle();
     }
   };
 
@@ -64,37 +65,10 @@ export default function LoginPage({ loginError, login, loginWithGoogle, isAuthen
                 <form className={classes.form}>
                   <CardHeader color="rose" className={classes.cardHeader}>
                     <h2>Login</h2>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-twitter" />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-facebook" />
-                      </Button>
-                      <Button
-                        justIcon
-                        name="loginWithGoogle"
-                        color="transparent"
-                        onClick={handleSubmit}
-                      >
-                        <i className="fab fa-google-plus-g" />
-                      </Button>
-                    </div>
+                    <SocialLogin />
                   </CardHeader>
                   <CardBody>
-                    {loginError ? (
-                      <Danger>Incorrect email or Password</Danger>
-                    ) : null}
+                    <Alert />
                     <CustomInput
                       labelText="Email"
                       id="email"
@@ -170,3 +144,8 @@ export default function LoginPage({ loginError, login, loginWithGoogle, isAuthen
     </div>
   );
 }
+
+LoginPage.propTypes = {
+  login: PropTypes.bool,
+  isAuthenticated: PropTypes.bool
+};

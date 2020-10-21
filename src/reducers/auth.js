@@ -9,9 +9,7 @@ export default (
     signUpError: false,
     logoutError: false,
     isAuthenticated: false,
-    user: {},
-    userLoaded: {},
-    userLoadedError: false
+    user: {}
   },
   action
 ) => {
@@ -21,7 +19,7 @@ export default (
         ...state,
         isLoggingIn: true,
         loginError: false,
-        signUpError: null
+        signUpError: false
       };
     case types.LOGIN_SUCCESS:
       return {
@@ -30,23 +28,13 @@ export default (
         isAuthenticated: true,
         user: action.user
       };
-    case types.USER_LOADED:
-      return {
-        ...state,
-        userLoaded: action.user
-      };
-    case types.USER_LOAD_FAILURE:
-      return {
-        ...state,
-        userLoadedError: true
-      };
     case types.LOGIN_FAILURE:
       return {
         ...state,
         isLoggingIn: false,
         isAuthenticated: false,
         loginError: true,
-        signUpError: null
+        signUpError: false
       };
     case types.SIGNUP_FAILURE:
       return {
@@ -54,7 +42,7 @@ export default (
         isLoggingIn: false,
         isAuthenticated: false,
         loginError: false,
-        signUpError: action.message
+        signUpError: true
       };
     case types.LOGOUT_REQUEST:
       return {

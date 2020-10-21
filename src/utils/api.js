@@ -21,10 +21,7 @@ api.interceptors.request.use(async config => {
   config.headers['x-auth-token'] = await myFirebase
     .auth()
     .currentUser.getIdToken()
-    .then(async idToken => {
-      console.log(idToken);
-      return idToken;
-    })
+    .then(async idToken => idToken)
     .catch(error => {
       console.log(error);
     });

@@ -5,8 +5,7 @@ import { getItems } from 'actions/item';
 const mapStateToProps = state => ({
   isLoggingIn: state.auth.isLoggingIn,
   loginError: state.auth.loginError,
-  isAuthenticated: state.auth.isAuthenticated,
-  items: state.item.items
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({

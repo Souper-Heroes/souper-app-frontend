@@ -1,0 +1,128 @@
+version: 2.1
+
+jobs:
+
+  checkout_and_build:
+    docker:
+      - image: circleci/node:8-stretch
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v3-npm-deps-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+            - v3-npm-deps-{{ .Branch }}-{{ checksum "package.json" }}
+            - v3-npm-deps-{{ .Branch }}
+            - v3-npm-deps-
+
+      - run:
+          name: install NPM dependencies
+          command: |
+            sudo npm install -g npm
+            sudo apt-get update
+            sudo apt-get install libcairo2-dev libjpeg62-turbo-dev libpango1.0-dev libgif-dev build-essential g++
+            npm install
+
+      - save_cache:
+          key: v3-npm-deps-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+
+      - run:
+          # Should create build/ which will be stored by persist_to_workspace
+          name: Build
+          command: |
+            npm run build
+
+      - run:
+          # Why pip?  The outdated version bundled with Debian only has the
+          # `aws cloudfront create-invalidation command` in preview mode and
+          # this is hard to script.  Switch to a regular install when it gets
+          # updated.
+          name: Install AWS CLI
+          command: |
+            sudo apt-get update -y -qq
+            sudo apt-get -y -qq install python3 python3-pip jq
+            pip3 install --quiet awscli==1.16.204     # installs to ~/.local/bin/aws
+
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
+            - .local
+
+  lint:
+    docker:
+      - image: circleci/node:8-stretch
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: run lint
+          command: |
+            npm run lint:check
+
+  upload_live_origin:
+    docker:
+      - image: circleci/node:8-stretch
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Upload to versioned S3 directory
+          command: |
+            PKG_VERSION=v`grep '"version"' package.json | egrep -o "[0-9]+.[0-9]+.[0-9]+"`
+            ~/.local/bin/aws s3 sync --delete build/ s3://${AWS_S3_ORIGIN_BUCKET_LIVE_A}/${PKG_VERSION}/
+  publish_live_origin:
+    docker:
+      - image: circleci/node:8-stretch
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Copy from S3 versioned dir to latest/
+          command: |
+            PKG_VERSION=v`grep '"version"' package.json | egrep -o "[0-9]+.[0-9]+.[0-9]+"`
+            ~/.local/bin/aws s3 sync --quiet --delete s3://${AWS_S3_ORIGIN_BUCKET_LIVE_A}/${PKG_VERSION}/ s3://${AWS_S3_ORIGIN_BUCKET_LIVE_A}/latest/
+      - run:
+          name: Invalidate CloudFront caches to load latest content
+          command: |
+            # This project is served through multiple dists; iterate over a
+            # comma-separated list
+            IFS=',' read -ra DIST_IDS \<<< "$AWS_CLOUDFRONT_DIST_ID_LIVE_A"
+            for DIST_ID in "${DIST_IDS[@]}"; do
+              echo "Invalidating dist ${DIST_ID}"
+              INVALIDATION_ID=$(~/.local/bin/aws cloudfront create-invalidation --distribution-id ${DIST_ID} --paths "/shipping/*" | jq -r .Invalidation.Id)
+              ~/.local/bin/aws cloudfront wait invalidation-completed --distribution-id ${DIST_ID} --id ${INVALIDATION_ID}
+            done
+
+workflows:
+  version: 2.1
+
+  build_and_publish:
+    jobs:
+
+      - checkout_and_build
+
+      - lint:
+          requires:
+            - checkout_and_build
+
+      - upload_live_origin:
+          context: souper-a-builds
+          requires:
+            - lint
+          filters:
+            branches:
+              only:
+                - master
+
+      - publish_live_origin:
+          context: souper-a-builds
+          requires:
+            - upload_live_origin
+          filters:
+            branches:
+              only:
+                - master

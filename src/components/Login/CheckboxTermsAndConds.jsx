@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 // material-ui components
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 // @material-ui/icons
 import Check from '@material-ui/icons/Check';
-
 import styles from 'assets/jss/material-kit-react/customCheckboxRadioSwitch';
 
 const useStyles = makeStyles(styles);
@@ -24,10 +24,10 @@ export default function CheckboxTermsAndConds({
     classes.checkboxAndRadioHorizontal
   );
   const handleToggle = () => {
-    const newChecked = checked ? false : true;
+    const newChecked = !checked;
 
     setChecked(newChecked);
-    //Callback function to take care of what happens in the Parent component based on the new value
+    // Callback function to take care of what happens in the Parent component based on the new value
     checkTermsAndConds(newChecked);
   };
 
@@ -35,7 +35,7 @@ export default function CheckboxTermsAndConds({
     <div>
       <div className={wrapperDiv}>
         <FormControlLabel
-          control={
+          control={(
             <Checkbox
               tabIndex={-1}
               onClick={() => handleToggle()}
@@ -43,7 +43,7 @@ export default function CheckboxTermsAndConds({
               icon={<Check className={classes.uncheckedIcon} />}
               classes={{ checked: classes.checked }}
             />
-          }
+          )}
           classes={{ label: classes.label }}
           label={children}
         />
@@ -51,3 +51,8 @@ export default function CheckboxTermsAndConds({
     </div>
   );
 }
+
+CheckboxTermsAndConds.propTypes = {
+  checkTermsAndConds: PropTypes.func,
+  children: PropTypes.node
+};
