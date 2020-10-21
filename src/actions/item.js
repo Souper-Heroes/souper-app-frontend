@@ -63,17 +63,24 @@ export const searchItems = filterOptions => async dispatch => {
     dispatch({
       type: types.SEARCH_ITEMS_REQUEST
     });
+    const conversion = {
+      miles: 0.00062137,
+      kilometers: 1000
+    };
     const res = await api.get('items/search', {
       params: {
-        maxDistance: filterOptions.maxDistance,
+        maxDistance:
+          filterOptions.unit === 'Miles'
+            ? filterOptions.distance / conversion.miles
+            : filterOptions.distance * conversion.kilometers,
         latt: filterOptions.latt,
         long: filterOptions.long
       }
     });
-
     dispatch({
       type: types.SEARCH_ITEMS,
-      payload: res.data
+      payload: res.data,
+      filters: filterOptions
     });
   } catch (err) {
     // do something with error

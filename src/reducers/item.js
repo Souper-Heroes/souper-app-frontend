@@ -3,15 +3,17 @@ import { types } from '../actions/item';
 import { types as authTypes } from '../actions/auth';
 
 const initialState = {
-  myitems: {},
+  myitems: [],
   loading: true,
   items: [],
   search: [],
   filters: {
     unit: 'Miles',
     distance: 2,
-    category: [],
-    expiry: ''
+    category: '',
+    expiry: '',
+    long: 0,
+    latt: 0
   },
   error: {}
 };
@@ -33,7 +35,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         search: payload,
-        loading: false
+        loading: false,
+        filters: action.filters
       };
     case types.SEARCH_ITEMS_ERROR:
       return {
