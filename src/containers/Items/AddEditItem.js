@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addItem: formData => dispatch(addItem(formData)),
-  getItem: () => dispatch(getItem()),
+  getItem: _id => dispatch(getItem(_id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddEditItem);

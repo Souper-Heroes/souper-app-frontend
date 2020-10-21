@@ -91,14 +91,14 @@ export default function AddEditItem({ addItem, getItem }) {
   };
 
   // Edit item
-  const onLoad = async () => {
+  const handleButtonClick = async () => {
     // Get item and fill vars:
     const gotItem = await getItem({
       title: getItem.title,
       description: getItem.description,
-      category: getItem.category.map(cat => cat.title),
-      expiry: moment(getItem.expiry).format('L'), // formats to DD/MM/yyyy - might not have to.
-      location: getItem.location,
+      //category: getItem.category.map(cat => cat.title),
+      //expiry: moment(getItem.expiry).format('L'), // formats to DD/MM/yyyy - might not have to.
+      //location: getItem.location,
       availability: getItem.availability,
     });
     if (!gotItem) {
@@ -142,6 +142,7 @@ export default function AddEditItem({ addItem, getItem }) {
               <DropZone />
             </GridItem>
             <GridItem xs={12} sm={6} className={classes.navWrapper}>
+              <Button onClick={handleButtonClick} />
               <CustomInput
                 labelText="Title"
                 inputProps={{
