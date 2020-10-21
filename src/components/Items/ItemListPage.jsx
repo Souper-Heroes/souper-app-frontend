@@ -51,9 +51,7 @@ export default function ItemListPage({
 
   return (
     <>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
+      {loading ? (<div>Loading...</div>) : (
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
             <GridContainer justify="center">
