@@ -30,10 +30,9 @@ export default function MyItemListing(props) {
     myitem,
     deleteItem,
     unreserveItem
-    // addrstatus,
+    // getAddress,
     // address,
-    // getAddress
-
+    // addrstatus
   } = props;
   const classes = useStyles();
 
@@ -66,19 +65,20 @@ export default function MyItemListing(props) {
     }
   };
 
-  const handleOnClickAgreeCup = () => {
+  const handleOnClickAgreeCup = async () => {
     /* TODO
     console.log(
       `Clicked Cup button, do something with item: ${item.itemId}, Title: ${item.description}`
     ); */
 
-    // getAddress(myitem.postcode);
+    // await getAddress(myitem.postcode);
 
-    // if (addrstatus === "OK") {
+    // setTimeout(1000);
+    // console.log("*** my address: ", address);
+    // if (addrstatus == "OK") {
     //  console.log('My Address:', address, 'addrstatus:', addrstatus);
     // }
     // else {
-
     //  console.log('Address not found, addrstatus:', addrstatus);
     // }
   };
