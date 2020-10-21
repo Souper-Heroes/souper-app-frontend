@@ -1,4 +1,3 @@
-// import api from '../utils/api';
 import Geocode from 'react-geocode';
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
@@ -30,3 +29,18 @@ export const getAddress = postcode => async dispatch => {
     }
   );
 };
+
+export const types = {
+  USER_LOADED: 'USER_LOADED',
+  USER_LOAD_FAILURE: 'USER_LOAD_FAILURE'
+};
+
+export const userLoaded = user => ({
+  type: types.USER_LOADED,
+  user
+});
+
+export const userLoadError = () => ({
+  type: types.USER_LOAD_FAILURE
+});
+

@@ -1,27 +1,43 @@
+import { types as authTypes } from '../actions/auth';
 import { types } from '../actions/user';
 
-const initialState = {
-  address: null
-};
-
-export default (state = initialState, action) => {
-  const { type, payload } = action;
-  switch (type) {
+export default (
+  state = {
+    user: {},
+    userLoadedError: false,
+    address: null
+  },
+  action
+) => {
+  switch (action.type) {
+    case types.USER_LOADED:
+      return {
+        ...state,
+        user: action.user
+      };
+    case types.USER_LOAD_FAILURE:
+      return {
+        ...state,
+        userLoadedError: true
+      };
+    case authTypes.LOGOUT_SUCCESS:
+      return {
+        user: {},
+        userLoadedError: false
+      };
     case types.GET_USER_ADDRESS:
       return {
         ...state,
-        address: payload,
-        addrstatus: payload.status
+        address: action.payload,
+        addrstatus: action.payload.status
       };
     case types.GET_USER_ADDRESS_ERROR:
       return {
         ...state,
-        address: payload,
-        addrstatus: payload.status
+        address: action.payload,
+        addrstatus: action.payload.status
       };
-
     default:
       return state;
   }
-  // return state;
 };
