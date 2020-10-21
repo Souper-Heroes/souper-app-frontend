@@ -32,11 +32,6 @@ const styles = {
   }
 };
 
-const conversionMeters = {
-  miles: 0.00062137,
-  kilometers: 1000
-};
-
 const useStyles = makeStyles(styles);
 
 function ItemListings({
@@ -58,11 +53,11 @@ function ItemListings({
   const handleGetItems = async () => {
     searchItems({
       unit,
-      maxDistance: (
-        unit === 'Miles' ? distance / conversionMeters.miles : distance * conversionMeters.kilometers
-      ),
+      distance,
       long: 0.18387,
-      latt: 51.57415
+      latt: 51.57415,
+      category,
+      expiry
     });
   };
 
