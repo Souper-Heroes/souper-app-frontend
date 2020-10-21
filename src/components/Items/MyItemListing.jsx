@@ -30,6 +30,10 @@ export default function MyItemListing(props) {
     myitem,
     deleteItem,
     unreserveItem
+    // addrstatus,
+    // address,
+    // getAddress
+
   } = props;
   const classes = useStyles();
 
@@ -53,6 +57,7 @@ export default function MyItemListing(props) {
     console.log(
       `Clicked Delete button, do something with item: ${item.itemId}, Title: ${item.description}`
     ); */
+
     if (type === 'provide') {
       deleteItem(myitem._id);
     } else {
@@ -66,6 +71,16 @@ export default function MyItemListing(props) {
     console.log(
       `Clicked Cup button, do something with item: ${item.itemId}, Title: ${item.description}`
     ); */
+
+    // getAddress(myitem.postcode);
+
+    // if (addrstatus === "OK") {
+    //  console.log('My Address:', address, 'addrstatus:', addrstatus);
+    // }
+    // else {
+
+    //  console.log('Address not found, addrstatus:', addrstatus);
+    // }
   };
 
   return (
@@ -307,5 +322,9 @@ MyItemListing.propTypes = {
   type: PropTypes.string,
   myitem: PropTypes.instanceOf(Object),
   deleteItem: PropTypes.func,
-  unreserveItem: PropTypes.func
+  unreserveItem: PropTypes.func,
+  // getAddress: PropTypes.func,
+  // address: PropTypes.instanceOf(Object),
+  // addrstatus: PropTypes.string,
+
 };

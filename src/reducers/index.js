@@ -5,7 +5,9 @@ import storage from 'redux-persist/lib/storage';
 import message from './message';
 import auth from './auth';
 import item from './item';
+
 import alert from './alert';
+
 import user from './user';
 
 const persistConfig = {

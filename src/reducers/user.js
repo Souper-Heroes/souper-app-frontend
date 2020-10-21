@@ -4,7 +4,8 @@ import { types } from '../actions/user';
 export default (
   state = {
     user: {},
-    userLoadedError: false
+    userLoadedError: false,
+    address: null
   },
   action
 ) => {
@@ -23,6 +24,18 @@ export default (
       return {
         user: {},
         userLoadedError: false
+      };
+    case types.GET_USER_ADDRESS:
+      return {
+        ...state,
+        address: action.payload,
+        addrstatus: action.payload.status
+      };
+    case types.GET_USER_ADDRESS_ERROR:
+      return {
+        ...state,
+        address: action.payload,
+        addrstatus: action.payload.status
       };
     default:
       return state;
