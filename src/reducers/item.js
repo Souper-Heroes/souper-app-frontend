@@ -1,19 +1,51 @@
 import moment from 'moment';
 import { types } from '../actions/item';
+import { types as authTypes } from '../actions/auth';
 
 const initialState = {
   myitems: [],
   loading: true,
-  items: []
+  items: [],
+  search: [],
+  filters: {
+    unit: 'miles',
+    distance: 2,
+    category: [],
+    expiry: ''
+  },
+  error: {}
 };
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    case authTypes.LOGOUT_SUCCESS:
+      return {
+        ...initialState,
+        filters: {}
+      };
+    case types.SEARCH_ITEMS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case types.SEARCH_ITEMS:
+      return {
+        ...state,
+        search: payload,
+        loading: false
+      };
+    case types.SEARCH_ITEMS_ERROR:
+      return {
+        ...state,
+        error: payload,
+        loading: false
+      };
     case types.GET_ITEMS:
       return {
         ...state,
-        items: payload
+        items: payload,
+        loading: false
       };
     case types.GET_MY_ITEMS:
       return {
@@ -23,7 +55,9 @@ export default (state = initialState, action) => {
       };
     case types.GET_ITEMS_ERROR:
       return {
-        items: payload
+        ...state,
+        items: payload,
+        loading: false
       };
     case types.GET_DELETE_ITEM_ERROR:
       return {

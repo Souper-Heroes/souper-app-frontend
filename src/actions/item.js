@@ -18,6 +18,9 @@ export const types = {
   RESERVE_ITEM: 'RESERVE_ITEM',
   UNRESERVE_ITEM: 'UNRESERVE_ITEM',
   UNRESERVE_ITEM_ERROR: 'UNRESERVE_ITEM_ERROR',
+  SEARCH_ITEMS_REQUEST: 'SEARCH_ITEMS_REQUEST',
+  SEARCH_ITEMS: 'SEARCH_ITEMS',
+  SEARCH_ITEMS_ERROR: 'SEARCH_ITEMS_ERROR'
 };
 
 export const addItem = formData => async dispatch => {
@@ -51,6 +54,25 @@ export const getItems = () => async dispatch => {
     // console.log(err);
     dispatch({
       type: types.GET_ITEMS_ERROR
+    });
+  }
+};
+export const searchItems = () => async dispatch => {
+  try {
+    dispatch({
+      type: types.SEARCH_ITEMS_REQUEST
+    });
+    const res = await api.get('items/search');
+
+    dispatch({
+      type: types.SEARCH_ITEMS,
+      payload: res.data
+    });
+  } catch (err) {
+    // do something with error
+    // console.log(err);
+    dispatch({
+      type: types.SEARCH_ITEMS_ERROR
     });
   }
 };
