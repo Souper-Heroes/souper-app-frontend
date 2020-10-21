@@ -1,6 +1,8 @@
 // import * as routes from 'components/Routing/routes';
 import api from '../utils/api';
 
+import { setAlert } from './alert';
+
 export const types = {
   ADD_ITEM: 'ADD_ITEM',
   ADD_ITEM_ERROR: 'ADD_ITEM_ERROR',
@@ -24,11 +26,13 @@ export const types = {
 
 export const addItem = formData => async dispatch => {
   try {
+    console.log(formData);
     const res = await api.post('/items', formData);
     dispatch({
       type: types.ADD_ITEM,
       payload: res.data,
     });
+    dispatch(setAlert('Item successfuly added.', 'info', 'alert'));
     return true;
   } catch (err) {
     // do something with error
@@ -36,6 +40,9 @@ export const addItem = formData => async dispatch => {
     dispatch({
       type: types.ADD_ITEM_ERROR,
     });
+    dispatch(
+      setAlert('Item not added. Check fields and retry.', 'danger', 'alert')
+    );
     return false;
   }
 };

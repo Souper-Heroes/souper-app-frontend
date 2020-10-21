@@ -4,14 +4,13 @@ import { connect } from 'react-redux';
 import Danger from 'components/MaterialKitComponents/Typography/Danger';
 import SnackbarContent from 'components/MaterialKitComponents/Snackbar/SnackbarContent';
 
-const Alert = ({ alerts }) => alerts !== null
-  && alerts.length > 0
-  && alerts.map(alert => (
+const Alert = ({ alerts }) =>
+  alerts !== null &&
+  alerts.length > 0 &&
+  alerts.map(alert => (
     <div key={alert.id}>
       {alert.displayType === 'text' ? (
-        alert.alertType === 'danger' && (
-          <Danger>{alert.msg}</Danger>
-        )
+        alert.alertType === 'danger' && <Danger>{alert.msg}</Danger>
       ) : (
         <SnackbarContent
           message={<span>{alert.msg}</span>}
@@ -24,11 +23,11 @@ const Alert = ({ alerts }) => alerts !== null
   ));
 
 Alert.propTypes = {
-  alerts: PropTypes.instanceOf(Array)
+  alerts: PropTypes.instanceOf(Array),
 };
 
 const mapStateToProps = state => ({
-  alerts: state.alert
+  alerts: state.alert,
 });
 
 export default connect(mapStateToProps)(Alert);

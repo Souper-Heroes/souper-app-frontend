@@ -25,12 +25,7 @@ import banana from 'assets/img/purple-banana.jpg';
 const useStyles = makeStyles(styles);
 
 export default function MyItemListing(props) {
-  const {
-    type,
-    myitem,
-    deleteItem,
-    unreserveItem
-  } = props;
+  const { type, myitem, deleteItem, unreserveItem } = props;
   const classes = useStyles();
 
   const GetCollectionMsg = newType => {
@@ -283,7 +278,7 @@ export default function MyItemListing(props) {
                 </Button>
                 {type === 'provide' && (
                   <Link
-                    to={`/addedititem/${myitem._id}`}
+                    to={`/addEditItem/${myitem._id}`}
                     className={classes.link}
                   >
                     <Button>
@@ -307,5 +302,5 @@ MyItemListing.propTypes = {
   type: PropTypes.string,
   myitem: PropTypes.instanceOf(Object),
   deleteItem: PropTypes.func,
-  unreserveItem: PropTypes.func
+  unreserveItem: PropTypes.func,
 };

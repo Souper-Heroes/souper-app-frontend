@@ -6,6 +6,8 @@ import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
 
+import Alert from 'components/Alert/Alert';
+
 // Material Kit components
 import Button from 'components/MaterialKitComponents/CustomButtons/Button';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
@@ -50,15 +52,22 @@ const categoryOptions = [
 
 const useStyles = makeStyles(styles);
 
-export default function AddEditItem({ addItem, getItem }) {
-  const classes = useStyles();
+export default function AddEditItem({ addItem, id, item }) {
+  //const [location, setLocation] = useState({});
+  const [postcode, setPostcode] = useState(item ? item.postcode : '');
+  const [availability, setAvailability] = useState(
+    item ? item.availability : ''
+  );
+  const [title, setTitle] = useState(item ? item.title : '');
+  const [description, setDescription] = useState(item ? item.description : '');
+  const [expiry, setExpiry] = useState(item ? item.expiry : '');
+  const [category, setCategory] = useState(item ? item.category : []);
 
-  // const [location, setLocation] = useState({});
-  const [availability, setAvailability] = useState('');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [expiry, setExpiry] = useState('');
-  const [category, setCategory] = useState([]);
+  if (item) {
+    console.log(item);
+    // setTitle(item.title);
+  }
+  const classes = useStyles();
 
   const handleTitleChange = e => {
     // console.log(e.target.value);
@@ -89,28 +98,13 @@ export default function AddEditItem({ addItem, getItem }) {
     setAvailability(e.target.value);
   };
 
-  // Edit item
-  const handleButtonClick = async () => {
-    // Get item and fill vars:
-    const gotItem = await getItem({
-      title: getItem.title,
-      description: getItem.description,
-      //category: getItem.category.map(cat => cat.title),
-      //expiry: moment(getItem.expiry).format('L'), // formats to DD/MM/yyyy - might not have to.
-      //location: getItem.location,
-      availability: getItem.availability,
-    });
-    if (!gotItem) {
-      // Do something with the error
-    }
-  };
-
   const onSubmit = async () => {
     const addedItem = await addItem({
       title,
       description,
       category: category.map(cat => cat.title),
       expiry,
+      postcode: 'Postcode', // TODO - get this info from Profile
       location: {
         type: 'Point',
         coordinates: [-112.110492, 36.098948], // TODO - get this info from Profile
@@ -122,7 +116,6 @@ export default function AddEditItem({ addItem, getItem }) {
       setTitle('');
       setDescription('');
       setCategory([]);
-      // setLocation({});
       setExpiry('');
       setAvailability('');
     }
@@ -141,7 +134,6 @@ export default function AddEditItem({ addItem, getItem }) {
               <DropZone />
             </GridItem>
             <GridItem xs={12} sm={6} className={classes.navWrapper}>
-              <Button onClick={handleButtonClick} />
               <CustomInput
                 labelText="Title"
                 inputProps={{
@@ -229,18 +221,19 @@ export default function AddEditItem({ addItem, getItem }) {
                   }}
                 />
                 <CustomInput
-                  labelText="Location"
-                  name="location"
+                  labelText="Postcode"
+                  name="postcode"
                   id="disabled"
                   inputProps={{
                     disabled: true,
-                    value: 'DT9 4LY',
+                    value: postcode,
                   }}
                   formControlProps={{
                     fullWidth: true,
                   }}
                 />
               </GridItem>
+
               <GridContainer xs={12} fullWidth align="right">
                 <GridItem xs={6} />
                 <GridItem xs={3}>
@@ -258,6 +251,7 @@ export default function AddEditItem({ addItem, getItem }) {
                   </Button>
                 </GridItem>
               </GridContainer>
+              <Alert />
             </GridItem>
           </GridContainer>
         </div>

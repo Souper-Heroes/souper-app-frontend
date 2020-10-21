@@ -7,4 +7,5 @@ export const ITEM_MAP = '/itemmap';
 export const ITEM_LIST = '/itemlist';
 export const PROFILE = '/profile';
 export const ADD_EDIT_ITEM = '/addEditItem';
+export const EDIT_ITEM = '/addEditItem/:id';
 export const DASHBOARD = '/dashboard';

@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const types = {
   SET_ALERT: 'SET_ALERT',
-  REMOVE_ALERT: 'REMOVE_ALERT'
+  REMOVE_ALERT: 'REMOVE_ALERT',
 };
 
 export const setAlert = (
@@ -18,8 +18,8 @@ export const setAlert = (
       msg,
       alertType,
       displayType,
-      id
-    }
+      id,
+    },
   });
 
   setTimeout(
