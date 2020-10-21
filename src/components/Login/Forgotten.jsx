@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import * as ROUTES from 'components/Routing/routes';
+import PropTypes from 'prop-types';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -13,19 +15,36 @@ import CardBody from 'components/MaterialKitComponents/Card/CardBody';
 import CardHeader from 'components/MaterialKitComponents/Card/CardHeader';
 import CardFooter from 'components/MaterialKitComponents/Card/CardFooter';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
+import Muted from 'components/MaterialKitComponents/Typography/Muted';
+import SocialLogin from 'containers/Login/SocialLogin';
+import Alert from 'components/Alert/Alert';
 
 import styles from 'assets/jss/material-kit-react/views/loginPage';
 import image from 'assets/img/board.jpg';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles(styles);
 
-export default function Forgotten() {
+export default function Forgotten({ isAuthenticated, passwordReset }) {
   const [cardAnimaton, setCardAnimation] = React.useState('cardHidden');
+  const [email, setEmail] = useState('');
   setTimeout(() => {
     setCardAnimation('');
   }, 700);
   const classes = useStyles();
+
+  const handleSubmit = async () => {
+    passwordReset(email);
+  };
+  const handleInputChange = event => {
+    const { value } = event.currentTarget;
+    setEmail(value);
+  };
+
+  if (isAuthenticated) {
+    return <Redirect to={ROUTES.DASHBOARD} />;
+  }
+
   return (
     <div>
       <div
@@ -43,42 +62,15 @@ export default function Forgotten() {
                 <form className={classes.form}>
                   <CardHeader color="rose" className={classes.cardHeader}>
                     <h4>Reset Password</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-twitter" />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-facebook" />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-google-plus-g" />
-                      </Button>
-                    </div>
+                    <SocialLogin />
                   </CardHeader>
                   <CardBody>
-                    <h4>Forgotten your password?</h4>
-                    <p>
+                    <Alert />
+                    <Muted>
+                      <b>Forgotten your password?</b><br />
                       Enter the email address that you used to register. We'll
                       send you an email with a link to reset your password.
-                    </p>
+                    </Muted>
                     <CustomInput
                       labelText="Email..."
                       id="email"
@@ -87,21 +79,7 @@ export default function Forgotten() {
                       }}
                       inputProps={{
                         type: 'email',
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                    <CustomInput
-                      labelText="Confirm email"
-                      id="email"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: 'email',
+                        onChange: event => handleInputChange(event),
                         endAdornment: (
                           <InputAdornment position="end">
                             <Email className={classes.inputIconsColor} />
@@ -110,19 +88,18 @@ export default function Forgotten() {
                       }}
                     />
                   </CardBody>
-                  <Link to="/reset">
-                    <CardFooter className={classes.cardFooter}>
-                      <Button
-                        fullWidth
-                        to="#TODO_Send email"
-                        variant="contained"
-                        color="rose"
-                        size="lg"
-                      >
-                        Reset
-                      </Button>
-                    </CardFooter>
-                  </Link>
+                  <CardFooter className={classes.cardFooter}>
+                    <Button
+                      fullWidth
+                      to="#TODO_Send email"
+                      variant="contained"
+                      color="rose"
+                      size="lg"
+                      onClick={handleSubmit}
+                    >
+                      Reset
+                    </Button>
+                  </CardFooter>
                   <Link to="/login">
                     <CardFooter className={classes.cardFooter}>
                       <Button fullWidth size="lg" color="info">
@@ -139,3 +116,8 @@ export default function Forgotten() {
     </div>
   );
 }
+
+Forgotten.propTypes = {
+  passwordReset: PropTypes.func,
+  isAuthenticated: PropTypes.bool,
+};
