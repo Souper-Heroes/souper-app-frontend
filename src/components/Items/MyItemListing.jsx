@@ -30,6 +30,10 @@ export default function MyItemListing(props) {
     myitem,
     deleteItem,
     unreserveItem
+    // addrstatus,
+    // address,
+    // getAddress
+
   } = props;
   const classes = useStyles();
 
@@ -74,6 +78,7 @@ export default function MyItemListing(props) {
     //  console.log('My Address:', address, 'addrstatus:', addrstatus);
     // }
     // else {
+
     //  console.log('Address not found, addrstatus:', addrstatus);
     // }
   };
