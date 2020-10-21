@@ -81,7 +81,7 @@ export const loadUser = () => async dispatch => {
 
 export const loginUser = (email, password) => dispatch => {
   dispatch(requestLogin());
-  myFirebase
+  return myFirebase
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(() => {
@@ -99,7 +99,7 @@ export const loginUser = (email, password) => dispatch => {
 
 export const loginWithGoogle = () => dispatch => {
   dispatch(requestLogin());
-  myFirebase
+  return myFirebase
     .auth()
     .signInWithPopup(googleProvider)
     .then(() => {
@@ -120,7 +120,7 @@ export const loginWithGoogle = () => dispatch => {
 
 export const signUp = (email, password, displayName) => dispatch => {
   dispatch(requestLogin());
-  myFirebase
+  return myFirebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(user => {
@@ -138,7 +138,7 @@ export const signUp = (email, password, displayName) => dispatch => {
 
 export const logoutUser = () => dispatch => {
   dispatch(requestLogout());
-  myFirebase
+  return myFirebase
     .auth()
     .signOut()
     .then(() => {
@@ -152,7 +152,7 @@ export const logoutUser = () => dispatch => {
 
 export const verifyAuth = () => dispatch => {
   dispatch(verifyRequest());
-  myFirebase.auth().onAuthStateChanged(user => {
+  return myFirebase.auth().onAuthStateChanged(user => {
     if (user !== null) {
       dispatch(receiveLogin(user));
     }

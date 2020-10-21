@@ -47,6 +47,7 @@ function App(props) {
           component={ItemListPage}
           isAuthenticated={isAuthenticated}
           isVerifying={isVerifying}
+          isVerifying={isVerifying}
         />
         <ProtectedRoute
           path={ROUTES.PROFILE}

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import Profile from 'components/Profile/Profile';
+import { updateProfile } from 'actions/user';
 
-const mapStateToProps = ({ user: { name, email, postCode } }) => ({
-  initialName: name,
-  email,
-  initialPostCode: postCode
+const mapDispatchToProps = dispatch => ({
+  updateProfile: payload => dispatch(updateProfile(payload))
 });
 
-export default connect(mapStateToProps)(Profile);
+export default connect(null, mapDispatchToProps)(Profile);
+

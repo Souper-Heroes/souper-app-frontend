@@ -26,7 +26,7 @@ import image from '../../assets/img/board.jpg';
 const useStyles = makeStyles(styles);
 
 export default function LoginPage({
-  loginError, login, loginWithGoogle, isAuthenticated
+  loginError, login, loginWithGoogle, isAuthenticated, getProfile
 }) {
   const emailRef = useRef(null);
   const passRef = useRef(null);
@@ -40,10 +40,11 @@ export default function LoginPage({
   const handleSubmit = async event => {
     const { name } = event.currentTarget;
     if (name === 'login') {
-      login(emailRef.current.value, passRef.current.value);
+      await login(emailRef.current.value, passRef.current.value);
     } else if (name === 'loginWithGoogle') {
-      loginWithGoogle();
+      await loginWithGoogle();
     }
+    await getProfile();
   };
 
   if (isAuthenticated) {
@@ -178,5 +179,6 @@ LoginPage.propTypes = {
   loginError: PropTypes.bool,
   login: PropTypes.bool,
   loginWithGoogle: PropTypes.bool,
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
+  getProfile: PropTypes.func
 };
