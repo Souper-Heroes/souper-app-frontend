@@ -29,7 +29,8 @@ export default function MyItemListing(props) {
     type,
     myitem,
     deleteItem,
-    unreserveItem
+    unreserveItem,
+    deleteExpiredItems,
     // getAddress,
     // address,
     // addrstatus
@@ -70,6 +71,8 @@ export default function MyItemListing(props) {
     console.log(
       `Clicked Cup button, do something with item: ${item.itemId}, Title: ${item.description}`
     ); */
+
+    await deleteExpiredItems(myitem._id);
 
     // await getAddress(myitem.postcode);
 
@@ -322,6 +325,7 @@ MyItemListing.propTypes = {
   type: PropTypes.string,
   myitem: PropTypes.instanceOf(Object),
   deleteItem: PropTypes.func,
+  deleteExpiredItems: PropTypes.func,
   unreserveItem: PropTypes.func,
   // getAddress: PropTypes.func,
   // address: PropTypes.instanceOf(Object),
