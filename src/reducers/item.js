@@ -2,120 +2,9 @@ import moment from 'moment';
 import { types } from '../actions/item';
 
 const initialState = {
-  pitems: null,
-  citems: null,
   myitems: [],
   loading: true,
-  items: [
-    {
-      _id: '1',
-      user_uid: '1',
-      c_user_uid: '2',
-      title: '5 Squashy Bananas',
-      category: ['Fruit'],
-      description: 'Been in my bag, only one end is squishy.',
-      photo: '#1111',
-      expiry: '2020-10-23T16:00:00Z',
-      location: 'EN4 4QE',
-      availability: '23rd Oct 2020 3-4PM'
-    },
-    {
-      _id: '2',
-      user_uid: '2',
-      c_user_uid: '3',
-      title: 'Cashew nuts',
-      category: ['Nuts'],
-      description: 'Unopened but the packet is a bit battered',
-      photo: '#1112',
-      expiry: '2020-10-24T13:00:00Z',
-      location: 'SR5 4TQ',
-      availability: '23rd Oct 2020 3-4PM'
-    },
-    {
-      _id: '3',
-      user_uid: '2',
-      c_user_uid: '3',
-      title: '6 Chicken Wings',
-      category: ['Meat'],
-      description: "Cooked yesterday, I don't want them.",
-      photo: '#1113',
-      expiry: '2020-11-30T13:00:00Z',
-      location: 'EN4 4RE',
-      availability: '23rd Oct 2020 3-4PM'
-    },
-    {
-      _id: '4',
-      user_uid: '1',
-      c_user_uid: '2',
-      title: 'Potatoes',
-      category: ['Vegtables'],
-      description: 'Half a bag of Potatoes roots growing',
-      photo: '#1114',
-      expiry: '2020-06-30T14:30:00Z',
-      location: 'DE3 7TQ',
-      availability: '23rd Oct 2020 3-4PM'
-    },
-    {
-      _id: '5',
-      user_uid: '3',
-      c_user_uid: null,
-      title: '10 Leeks',
-      category: ['Vegetables'],
-      description: '10 Leeks picked from my garden 5 days ago',
-      photo: '#1115',
-      expiry: '2020-12-29T13:00:00Z',
-      location: 'SL3 7TC',
-      availability: '23rd Oct 2020 3-4PM'
-    },
-    {
-      _id: '6',
-      user_uid: '2',
-      c_user_uid: null,
-      title: 'Soup',
-      category: ['Canned Food'],
-      description: '2 Tins Of Baxters Carrot And Corriander Soup',
-      photo: '#1116',
-      expiry: '2020-12-03T17:30:00Z',
-      location: 'SP3 7XE',
-      availability: '23rd Oct 2020 3-4PM'
-    },
-    {
-      _id: '7',
-      user_uid: '2',
-      c_user_uid: '1',
-      title: 'Soup',
-      category: ['Canned Food'],
-      description: '2 Tins Of Baxters Carrot And Corriander Soup',
-      photo: '#1117',
-      expiry: '2020-12-03T17:30:00Z',
-      location: 'SP3 7QE',
-      availability: '23rd Oct 2020 3-4PM'
-    },
-    {
-      _id: '8',
-      user_uid: '3',
-      c_user_uid: '1',
-      title: '10 Leeks',
-      category: ['Vegetables'],
-      description: '10 Leeks picked from my garden 5 days ago',
-      photo: '#1115',
-      expiry: '2020-12-29T17:30:00Z',
-      location: 'SL3 9TE',
-      availability: '23rd Oct 2020 3-4PM'
-    },
-    {
-      _id: '9',
-      user_uid: '1',
-      c_user_uid: null,
-      title: 'Potatoes',
-      category: ['Baked Goods'],
-      description: 'Half a bag of Potatoes roots growing',
-      photo: '#1114',
-      expiry: '2020-04-30T17:30:00Z',
-      location: 'DE3 3TQ',
-      availability: '23rd Oct 2020 3-4PM'
-    }
-  ]
+  items: []
 };
 
 export default (state = initialState, action) => {
@@ -131,16 +20,6 @@ export default (state = initialState, action) => {
         ...state,
         myitems: payload,
         loading: false
-      };
-    case types.GET_PROVIDER_ITEMS:
-      return {
-        ...state,
-        pitems: payload
-      };
-    case types.GET_COLLECTOR_ITEMS:
-      return {
-        ...state,
-        citems: payload
       };
     case types.GET_ITEMS_ERROR:
       return {

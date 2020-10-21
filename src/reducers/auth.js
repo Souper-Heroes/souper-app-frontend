@@ -9,9 +9,7 @@ export default (
     signUpError: false,
     logoutError: false,
     isAuthenticated: false,
-    user: {},
-    userLoaded: {},
-    userLoadedError: false,
+    user: {}
   },
   action
 ) => {
@@ -21,24 +19,14 @@ export default (
         ...state,
         isLoggingIn: true,
         loginError: false,
-        signUpError: null,
+        signUpError: false
       };
     case types.LOGIN_SUCCESS:
       return {
         ...state,
         isLoggingIn: false,
         isAuthenticated: true,
-        user: action.user,
-      };
-    case types.USER_LOADED:
-      return {
-        ...state,
-        userLoaded: action.user,
-      };
-    case types.USER_LOAD_FAILURE:
-      return {
-        ...state,
-        userLoadedError: true,
+        user: action.user
       };
     case types.LOGIN_FAILURE:
       return {
@@ -46,7 +34,7 @@ export default (
         isLoggingIn: false,
         isAuthenticated: false,
         loginError: true,
-        signUpError: null,
+        signUpError: false
       };
     case types.SIGNUP_FAILURE:
       return {
@@ -54,37 +42,37 @@ export default (
         isLoggingIn: false,
         isAuthenticated: false,
         loginError: false,
-        signUpError: action.message,
+        signUpError: true
       };
     case types.LOGOUT_REQUEST:
       return {
         ...state,
         isLoggingOut: true,
-        logoutError: false,
+        logoutError: false
       };
     case types.LOGOUT_SUCCESS:
       return {
         ...state,
         isLoggingOut: false,
         isAuthenticated: false,
-        user: {},
+        user: {}
       };
     case types.LOGOUT_FAILURE:
       return {
         ...state,
         isLoggingOut: false,
-        logoutError: true,
+        logoutError: true
       };
     case types.VERIFY_REQUEST:
       return {
         ...state,
         isVerifying: true,
-        verifyingError: false,
+        verifyingError: false
       };
     case types.VERIFY_SUCCESS:
       return {
         ...state,
-        isVerifying: false,
+        isVerifying: false
       };
     default:
       return state;
