@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import {
-  Route, Switch, Redirect, HashRouter as Router
+  Route,
+  Switch,
+  Redirect,
+  HashRouter as Router,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TestData from 'assets/data/TestData.json';
@@ -60,7 +63,15 @@ function App(props) {
           isVerifying={isVerifying}
         />
         <ProtectedRoute
+          exact
           path={ROUTES.ADD_EDIT_ITEM}
+          component={AddEditItem}
+          isAuthenticated={isAuthenticated}
+          isVerifying={isVerifying}
+        />
+        <ProtectedRoute
+          exact
+          path={ROUTES.EDIT_ITEM}
           component={AddEditItem}
           isAuthenticated={isAuthenticated}
           isVerifying={isVerifying}
