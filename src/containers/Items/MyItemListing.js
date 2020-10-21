@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
   myitems: state.item.myitems,
   _id: state.auth.user.uid,
   address: state.user.address,
-  addrstatus: state.user.address.addrstatus
+  addrstatus: state.user.addrstatus
 });
 
 const mapDispatchToProps = dispatch => ({
