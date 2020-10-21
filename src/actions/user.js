@@ -5,9 +5,20 @@ Geocode.setLanguage('en');
 Geocode.enableDebug();
 
 export const types = {
+  USER_LOADED: 'USER_LOADED',
+  USER_LOAD_FAILURE: 'USER_LOAD_FAILURE',
   GET_USER_ADDRESS: 'GET_USER_ADDRESS',
   GET_USER_ADDRESS_ERROR: 'GET_USER_ADDRESS_ERROR'
 };
+
+export const userLoaded = user => ({
+  type: types.USER_LOADED,
+  user
+});
+
+export const userLoadError = () => ({
+  type: types.USER_LOAD_FAILURE
+});
 
 export const getAddress = postcode => async dispatch => {
   Geocode.fromAddress(postcode).then(
@@ -29,18 +40,3 @@ export const getAddress = postcode => async dispatch => {
     }
   );
 };
-
-export const types = {
-  USER_LOADED: 'USER_LOADED',
-  USER_LOAD_FAILURE: 'USER_LOAD_FAILURE'
-};
-
-export const userLoaded = user => ({
-  type: types.USER_LOADED,
-  user
-});
-
-export const userLoadError = () => ({
-  type: types.USER_LOAD_FAILURE
-});
-
