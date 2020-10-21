@@ -16,10 +16,11 @@ import Paginations from 'components/MaterialKitComponents/Pagination/Pagination'
 import {
   cardTitle,
   cardLink,
-  cardSubtitle,
+  cardSubtitle
 } from 'assets/jss/material-kit-react';
 import Slider from 'nouislider';
 import PropTypes from 'prop-types';
+import Spinner from '../Layout/Spinner';
 
 const styles = {
   ...profile,
@@ -27,14 +28,22 @@ const styles = {
   cardLink,
   cardSubtitle,
   textLeft: {
-    textAlign: 'left',
-  },
+    textAlign: 'left'
+  }
 };
 
 const useStyles = makeStyles(styles);
 
-function ItemListings({ getItems, items }) {
-console.log(items);
+function ItemListings({
+  getItems,
+  items,
+  searchItems,
+  search,
+  searchCount,
+  filters,
+  loading
+}) {
+  console.log(filters);
   const classes = useStyles();
 
   const [sortBy, setSortBy] = useState('Distance');
@@ -44,7 +53,7 @@ console.log(items);
   const [expiry, setExpiry] = useState('');
 
   const handleGetItems = async () => {
-    getItems();
+    searchItems();
   };
 
   const onChangeHandler = event => {
@@ -59,8 +68,8 @@ console.log(items);
         start: `${distance}`,
         format: {
           from: Number,
-          to: val => `${val.toFixed(2)} ${value === 'Miles' ? 'mi' : 'km'}`,
-        },
+          to: val => `${val.toFixed(2)} ${value === 'Miles' ? 'mi' : 'km'}`
+        }
       });
     } else if (name === 'category') {
       setCategory(value);
@@ -78,23 +87,25 @@ console.log(items);
       start: `${distance}`,
       format: {
         from: Number,
-        to: value => `${value.toFixed(2)} ${unit === 'Miles' ? 'mi' : 'km'}`,
+        to: value => `${value.toFixed(2)} ${unit === 'Miles' ? 'mi' : 'km'}`
       },
       keyboardSupport: true,
       connect: [true, false],
       range: {
         min: 0,
-        max: 5,
+        max: 5
       },
       tooltips: true,
       pips: {
         mode: 'steps',
         stepped: true,
-        density: 10,
-      },
+        density: 10
+      }
     });
     // set the Distance State when slider value changed
-    distanceSlider.noUiSlider.on('change', () => setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, '')));
+    distanceSlider.noUiSlider.on('change', () =>
+      setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, ''))
+    );
     // eslint-disable-next-line
   }, []);
 
@@ -119,7 +130,7 @@ console.log(items);
                   </Select>
                 </FormControl>
                 <InputLabel className={classes.filterLabel}>
-                  Distance
+                  Max Distance
                 </InputLabel>
                 <FormControl fullWidth>
                   <div
@@ -179,7 +190,7 @@ console.log(items);
               spacing={1}
             >
               <GridItem xs={12} sm={12} md={8}>
-                <h6>18 ITEMS FOUND</h6>
+                <h6>{searchCount} ITEMS FOUND</h6>
               </GridItem>
               <GridItem xs={12} sm={12} md={4}>
                 {/* <InputLabel className={classes.filterLabel}>Sort By</InputLabel> */}
@@ -196,26 +207,32 @@ console.log(items);
                   </Select>
                 </FormControl>
               </GridItem>
-              {items.map((item) => (
-                <GridItem xs={12} sm={6} md={4}>
-                  <Card className={classes.textLeft}>
-                    <CardBody>
-                      <h4 className={classes.cardTitle}>Card Title</h4>
-                      <h6 className={classes.cardSubtitle}>Card Subtitle</h6>
-                      <p>
-                        {item.description}
-                      </p>
-                      <a
-                        href="#pablo"
-                        className={classes.cardLink}
-                        onClick={e => e.preventDefault()}
-                      >
-                        View Item
-                      </a>
-                    </CardBody>
-                  </Card>
-                </GridItem>
-              ))}
+              {loading ? (
+                <Spinner />
+              ) : (
+                <>
+                  {search.map(item => (
+                    <GridItem xs={12} sm={6} md={4} key={item._id}>
+                      <Card className={classes.textLeft}>
+                        <CardBody>
+                          <h4 className={classes.cardTitle}>Card Title</h4>
+                          <h6 className={classes.cardSubtitle}>
+                            Card Subtitle
+                          </h6>
+                          <p>{item.description}</p>
+                          <a
+                            href="#pablo"
+                            className={classes.cardLink}
+                            onClick={e => e.preventDefault()}
+                          >
+                            View Item
+                          </a>
+                        </CardBody>
+                      </Card>
+                    </GridItem>
+                  ))}
+                </>
+              )}
             </GridItem>
             <GridItem
               xs={12}
@@ -233,7 +250,7 @@ console.log(items);
                   { text: 3 },
                   { text: 4 },
                   { text: 5 },
-                  { text: 'NEXT' },
+                  { text: 'NEXT' }
                 ]}
                 color="primary"
               />
@@ -246,7 +263,7 @@ console.log(items);
 }
 
 ItemListings.propTypes = {
-  getItems: PropTypes.func,
+  getItems: PropTypes.func
 };
 
 export default ItemListings;
