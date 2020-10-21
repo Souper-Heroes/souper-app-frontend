@@ -3,12 +3,12 @@ import { types } from '../actions/item';
 import { types as authTypes } from '../actions/auth';
 
 const initialState = {
-  myitems: [],
+  myitems: {},
   loading: true,
   items: [],
   search: [],
   filters: {
-    unit: 'miles',
+    unit: 'Miles',
     distance: 2,
     category: [],
     expiry: ''
@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
     case authTypes.LOGOUT_SUCCESS:
       return {
         ...initialState,
-        filters: {}
+        loading: false
       };
     case types.SEARCH_ITEMS_REQUEST:
       return {

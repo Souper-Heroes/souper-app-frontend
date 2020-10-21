@@ -32,6 +32,11 @@ const styles = {
   }
 };
 
+const conversionMeters = {
+  miles: 0.00062137,
+  kilometers: 1000
+};
+
 const useStyles = makeStyles(styles);
 
 function ItemListings({
@@ -43,17 +48,22 @@ function ItemListings({
   filters,
   loading
 }) {
-  console.log(filters);
   const classes = useStyles();
-
   const [sortBy, setSortBy] = useState('Distance');
-  const [distance, setDistance] = useState(2);
-  const [unit, setUnit] = useState('Miles');
+  const [distance, setDistance] = useState(filters.distance);
+  const [unit, setUnit] = useState(filters.unit);
   const [category, setCategory] = useState('');
-  const [expiry, setExpiry] = useState('');
+  const [expiry, setExpiry] = useState(filters.expiry);
 
   const handleGetItems = async () => {
-    searchItems();
+    searchItems({
+      unit,
+      maxDistance: (
+        unit === 'Miles' ? distance / conversionMeters.miles : distance * conversionMeters.kilometers
+      ),
+      long: 0.18387,
+      latt: 51.57415
+    });
   };
 
   const onChangeHandler = event => {

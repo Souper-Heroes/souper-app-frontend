@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getItems: () => dispatch(getItems()),
-  searchItems: () => dispatch(searchItems())
+  searchItems: filterOptions => dispatch(searchItems(filterOptions))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemListings);
