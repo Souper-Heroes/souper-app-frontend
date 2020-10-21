@@ -53,6 +53,15 @@ const categoryOptions = [
 const useStyles = makeStyles(styles);
 
 export default function AddEditItem({ addItem, id, item }) {
+  // debug
+  //if (process.env.NODE_ENV === 'production') {
+
+  // Do item specific formatting
+  if (item) {
+    item.expiry = moment(item.expiry).format('DD/MM/yyyy');
+  }
+
+  // TODO - add location here as we don't want to change it on edit.
   //const [location, setLocation] = useState({});
   const [postcode, setPostcode] = useState(item ? item.postcode : '');
   const [availability, setAvailability] = useState(
@@ -63,38 +72,31 @@ export default function AddEditItem({ addItem, id, item }) {
   const [expiry, setExpiry] = useState(item ? item.expiry : '');
   const [category, setCategory] = useState(item ? item.category : []);
 
-  if (item) {
-    console.log(item);
-    // setTitle(item.title);
-  }
   const classes = useStyles();
 
   const handleTitleChange = e => {
-    // console.log(e.target.value);
     setTitle(e.target.value);
   };
 
   const handleDescriptionChange = e => {
-    // console.log(e.target.value);
     setDescription(e.target.value);
   };
 
-  const onTagsChange = (event, values) => {
+  const onCategoryChange = (event, values) => {
     setCategory(values);
   };
 
   const handleExpiryChange = value => {
-    // console.log(newDate);
     setExpiry(moment(value._d));
   };
 
+  // Prevent the user from entering dates in the past.
   const yesterday = moment().subtract(1, 'day');
   function valid(current) {
     return current.isAfter(yesterday);
   }
 
   const handleAvailChange = e => {
-    // console.log(e.target.value);
     setAvailability(e.target.value);
   };
 
@@ -162,7 +164,7 @@ export default function AddEditItem({ addItem, id, item }) {
                 id="checkboxes"
                 options={categoryOptions}
                 disableCloseOnSelect
-                onChange={onTagsChange}
+                onChange={onCategoryChange}
                 value={category}
                 getOptionLabel={option => option.title}
                 renderOption={(option, { selected }) => (
