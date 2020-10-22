@@ -1,34 +1,71 @@
 import moment from 'moment';
 import { types } from '../actions/item';
+import { types as authTypes } from '../actions/auth';
 
 const initialState = {
   myitems: [],
   loading: true,
   items: [],
+  search: [],
+  filters: {
+    unit: 'Miles',
+    distance: 2,
+    category: '',
+    expiry: '',
+    long: 0,
+    latt: 0
+  },
+  error: {}
 };
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    case authTypes.LOGOUT_SUCCESS:
+      return {
+        ...initialState,
+        loading: false
+      };
+    case types.SEARCH_ITEMS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case types.SEARCH_ITEMS:
+      return {
+        ...state,
+        search: payload,
+        loading: false,
+        filters: action.filters
+      };
+    case types.SEARCH_ITEMS_ERROR:
+      return {
+        ...state,
+        error: payload,
+        loading: false
+      };
     case types.GET_ITEMS:
       return {
         ...state,
         items: payload,
+        loading: false
       };
     case types.GET_MY_ITEMS:
       return {
         ...state,
         myitems: payload,
-        loading: false,
+        loading: false
       };
     case types.GET_ITEMS_ERROR:
       return {
+        ...state,
         items: payload,
+        loading: false
       };
     case types.GET_DELETE_ITEM_ERROR:
       return {
         ...state,
-        msg: payload.msg,
+        msg: payload.msg
       };
     case types.UPDATE_COLLECTDATES:
       return {
@@ -43,10 +80,10 @@ export default (state = initialState, action) => {
               return updItem;
             }
             return myItem;
-          }),
+          })
           // items: [...state.items.filter(item => item._id === action._id).map(),],
         ],
-        success: true,
+        success: true
       };
     case types.UNRESERVE_ITEM:
       return {
@@ -54,7 +91,7 @@ export default (state = initialState, action) => {
         ...state,
         myitems: state.myitems.filter(item => item._id !== payload._id),
         success: true,
-        citem: payload,
+        citem: payload
       };
     case types.RESERVE_ITEM:
       return {
@@ -68,16 +105,16 @@ export default (state = initialState, action) => {
               return updItem;
             }
             return myItem;
-          }),
+          })
         ],
         success: true,
-        citem: payload,
+        citem: payload
       };
     case types.DELETEITEM:
       return {
         ...state,
         myitems: state.myitems.filter(item => item._id !== action._id),
-        msg: payload.msg,
+        msg: payload.msg
       };
     case types.SORTITEM:
       if (action.menuItem === 'Category') {
@@ -91,7 +128,7 @@ export default (state = initialState, action) => {
               return -1;
             }
             return 0;
-          }),
+          })
         };
       }
       // Sort By Expiry Date
@@ -105,7 +142,7 @@ export default (state = initialState, action) => {
             return -1;
           }
           return 0;
-        }),
+        })
       };
 
     default:

@@ -10,12 +10,13 @@ const mapStateToProps = (state, ownProps) => ({
   myitems: state.item.myitems,
   item: state.item.myitems
     ? state.item.myitems.find(i => i._id === ownProps.match.params.id)
-    : null,
+    : null
 });
 
 const mapDispatchToProps = dispatch => ({
   addItem: formData => dispatch(addItem(formData)),
-  updateItem: (formData, history) => dispatch(updateItem(formData, history)),
+  updateItem: (formData, history, _id) =>
+    dispatch(updateItem(formData, history, _id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddEditItem);
