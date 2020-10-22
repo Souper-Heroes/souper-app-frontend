@@ -24,6 +24,7 @@ api.interceptors.request.use(async config => {
       config.headers['x-auth-token'] = await user.getIdToken();
     }
   } catch (error) {
+    // eslint-disable-next-line
     console.error(error);
   }
   return config;
