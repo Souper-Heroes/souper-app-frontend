@@ -124,7 +124,7 @@ function Profile({
             <div style={{ alignContent: 'flex' }}>
               <h2 className={classes.title}>  Profile  </h2>
             </div>
-            <form>
+            <form onSubmit={onSubmit}>
               <GridContainer>
                 <GridItem xs={12} md={6} align="center">
                   <img
@@ -153,6 +153,7 @@ function Profile({
                     inputProps={{
                       value: display_name,
                       name: 'display_name',
+                      required: true,
                       onChange: event => onChangeHandler(event)
                     }}
                   />
@@ -176,6 +177,7 @@ function Profile({
                     inputProps={{
                       value: postcode,
                       name: 'postcode',
+                      required: true,
                       onChange: event => onChangeHandler(event)
                     }}
                   />
@@ -187,6 +189,7 @@ function Profile({
                     }}
                     inputProps={{
                       value: address,
+                      required: true,
                       disabled: true
                     }}
                   />
@@ -221,7 +224,7 @@ function Profile({
                       onChange={event => onChangeHandler(event)}
                     />
                   </FormControl>
-                  <Button variant="contained" style={{ marginTop: 40 }} color="success" size="md" onClick={onSubmit}>
+                  <Button variant="contained" type="submit" style={{ marginTop: 40 }} color="success" size="md">
                     SAVE
                   </Button>
                 </GridItem>
@@ -239,10 +242,10 @@ Profile.propTypes = {
   initialName: PropTypes.string,
   initialPostCode: PropTypes.string,
   initialAddress: PropTypes.string,
-  initialDistance: PropTypes.string,
-  initialUnit: PropTypes.number,
+  initialDistance: PropTypes.number,
+  initialUnit: PropTypes.string,
   initialPic: PropTypes.string,
-  initialLocation: PropTypes.string,
+  initialLocation: PropTypes.instanceOf(Object),
   email: PropTypes.string
 };
 
