@@ -55,12 +55,10 @@ const useStyles = makeStyles(styles);
 export default function AddEditItem({ addItem, updateItem, item, history }) {
  
   const formatExpiry = (expiry) => {
-    // Format time so that the calendar info displays.
     return moment(expiry).format('DD/MM/yyyy')
   }; 
   
   const formatCategory = (catArr) => {
-    // Format category objects to appear in an array.
     let obj = { title: '' };
     const objArr = [];
     catArr.forEach(cat => {
@@ -68,12 +66,11 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
       item.title = cat;
       objArr.push(item);
     });
-    console.log('This one! ', objArr);
+    // console.log('This one! ', objArr);
     return objArr;
   };
 
-  // TODO - add location here as we don't want to change it on edit.
-  //const [location, setLocation] = useState({});
+  const [location, setLocation] = useState(item ? item.location : {});
   const [postcode, setPostcode] = useState(item ? item.postcode : '');
   const [availability, setAvailability] = useState(
     item ? item.availability : ''
@@ -126,10 +123,7 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
           category: category.map(cat => cat.title),
           expiry,
           postcode, 
-          location: {
-            type,
-            coordinates,
-          },
+          location,
           availability,
         },
         history,
@@ -141,7 +135,7 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
         description,
         category: category.map(cat => cat.title),
         expiry,
-        postcode: 'Postcode', // TODO - get this info from Profile
+        postcode: 'SP3 6RN', // TODO - get this info from Profile
         location: {
           type: 'Point',
           coordinates: [-112.110492, 36.098948], // TODO - get this info from Profile
