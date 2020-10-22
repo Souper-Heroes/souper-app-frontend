@@ -85,12 +85,14 @@ function ItemListings({
 
   useEffect(() => {
     const distanceSlider = document.getElementById('sliderRegular');
+    const distanceVal = 2;
+    const unitVal = 'Miles';
     // create distance Slider when component mounts
     Slider.create(distanceSlider, {
-      start: `${distance}`, // eslint-disable-line no-use-before-define
+      start: `${distanceVal}`,
       format: {
         from: Number,
-        to: value => `${value.toFixed(2)} ${unit === 'Miles' ? 'mi' : 'km'}` // eslint-disable-line no-use-before-define
+        to: value => `${value.toFixed(2)} ${unitVal === 'Miles' ? 'mi' : 'km'}`
       },
       keyboardSupport: true,
       connect: [true, false],
