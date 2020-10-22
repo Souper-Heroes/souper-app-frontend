@@ -53,24 +53,24 @@ const categoryOptions = [
 const useStyles = makeStyles(styles);
 
 export default function AddEditItem({ addItem, updateItem, item, history }) {
-  // Do item specific formatting
-  //const formatExpiry = item.expiry => {
+ 
   const formatExpiry = (expiry) => {
-    return moment(expiry).format('DD/MM/yyyy')
-  };  
     // Format time so that the calendar info displays.
-    // item.expiry = moment(item.expiry).format('DD/MM/yyyy');
-    // Format category so that the check box drop down displays it.
-    // let obj = { title: '' };
-    // const objArr = [];
-    // item.category.forEach(cat => {
-    //   const item = Object.create(obj);
-    //   item.title = cat;
-    //   objArr.push(item);
-    // });
-    // console.log('This one! ', objArr);
-    //item.category = objArr;
-  // };
+    return moment(expiry).format('DD/MM/yyyy')
+  }; 
+  
+  const formatCategory = (catArr) => {
+    // Format category objects to appear in an array.
+    let obj = { title: '' };
+    const objArr = [];
+    catArr.forEach(cat => {
+      const item = Object.create(obj);
+      item.title = cat;
+      objArr.push(item);
+    });
+    console.log('This one! ', objArr);
+    return objArr;
+  };
 
   // TODO - add location here as we don't want to change it on edit.
   //const [location, setLocation] = useState({});
@@ -84,7 +84,7 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
     item ? formatExpiry(item.expiry) : ''
   );
   const [category, setCategory] = useState(
-    item ? [{ title: 'Fruit' }, { title: 'Nuts' }, { title: 'Frozen' }] : []
+    item ? formatCategory(item.category) : []
   );
 
   const classes = useStyles();
@@ -125,10 +125,10 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
           description,
           category: category.map(cat => cat.title),
           expiry,
-          postcode: 'Postcode', // TODO - get this info from Profile
+          postcode: 'Postcode', 
           location: {
             type: 'Point',
-            coordinates: [-112.110492, 36.098948], // TODO - get this info from Profile
+            coordinates: [-112.110492, 36.098948], 
           },
           availability,
         },
