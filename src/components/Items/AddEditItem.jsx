@@ -125,10 +125,10 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
           description,
           category: category.map(cat => cat.title),
           expiry,
-          postcode: 'Postcode', 
+          postcode, 
           location: {
-            type: 'Point',
-            coordinates: [-112.110492, 36.098948], 
+            type,
+            coordinates,
           },
           availability,
         },
