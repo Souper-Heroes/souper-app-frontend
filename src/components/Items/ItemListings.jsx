@@ -87,10 +87,10 @@ function ItemListings({
     const distanceSlider = document.getElementById('sliderRegular');
     // create distance Slider when component mounts
     Slider.create(distanceSlider, {
-      start: `${filters.distance}`,
+      start: `${distance}`, // eslint-disable-line no-use-before-define
       format: {
         from: Number,
-        to: value => `${value.toFixed(2)} ${filters.unit === 'Miles' ? 'mi' : 'km'}`
+        to: value => `${value.toFixed(2)} ${unit === 'Miles' ? 'mi' : 'km'}` // eslint-disable-line no-use-before-define
       },
       keyboardSupport: true,
       connect: [true, false],
