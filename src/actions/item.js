@@ -18,6 +18,9 @@ export const types = {
   RESERVE_ITEM: 'RESERVE_ITEM',
   UNRESERVE_ITEM: 'UNRESERVE_ITEM',
   UNRESERVE_ITEM_ERROR: 'UNRESERVE_ITEM_ERROR',
+  SEARCH_ITEMS_REQUEST: 'SEARCH_ITEMS_REQUEST',
+  SEARCH_ITEMS: 'SEARCH_ITEMS',
+  SEARCH_ITEMS_ERROR: 'SEARCH_ITEMS_ERROR'
 };
 
 export const addItem = formData => async dispatch => {
@@ -54,41 +57,36 @@ export const getItems = () => async dispatch => {
     });
   }
 };
-
-export const getProviderItems = _id => async dispatch => {
+export const searchItems = filterOptions => async dispatch => {
   try {
-    // console.log('***** ABOUT TO CALL getProviderItems:', _id);
-
-    const res = await api.get(`/items/provider/${_id}`);
-
+    console.log(filterOptions);
     dispatch({
-      type: types.GET_PROVIDER_ITEMS,
-      payload: res.data
+      type: types.SEARCH_ITEMS_REQUEST
+    });
+    const conversion = {
+      miles: 0.00062137,
+      kilometers: 1000
+    };
+    const res = await api.get('items/search', {
+      params: {
+        maxDistance:
+          filterOptions.unit === 'Miles'
+            ? filterOptions.distance / conversion.miles
+            : filterOptions.distance * conversion.kilometers,
+        lat: filterOptions.lat,
+        long: filterOptions.long
+      }
+    });
+    dispatch({
+      type: types.SEARCH_ITEMS,
+      payload: res.data,
+      filters: filterOptions
     });
   } catch (err) {
     // do something with error
     // console.log(err);
     dispatch({
-      type: types.GET_ITEMS_ERROR
-    });
-  }
-};
-
-export const getCollectorItems = _id => async dispatch => {
-  try {
-    // onsole.log('***** ABOUT TO CALL getProviderItems:', _id);
-
-    const res = await api.get(`/items/collector/${_id}`);
-
-    dispatch({
-      type: types.GET_COLLECTOR_ITEMS,
-      payload: res.data
-    });
-  } catch (err) {
-    // do something with error
-    // console.log(err);
-    dispatch({
-      type: types.GET_ITEMS_ERROR
+      type: types.SEARCH_ITEMS_ERROR
     });
   }
 };

@@ -156,6 +156,9 @@ export const signUp = (email, password, displayName) => dispatch => {
       });
     })
     .then(user => {
+      dispatch(loadUser(user));
+    })
+    .then(user => {
       dispatch(receiveLogin(user));
     })
     .catch(error => {
