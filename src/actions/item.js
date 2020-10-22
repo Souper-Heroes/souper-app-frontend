@@ -73,7 +73,7 @@ export const searchItems = filterOptions => async dispatch => {
           filterOptions.unit === 'Miles'
             ? filterOptions.distance / conversion.miles
             : filterOptions.distance * conversion.kilometers,
-        latt: filterOptions.latt,
+        lat: filterOptions.lat,
         long: filterOptions.long
       }
     });

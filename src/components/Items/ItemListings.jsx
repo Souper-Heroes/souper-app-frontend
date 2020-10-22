@@ -55,7 +55,7 @@ function ItemListings({
       unit,
       distance,
       long: 0.18387,
-      latt: 51.57415,
+      lat: 51.57415,
       category,
       expiry
     });
@@ -194,11 +194,10 @@ function ItemListings({
               direction="row"
               spacing={1}
             >
-              <GridItem xs={12} sm={12} md={8}>
+              <GridItem xs={12} sm={6} md={8}>
                 <h6>{searchCount} ITEMS FOUND</h6>
               </GridItem>
-              <GridItem xs={12} sm={12} md={4}>
-                {/* <InputLabel className={classes.filterLabel}>Sort By</InputLabel> */}
+              <GridItem xs={12} sm={6} md={4}>
                 <FormControl fullWidth required className={classes.formControl}>
                   <Select
                     native
