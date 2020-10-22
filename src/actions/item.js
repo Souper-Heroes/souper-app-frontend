@@ -1,4 +1,3 @@
-// import * as routes from 'components/Routing/routes';
 import api from '../utils/api';
 
 export const types = {
