@@ -52,26 +52,29 @@ const categoryOptions = [
 
 const useStyles = makeStyles(styles);
 
-export default function AddEditItem({ addItem, updateItem, item, history }) {
- 
-  const formatExpiry = (expiry) => {
-    return moment(expiry).format('DD/MM/yyyy')
-  }; 
-  
-  const formatCategory = (catArr) => {
-    let obj = { title: '' };
+export default function AddEditItem(
+  {
+    addItem,
+    updateItem,
+    item,
+  }
+) {
+  const formatExpiry = expiry => moment(expiry).format('DD/MM/yyyy');
+
+  const formatCategory = catArr => {
+    const obj = { title: '' };
     const objArr = [];
     catArr.forEach(cat => {
-      const item = Object.create(obj);
-      item.title = cat;
-      objArr.push(item);
+      const itemObj = Object.create(obj);
+      itemObj.title = cat;
+      objArr.push(itemObj);
     });
     // console.log('This one! ', objArr);
     return objArr;
   };
 
-  const [location, setLocation] = useState(item ? item.location : {});
-  const [postcode, setPostcode] = useState(item ? item.postcode : '');
+  const [location] = useState(item ? item.location : {});
+  const [postcode] = useState(item ? item.postcode : '');
   const [availability, setAvailability] = useState(
     item ? item.availability : ''
   );
@@ -95,7 +98,6 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
   };
 
   const onCategoryChange = (event, values) => {
-    console.log(values);
     setCategory(values);
   };
 
@@ -115,18 +117,16 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
 
   const onSubmit = async () => {
     if (item) {
-      console.log('GOT ITEM', item);
-      const updatedItem = await updateItem(
+      await updateItem(
         {
           title,
           description,
           category: category.map(cat => cat.title),
           expiry,
-          postcode, 
+          postcode,
           location,
           availability,
         },
-        history,
         item._id
       );
     } else {
@@ -197,9 +197,7 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
                 onChange={onCategoryChange}
                 value={category}
                 getOptionLabel={option => option.title}
-                getOptionSelected={(option, value) =>
-                  option.title === value.title
-                }
+                getOptionSelected={(option, value) => option.title === value.title}
                 renderOption={(option, { selected }) => (
                   <>
                     <Checkbox
