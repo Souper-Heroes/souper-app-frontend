@@ -87,10 +87,10 @@ function ItemListings({
     const distanceSlider = document.getElementById('sliderRegular');
     // create distance Slider when component mounts
     Slider.create(distanceSlider, {
-      start: `${distance}`,
+      start: `${filters.distance}`,
       format: {
         from: Number,
-        to: value => `${value.toFixed(2)} ${unit === 'Miles' ? 'mi' : 'km'}`
+        to: value => `${value.toFixed(2)} ${filters.unit === 'Miles' ? 'mi' : 'km'}`
       },
       keyboardSupport: true,
       connect: [true, false],
