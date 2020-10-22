@@ -15,8 +15,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
   addItem: formData => dispatch(addItem(formData)),
-  updateItem: (formData, history, _id) =>
-    dispatch(updateItem(formData, history, _id))
+  updateItem: (formData, history, _id) => dispatch(updateItem(formData, history, _id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddEditItem);
