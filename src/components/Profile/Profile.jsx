@@ -12,7 +12,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { getAddressProfile } from 'actions/user';
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(styles);
 
@@ -137,7 +137,7 @@ function Profile({
                   <Button color="rose" size="md" onClick={openFileDialog}>
                     CHANGE AVATAR
                   </Button>
-                  <input type="file" ref={imageInputRef} accept=".png, .jpg, .jpeg" style={{ display: 'none' }} onChange={e => encodeImageFile(e)} />
+                  <input type="" ref={imageInputRef} accept=".png, .jpg, .jpeg" style={{ display: 'none' }} onChange={e => encodeImageFile(e)} />
                   <br />
                   <Button color="info" size="md">
                     DISABLED
