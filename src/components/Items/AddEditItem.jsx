@@ -52,46 +52,21 @@ const categoryOptions = [
 
 const useStyles = makeStyles(styles);
 
-export default function AddEditItem({ addItem, id, item }) {
-  // debug
-  //if (process.env.NODE_ENV === 'production') {
-
-  // Function to add an element to an object
-  function addValueInObject(object, key, value) {
-    var res = {};
-    var textObject = JSON.stringify(object);
-    if (textObject === '{}') {
-      res = JSON.parse('{"' + key + '":"' + value + '"}');
-    } else {
-      res = JSON.parse(
-        '{' +
-          textObject.substring(1, textObject.length - 1) +
-          ',"' +
-          key +
-          '":"' +
-          value +
-          '"}'
-      );
-    }
-    return res;
-  }
+export default function AddEditItem({ addItem, updateItem, item, history }) {
   // Do item specific formatting
   if (item) {
     // Format time so that the calendar info displays.
-    item.expiry = moment(item.expiry).format('DD/MM/yyyy');
+    // item.expiry = moment(item.expiry).format('DD/MM/yyyy');
     // Format category so that the check box drop down displays it.
-    console.log('Hello');
-    console.log(item.category);
-    let catObj = {};
-    let catArr = [];
-    item.category.forEach(cat => {
-      catObj = addValueInObject(catObj, 'title', cat);
-      catArr.push(catObj);
-    });
-    console.log('THis is the catagory Object', catObj);
-    console.log('This is the catagory Array', catArr);
-
-    item.category = catArr;
+    // let obj = { title: '' };
+    // const objArr = [];
+    // item.category.forEach(cat => {
+    //   const item = Object.create(obj);
+    //   item.title = cat;
+    //   objArr.push(item);
+    // });
+    // console.log('This one! ', objArr);
+    //item.category = objArr;
   }
 
   // TODO - add location here as we don't want to change it on edit.
@@ -102,8 +77,12 @@ export default function AddEditItem({ addItem, id, item }) {
   );
   const [title, setTitle] = useState(item ? item.title : '');
   const [description, setDescription] = useState(item ? item.description : '');
-  const [expiry, setExpiry] = useState(item ? item.expiry : '');
-  const [category, setCategory] = useState(item ? item.category : []);
+  const [expiry, setExpiry] = useState(
+    item ? moment(item.expiry).format('DD/MM/yyyy') : ''
+  );
+  const [category, setCategory] = useState(
+    item ? [{ title: 'Fruit' }, { title: 'Nuts' }, { title: 'Frozen' }] : []
+  );
 
   const classes = useStyles();
 
@@ -116,6 +95,7 @@ export default function AddEditItem({ addItem, id, item }) {
   };
 
   const onCategoryChange = (event, values) => {
+    console.log(values);
     setCategory(values);
   };
 
@@ -134,25 +114,45 @@ export default function AddEditItem({ addItem, id, item }) {
   };
 
   const onSubmit = async () => {
-    const addedItem = await addItem({
-      title,
-      description,
-      category: category.map(cat => cat.title),
-      expiry,
-      postcode: 'Postcode', // TODO - get this info from Profile
-      location: {
-        type: 'Point',
-        coordinates: [-112.110492, 36.098948], // TODO - get this info from Profile
-      },
-      availability,
-    });
-    // reset form
-    if (addedItem) {
-      setTitle('');
-      setDescription('');
-      setCategory([]);
-      setExpiry('');
-      setAvailability('');
+    if (item) {
+      console.log('GOT ITEM', item);
+      const updatedItem = await updateItem(
+        {
+          title,
+          description,
+          category: category.map(cat => cat.title),
+          expiry,
+          postcode: 'Postcode', // TODO - get this info from Profile
+          location: {
+            type: 'Point',
+            coordinates: [-112.110492, 36.098948], // TODO - get this info from Profile
+          },
+          availability,
+        },
+        history,
+        item._id
+      );
+    } else {
+      const addedItem = await addItem({
+        title,
+        description,
+        category: category.map(cat => cat.title),
+        expiry,
+        postcode: 'Postcode', // TODO - get this info from Profile
+        location: {
+          type: 'Point',
+          coordinates: [-112.110492, 36.098948], // TODO - get this info from Profile
+        },
+        availability,
+      });
+      // reset form
+      if (addedItem) {
+        setTitle('');
+        setDescription('');
+        setCategory([]);
+        setExpiry('');
+        setAvailability('');
+      }
     }
   };
 
@@ -200,6 +200,9 @@ export default function AddEditItem({ addItem, id, item }) {
                 onChange={onCategoryChange}
                 value={category}
                 getOptionLabel={option => option.title}
+                getOptionSelected={(option, value) =>
+                  option.title === value.title
+                }
                 renderOption={(option, { selected }) => (
                   <>
                     <Checkbox
@@ -296,5 +299,7 @@ export default function AddEditItem({ addItem, id, item }) {
 }
 
 AddEditItem.propTypes = {
-  addItem: PropTypes.instanceOf(Array),
+  addItem: PropTypes.func,
+  updateItem: PropTypes.func,
+  item: PropTypes.instanceOf(Array),
 };
