@@ -54,7 +54,10 @@ const useStyles = makeStyles(styles);
 
 export default function AddEditItem({ addItem, updateItem, item, history }) {
   // Do item specific formatting
-  if (item) {
+  //const formatExpiry = item.expiry => {
+  const formatExpiry = (expiry) => {
+    return moment(expiry).format('DD/MM/yyyy')
+  };  
     // Format time so that the calendar info displays.
     // item.expiry = moment(item.expiry).format('DD/MM/yyyy');
     // Format category so that the check box drop down displays it.
@@ -67,7 +70,7 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
     // });
     // console.log('This one! ', objArr);
     //item.category = objArr;
-  }
+  // };
 
   // TODO - add location here as we don't want to change it on edit.
   //const [location, setLocation] = useState({});
@@ -78,7 +81,7 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
   const [title, setTitle] = useState(item ? item.title : '');
   const [description, setDescription] = useState(item ? item.description : '');
   const [expiry, setExpiry] = useState(
-    item ? moment(item.expiry).format('DD/MM/yyyy') : ''
+    item ? formatExpiry(item.expiry) : ''
   );
   const [category, setCategory] = useState(
     item ? [{ title: 'Fruit' }, { title: 'Nuts' }, { title: 'Frozen' }] : []
