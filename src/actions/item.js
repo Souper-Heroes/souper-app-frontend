@@ -6,7 +6,8 @@ import { setAlert } from './alert';
 export const types = {
   ADD_ITEM: 'ADD_ITEM',
   ADD_ITEM_ERROR: 'ADD_ITEM_ERROR',
-  ADD_ITEM_RESET_FORM: 'ADD_ITEM_RESET_FORM',
+  UPDATE_ITEM: 'UPDATE_ITEM',
+  UPDATE_ITEM_ERROR: 'UPDATE_ITEM_ERROR',
   GET_ITEM: 'GET_ITEM',
   GET_ITEMS: 'GET_ITEMS',
   GET_ITEM_ERROR: 'GET_ITEM_ERROR',
@@ -42,6 +43,29 @@ export const addItem = formData => async dispatch => {
     });
     dispatch(
       setAlert('Item not added. Check fields and retry.', 'danger', 'alert')
+    );
+    return false;
+  }
+};
+
+export const updateItem = (formData, history, _id) => async dispatch => {
+  try {
+    console.log(formData);
+    const res = await api.put(`/items/${_id}`, formData);
+    dispatch({
+      type: types.UPDATE_ITEM,
+      payload: res.data,
+    });
+    dispatch(setAlert('Item successfuly updated.', 'info', 'alert'));
+    return true;
+  } catch (err) {
+    // do something with error
+    // console.log(err);
+    dispatch({
+      type: types.UPDATE_ITEM_ERROR,
+    });
+    dispatch(
+      setAlert('Item not updated. Check fields and retry.', 'danger', 'alert')
     );
     return false;
   }

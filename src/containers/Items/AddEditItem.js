@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import AddEditItem from 'components/Items/AddEditItem';
-import { addItem } from 'actions/item';
+import { addItem, updateItem } from 'actions/item';
 
 const mapStateToProps = (state, ownProps) => ({
   isLoggingIn: state.auth.isLoggingIn,
@@ -15,6 +15,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
   addItem: formData => dispatch(addItem(formData)),
+  updateItem: (formData, history) => dispatch(updateItem(formData, history)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddEditItem);
