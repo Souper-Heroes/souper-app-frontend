@@ -35,8 +35,6 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 function ItemListings({
-  getItems,
-  items,
   searchItems,
   search,
   searchCount,
@@ -108,10 +106,7 @@ function ItemListings({
       }
     });
     // set the Distance State when slider value changed
-    distanceSlider.noUiSlider.on('change', () =>
-      setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, ''))
-    );
-    // eslint-disable-next-line
+    distanceSlider.noUiSlider.on('change', () => setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, '')));
   }, []);
 
   return (
@@ -267,7 +262,11 @@ function ItemListings({
 }
 
 ItemListings.propTypes = {
-  getItems: PropTypes.func
+  searchItems: PropTypes.instanceOf(Object).isRequired,
+  search: PropTypes.func.isRequired,
+  searchCount: PropTypes.number.isRequired,
+  filters: PropTypes.instanceOf(Object).isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 export default ItemListings;
