@@ -215,27 +215,23 @@ function ItemListings({
               </GridItem>
               {loading ? (<Spinner />) : (
                 <>
-                  {console.log('user id:', user._id)}
                   {/* Only retrieve items not belonging to the user and not already being collected by someone else */}
                   {search.filter(item => item.c_user_uid === null && item.user_uid !== user._id).map(item => (
                     <GridItem xs={12} sm={6} md={4} key={item._id}>
                       <Card className={classes.textLeft}>
                         <CardBody>
                           <h5 className={classes.cardTitle}>{item.title}</h5>
-                          <strong>
-                            <h6 className={classes.cardSubtitle}>
-                              {`Expires: ${moment(item.expiry).format('DD/MM/YYYY')}`}
-                            </h6>
-                          </strong>
+
+                          <Typography variant="body2">
+                            {`Expires: ${moment(item.expiry).format('Do MMM YY')}`}
+                          </Typography>
+
                           <p>{item.description}</p>
-                          {console.log('Link to item:', `/itemview/${item._id}/${type}`)}
                           <Link
                             to={`/itemview/${item._id}/${type}`}
                             className={classes.link}
                           >
-                            <Typography>
-                              View Item
-                            </Typography>
+                            View Item
                           </Link>
                         </CardBody>
                       </Card>
