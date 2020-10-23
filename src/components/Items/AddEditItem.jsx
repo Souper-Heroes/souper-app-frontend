@@ -106,7 +106,7 @@ export default function AddEditItem({ addItem, updateItem, item }) {
   };
 
   const handleExpiryChange = value => {
-    setExpiry(moment(value._d));
+    setExpiry(value._d);
   };
 
   // Prevent the user from entering dates in the past.
@@ -127,7 +127,7 @@ export default function AddEditItem({ addItem, updateItem, item }) {
           title,
           description,
           category: category.map(cat => cat.title),
-          expiry,
+          expiry: moment(expiry),
           postcode,
           location,
           availability,
@@ -139,7 +139,7 @@ export default function AddEditItem({ addItem, updateItem, item }) {
         title,
         description,
         category: category.map(cat => cat.title),
-        expiry,
+        expiry: moment(expiry),
         postcode: 'SP3 6RN', // TODO - get this info from Profile
         location: {
           type: 'Point',
