@@ -47,7 +47,7 @@ const categoryOptions = [
   { title: 'Frozen' },
   { title: 'Dried' },
   { title: 'Tinned' },
-  { title: 'Packet' },
+  { title: 'Packet' }
 ];
 
 const useStyles = makeStyles(styles);
@@ -125,9 +125,9 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
           postcode: 'Postcode', // TODO - get this info from Profile
           location: {
             type: 'Point',
-            coordinates: [-112.110492, 36.098948], // TODO - get this info from Profile
+            coordinates: [-112.110492, 36.098948] // TODO - get this info from Profile
           },
-          availability,
+          availability
         },
         history,
         item._id
@@ -141,9 +141,9 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
         postcode: 'Postcode', // TODO - get this info from Profile
         location: {
           type: 'Point',
-          coordinates: [-112.110492, 36.098948], // TODO - get this info from Profile
+          coordinates: [-112.110492, 36.098948] // TODO - get this info from Profile
         },
-        availability,
+        availability
       });
       // reset form
       if (addedItem) {
@@ -164,20 +164,21 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
     <div>
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={6} className={classes.navWrapper}>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={3} className={classes.navWrapper}>
               <DropZone />
             </GridItem>
-            <GridItem xs={12} sm={6} className={classes.navWrapper}>
+            <GridItem xs={12} sm={8} className={classes.navWrapper}>
+              <Alert />
               <CustomInput
                 labelText="Title"
                 inputProps={{
                   placeholder: 'Give your item a name',
                   onChange: event => handleTitleChange(event),
-                  value: title,
+                  value: title
                 }}
                 formControlProps={{
-                  fullWidth: true,
+                  fullWidth: true
                 }}
               />
               <CustomInput
@@ -186,10 +187,10 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
                   placeholder:
                     'Describe your item, has it been opened or dropped?',
                   onChange: event => handleDescriptionChange(event),
-                  value: description,
+                  value: description
                 }}
                 formControlProps={{
-                  fullWidth: true,
+                  fullWidth: true
                 }}
               />
               <Autocomplete
@@ -223,73 +224,71 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
                   />
                 )}
               />
-            </GridItem>
-          </GridContainer>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={6} className={classes.navWrapper}>
+              <br />
               <InputLabel style={{ float: 'left' }} className={classes.label}>
                 Expiry date
               </InputLabel>
               <br />
               <FormControl fullWidth>
                 <Datetime
-                  className={classes.bottomFilter}
                   name="expiry"
                   timeFormat={false}
                   dateFormat="DD/MM/yyyy"
                   value={expiry}
                   isValidDate={valid}
                   onChange={handleExpiryChange}
-                  input={false}
+                  closeOnSelect
+                  inputProps={{ readOnly: true }}
                 />
               </FormControl>
+              <CustomInput
+                labelText="Available collection times"
+                inputProps={{
+                  placeholder:
+                    'e.g. Weekdays between 9 and 5pm, and all day Sunday',
+                  onChange: event => handleAvailChange(event),
+                  value: availability
+                }}
+                formControlProps={{
+                  fullWidth: true
+                }}
+              />
+              <CustomInput
+                labelText="Postcode"
+                name="postcode"
+                id="disabled"
+                inputProps={{
+                  disabled: true,
+                  value: postcode
+                }}
+                formControlProps={{
+                  fullWidth: true
+                }}
+              />
             </GridItem>
-            <GridItem xs={12} sm={6} container spacing={1} direction="row">
-              <GridItem xs={12}>
-                <CustomInput
-                  labelText="Available collection times"
-                  inputProps={{
-                    placeholder:
-                      'e.g. Weekdays between 9 and 5pm, and all day Sunday',
-                    onChange: event => handleAvailChange(event),
-                    value: availability,
-                  }}
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                />
-                <CustomInput
-                  labelText="Postcode"
-                  name="postcode"
-                  id="disabled"
-                  inputProps={{
-                    disabled: true,
-                    value: postcode,
-                  }}
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                />
+            <GridItem
+              xs={12}
+              sm={12}
+              md={12}
+              container
+              spacing={1}
+              direction="row-reverse"
+            >
+              <GridItem xs={12} sm={6} md={3}>
+                <Button
+                  fullWidth
+                  color="success"
+                  size="md"
+                  onClick={event => onSubmit(event)}
+                >
+                  Save
+                </Button>
               </GridItem>
-
-              <GridContainer xs={12} fullWidth align="right">
-                <GridItem xs={6} />
-                <GridItem xs={3}>
-                  <Button color="danger" size="md" onClick={onCancel}>
-                    Cancel
-                  </Button>
-                </GridItem>
-                <GridItem xs={3}>
-                  <Button
-                    color="success"
-                    size="md"
-                    onClick={event => onSubmit(event)}
-                  >
-                    Save
-                  </Button>
-                </GridItem>
-              </GridContainer>
-              <Alert />
+              <GridItem xs={12} sm={6} md={3}>
+                <Button fullWidth color="danger" size="md" onClick={onCancel}>
+                  Cancel
+                </Button>
+              </GridItem>
             </GridItem>
           </GridContainer>
         </div>
@@ -301,5 +300,5 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
 AddEditItem.propTypes = {
   addItem: PropTypes.func,
   updateItem: PropTypes.func,
-  item: PropTypes.instanceOf(Array),
+  item: PropTypes.instanceOf(Object)
 };

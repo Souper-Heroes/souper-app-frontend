@@ -295,7 +295,7 @@ export default function MyItemListing(props) {
                 </Button>
                 {type === 'provide' && (
                   <Link
-                    to={`/addEditItem/${myitem._id}`}
+                    to={`/editItem/${myitem._id}`}
                     className={classes.link}
                   >
                     <Button>
