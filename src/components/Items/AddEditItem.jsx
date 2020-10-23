@@ -51,7 +51,13 @@ const categoryOptions = [
 
 const useStyles = makeStyles(styles);
 
-export default function AddEditItem({ addItem, updateItem, item, postcode, location }) {
+export default function AddEditItem({
+  addItem,
+  updateItem,
+  item,
+  postcode,
+  location
+}) {
   const formatExpiry = expiry => moment(expiry).format('DD/MM/yyyy');
 
   const formatCategory = catArr => {
@@ -104,7 +110,7 @@ export default function AddEditItem({ addItem, updateItem, item, postcode, locat
   };
 
   const handleExpiryChange = value => {
-    setExpiry(moment(value._d));
+    setExpiry(value._d);
   };
 
   // Prevent the user from entering dates in the past.
@@ -125,7 +131,7 @@ export default function AddEditItem({ addItem, updateItem, item, postcode, locat
           title,
           description,
           category: category.map(cat => cat.title),
-          expiry,
+          expiry: moment(expiry),
           postcode,
           location,
           availability,
@@ -137,8 +143,8 @@ export default function AddEditItem({ addItem, updateItem, item, postcode, locat
         title,
         description,
         category: category.map(cat => cat.title),
-        expiry,
-        postcode, // TODO - get this info from Profile
+        expiry: moment(expiry),
+        postcode,
         location,
         availability
       });
@@ -196,9 +202,7 @@ export default function AddEditItem({ addItem, updateItem, item, postcode, locat
                   onChange={onCategoryChange}
                   value={category}
                   getOptionLabel={option => option.title}
-                  getOptionSelected={(option, value) =>
-                    option.title === value.title
-                  }
+                  getOptionSelected={(option, value) => option.title === value.title}
                   renderOption={(option, { selected }) => (
                     <>
                       <Checkbox
