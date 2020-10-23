@@ -176,7 +176,6 @@ export default function AddEditItem(
               <DropZone />
             </GridItem>
             <GridItem xs={12} sm={8} className={classes.navWrapper}>
-              <Alert />
               <CustomInput
                 labelText="Title"
                 inputProps={{
@@ -270,6 +269,7 @@ export default function AddEditItem(
                   fullWidth: true
                 }}
               />
+              <Alert />
             </GridItem>
             <GridItem
               xs={12}
@@ -279,7 +279,7 @@ export default function AddEditItem(
               spacing={1}
               direction="row-reverse"
             >
-              <GridItem xs={12} sm={6} md={3}>
+              <GridItem xs={12} sm={4} md={2}>
                 <Button
                   fullWidth
                   color="success"
@@ -289,7 +289,7 @@ export default function AddEditItem(
                   Save
                 </Button>
               </GridItem>
-              <GridItem xs={12} sm={6} md={3}>
+              <GridItem xs={12} sm={4} md={2}>
                 <Button fullWidth color="danger" size="md" onClick={onCancel}>
                   Cancel
                 </Button>
