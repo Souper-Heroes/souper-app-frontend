@@ -1,10 +1,15 @@
 import api from '../utils/api';
 
+import { setAlert } from './alert';
+
 export const types = {
   ADD_ITEM: 'ADD_ITEM',
   ADD_ITEM_ERROR: 'ADD_ITEM_ERROR',
-  ADD_ITEM_RESET_FORM: 'ADD_ITEM_RESET_FORM',
+  UPDATE_ITEM: 'UPDATE_ITEM',
+  UPDATE_ITEM_ERROR: 'UPDATE_ITEM_ERROR',
+  GET_ITEM: 'GET_ITEM',
   GET_ITEMS: 'GET_ITEMS',
+  GET_ITEM_ERROR: 'GET_ITEM_ERROR',
   GET_ITEMS_ERROR: 'GET_ITEMS_ERROR',
   GET_DELETE_ITEM_ERROR: 'GET_DELETE_ITEM_ERROR',
   GET_MY_ITEMS: 'GET_MY_ITEMS',
@@ -27,11 +32,13 @@ export const types = {
 
 export const addItem = formData => async dispatch => {
   try {
+    console.log(formData);
     const res = await api.post('/items', formData);
     dispatch({
       type: types.ADD_ITEM,
       payload: res.data
     });
+    dispatch(setAlert('Item successfuly added.', 'success', 'alert'));
     return true;
   } catch (err) {
     // do something with error
@@ -39,6 +46,31 @@ export const addItem = formData => async dispatch => {
     dispatch({
       type: types.ADD_ITEM_ERROR
     });
+    dispatch(
+      setAlert('Item not added. Check fields and retry.', 'warning', 'alert')
+    );
+    return false;
+  }
+};
+
+export const updateItem = (formData, _id) => async dispatch => {
+  try {
+    const res = await api.put(`/items/${_id}`, formData);
+    dispatch({
+      type: types.UPDATE_ITEM,
+      payload: res.data
+    });
+    dispatch(setAlert('Item successfuly updated.', 'success', 'alert'));
+    return true;
+  } catch (err) {
+    // do something with error
+    console.log(err);
+    dispatch({
+      type: types.UPDATE_ITEM_ERROR
+    });
+    dispatch(
+      setAlert('Item not updated. Check fields and retry.', 'warning', 'alert')
+    );
     return false;
   }
 };
