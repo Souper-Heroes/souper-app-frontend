@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import React from 'react';
 // react components for routing our app without refresh
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
