@@ -51,9 +51,8 @@ export const addItem = formData => async dispatch => {
   }
 };
 
-export const updateItem = (formData, history, _id) => async dispatch => {
+export const updateItem = (formData, _id) => async dispatch => {
   try {
-    console.log(formData);
     const res = await api.put(`/items/${_id}`, formData);
     dispatch({
       type: types.UPDATE_ITEM,
@@ -63,7 +62,7 @@ export const updateItem = (formData, history, _id) => async dispatch => {
     return true;
   } catch (err) {
     // do something with error
-    // console.log(err);
+    console.log(err);
     dispatch({
       type: types.UPDATE_ITEM_ERROR
     });

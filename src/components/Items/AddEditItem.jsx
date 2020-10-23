@@ -52,36 +52,38 @@ const categoryOptions = [
 
 const useStyles = makeStyles(styles);
 
-export default function AddEditItem({ addItem, updateItem, item, history }) {
-  // Do item specific formatting
-  if (item) {
-    // Format time so that the calendar info displays.
-    // item.expiry = moment(item.expiry).format('DD/MM/yyyy');
-    // Format category so that the check box drop down displays it.
-    // let obj = { title: '' };
-    // const objArr = [];
-    // item.category.forEach(cat => {
-    //   const item = Object.create(obj);
-    //   item.title = cat;
-    //   objArr.push(item);
-    // });
-    // console.log('This one! ', objArr);
-    //item.category = objArr;
+export default function AddEditItem(
+  {
+    addItem,
+    updateItem,
+    item,
   }
+) {
+  const formatExpiry = expiry => moment(expiry).format('DD/MM/yyyy');
 
-  // TODO - add location here as we don't want to change it on edit.
-  //const [location, setLocation] = useState({});
-  const [postcode, setPostcode] = useState(item ? item.postcode : '');
+  const formatCategory = catArr => {
+    const obj = { title: '' };
+    const objArr = [];
+    catArr.forEach(cat => {
+      const itemObj = Object.create(obj);
+      itemObj.title = cat;
+      objArr.push(itemObj);
+    });
+    return objArr;
+  };
+
+  const [location] = useState(item ? item.location : {});
+  const [postcode] = useState(item ? item.postcode : '');
   const [availability, setAvailability] = useState(
     item ? item.availability : ''
   );
   const [title, setTitle] = useState(item ? item.title : '');
   const [description, setDescription] = useState(item ? item.description : '');
   const [expiry, setExpiry] = useState(
-    item ? moment(item.expiry).format('DD/MM/yyyy') : ''
+    item ? formatExpiry(item.expiry) : ''
   );
   const [category, setCategory] = useState(
-    item ? [{ title: 'Fruit' }, { title: 'Nuts' }, { title: 'Frozen' }] : []
+    item ? formatCategory(item.category) : []
   );
 
   const classes = useStyles();
@@ -95,7 +97,6 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
   };
 
   const onCategoryChange = (event, values) => {
-    console.log(values);
     setCategory(values);
   };
 
@@ -115,21 +116,16 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
 
   const onSubmit = async () => {
     if (item) {
-      console.log('GOT ITEM', item);
-      const updatedItem = await updateItem(
+      await updateItem(
         {
           title,
           description,
           category: category.map(cat => cat.title),
           expiry,
-          postcode: 'Postcode', // TODO - get this info from Profile
-          location: {
-            type: 'Point',
-            coordinates: [-112.110492, 36.098948] // TODO - get this info from Profile
-          },
-          availability
+          postcode,
+          location,
+          availability,
         },
-        history,
         item._id
       );
     } else {
@@ -138,7 +134,7 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
         description,
         category: category.map(cat => cat.title),
         expiry,
-        postcode: 'Postcode', // TODO - get this info from Profile
+        postcode: 'SP3 6RN', // TODO - get this info from Profile
         location: {
           type: 'Point',
           coordinates: [-112.110492, 36.098948] // TODO - get this info from Profile
@@ -201,9 +197,7 @@ export default function AddEditItem({ addItem, updateItem, item, history }) {
                 onChange={onCategoryChange}
                 value={category}
                 getOptionLabel={option => option.title}
-                getOptionSelected={(option, value) =>
-                  option.title === value.title
-                }
+                getOptionSelected={(option, value) => option.title === value.title}
                 renderOption={(option, { selected }) => (
                   <>
                     <Checkbox
