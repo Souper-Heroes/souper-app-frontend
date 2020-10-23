@@ -51,8 +51,7 @@ const categoryOptions = [
 
 const useStyles = makeStyles(styles);
 
-export default function AddEditItem({ addItem, updateItem, item, postcode }) {
-
+export default function AddEditItem({ addItem, updateItem, item, postcode, location }) {
   const formatExpiry = expiry => moment(expiry).format('DD/MM/yyyy');
 
   const formatCategory = catArr => {
@@ -65,8 +64,6 @@ export default function AddEditItem({ addItem, updateItem, item, postcode }) {
     });
     return objArr;
   };
-
-  const [location] = useState(item ? item.location : {});
 
   const [availability, setAvailability] = useState(
     item ? item.availability : ''
@@ -142,10 +139,7 @@ export default function AddEditItem({ addItem, updateItem, item, postcode }) {
         category: category.map(cat => cat.title),
         expiry,
         postcode, // TODO - get this info from Profile
-        location: {
-          type: 'Point',
-          coordinates: [-112.110492, 36.098948] // TODO - get this info from Profile
-        },
+        location,
         availability
       });
       // reset form
@@ -301,5 +295,6 @@ AddEditItem.propTypes = {
   addItem: PropTypes.func,
   updateItem: PropTypes.func,
   item: PropTypes.instanceOf(Object),
-  postcode: PropTypes.string
+  postcode: PropTypes.string,
+  location: PropTypes.instanceOf(Object)
 };
