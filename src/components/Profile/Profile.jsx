@@ -31,10 +31,11 @@ function Profile({
   const [preferred_distance, setDistance] = useState(initialDistance);
   const [preferred_distance_unit, setUnit] = useState(initialUnit);
   const [profile_pic, setProfilePic] = useState(initialPic);
-  const [successOpen, setSuccessOpen] = React.useState(false);
-  let location = initialLocation;
+  const [successOpen, setSuccessOpen] = useState(false);
+  const [location, setLocation] = useState(initialLocation);
 
   const imageInputRef = useRef();
+  const postCodeRef = useRef();
 
   const classes = useStyles();
 
@@ -68,7 +69,6 @@ function Profile({
     } else if (nameInput === 'postcode') {
       setPostCode(value);
       setAddress('');
-      location = {};
     }
   };
 
@@ -88,9 +88,11 @@ function Profile({
   };
 
   const searchAddress = async () => {
-    const addressUpdated = await getAddressProfile(postcode);
-    setAddress(addressUpdated.address);
-    location = addressUpdated.location;
+    if (postCodeRef.current.reportValidity()) {
+      const addressUpdated = await getAddressProfile(postcode);
+      setAddress(addressUpdated.address);
+      setLocation(addressUpdated.location);
+    }
   };
 
   const onSubmit = async e => {
@@ -156,15 +158,11 @@ function Profile({
                     CHANGE AVATAR
                   </Button>
                   <input type="file" ref={imageInputRef} accept=".png, .jpg, .jpeg" style={{ display: 'none' }} onChange={e => encodeImageFile(e)} />
-                  <br />
-                  <Button color="info" size="md">
-                    DISABLED
-                  </Button>
                 </GridItem>
                 <GridItem xs={12} md={6} align="right">
                   <CustomInput
                     labelText="Name"
-                    id="fullName"
+                    id="display_name"
                     formControlProps={{
                       fullWidth: true,
                     }}
@@ -203,6 +201,7 @@ function Profile({
                       value={postcode}
                       name="postcode"
                       required
+                      ref={postCodeRef}
                       style={{ zIndex: -1, opacity: 0, position: 'absolute' }}
                       onChange={() => ({})}
                       title="Please enter a valid UK postcode"
@@ -237,10 +236,10 @@ function Profile({
                   >
                     Search address
                   </Button>
-                  <InputLabel id="demo-simple-select-label" style={{ marginTop: 15 }}>
+                  <InputLabel id="demo-simple-select-label" style={{ marginTop: 25, fontSize: 13 }}>
                     Maximum distance you would travel for an item
                   </InputLabel>
-                  <FormControl required className={classes.formControl} style={{ marginBottom: 20 }}>
+                  <FormControl required className={classes.formControl} style={{ marginBottom: 25 }}>
                     <Select
                       native
                       value={preferred_distance_unit}
