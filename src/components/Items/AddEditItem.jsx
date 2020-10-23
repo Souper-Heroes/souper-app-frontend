@@ -270,7 +270,6 @@ export default function AddEditItem({ addItem, updateItem, item }) {
                     fullWidth: true
                   }}
                 />
-                <Alert />
               </GridItem>
               <GridItem
                 xs={12}
@@ -291,6 +290,7 @@ export default function AddEditItem({ addItem, updateItem, item }) {
                   </Button>
                 </GridItem>
               </GridItem>
+              <Alert />
             </GridContainer>
           </form>
         </div>
