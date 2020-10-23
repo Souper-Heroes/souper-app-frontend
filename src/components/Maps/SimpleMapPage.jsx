@@ -10,12 +10,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // const AnyReactComponent = ({ text }) => <div>{text}</div>;
 // TODO destructure 'userLoaded' which holds the logged in users default location
-export default function SimpleMapPage({ _id, myitems }) {
+export default function SimpleMapPage({ _id, myitems, user }) {
   const classes = makeStyles(styles);
   const defaultProps = {
     center: {
-      lat: 51.562908, // TODO userLoaded.location.coordinates[0], // lat: 51.562908,
-      lng: 0.21727 // TODO userLoaded.location.coordinates[1] // lng: 0.21727
+      lat: user.location.coordinates[1], // lat: 51.562908,
+      lng: user.location.coordinates[0] // lng: 0.21727
     },
     zoom: 11
   };
@@ -57,7 +57,7 @@ export default function SimpleMapPage({ _id, myitems }) {
 
 SimpleMapPage.propTypes = {
   _id: PropTypes.string,
-  // userLoaded: PropTypes.instanceOf(Object),
+  user: PropTypes.instanceOf(Object),
   myitems: PropTypes.instanceOf(Object)
 };
 
