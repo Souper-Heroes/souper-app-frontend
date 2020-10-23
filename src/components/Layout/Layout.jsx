@@ -8,6 +8,7 @@ import Parallax from 'components/MaterialKitComponents/Parallax/Parallax';
 import * as ROUTES from 'components/Routing/routes';
 import citrus from 'assets/img/citrus-fruit.jpg';
 import PropTypes from 'prop-types';
+import Alert from 'components/Alert/Alert';
 
 const Layout = ({ children }) => {
   const history = useHistory();
@@ -20,6 +21,7 @@ const Layout = ({ children }) => {
 
   return (
     <div>
+      <Alert />
       <Header
         brand={<Restaurant onClick={redirectToDashboard} />}
         color="rose"

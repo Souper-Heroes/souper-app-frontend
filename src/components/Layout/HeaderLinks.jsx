@@ -45,7 +45,7 @@ export default function HeaderLinks({logout, display_name}) {
             <Link to={ROUTES.ITEM_LIST} className={classes.dropdownLink}>
               My Items
             </Link>,
-            <Link to={ROUTES.ADD_EDIT_ITEM} className={classes.dropdownLink}>
+            <Link to={ROUTES.ADD_ITEM} className={classes.dropdownLink}>
               Add Items
             </Link>,
             <a onClick={logmeout} className={classes.dropdownLink}>
