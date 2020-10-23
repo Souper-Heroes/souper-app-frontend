@@ -7,8 +7,6 @@ import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
 
-import Alert from 'components/Alert/Alert';
-
 // Material Kit components
 import Button from 'components/MaterialKitComponents/CustomButtons/Button';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
@@ -290,7 +288,6 @@ export default function AddEditItem({ addItem, updateItem, item }) {
                   </Button>
                 </GridItem>
               </GridItem>
-              <Alert />
             </GridContainer>
           </form>
         </div>
