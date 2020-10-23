@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 // import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
@@ -10,8 +11,8 @@ import styles from 'assets/jss/Items/views/ItemViewPage';
 import banana from 'assets/img/purple-banana.jpg';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import * as ROUTES from 'components/Routing/routes';
 
-// import * as routes from 'components/Routing/routes';
 const useStyles = makeStyles(styles);
 
 export default function ItemViewPage({
@@ -22,32 +23,27 @@ export default function ItemViewPage({
   unreserveItem,
   reserveItem
 }) {
-  // console.log('ITEM VIEW PAGE PROPS', props);
   const [isDisableAmendBtn, setIsDisableAmendBtn] = useState(true);
 
+  const history = useHistory();
   const classes = useStyles();
 
-  // console.log("MY VIEW PAGE ITEM:", item);
-
   if (item == null) {
-    // console.log("My Item is null redirecting to ITEM_LIST");
-    // return <Redirect to={routes.ITEM_LIST} />;
-    window.history.back();
+    // window.history.back();
+    history.push(ROUTES.ITEM_LIST);
   }
-
-  // console.log("*** ITEM:", item);
 
   const handleOnClickReserve = e => {
     e.preventDefault();
     reserveItem(item._id);
-    window.history.back();
+    // window.history.back();
+    history.push(ROUTES.ITEM_LIST);
   };
 
   const handleOnClickUnreserve = e => {
-    // console.log(`Clicked Reserve Account, do something with DisplayName: `);
     e.preventDefault();
     unreserveItem(item._id);
-    window.history.back();
+    history.push(ROUTES.DASHBOARD);
   };
 
   const handleOnClickAmendTime = id => {
@@ -57,7 +53,6 @@ export default function ItemViewPage({
   };
 
   const handleOnClickCancel = () => {
-    // console.log(`Clicked Cancel Account, do something with DisplayName: `);
     window.history.back();
   };
 
