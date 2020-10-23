@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
     history.push(ROUTES.DASHBOARD);
   };
   const redirectToAddItem = () => {
-    history.push(ROUTES.ADD_EDIT_ITEM);
+    history.push(ROUTES.ADD_ITEM);
   };
 
   return (
