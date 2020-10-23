@@ -24,7 +24,8 @@ export default function CustomInput(props) {
     error,
     white,
     inputRootCustomClasses,
-    success
+    success,
+    children
   } = props;
 
   const labelClasses = classNames({
@@ -74,6 +75,7 @@ export default function CustomInput(props) {
         id={id}
         {...inputProps}
       />
+      { children }
     </FormControl>
   );
 }
@@ -87,5 +89,6 @@ CustomInput.propTypes = {
   inputRootCustomClasses: PropTypes.string,
   error: PropTypes.bool,
   success: PropTypes.bool,
-  white: PropTypes.bool
+  white: PropTypes.bool,
+  children: PropTypes.node
 };

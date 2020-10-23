@@ -1,4 +1,3 @@
-// import * as routes from 'components/Routing/routes';
 import api from '../utils/api';
 
 import { setAlert } from './alert';
@@ -21,8 +20,11 @@ export const types = {
   SORTITEM: 'SORTITEM',
   UPDATE_COLLECTDATES: 'UPDATE_COLLECTDATES',
   RESERVE_ITEM: 'RESERVE_ITEM',
+  RESERVE_ITEM_ERROR: 'RESERVE_ITEM_ERROR',
   UNRESERVE_ITEM: 'UNRESERVE_ITEM',
   UNRESERVE_ITEM_ERROR: 'UNRESERVE_ITEM_ERROR',
+  DELETE_EXPIRED_ITEMS: 'DELETE_EXPIRED_ITEMS',
+  DELETE_EXPIRED_ITEMS_ERROR: 'DELETE_EXPIRED_ITEMS_ERROR',
   SEARCH_ITEMS_REQUEST: 'SEARCH_ITEMS_REQUEST',
   SEARCH_ITEMS: 'SEARCH_ITEMS',
   SEARCH_ITEMS_ERROR: 'SEARCH_ITEMS_ERROR'
@@ -91,7 +93,6 @@ export const getItems = () => async dispatch => {
 };
 export const searchItems = filterOptions => async dispatch => {
   try {
-    console.log(filterOptions);
     dispatch({
       type: types.SEARCH_ITEMS_REQUEST
     });
@@ -180,7 +181,7 @@ export const reserveItem = _id => async dispatch => {
     // do something with error
     // console.log(err);
     dispatch({
-      type: types.GET_ITEMS_ERROR // TODO set the correct ERROR FOR UPDATE
+      type: types.RESERVE_ITEM_ERROR
     });
   }
 };
@@ -195,7 +196,22 @@ export const unreserveItem = _id => async dispatch => {
     });
   } catch (err) {
     dispatch({
-      type: types.UNRESERVE_ITEM_ERROR // TODO set the correct ERROR FOR UPDATE
+      type: types.UNRESERVE_ITEM_ERROR
+    });
+  }
+};
+
+export const deleteExpiredItems = _id => async dispatch => {
+  try {
+    const res = await api.delete(`/items/expired/${_id}`);
+
+    dispatch({
+      type: types.DELETE_EXPIRED_ITEMS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: types.DELETE_EXPIRED_ITEMS_ERROR
     });
   }
 };

@@ -69,7 +69,7 @@ export default (state = initialState, action) => {
       };
     case types.UPDATE_COLLECTDATES:
       return {
-        // TODO should call axios api function to update bbackend with new preferred Collect time for item
+        // TODO should call axios api function to update backend with new preferred Collect time for item
         ...state,
         // Only new objects can be created and assigned to the state, thats why we use [...]
         items: [
@@ -87,7 +87,6 @@ export default (state = initialState, action) => {
       };
     case types.UNRESERVE_ITEM:
       return {
-        // TODO should call axios api function to update bbackend with new preferred Collect time for item
         ...state,
         myitems: state.myitems.filter(item => item._id !== payload._id),
         success: true,
@@ -95,7 +94,6 @@ export default (state = initialState, action) => {
       };
     case types.RESERVE_ITEM:
       return {
-        // TODO should call axios api function to update bbackend with new preferred Collect time for item
         ...state,
         myitems: [
           ...state.myitems.map(myItem => {
