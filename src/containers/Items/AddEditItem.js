@@ -6,6 +6,8 @@ const mapStateToProps = (state, ownProps) => ({
   isLoggingIn: state.auth.isLoggingIn,
   loginError: state.auth.loginError,
   isAuthenticated: state.auth.isAuthenticated,
+  postcode: state.user.postcode,
+  location: state.auth.location,
   id: ownProps.match.params.id,
   myitems: state.item.myitems,
   item: state.item.myitems

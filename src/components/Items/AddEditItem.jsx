@@ -51,7 +51,8 @@ const categoryOptions = [
 
 const useStyles = makeStyles(styles);
 
-export default function AddEditItem({ addItem, updateItem, item }) {
+export default function AddEditItem({ addItem, updateItem, item, postcode }) {
+
   const formatExpiry = expiry => moment(expiry).format('DD/MM/yyyy');
 
   const formatCategory = catArr => {
@@ -66,7 +67,7 @@ export default function AddEditItem({ addItem, updateItem, item }) {
   };
 
   const [location] = useState(item ? item.location : {});
-  const [postcode] = useState(item ? item.postcode : '');
+
   const [availability, setAvailability] = useState(
     item ? item.availability : ''
   );
@@ -140,7 +141,7 @@ export default function AddEditItem({ addItem, updateItem, item }) {
         description,
         category: category.map(cat => cat.title),
         expiry,
-        postcode: 'SP3 6RN', // TODO - get this info from Profile
+        postcode, // TODO - get this info from Profile
         location: {
           type: 'Point',
           coordinates: [-112.110492, 36.098948] // TODO - get this info from Profile
@@ -164,10 +165,10 @@ export default function AddEditItem({ addItem, updateItem, item }) {
         <div className={classes.container}>
           <form onSubmit={onSubmit}>
             <GridContainer>
-              <GridItem xs={12} sm={6} md={3} className={classes.navWrapper}>
+              <GridItem xs={12} sm={6} md={4} className={classes.navWrapper}>
                 <DropZone />
               </GridItem>
-              <GridItem xs={12} sm={6} md={9} className={classes.navWrapper}>
+              <GridItem xs={12} sm={6} md={8} className={classes.navWrapper}>
                 <CustomInput
                   labelText="Title"
                   inputProps={{
@@ -262,7 +263,7 @@ export default function AddEditItem({ addItem, updateItem, item }) {
                   id="disabled"
                   inputProps={{
                     disabled: true,
-                    value: postcode
+                    value: postcode.toUpperCase()
                   }}
                   formControlProps={{
                     fullWidth: true
@@ -299,5 +300,6 @@ export default function AddEditItem({ addItem, updateItem, item }) {
 AddEditItem.propTypes = {
   addItem: PropTypes.func,
   updateItem: PropTypes.func,
-  item: PropTypes.instanceOf(Object)
+  item: PropTypes.instanceOf(Object),
+  postcode: PropTypes.string
 };
