@@ -6,9 +6,11 @@ import SouperFooter from 'components/Layout/SouperFooter';
 import Parallax from 'components/MaterialKitComponents/Parallax/Parallax';
 import citrus from 'assets/img/citrus-fruit.jpg';
 import PropTypes from 'prop-types';
+import Alert from 'components/Alert/Alert';
 
 const Layout = ({ children }) => (
   <div>
+    <Alert />
     <Header
       brand={<Restaurant />}
       color="rose"
