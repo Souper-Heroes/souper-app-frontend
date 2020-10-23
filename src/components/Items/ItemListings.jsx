@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Datetime from 'react-datetime';
+import moment from 'moment';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import { Typography } from '@material-ui/core';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import profile from 'assets/jss/material-kit-react/views/profilePage';
@@ -33,13 +36,15 @@ const styles = {
 };
 
 const useStyles = makeStyles(styles);
+const type = 'search';
 
 function ItemListings({
   searchItems,
   search,
-  searchCount,
+  // searchCount,
   filters,
-  loading
+  loading,
+  user // current logged in user
 }) {
   const classes = useStyles();
   const [sortBy, setSortBy] = useState('Distance');
@@ -52,8 +57,8 @@ function ItemListings({
     searchItems({
       unit,
       distance,
-      long: 0.18387,
-      lat: 51.57415,
+      long: user.location.coordinates[0], // 0.18387,
+      lat: user.location.coordinates[1], // 51.57415,
       category,
       expiry
     });
@@ -192,7 +197,7 @@ function ItemListings({
               spacing={1}
             >
               <GridItem xs={12} sm={6} md={8}>
-                <h6>{searchCount} ITEMS FOUND</h6>
+                <h6>{search.filter(item => item.c_user_uid === null && item.user_uid !== user._id).length} ITEMS FOUND</h6>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
                 <FormControl fullWidth required className={classes.formControl}>
@@ -208,26 +213,30 @@ function ItemListings({
                   </Select>
                 </FormControl>
               </GridItem>
-              {loading ? (
-                <Spinner />
-              ) : (
+              {loading ? (<Spinner />) : (
                 <>
-                  {search.map(item => (
+                  {console.log('user id:', user._id)}
+                  {/* Only retrieve items not belonging to the user and not already being collected by someone else */}
+                  {search.filter(item => item.c_user_uid === null && item.user_uid !== user._id).map(item => (
                     <GridItem xs={12} sm={6} md={4} key={item._id}>
                       <Card className={classes.textLeft}>
                         <CardBody>
-                          <h4 className={classes.cardTitle}>Card Title</h4>
-                          <h6 className={classes.cardSubtitle}>
-                            Card Subtitle
-                          </h6>
+                          <h5 className={classes.cardTitle}>{item.title}</h5>
+                          <strong>
+                            <h6 className={classes.cardSubtitle}>
+                              {`Expires: ${moment(item.expiry).format('DD/MM/YYYY')}`}
+                            </h6>
+                          </strong>
                           <p>{item.description}</p>
-                          <a
-                            href="#pablo"
-                            className={classes.cardLink}
-                            onClick={e => e.preventDefault()}
+                          {console.log('Link to item:', `/itemview/${item._id}/${type}`)}
+                          <Link
+                            to={`/itemview/${item._id}/${type}`}
+                            className={classes.link}
                           >
-                            View Item
-                          </a>
+                            <Typography>
+                              View Item
+                            </Typography>
+                          </Link>
                         </CardBody>
                       </Card>
                     </GridItem>
@@ -264,9 +273,10 @@ function ItemListings({
 }
 
 ItemListings.propTypes = {
+  user: PropTypes.instanceOf(Object).isRequired,
   searchItems: PropTypes.instanceOf(Object).isRequired,
   search: PropTypes.instanceOf(Array),
-  searchCount: PropTypes.number.isRequired,
+  // searchCount: PropTypes.number.isRequired,
   filters: PropTypes.instanceOf(Object).isRequired,
   loading: PropTypes.bool.isRequired
 };
