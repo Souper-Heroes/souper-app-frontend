@@ -64,7 +64,7 @@ function App(props) {
         />
         <ProtectedRoute
           exact
-          path={ROUTES.ADD_EDIT_ITEM}
+          path={ROUTES.ADD_ITEM}
           component={AddEditItem}
           isAuthenticated={isAuthenticated}
           isVerifying={isVerifying}
