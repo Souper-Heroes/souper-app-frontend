@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import Danger from 'components/MaterialKitComponents/Typography/Danger';
 import SnackbarContent from 'components/MaterialKitComponents/Snackbar/SnackbarContent';
 
-const Alert = ({ alerts }) =>
-  alerts !== null &&
-  alerts.length > 0 &&
-  alerts.map(alert => (
+const Alert = ({ alerts }) => alerts !== null
+  && alerts.length > 0
+  && alerts.map(alert => (
     <div key={alert.id}>
       {alert.displayType === 'text' ? (
         alert.alertType === 'danger' && <Danger>{alert.msg}</Danger>
