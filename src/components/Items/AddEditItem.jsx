@@ -238,7 +238,10 @@ export default function AddEditItem({
                     onChange={handleExpiryChange}
                     closeOnSelect
                     inputProps={
-                      { readOnly: true }
+                      {
+                        required: true,
+                        onKeyDown: e => e.preventDefault()
+                      }
                     }
                   />
                 </FormControl>
