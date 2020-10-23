@@ -152,7 +152,7 @@ export default function MyItemListing(props) {
                           gutterBottom
                           align="left"
                         >
-                          {myitem.category[0]}
+                          {myitem.category.map(i => i).reduce((p, c) => `${p} ${c}`, '')}
                         </Typography>
                       </GridItem>
                     </GridContainer>
