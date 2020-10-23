@@ -28,7 +28,7 @@ export default function Header(props) {
   };
 
   const {
-    color, rightLinks, leftLinks, brand, fixed, absolute
+    color, rightLinks, leftLinks, brand, addItem, fixed, absolute
   } = props;
   const appBarClasses = classNames({
     [classes.appBar]: true,
@@ -37,6 +37,7 @@ export default function Header(props) {
     [classes.fixed]: fixed,
   });
   const brandComponent = <Button className={classes.title}>{brand}</Button>;
+  const addItemComponent = <Button className={classes.title}>{addItem}</Button>;
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
@@ -50,6 +51,7 @@ export default function Header(props) {
             brandComponent
           )}
         </div>
+        {addItemComponent}
         <Hidden smDown implementation="css">
           {rightLinks}
         </Hidden>
@@ -102,6 +104,7 @@ Header.propTypes = {
   rightLinks: PropTypes.node,
   leftLinks: PropTypes.node,
   brand: PropTypes.instanceOf(Object),
+  addItem: PropTypes.instanceOf(Object),
   fixed: PropTypes.bool,
   absolute: PropTypes.bool,
   // this will cause the sidebar to change the color from

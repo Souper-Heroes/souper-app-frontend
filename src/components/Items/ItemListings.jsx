@@ -215,7 +215,6 @@ function ItemListings({
               </GridItem>
               {loading ? (<Spinner />) : (
                 <>
-                  {console.log('user id:', user._id)}
                   {/* Only retrieve items not belonging to the user and not already being collected by someone else */}
                   {search.filter(item => item.c_user_uid === null && item.user_uid !== user._id).map(item => (
                     <GridItem xs={12} sm={6} md={4} key={item._id}>
@@ -228,7 +227,6 @@ function ItemListings({
                             </h6>
                           </strong>
                           <p>{item.description}</p>
-                          {console.log('Link to item:', `/itemview/${item._id}/${type}`)}
                           <Link
                             to={`/itemview/${item._id}/${type}`}
                             className={classes.link}
