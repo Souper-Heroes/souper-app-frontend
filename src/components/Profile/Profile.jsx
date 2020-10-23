@@ -10,9 +10,15 @@ import styles from 'assets/jss/material-kit-react/views/profilePage';
 import Slider from 'nouislider';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import FormControl from '@material-ui/core/FormControl';
 import { getAddressProfile } from 'actions/user';
 import PropTypes from 'prop-types';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles(styles);
 
@@ -25,11 +31,21 @@ function Profile({
   const [preferred_distance, setDistance] = useState(initialDistance);
   const [preferred_distance_unit, setUnit] = useState(initialUnit);
   const [profile_pic, setProfilePic] = useState(initialPic);
+  const [successOpen, setSuccessOpen] = React.useState(false);
   let location = initialLocation;
 
   const imageInputRef = useRef();
 
   const classes = useStyles();
+
+  const handleSuccessClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSuccessOpen(false);
+  };
+
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
@@ -77,8 +93,9 @@ function Profile({
     location = addressUpdated.location;
   };
 
-  const onSubmit = () => {
-    updateProfile({
+  const onSubmit = async e => {
+    e.preventDefault();
+    await updateProfile({
       display_name,
       address,
       postcode,
@@ -87,6 +104,7 @@ function Profile({
       profile_pic,
       location
     });
+    setSuccessOpen(true);
   };
 
   useEffect(() => {
@@ -180,7 +198,17 @@ function Profile({
                       required: true,
                       onChange: event => onChangeHandler(event)
                     }}
-                  />
+                  >
+                    <input
+                      value={postcode}
+                      name="postcode"
+                      required
+                      style={{ zIndex: -1, opacity: 0, position: 'absolute' }}
+                      onChange={() => ({})}
+                      title="Please enter a valid UK postcode"
+                      pattern="^([A-Za-z][A-Ha-hJ-Yj-y]?[0-9][A-Za-z0-9]? ?[0-9][A-Za-z]{2}|[Gg][Ii][Rr] ?0[Aa]{2})$"
+                    />
+                  </CustomInput>
                   <CustomInput
                     labelText="First line of address"
                     id="address"
@@ -189,10 +217,17 @@ function Profile({
                     }}
                     inputProps={{
                       value: address,
-                      required: true,
                       disabled: true
                     }}
-                  />
+                  >
+                    <input
+                      value={address}
+                      name="address"
+                      required
+                      style={{ zIndex: -1, opacity: 0, position: 'absolute' }}
+                      onChange={() => ({})}
+                    />
+                  </CustomInput>
                   <Button
                     variant="contained"
                     color="rose"
@@ -227,6 +262,11 @@ function Profile({
                   <Button variant="contained" type="submit" style={{ marginTop: 40 }} color="success" size="md">
                     SAVE
                   </Button>
+                  <Snackbar open={successOpen} autoHideDuration={6000} onClose={handleSuccessClose}>
+                    <Alert onClose={handleSuccessClose} severity="success">
+                      Profile has been successfully updated
+                    </Alert>
+                  </Snackbar>
                 </GridItem>
               </GridContainer>
             </form>

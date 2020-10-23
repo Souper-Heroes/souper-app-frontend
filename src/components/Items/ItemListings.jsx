@@ -265,7 +265,7 @@ function ItemListings({
 
 ItemListings.propTypes = {
   searchItems: PropTypes.instanceOf(Object).isRequired,
-  search: PropTypes.func.isRequired,
+  search: PropTypes.instanceOf(Array),
   searchCount: PropTypes.number.isRequired,
   filters: PropTypes.instanceOf(Object).isRequired,
   loading: PropTypes.bool.isRequired
