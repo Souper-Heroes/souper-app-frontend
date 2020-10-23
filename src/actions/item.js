@@ -41,8 +41,7 @@ export const addItem = formData => async dispatch => {
     dispatch(setAlert('Item successfuly added.', 'success', 'alert'));
     return true;
   } catch (err) {
-    // do something with error
-    // console.log(err);
+    console.error(err);
     dispatch({
       type: types.ADD_ITEM_ERROR
     });
@@ -63,8 +62,7 @@ export const updateItem = (formData, _id) => async dispatch => {
     dispatch(setAlert('Item successfuly updated.', 'success', 'alert'));
     return true;
   } catch (err) {
-    // do something with error
-    console.log(err);
+    console.error(err);
     dispatch({
       type: types.UPDATE_ITEM_ERROR
     });
@@ -84,8 +82,7 @@ export const getItems = () => async dispatch => {
       payload: res.data
     });
   } catch (err) {
-    // do something with error
-    // console.log(err);
+    console.error(err);
     dispatch({
       type: types.GET_ITEMS_ERROR
     });
@@ -116,8 +113,7 @@ export const searchItems = filterOptions => async dispatch => {
       filters: filterOptions
     });
   } catch (err) {
-    // do something with error
-    // console.log(err);
+    console.error(err);
     dispatch({
       type: types.SEARCH_ITEMS_ERROR
     });
@@ -133,8 +129,7 @@ export const getMyItems = () => async dispatch => {
       payload: res.data
     });
   } catch (err) {
-    // do something with error
-    // console.log(err);
+    console.error(err);
     dispatch({
       type: types.GET_MY_ITEMS_ERROR
     });
@@ -178,8 +173,7 @@ export const reserveItem = _id => async dispatch => {
       payload: res.data
     });
   } catch (err) {
-    // do something with error
-    // console.log(err);
+    console.log(err);
     dispatch({
       type: types.RESERVE_ITEM_ERROR
     });
