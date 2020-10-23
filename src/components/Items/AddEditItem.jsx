@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // nodejs library that concatenates classes
 import classNames from 'classnames';
@@ -46,70 +46,112 @@ const categoryOptions = [
   { title: 'Frozen' },
   { title: 'Dried' },
   { title: 'Tinned' },
-  { title: 'Packet' },
+  { title: 'Packet' }
 ];
 
 const useStyles = makeStyles(styles);
 
-export default function AddEditItem({ addItem }) {
+export default function AddEditItem({
+  addItem,
+  updateItem,
+  item,
+  postcode,
+  location
+}) {
+  const formatExpiry = expiry => moment(expiry).format('DD/MM/yyyy');
+
+  const formatCategory = catArr => {
+    const obj = { title: '' };
+    const objArr = [];
+    catArr.forEach(cat => {
+      const itemObj = Object.create(obj);
+      itemObj.title = cat;
+      objArr.push(itemObj);
+    });
+    return objArr;
+  };
+
+  const [availability, setAvailability] = useState(
+    item ? item.availability : ''
+  );
+  const [title, setTitle] = useState(item ? item.title : '');
+  const [description, setDescription] = useState(item ? item.description : '');
+  const [expiry, setExpiry] = useState(item ? formatExpiry(item.expiry) : '');
+  const [category, setCategory] = useState(
+    item ? formatCategory(item.category) : []
+  );
+
+  const resetForm = () => {
+    setTitle('');
+    setDescription('');
+    setCategory([]);
+    setExpiry('');
+    setAvailability('');
+  };
+
+  useEffect(() => {
+    if (!item) {
+      resetForm();
+    }
+  }, [item]);
+
   const classes = useStyles();
 
-  // const [location, setLocation] = useState({});
-  const [availability, setAvailability] = useState('');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [expiry, setExpiry] = useState('');
-  const [category, setCategory] = useState([]);
-
   const handleTitleChange = e => {
-    // console.log(e.target.value);
     setTitle(e.target.value);
   };
 
   const handleDescriptionChange = e => {
-    // console.log(e.target.value);
     setDescription(e.target.value);
   };
 
-  const onTagsChange = (event, values) => {
+  const onCategoryChange = (event, values) => {
     setCategory(values);
   };
 
   const handleExpiryChange = value => {
-    // console.log(newDate);
-    setExpiry(moment(value._d));
+    setExpiry(value._d);
   };
 
+  // Prevent the user from entering dates in the past.
   const yesterday = moment().subtract(1, 'day');
   function valid(current) {
     return current.isAfter(yesterday);
   }
 
   const handleAvailChange = e => {
-    // console.log(e.target.value);
     setAvailability(e.target.value);
   };
 
-  const onSubmit = async () => {
-    const addedItem = await addItem({
-      title,
-      description,
-      category: category.map(cat => cat.title),
-      expiry,
-      location: {
-        type: 'Point',
-        coordinates: [-112.110492, 36.098948], // TODO - get this info from Profile
-      },
-      availability,
-    });
-    // reset form
-    if (addedItem) {
-      setTitle('');
-      setDescription('');
-      setCategory([]);
-      // setLocation({});
-      setExpiry('');
-      setAvailability('');
+  const onSubmit = async e => {
+    e.preventDefault();
+    if (item) {
+      await updateItem(
+        {
+          title,
+          description,
+          category: category.map(cat => cat.title),
+          expiry: moment(expiry),
+          postcode,
+          location,
+          availability,
+        },
+        item._id
+      );
+    } else {
+      const addedItem = await addItem({
+        title,
+        description,
+        category: category.map(cat => cat.title),
+        expiry: moment(expiry),
+        postcode,
+        location,
+        availability
+      });
+      // reset form
+      if (addedItem) {
+        resetForm();
+      }
     }
   };
 
@@ -121,129 +163,132 @@ export default function AddEditItem({ addItem }) {
     <div>
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={6} className={classes.navWrapper}>
-              <DropZone />
-            </GridItem>
-            <GridItem xs={12} sm={6} className={classes.navWrapper}>
-              <CustomInput
-                labelText="Title"
-                inputProps={{
-                  placeholder: 'Give your item a name',
-                  onChange: event => handleTitleChange(event),
-                  value: title,
-                }}
-                formControlProps={{
-                  fullWidth: true,
-                }}
-              />
-              <CustomInput
-                labelText="Description"
-                inputProps={{
-                  placeholder:
-                    'Describe your item, has it been opened or dropped?',
-                  onChange: event => handleDescriptionChange(event),
-                  value: description,
-                }}
-                formControlProps={{
-                  fullWidth: true,
-                }}
-              />
-              <Autocomplete
-                multiple
-                id="checkboxes"
-                options={categoryOptions}
-                disableCloseOnSelect
-                onChange={onTagsChange}
-                value={category}
-                getOptionLabel={option => option.title}
-                renderOption={(option, { selected }) => (
-                  <>
-                    <Checkbox
-                      icon={icon}
-                      checkedIcon={checkedIcon}
-                      style={{ marginRight: 8 }}
-                      checked={selected}
-                    />
-                    {option.title}
-                  </>
-                )}
-                renderInput={params => (
-                  <TextField
-                    {...params}
-                    variant="outlined"
-                    label="Category"
-                    placeholder="Choose all that apply"
-                  />
-                )}
-              />
-            </GridItem>
-          </GridContainer>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={6} className={classes.navWrapper}>
-              <InputLabel style={{ float: 'left' }} className={classes.label}>
-                Expiry date
-              </InputLabel>
-              <br />
-              <FormControl fullWidth>
-                <Datetime
-                  className={classes.bottomFilter}
-                  name="expiry"
-                  timeFormat={false}
-                  dateFormat="DD/MM/yyyy"
-                  value={expiry}
-                  isValidDate={valid}
-                  onChange={handleExpiryChange}
-                  input={false}
+          <form onSubmit={onSubmit}>
+            <GridContainer>
+              <GridItem xs={12} sm={6} md={4} className={classes.navWrapper}>
+                <DropZone />
+              </GridItem>
+              <GridItem xs={12} sm={6} md={8} className={classes.navWrapper}>
+                <CustomInput
+                  labelText="Title"
+                  inputProps={{
+                    required: true,
+                    placeholder: 'Give your item a name',
+                    onChange: event => handleTitleChange(event),
+                    value: title
+                  }}
+                  formControlProps={{
+                    fullWidth: true
+                  }}
                 />
-              </FormControl>
-            </GridItem>
-            <GridItem xs={12} sm={6} container spacing={1} direction="row">
-              <GridItem xs={12}>
+                <CustomInput
+                  labelText="Description"
+                  inputProps={{
+                    required: true,
+                    placeholder:
+                      'Describe your item, has it been opened or dropped?',
+                    onChange: event => handleDescriptionChange(event),
+                    value: description
+                  }}
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                />
+                <Autocomplete
+                  multiple
+                  id="checkboxes"
+                  options={categoryOptions}
+                  disableCloseOnSelect
+                  onChange={onCategoryChange}
+                  value={category}
+                  getOptionLabel={option => option.title}
+                  getOptionSelected={(option, value) => option.title === value.title}
+                  renderOption={(option, { selected }) => (
+                    <>
+                      <Checkbox
+                        icon={icon}
+                        checkedIcon={checkedIcon}
+                        style={{ marginRight: 8 }}
+                        checked={selected}
+                      />
+                      {option.title}
+                    </>
+                  )}
+                  renderInput={params => (
+                    <TextField
+                      {...params}
+                      variant="outlined"
+                      label="Category"
+                      placeholder="Choose all that apply"
+                    />
+                  )}
+                />
+                <br />
+                <InputLabel style={{ float: 'left' }} className={classes.label}>
+                  Expiry date
+                </InputLabel>
+                <br />
+                <FormControl fullWidth>
+                  <Datetime
+                    name="expiry"
+                    timeFormat={false}
+                    dateFormat="DD/MM/yyyy"
+                    value={expiry}
+                    isValidDate={valid}
+                    onChange={handleExpiryChange}
+                    closeOnSelect
+                    inputProps={
+                      { readOnly: true }
+                    }
+                  />
+                </FormControl>
                 <CustomInput
                   labelText="Available collection times"
                   inputProps={{
+                    required: true,
                     placeholder:
                       'e.g. Weekdays between 9 and 5pm, and all day Sunday',
                     onChange: event => handleAvailChange(event),
-                    value: availability,
+                    value: availability
                   }}
                   formControlProps={{
-                    fullWidth: true,
+                    fullWidth: true
                   }}
                 />
                 <CustomInput
-                  labelText="Location"
-                  name="location"
+                  labelText="Postcode"
+                  name="postcode"
                   id="disabled"
                   inputProps={{
                     disabled: true,
-                    value: 'DT9 4LY',
+                    value: postcode.toUpperCase()
                   }}
                   formControlProps={{
-                    fullWidth: true,
+                    fullWidth: true
                   }}
                 />
               </GridItem>
-              <GridContainer xs={12} fullWidth align="right">
-                <GridItem xs={6} />
-                <GridItem xs={3}>
-                  <Button color="danger" size="md" onClick={onCancel}>
-                    Cancel
-                  </Button>
-                </GridItem>
-                <GridItem xs={3}>
-                  <Button
-                    color="success"
-                    size="md"
-                    onClick={event => onSubmit(event)}
-                  >
+              <GridItem
+                xs={12}
+                sm={12}
+                md={12}
+                container
+                spacing={1}
+                direction="row-reverse"
+              >
+                <GridItem xs={12} sm={6} md={2}>
+                  <Button type="submit" fullWidth color="success" size="md">
                     Save
                   </Button>
                 </GridItem>
-              </GridContainer>
-            </GridItem>
-          </GridContainer>
+                <GridItem xs={12} sm={6} md={2}>
+                  <Button fullWidth color="danger" size="md" onClick={onCancel}>
+                    Cancel
+                  </Button>
+                </GridItem>
+              </GridItem>
+            </GridContainer>
+          </form>
         </div>
       </div>
     </div>
@@ -251,5 +296,9 @@ export default function AddEditItem({ addItem }) {
 }
 
 AddEditItem.propTypes = {
-  addItem: PropTypes.instanceOf(Array),
+  addItem: PropTypes.func,
+  updateItem: PropTypes.func,
+  item: PropTypes.instanceOf(Object),
+  postcode: PropTypes.string,
+  location: PropTypes.instanceOf(Object)
 };
