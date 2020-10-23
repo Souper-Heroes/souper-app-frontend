@@ -36,7 +36,7 @@ export const addItem = formData => async dispatch => {
       type: types.ADD_ITEM,
       payload: res.data
     });
-    dispatch(setAlert('Item successfuly added.', 'info', 'alert'));
+    dispatch(setAlert('Item successfuly added.', 'success', 'alert'));
     return true;
   } catch (err) {
     // do something with error
@@ -45,7 +45,7 @@ export const addItem = formData => async dispatch => {
       type: types.ADD_ITEM_ERROR
     });
     dispatch(
-      setAlert('Item not added. Check fields and retry.', 'danger', 'alert')
+      setAlert('Item not added. Check fields and retry.', 'warning', 'alert')
     );
     return false;
   }
@@ -58,7 +58,7 @@ export const updateItem = (formData, _id) => async dispatch => {
       type: types.UPDATE_ITEM,
       payload: res.data
     });
-    dispatch(setAlert('Item successfuly updated.', 'info', 'alert'));
+    dispatch(setAlert('Item successfuly updated.', 'success', 'alert'));
     return true;
   } catch (err) {
     // do something with error
@@ -67,7 +67,7 @@ export const updateItem = (formData, _id) => async dispatch => {
       type: types.UPDATE_ITEM_ERROR
     });
     dispatch(
-      setAlert('Item not updated. Check fields and retry.', 'danger', 'alert')
+      setAlert('Item not updated. Check fields and retry.', 'warning', 'alert')
     );
     return false;
   }
