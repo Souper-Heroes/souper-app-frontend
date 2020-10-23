@@ -61,7 +61,6 @@ export const getItems = () => async dispatch => {
 };
 export const searchItems = filterOptions => async dispatch => {
   try {
-    console.log(filterOptions);
     dispatch({
       type: types.SEARCH_ITEMS_REQUEST
     });

@@ -1,78 +1,164 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
-import profileImage from 'assets/img/faces/christian.jpg';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import CustomInput from 'components/MaterialKitComponents/CustomInput/CustomInput';
 import Button from 'components/MaterialKitComponents/CustomButtons/Button';
+import Icon from '@material-ui/core/Icon';
 import styles from 'assets/jss/material-kit-react/views/profilePage';
-import Slider from '@material-ui/core/Slider';
-import MenuItem from '@material-ui/core/MenuItem';
+import Slider from 'nouislider';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
-import Delete from '@material-ui/icons/Delete';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import FormControl from '@material-ui/core/FormControl';
+import { getAddressProfile } from 'actions/user';
+import PropTypes from 'prop-types';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles(styles);
 
-export default function Profile() {
-  const [distance, setDistance] = React.useState('miles');
+function Profile({
+  initialName, initialPic, initialPostCode, initialLocation, initialUnit, initialDistance, initialAddress, updateProfile, email
+}) {
+  const [display_name, setDisplayName] = useState(initialName);
+  const [postcode, setPostCode] = useState(initialPostCode);
+  const [address, setAddress] = useState(initialAddress);
+  const [preferred_distance, setDistance] = useState(initialDistance);
+  const [preferred_distance_unit, setUnit] = useState(initialUnit);
+  const [profile_pic, setProfilePic] = useState(initialPic);
+  const [successOpen, setSuccessOpen] = React.useState(false);
+  let location = initialLocation;
+
+  const imageInputRef = useRef();
+
   const classes = useStyles();
+
+  const handleSuccessClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSuccessOpen(false);
+  };
+
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
     classes.imgFluid
   );
-  const marks = [
-    {
-      value: 0,
-      label: '0',
-    },
-    {
-      value: 1,
-      label: '|',
-    },
-    {
-      value: 2,
-      label: '|',
-    },
-    {
-      value: 3,
-      label: '|',
-    },
-    {
-      value: 4,
-      label: '|',
-    },
-    {
-      value: 5,
-      label: '5',
-    },
-  ];
-  const valuetext = value => `${value} Miles`;
-  const handleChange = event => setDistance(event.target.value);
+
+  const onChangeHandler = event => {
+    const { name: nameInput, value } = event.currentTarget;
+    if (nameInput === 'preferred_distance_unit') {
+      setUnit(value);
+      document.getElementById('sliderRegular').noUiSlider.updateOptions({
+        start: `${preferred_distance}`,
+        format: {
+          from: Number,
+          to: val => `${val.toFixed(2)} ${value === 'Miles' ? 'mi' : 'km'}`
+        }
+      });
+    } else if (nameInput === 'display_name') {
+      setDisplayName(value);
+    } else if (nameInput === 'postcode') {
+      setPostCode(value);
+      setAddress('');
+      location = {};
+    }
+  };
+
+  const openFileDialog = () => {
+    imageInputRef.current.click();
+  };
+
+  const encodeImageFile = e => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setProfilePic(reader.result);
+      };
+    }
+  };
+
+  const searchAddress = async () => {
+    const addressUpdated = await getAddressProfile(postcode);
+    setAddress(addressUpdated.address);
+    location = addressUpdated.location;
+  };
+
+  const onSubmit = async e => {
+    e.preventDefault();
+    await updateProfile({
+      display_name,
+      address,
+      postcode,
+      preferred_distance,
+      preferred_distance_unit,
+      profile_pic,
+      location
+    });
+    setSuccessOpen(true);
+  };
+
+  useEffect(() => {
+    const distanceSlider = document.getElementById('sliderRegular');
+    // create distance Slider when component mounts
+    Slider.create(distanceSlider, {
+      start: `${preferred_distance}`,
+      format: {
+        from: Number,
+        to: value => `${value.toFixed(2)} ${preferred_distance_unit === 'Miles' ? 'mi' : 'km'}`
+      },
+      keyboardSupport: true,
+      connect: [true, false],
+      range: {
+        min: 0,
+        max: 5
+      },
+      tooltips: true,
+      pips: {
+        mode: 'steps',
+        stepped: true,
+        density: 10
+      }
+    });
+    // set the Distance State when slider value changed
+    distanceSlider.noUiSlider.on('change', () => setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, '')));
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
       <div className={classes.container}>
         <GridContainer justify="center">
           <GridItem xs={12} md={8}>
-            <div style={{ display: 'flex' }}>
+            <div style={{ alignContent: 'flex' }}>
               <h2 className={classes.title}>  Profile  </h2>
-              <Button justIcon round color="rose" style={{ margin: 35, marginLeft: 'auto' }}><Delete style={{ color: '#FFFFFF' }} /></Button>
             </div>
-            <form>
+            <form onSubmit={onSubmit}>
               <GridContainer>
                 <GridItem xs={12} md={6} align="center">
                   <img
-                    src={profileImage}
+                    src={profile_pic}
                     alt="profile"
                     className={imageClasses}
-                    style={{ width: 250, height: 250 }}
+                    style={{ width: 180, height: 180 }}
                   />
                   <br /><br />
-                  <Button color="rose" size="md">
+                  <Button color="rose" size="md" onClick={openFileDialog}>
                     CHANGE AVATAR
+                  </Button>
+                  <input type="file" ref={imageInputRef} accept=".png, .jpg, .jpeg" style={{ display: 'none' }} onChange={e => encodeImageFile(e)} />
+                  <br />
+                  <Button color="info" size="md">
+                    DISABLED
                   </Button>
                 </GridItem>
                 <GridItem xs={12} md={6} align="right">
@@ -82,6 +168,12 @@ export default function Profile() {
                     formControlProps={{
                       fullWidth: true,
                     }}
+                    inputProps={{
+                      value: display_name,
+                      name: 'display_name',
+                      required: true,
+                      onChange: event => onChangeHandler(event)
+                    }}
                   />
                   <CustomInput
                     labelText="Email"
@@ -89,45 +181,92 @@ export default function Profile() {
                     formControlProps={{
                       fullWidth: true,
                     }}
+                    inputProps={{
+                      value: email,
+                      disabled: true
+                    }}
                   />
+                  <CustomInput
+                    labelText="Post Code"
+                    id="postcode"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      value: postcode,
+                      name: 'postcode',
+                      required: true,
+                      onChange: event => onChangeHandler(event)
+                    }}
+                  >
+                    <input
+                      value={postcode}
+                      name="postcode"
+                      required
+                      style={{ zIndex: -1, opacity: 0, position: 'absolute' }}
+                      onChange={() => ({})}
+                      title="Please enter a valid UK postcode"
+                      pattern="^([A-Za-z][A-Ha-hJ-Yj-y]?[0-9][A-Za-z0-9]? ?[0-9][A-Za-z]{2}|[Gg][Ii][Rr] ?0[Aa]{2})$"
+                    />
+                  </CustomInput>
                   <CustomInput
                     labelText="First line of address"
                     id="address"
                     formControlProps={{
                       fullWidth: true,
                     }}
-                  />
-                  <CustomInput
-                    labelText="Post Code"
-                    id="postCode"
-                    formControlProps={{
-                      fullWidth: true,
+                    inputProps={{
+                      value: address,
+                      disabled: true
                     }}
-                  />
-                  <InputLabel id="demo-simple-select-label">
+                  >
+                    <input
+                      value={address}
+                      name="address"
+                      required
+                      style={{ zIndex: -1, opacity: 0, position: 'absolute' }}
+                      onChange={() => ({})}
+                    />
+                  </CustomInput>
+                  <Button
+                    variant="contained"
+                    color="rose"
+                    className={classes.button}
+                    endIcon={<Icon>search</Icon>}
+                    onClick={event => searchAddress(event)}
+                  >
+                    Search address
+                  </Button>
+                  <InputLabel id="demo-simple-select-label" style={{ marginTop: 15 }}>
                     Maximum distance you would travel for an item
                   </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={distance}
-                    onChange={handleChange}
-                  >
-                    <MenuItem value="miles">in Miles</MenuItem>
-                    <MenuItem value="km">in Km</MenuItem>
-                  </Select>
-                  <Slider
-                    defaultValue={20}
-                    getAriaValueText={valuetext}
-                    min={0}
-                    max={5}
-                    step={0.1}
-                    valueLabelDisplay="auto"
-                    marks={marks}
-                  />
-                  <Button variant="contained" color="success" size="md">
+                  <FormControl required className={classes.formControl} style={{ marginBottom: 20 }}>
+                    <Select
+                      native
+                      value={preferred_distance_unit}
+                      onChange={event => onChangeHandler(event)}
+                      name="preferred_distance_unit"
+                    >
+                      <option value="Miles">In Miles</option>
+                      <option value="Kilometers">In Kilometers</option>
+                    </Select>
+                  </FormControl>
+                  <FormControl fullWidth>
+                    <div
+                      className="slider-primary"
+                      id="sliderRegular"
+                      name="slider"
+                      onChange={event => onChangeHandler(event)}
+                    />
+                  </FormControl>
+                  <Button variant="contained" type="submit" style={{ marginTop: 40 }} color="success" size="md">
                     SAVE
                   </Button>
+                  <Snackbar open={successOpen} autoHideDuration={6000} onClose={handleSuccessClose}>
+                    <Alert onClose={handleSuccessClose} severity="success">
+                      Profile has been successfully updated
+                    </Alert>
+                  </Snackbar>
                 </GridItem>
               </GridContainer>
             </form>
@@ -137,3 +276,17 @@ export default function Profile() {
     </div>
   );
 }
+
+Profile.propTypes = {
+  updateProfile: PropTypes.func,
+  initialName: PropTypes.string,
+  initialPostCode: PropTypes.string,
+  initialAddress: PropTypes.string,
+  initialDistance: PropTypes.number,
+  initialUnit: PropTypes.string,
+  initialPic: PropTypes.string,
+  initialLocation: PropTypes.instanceOf(Object),
+  email: PropTypes.string
+};
+
+export default Profile;
