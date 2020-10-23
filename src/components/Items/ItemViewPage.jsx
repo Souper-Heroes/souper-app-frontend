@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
@@ -11,8 +11,7 @@ import banana from 'assets/img/purple-banana.jpg';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 
-import * as routes from 'components/Routing/routes';
-
+// import * as routes from 'components/Routing/routes';
 const useStyles = makeStyles(styles);
 
 export default function ItemViewPage({
@@ -31,19 +30,24 @@ export default function ItemViewPage({
   // console.log("MY VIEW PAGE ITEM:", item);
 
   if (item == null) {
-    return <Redirect to={routes.ITEM_LIST} />;
+    // console.log("My Item is null redirecting to ITEM_LIST");
+    // return <Redirect to={routes.ITEM_LIST} />;
+    window.history.back();
   }
 
   // console.log("*** ITEM:", item);
 
-  const handleOnClickReserve = () => {
+  const handleOnClickReserve = e => {
+    e.preventDefault();
     reserveItem(item._id);
+    window.history.back();
   };
 
   const handleOnClickUnreserve = e => {
     // console.log(`Clicked Reserve Account, do something with DisplayName: `);
     e.preventDefault();
     unreserveItem(item._id);
+    window.history.back();
   };
 
   const handleOnClickAmendTime = id => {
@@ -54,6 +58,7 @@ export default function ItemViewPage({
 
   const handleOnClickCancel = () => {
     // console.log(`Clicked Cancel Account, do something with DisplayName: `);
+    window.history.back();
   };
 
   return (
@@ -115,7 +120,7 @@ export default function ItemViewPage({
                       align="left"
                       gutterBottom
                     >
-                      {item.category}
+                      {item.category.map(i => i).reduce((p, c) => `${p} ${c}`, '')}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -252,7 +257,7 @@ export default function ItemViewPage({
                   </Button>
                 </GridItem>
                 <GridItem xs={6} sm={6} align="left">
-                  {type === 'collect' && item.c_user_uid === null && (
+                  {(type === 'collect' || type === 'search') && item.c_user_uid === null && (
                     <Button
                       className={classes.button_label}
                       color="success"
@@ -262,7 +267,7 @@ export default function ItemViewPage({
                       Reserve
                     </Button>
                   )}
-                  {type === 'collect' && _id === item.c_user_uid && (
+                  {(type === 'collect' || type === 'search') && item.c_user_uid !== null && _id === item.c_user_uid && (
                     <Button
                       className={classes.button_label}
                       color="success"
