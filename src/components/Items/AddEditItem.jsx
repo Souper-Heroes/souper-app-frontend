@@ -251,5 +251,5 @@ export default function AddEditItem({ addItem }) {
 }
 
 AddEditItem.propTypes = {
-  addItem: PropTypes.instanceOf(Array),
+  addItem: PropTypes.func,
 };
