@@ -5,7 +5,7 @@ const mapStateToProps = state => ({
   isLoggingIn: state.auth.isLoggingIn,
   isAuthenticated: state.auth.isAuthenticated,
   _id: state.auth.user.uid,
-  userLoaded: state.auth.userLoaded,
+  user: state.user,
   myitems: state.item.myitems,
 });
 
