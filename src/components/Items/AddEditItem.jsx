@@ -164,10 +164,10 @@ export default function AddEditItem({ addItem, updateItem, item }) {
         <div className={classes.container}>
           <form onSubmit={onSubmit}>
             <GridContainer>
-              <GridItem xs={12} sm={12} md={3} className={classes.navWrapper}>
+              <GridItem xs={12} sm={6} md={3} className={classes.navWrapper}>
                 <DropZone />
               </GridItem>
-              <GridItem xs={12} sm={8} className={classes.navWrapper}>
+              <GridItem xs={12} sm={6} md={9} className={classes.navWrapper}>
                 <CustomInput
                   labelText="Title"
                   inputProps={{
@@ -277,12 +277,12 @@ export default function AddEditItem({ addItem, updateItem, item }) {
                 spacing={1}
                 direction="row-reverse"
               >
-                <GridItem xs={12} sm={4} md={2}>
+                <GridItem xs={12} sm={6} md={2}>
                   <Button type="submit" fullWidth color="success" size="md">
                     Save
                   </Button>
                 </GridItem>
-                <GridItem xs={12} sm={4} md={2}>
+                <GridItem xs={12} sm={6} md={2}>
                   <Button fullWidth color="danger" size="md" onClick={onCancel}>
                     Cancel
                   </Button>
