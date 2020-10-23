@@ -61,7 +61,7 @@ jobs:
       - run:
           name: run lint
           command: |
-            npm run lint:check
+            npm run lint
 
   upload_live_origin:
     docker:
