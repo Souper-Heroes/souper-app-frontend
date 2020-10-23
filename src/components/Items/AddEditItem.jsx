@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // nodejs library that concatenates classes
 import classNames from 'classnames';
@@ -86,6 +86,20 @@ export default function AddEditItem(
     item ? formatCategory(item.category) : []
   );
 
+  const resetForm = () => {
+    setTitle('');
+    setDescription('');
+    setCategory([]);
+    setExpiry('');
+    setAvailability('');
+  };
+
+  useEffect(() => {
+    if (!item) {
+      resetForm();
+    }
+  }, [item]);
+
   const classes = useStyles();
 
   const handleTitleChange = e => {
@@ -143,11 +157,7 @@ export default function AddEditItem(
       });
       // reset form
       if (addedItem) {
-        setTitle('');
-        setDescription('');
-        setCategory([]);
-        setExpiry('');
-        setAvailability('');
+        resetForm();
       }
     }
   };
