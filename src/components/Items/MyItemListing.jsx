@@ -67,10 +67,10 @@ export default function MyItemListing(props) {
 
   return (
     <GridContainer spacing={1}>
-      <GridItem >
+      <GridItem>
         <Paper className={classes.paper} spacing={1}>
           <GridContainer spacing={2}>
-            <Grid item xs={12} lg={2} >
+            <Grid item xs={12} lg={2}>
               <Link
                 to={`/itemview/${myitem._id}/${type}`}
                 className={classes.link}
@@ -237,14 +237,14 @@ export default function MyItemListing(props) {
                             gutterBottom
                             align="left"
                           >
-                            {myitem.availability } 
+                            {myitem.availability }
                           </Typography>
                         )}
                       </GridItem>
                     </GridContainer>
                   </GridItem>
                 </GridContainer>
-                 <GridContainer className={classes.container}>
+                <GridContainer className={classes.container}>
                   <GridItem xs={12} sm={6} className={classes.cell}>
                     <GridContainer direction="row" className={classes.container}>
                       <GridItem xs={5} className={classes.cell}>
@@ -266,8 +266,7 @@ export default function MyItemListing(props) {
                           color="textPrimary"
                           gutterBottom
                           align="left"
-                        > 
-                        
+                        >
                           {moment(myitem.date).format('Do MMM YYYY')}
                         </Typography>
                       </GridItem>
@@ -309,7 +308,6 @@ export default function MyItemListing(props) {
                 </GridContainer>
               </GridItem>
               <GridItem xs={12} align="right">
-                
                 {type === 'provide' && (
                   <Link
                     to={`/editItem/${myitem._id}`}
