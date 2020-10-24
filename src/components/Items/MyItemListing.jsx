@@ -66,7 +66,7 @@ export default function MyItemListing(props) {
     }
   };
 
-  const handleOnClickAgreeCup = async () => {
+  //const handleOnClickAgreeCup = async () => {
     /* TODO
     console.log(
       `Clicked Cup button, do something with item: ${item.itemId}, Title: ${item.description}`
@@ -84,7 +84,7 @@ export default function MyItemListing(props) {
     // else {
     //  console.log('Address not found, addrstatus:', addrstatus);
     // }
-  };
+  //};
 
   return (
     <GridContainer spacing={1}>
@@ -293,12 +293,7 @@ export default function MyItemListing(props) {
                 </GridContainer>
               </GridItem>
               <GridItem xs={12} align="right">
-                <Button
-                  onClick={handleOnClickAgreeCup}
-                  color={myitem.c_user_uid === null ? 'default' : 'secondary'}
-                >
-                  <EmojiEvent />
-                </Button>
+                
                 {type === 'provide' && (
                   <Link
                     to={`/editItem/${myitem._id}`}
