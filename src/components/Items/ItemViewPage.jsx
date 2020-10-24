@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import { Redirect } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
@@ -21,11 +19,11 @@ export default function ItemViewPage({
   type,
   updateCollectionDates,
   unreserveItem,
-  reserveItem
+  reserveItem,
+  history
 }) {
   const [isDisableAmendBtn, setIsDisableAmendBtn] = useState(true);
 
-  const history = useHistory();
   const classes = useStyles();
 
   if (item == null) {
@@ -35,15 +33,12 @@ export default function ItemViewPage({
 
   const handleOnClickReserve = e => {
     e.preventDefault();
-    reserveItem(item._id);
-    // window.history.back();
-    history.push(ROUTES.ITEM_LIST);
+    reserveItem(item._id, history);
   };
 
   const handleOnClickUnreserve = e => {
     e.preventDefault();
-    unreserveItem(item._id);
-    history.push(ROUTES.DASHBOARD);
+    unreserveItem(item._id, history);
   };
 
   const handleOnClickAmendTime = id => {
@@ -286,6 +281,7 @@ ItemViewPage.propTypes = {
   _id: PropTypes.string,
   type: PropTypes.string,
   item: PropTypes.instanceOf(Object),
+  history: PropTypes.instanceOf(Object),
   reserveItem: PropTypes.func,
   unreserveItem: PropTypes.func,
   updateCollectionDates: PropTypes.func
