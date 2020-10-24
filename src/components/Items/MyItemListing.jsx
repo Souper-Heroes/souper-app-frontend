@@ -217,7 +217,13 @@ export default function MyItemListing(props) {
                         xs={5}
                         className={classes.cell}
                       >
-                        {myitem.availability !== null && GetCollectionMsg(type)}
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          gutterBottom
+                        >
+                          Availability:
+                        </Typography>
                       </GridItem>
                       <GridItem
                         xs={7}
@@ -231,7 +237,7 @@ export default function MyItemListing(props) {
                             gutterBottom
                             align="left"
                           >
-                            {myitem.availability}
+                            {myitem.availability } 
                           </Typography>
                         )}
                       </GridItem>
@@ -280,6 +286,23 @@ export default function MyItemListing(props) {
                         xs={5}
                         className={classes.cell}
                       >
+                        {myitem.availability !== null && GetCollectionMsg(type)}
+                      </GridItem>
+                      <GridItem
+                        xs={7}
+                        align="left"
+                        className={classes.cell}
+                      >
+                        {myitem.availability !== null && (
+                          <Typography
+                            variant="body2"
+                            color="textPrimary"
+                            gutterBottom
+                            align="left"
+                          >
+                            {myitem.availability}
+                          </Typography>
+                        )}
                       </GridItem>
                     </GridContainer>
                   </GridItem>
