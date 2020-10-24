@@ -104,7 +104,8 @@ export const searchItems = filterOptions => async dispatch => {
             ? filterOptions.distance / conversion.miles
             : filterOptions.distance * conversion.kilometers,
         lat: filterOptions.lat,
-        long: filterOptions.long
+        long: filterOptions.long,
+        sortBy: filterOptions.sortBy
       }
     });
     dispatch({

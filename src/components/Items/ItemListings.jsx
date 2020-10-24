@@ -47,7 +47,7 @@ function ItemListings({
   user // current logged in user
 }) {
   const classes = useStyles();
-  const [sortBy, setSortBy] = useState('Distance');
+  const [sortBy, setSortBy] = useState(-1);
   const [distance, setDistance] = useState(filters.distance);
   const [unit, setUnit] = useState(filters.unit);
   const [category, setCategory] = useState('');
@@ -57,8 +57,9 @@ function ItemListings({
     searchItems({
       unit,
       distance,
-      long: user.location.coordinates[0], // 0.18387,
-      lat: user.location.coordinates[1], // 51.57415,
+      long: user.location.coordinates[0],
+      lat: user.location.coordinates[1],
+      sortBy,
       category,
       expiry
     });
@@ -197,7 +198,7 @@ function ItemListings({
               spacing={1}
             >
               <GridItem xs={12} sm={6} md={8}>
-                <h6>{search.filter(item => item.c_user_uid === null && item.user_uid !== user._id).length} ITEMS FOUND</h6>
+                <h6>{search.length} ITEMS FOUND</h6>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
                 <FormControl fullWidth required className={classes.formControl}>
@@ -208,15 +209,15 @@ function ItemListings({
                     name="sortBy"
                   >
                     <option aria-label="None" value="" />
-                    <option value="Distance">Sort by: Distance</option>
-                    <option value="Expiry">Sort by: Expiry Date</option>
+                    <option value="1">Sort by: Nearest first</option>
+                    <option value="-1">Sort by: Nearest last</option>
                   </Select>
                 </FormControl>
               </GridItem>
               {loading ? (<Spinner />) : (
                 <>
                   {/* Only retrieve items not belonging to the user and not already being collected by someone else */}
-                  {search.filter(item => item.c_user_uid === null && item.user_uid !== user._id).map(item => (
+                  {search.map(item => (
                     <GridItem xs={12} sm={6} md={4} key={item._id}>
                       <Card className={classes.textLeft}>
                         <CardBody>
@@ -226,7 +227,7 @@ function ItemListings({
                               {`Expires: ${moment(item.expiry).format('DD/MM/YYYY')}`}
                             </h6>
                           </strong>
-                          <p>{item.description}</p>
+                          <p>{item.description} dist: {item.distance}</p>
                           <Link
                             to={`/itemview/${item._id}/${type}`}
                             className={classes.link}
