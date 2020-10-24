@@ -63,11 +63,6 @@ export default function MyItemListings(props) {
         </GridItem>
         {type === 'provide' && (
           <GridItem xs={6} sm={6} align="left">
-            <Link to="/addedititem" className={classes.link}>
-              <Button type="button" color="rose" to="/addedititem">
-                Add Item
-              </Button>
-            </Link>
           </GridItem>
         )}
         {type === 'collect' && (
