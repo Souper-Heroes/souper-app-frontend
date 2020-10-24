@@ -55,7 +55,7 @@ export default function ItemListPage({
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={8} lg={8}>
+              <GridItem xs={12} >
                 <CustomTabs
                   headerColor="rose"
                   plainTabs

@@ -12,7 +12,6 @@ import { Button } from '@material-ui/core';
 // @material-ui/icons
 import Edit from '@material-ui/icons/Edit';
 import Delete from '@material-ui/icons/Delete';
-import EmojiEvent from '@material-ui/icons/EmojiEvents';
 
 // core components
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
@@ -66,29 +65,9 @@ export default function MyItemListing(props) {
     }
   };
 
-  //const handleOnClickAgreeCup = async () => {
-    /* TODO
-    console.log(
-      `Clicked Cup button, do something with item: ${item.itemId}, Title: ${item.description}`
-    ); */
-
-    // await deleteExpiredItems(myitem._id);
-
-    // await getAddress(myitem.postcode);
-
-    // setTimeout(1000);
-    // console.log("*** my address: ", address);
-    // if (addrstatus == "OK") {
-    //  console.log('My Address:', address, 'addrstatus:', addrstatus);
-    // }
-    // else {
-    //  console.log('Address not found, addrstatus:', addrstatus);
-    // }
-  //};
-
   return (
     <GridContainer spacing={1}>
-      <GridItem>
+      <GridItem >
         <Paper className={classes.paper} spacing={1}>
           <GridContainer spacing={2}>
             <Grid item>
@@ -108,15 +87,13 @@ export default function MyItemListing(props) {
                   className={classes.link}
                 >
                   <Typography gutterBottom variant="body1">
-                    <strong>{myitem.description}</strong>
+                    <strong>{myitem.title}</strong>
                   </Typography>
                 </Link>
                 <GridContainer className={classes.container}>
                   <GridItem
                     xs={12}
                     sm={6}
-                    md={6}
-                    lg={6}
                     className={classes.cell}
                   >
                     <GridContainer
@@ -125,9 +102,6 @@ export default function MyItemListing(props) {
                     >
                       <GridItem
                         xs={5}
-                        sm={5}
-                        md={5}
-                        lg={5}
                         className={classes.cell}
                       >
                         <Typography
