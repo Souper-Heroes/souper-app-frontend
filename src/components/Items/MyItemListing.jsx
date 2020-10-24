@@ -300,7 +300,7 @@ export default function MyItemListing(props) {
                             gutterBottom
                             align="left"
                           >
-                            {myitem.availability}
+                            This should be added by the collector as to when they are collecting.
                           </Typography>
                         )}
                       </GridItem>
