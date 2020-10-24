@@ -221,11 +221,9 @@ function ItemListings({
                       <Card className={classes.textLeft}>
                         <CardBody>
                           <h5 className={classes.cardTitle}>{item.title}</h5>
-
                           <Typography variant="body2">
                             {`Expires: ${moment(item.expiry).format('Do MMM YY')}`}
                           </Typography>
-
                           <p>{item.description}</p>
                           <Link
                             to={`/itemview/${item._id}/${type}`}
