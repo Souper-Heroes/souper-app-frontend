@@ -215,7 +215,7 @@ function ItemListings({
               </GridItem>
               {loading ? (<Spinner />) : (
                 <>
-                  {/* Only retrieve items not belonging to the user and not already being collected by someone else */}
+                  {/*  Only retrieve items not belonging to the user and not already being collected by someone else  */}
                   {search.filter(item => item.c_user_uid === null && item.user_uid !== user._id).map(item => (
                     <GridItem xs={12} sm={6} md={4} key={item._id}>
                       <Card className={classes.textLeft}>
