@@ -70,7 +70,7 @@ export default function MyItemListing(props) {
       <GridItem >
         <Paper className={classes.paper} spacing={1}>
           <GridContainer spacing={2}>
-            <Grid item>
+            <Grid item xs={12} lg={2} >
               <Link
                 to={`/itemview/${myitem._id}/${type}`}
                 className={classes.link}
@@ -80,7 +80,7 @@ export default function MyItemListing(props) {
                 </ButtonBase>
               </Link>
             </Grid>
-            <GridContainer xs={12} sm item spacing={0} direction="column">
+            <GridContainer xs={12} lg={10} item spacing={0} direction="column">
               <GridItem align="left" xs={12} className={classes.cell}>
                 <Link
                   to={`/itemview/${myitem._id}/${type}`}
