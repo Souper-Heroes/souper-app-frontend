@@ -122,7 +122,7 @@ function Profile({
       connect: [true, false],
       range: {
         min: 0,
-        max: 5
+        max: 10
       },
       tooltips: true,
       pips: {

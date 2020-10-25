@@ -3,6 +3,7 @@ import Datetime from 'react-datetime';
 import moment from 'moment';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
+import Checkbox from '@material-ui/core/Checkbox';
 import { Link } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
@@ -15,6 +16,10 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from 'components/MaterialKitComponents/CustomButtons/Button';
 import Select from '@material-ui/core/Select';
 import Paginations from 'components/MaterialKitComponents/Pagination/Pagination';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
 
 import {
   cardTitle,
@@ -24,6 +29,9 @@ import {
 import Slider from 'nouislider';
 import PropTypes from 'prop-types';
 import Spinner from '../Layout/Spinner';
+
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const styles = {
   ...itemListings,
@@ -44,13 +52,14 @@ function ItemListings({
   // searchCount,
   filters,
   loading,
-  user // current logged in user
+  user, // current logged in user
+  categoryOptions
 }) {
   const classes = useStyles();
   const [sortBy, setSortBy] = useState(-1);
   const [distance, setDistance] = useState(filters.distance);
   const [unit, setUnit] = useState(filters.unit);
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState(filters.category);
   const [expiry, setExpiry] = useState(filters.expiry);
 
   const handleGetItems = async () => {
@@ -61,13 +70,17 @@ function ItemListings({
       lat: user.location.coordinates[1],
       sortBy,
       category,
-      expiry
+      expiry: moment(expiry).format('DD/MM/yyyy')
     });
+  };
+
+  const onCategoryChange = (event, values) => {
+    setCategory(values);
   };
 
   const onChangeHandler = event => {
     const { name, value } = event.currentTarget;
-    // console.log(name, value)
+
     if (name === 'sortBy') {
       setSortBy(value);
     } else if (name === 'unit') {
@@ -98,7 +111,7 @@ function ItemListings({
       connect: [true, false],
       range: {
         min: 0,
-        max: 5
+        max: 10
       },
       tooltips: true,
       pips: {
@@ -108,7 +121,9 @@ function ItemListings({
       }
     });
     // set the Distance State when slider value changed
-    distanceSlider.noUiSlider.on('change', () => setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, '')));
+    distanceSlider.noUiSlider.on('change', () =>
+      setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, ''))
+    );
   };
 
   const onDateChangeHandler = date => {
@@ -148,32 +163,55 @@ function ItemListings({
                     onChange={event => onChangeHandler(event)}
                   />
                 </FormControl>
-                <InputLabel className={classes.filterLabel}>
-                  Category
-                </InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
-                  <Select
-                    native
+                  <Autocomplete
+                    className={classes.filterLabel}
+                    multiple
+                    id="checkboxes"
+                    options={categoryOptions}
+                    disableCloseOnSelect
+                    onChange={(event, values) => onCategoryChange(event, values)}
                     value={category}
-                    onChange={event => onChangeHandler(event)}
-                    name="category"
-                  >
-                    <option aria-label="None" value="" />
-                    <option value="Fruit">Fruit</option>
-                    <option value="Tinned">Tinned</option>
-                    <option value="Veg">Veg</option>
-                  </Select>
+                    getOptionLabel={option => option.title}
+                    getOptionSelected={(option, value) => option.title === value.title}
+                    renderOption={(option, { selected }) => (
+                      <>
+                        <Checkbox
+                          icon={icon}
+                          checkedIcon={checkedIcon}
+                          style={{ marginRight: 8 }}
+                          checked={selected}
+                        />
+                        {option.title}
+                      </>
+                    )}
+                    renderInput={params => (
+                      <TextField
+                        {...params}
+                        variant="outlined"
+                        label="Category"
+                        placeholder="filter categories"
+                      />
+                    )}
+                  />
                 </FormControl>
                 <InputLabel className={classes.filterLabel}>
-                  Expiry Date
+                  Latest Expiry Date
                 </InputLabel>
                 <FormControl fullWidth>
                   <Datetime
                     className={classes.bottomFilter}
-                    inputProps={{ placeholder: 'Select Expiry date..' }}
                     name="expiry"
+                    timeFormat={false}
+                    dateFormat="DD/MM/yyyy"
                     value={expiry}
                     onChange={onDateChangeHandler}
+                    closeOnSelect
+                    inputProps={{
+                      placeholder: 'Select Expiry date..',
+                      required: true,
+                      onKeyDown: e => e.preventDefault()
+                    }}
                   />
                 </FormControl>
                 <FormControl fullWidth>
@@ -209,31 +247,42 @@ function ItemListings({
                   >
                     <option aria-label="None" value="" />
                     <option value="1">Sort by: Nearest first</option>
-                    <option value="-1">Sort by: Nearest last</option>
+                    <option value="-1">Sort by: Expiry</option>
+                    <option value="-1">Sort by: Newest first</option>
                   </Select>
                 </FormControl>
               </GridItem>
-              {loading ? (<Spinner />) : (
+              {loading ? (
+                <Spinner />
+              ) : (
                 <>
                   {/* Only retrieve items not belonging to the user and not already being collected by someone else */}
                   {search.map(item => (
-                    <GridItem xs={12} sm={6} md={4} key={item._id}>
+                    <GridItem
+                      xs={12}
+                      sm={6}
+                      md={4}
+                      key={item._id}
+                      className={classes.card}
+                    >
                       <Card className={classes.textLeft}>
                         <CardBody>
                           <h5 className={classes.cardTitle}>{item.title}</h5>
                           <strong>
                             <h6 className={classes.cardSubtitle}>
-                              {`Expires: ${moment(item.expiry).format('DD/MM/YYYY')}`}
+                              {`Expires: ${moment(item.expiry).format(
+                                'DD/MM/YYYY'
+                              )}`}
                             </h6>
                           </strong>
-                          <p>{item.description} dist: {item.distance}</p>
+                          <p>
+                            {item.description} <br /> dist: {item.distance}
+                          </p>
                           <Link
                             to={`/itemview/${item._id}/${type}`}
                             className={classes.link}
                           >
-                            <Typography>
-                              View Item
-                            </Typography>
+                            <Typography>View Item</Typography>
                           </Link>
                         </CardBody>
                       </Card>
@@ -276,7 +325,8 @@ ItemListings.propTypes = {
   search: PropTypes.instanceOf(Array),
   // searchCount: PropTypes.number.isRequired,
   filters: PropTypes.instanceOf(Object).isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  categoryOptions: PropTypes.instanceOf(Array).isRequired
 };
 
 export default ItemListings;

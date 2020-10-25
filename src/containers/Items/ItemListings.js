@@ -11,7 +11,8 @@ const mapStateToProps = state => ({
   search: state.item.search,
   searchCount: state.item.search.length,
   filters: state.item.filters,
-  loading: state.item.loading
+  loading: state.item.loading,
+  categoryOptions: state.item.categoryOptions
 });
 
 const mapDispatchToProps = dispatch => ({

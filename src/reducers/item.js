@@ -10,12 +10,27 @@ const initialState = {
   filters: {
     unit: 'Miles',
     distance: 2,
-    category: '',
+    category: [],
     expiry: '',
     sortBy: -1,
     long: 0,
     latt: 0
   },
+  categoryOptions: [
+    { title: 'Nuts' },
+    { title: 'Fruit' },
+    { title: 'Dairy' },
+    { title: 'Fish' },
+    { title: 'Meat' },
+    { title: 'Cereal' },
+    { title: 'Fresh' },
+    { title: 'Cooked' },
+    { title: 'Raw' },
+    { title: 'Frozen' },
+    { title: 'Dried' },
+    { title: 'Tinned' },
+    { title: 'Packet' }
+  ],
   error: {}
 };
 

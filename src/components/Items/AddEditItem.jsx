@@ -33,22 +33,6 @@ import DropZone from '../dropzone/DropZone';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-const categoryOptions = [
-  { title: 'Nuts' },
-  { title: 'Fruit' },
-  { title: 'Dairy' },
-  { title: 'Fish' },
-  { title: 'Meat' },
-  { title: 'Cereal' },
-  { title: 'Fresh' },
-  { title: 'Cooked' },
-  { title: 'Raw' },
-  { title: 'Frozen' },
-  { title: 'Dried' },
-  { title: 'Tinned' },
-  { title: 'Packet' }
-];
-
 const useStyles = makeStyles(styles);
 
 export default function AddEditItem({
@@ -56,7 +40,8 @@ export default function AddEditItem({
   updateItem,
   item,
   postcode,
-  location
+  location,
+  categoryOptions
 }) {
   const formatExpiry = expiry => moment(expiry).format('DD/MM/yyyy');
 
@@ -303,5 +288,6 @@ AddEditItem.propTypes = {
   updateItem: PropTypes.func,
   item: PropTypes.instanceOf(Object),
   postcode: PropTypes.string,
-  location: PropTypes.instanceOf(Object)
+  location: PropTypes.instanceOf(Object),
+  categoryOptions: PropTypes.instanceOf(Array),
 };
