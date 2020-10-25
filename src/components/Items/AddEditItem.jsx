@@ -140,6 +140,7 @@ export default function AddEditItem({
       );
     } else {
       const addedItem = await addItem({
+        c_user_uid: null,
         title,
         description,
         category: category.map(cat => cat.title),
