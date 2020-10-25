@@ -105,6 +105,7 @@ export const searchItems = filterOptions => async dispatch => {
             : filterOptions.distance * conversion.kilometers,
         lat: filterOptions.lat,
         long: filterOptions.long,
+        category: filterOptions.category.map(cat => cat.title),
         sortBy: filterOptions.sortBy
       }
     });
