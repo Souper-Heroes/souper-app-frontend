@@ -15,7 +15,7 @@ const initialState = {
     distance: 2,
     category: [],
     expiry: '',
-    sortBy: 'Nearest',
+    sortBy: { distance: 1 },
     long: 0,
     latt: 0
   },
