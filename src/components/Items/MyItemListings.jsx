@@ -94,12 +94,10 @@ MyItemListings.propTypes = {
   unreserveItem: PropTypes.func
 };
        
-/*
-       <GridItem xs={6} sm={6} align="left">
+/* <GridItem xs={6} sm={6} align="left">
             <Link to="/addItem" className={classes.link}>
               <Button type="button" color="rose">
                 Add Item
               </Button>
             </Link>
-          </GridItem> 
- */
+          </GridItem> */
