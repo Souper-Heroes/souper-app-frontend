@@ -1,5 +1,4 @@
 import api from '../utils/api';
-
 import { setAlert } from './alert';
 
 export const types = {
@@ -106,7 +105,8 @@ export const searchItems = filterOptions => async dispatch => {
         lat: filterOptions.lat,
         long: filterOptions.long,
         category: filterOptions.category.map(cat => cat.title),
-        sortBy: filterOptions.sortBy
+        sortBy: filterOptions.sortBy,
+        expiry: filterOptions.expiry
       }
     });
     dispatch({

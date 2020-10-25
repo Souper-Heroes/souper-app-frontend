@@ -60,7 +60,7 @@ function ItemListings({
   const [distance, setDistance] = useState(filters.distance);
   const [unit, setUnit] = useState(filters.unit);
   const [category, setCategory] = useState(filters.category);
-  const [expiry, setExpiry] = useState(filters.expiry);
+  const [expiry, setExpiry] = useState(filters.expiry.length ? moment(filters.expiry).format('DD/MM/yyyy') : filters.expiry);
 
   const handleGetItems = async () => {
     searchItems({
@@ -70,7 +70,7 @@ function ItemListings({
       lat: user.location.coordinates[1],
       sortBy,
       category,
-      expiry: moment(expiry).format('DD/MM/yyyy')
+      expiry: moment(expiry).toDate(),
     });
   };
 
@@ -196,7 +196,7 @@ function ItemListings({
                   />
                 </FormControl>
                 <InputLabel className={classes.filterLabel}>
-                  Latest Expiry Date
+                  Earliest Expiry Date
                 </InputLabel>
                 <FormControl fullWidth>
                   <Datetime
@@ -235,7 +235,7 @@ function ItemListings({
               spacing={1}
             >
               <GridItem xs={12} sm={6} md={8}>
-                <h6>{search.length} ITEMS FOUND</h6>
+                <h6><b>{search.totalCount}</b> ITEMS FOUND</h6>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
                 <FormControl fullWidth required className={classes.formControl}>
@@ -245,10 +245,9 @@ function ItemListings({
                     onChange={event => onChangeHandler(event)}
                     name="sortBy"
                   >
-                    <option aria-label="None" value="" />
-                    <option value="1">Sort by: Nearest first</option>
-                    <option value="-1">Sort by: Expiry</option>
-                    <option value="-1">Sort by: Newest first</option>
+                    <option value="Nearest">Sort by: Nearest first</option>
+                    <option value="Expiry">Sort by: Expiry</option>
+                    <option value="Newest">Sort by: Newest first</option>
                   </Select>
                 </FormControl>
               </GridItem>
@@ -257,7 +256,7 @@ function ItemListings({
               ) : (
                 <>
                   {/* Only retrieve items not belonging to the user and not already being collected by someone else */}
-                  {search.map(item => (
+                  {search.paginatedResults.map(item => (
                     <GridItem
                       xs={12}
                       sm={6}
@@ -322,7 +321,7 @@ function ItemListings({
 ItemListings.propTypes = {
   user: PropTypes.instanceOf(Object).isRequired,
   searchItems: PropTypes.instanceOf(Object).isRequired,
-  search: PropTypes.instanceOf(Array),
+  search: PropTypes.instanceOf(Object),
   // searchCount: PropTypes.number.isRequired,
   filters: PropTypes.instanceOf(Object).isRequired,
   loading: PropTypes.bool.isRequired,
