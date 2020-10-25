@@ -18,15 +18,6 @@ function SouperFooter() {
   return (
     <footer className={classes.footer}>
       <div className={classes.container}>
-        <div className={classes.left}>
-          <a
-            href="#ADD_ABOUT_PAGE_HERE"
-            className={classes.block}
-            target="_blank"
-          >
-            About us
-          </a>
-        </div>
         <div className={classes.right}>
           &copy; {1900 + new Date().getYear()}, made with{' '}
           <Favorite className={classes.icon} /> by
