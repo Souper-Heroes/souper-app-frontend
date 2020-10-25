@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
-import profile from 'assets/jss/material-kit-react/views/profilePage';
+import itemListings from 'assets/jss/Items/views/ItemListings';
 import Card from 'components/MaterialKitComponents/Card/Card';
 import CardBody from 'components/MaterialKitComponents/Card/CardBody';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -26,7 +26,7 @@ import PropTypes from 'prop-types';
 import Spinner from '../Layout/Spinner';
 
 const styles = {
-  ...profile,
+  ...itemListings,
   cardTitle,
   cardLink,
   cardSubtitle,
@@ -142,9 +142,8 @@ function ItemListings({
                 </InputLabel>
                 <FormControl fullWidth>
                   <div
-                    className="slider-primary"
                     id="sliderRegular"
-                    // className={classes.slider}
+                    className={classes.slider}
                     name="slider"
                     onChange={event => onChangeHandler(event)}
                   />
@@ -160,9 +159,9 @@ function ItemListings({
                     name="category"
                   >
                     <option aria-label="None" value="" />
-                    <option value="Fruit">Fruit</option>
-                    <option value="Tinned">Tinned</option>
-                    <option value="Veg">Veg</option>
+                    <option value={'Fruit'}>Fruit</option>
+                    <option value={'Tinned'}>Tinned</option>
+                    <option value={'Veg'}>Veg</option>
                   </Select>
                 </FormControl>
                 <InputLabel className={classes.filterLabel}>
@@ -261,7 +260,7 @@ function ItemListings({
                   { text: 5 },
                   { text: 'NEXT' }
                 ]}
-                color="primary"
+                color="rose"
               />
             </GridItem>
           </GridContainer>
