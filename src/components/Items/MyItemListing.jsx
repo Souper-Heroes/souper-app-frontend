@@ -12,7 +12,6 @@ import { Button } from '@material-ui/core';
 // @material-ui/icons
 import Edit from '@material-ui/icons/Edit';
 import Delete from '@material-ui/icons/Delete';
-import EmojiEvent from '@material-ui/icons/EmojiEvents';
 
 // core components
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
@@ -66,32 +65,12 @@ export default function MyItemListing(props) {
     }
   };
 
-  const handleOnClickAgreeCup = async () => {
-    /* TODO
-    console.log(
-      `Clicked Cup button, do something with item: ${item.itemId}, Title: ${item.description}`
-    ); */
-
-    // await deleteExpiredItems(myitem._id);
-
-    // await getAddress(myitem.postcode);
-
-    // setTimeout(1000);
-    // console.log("*** my address: ", address);
-    // if (addrstatus == "OK") {
-    //  console.log('My Address:', address, 'addrstatus:', addrstatus);
-    // }
-    // else {
-    //  console.log('Address not found, addrstatus:', addrstatus);
-    // }
-  };
-
   return (
     <GridContainer spacing={1}>
       <GridItem>
         <Paper className={classes.paper} spacing={1}>
           <GridContainer spacing={2}>
-            <Grid item>
+            <Grid item xs={12} lg={2}>
               <Link
                 to={`/itemview/${myitem._id}/${type}`}
                 className={classes.link}
@@ -101,22 +80,20 @@ export default function MyItemListing(props) {
                 </ButtonBase>
               </Link>
             </Grid>
-            <GridContainer xs={12} sm item spacing={0} direction="column">
+            <GridContainer xs={12} lg={10} item spacing={0} direction="column">
               <GridItem align="left" xs={12} className={classes.cell}>
                 <Link
                   to={`/itemview/${myitem._id}/${type}`}
                   className={classes.link}
                 >
                   <Typography gutterBottom variant="body1">
-                    <strong>{myitem.description}</strong>
+                    <strong>{myitem.title}</strong>
                   </Typography>
                 </Link>
                 <GridContainer className={classes.container}>
                   <GridItem
                     xs={12}
                     sm={6}
-                    md={6}
-                    lg={6}
                     className={classes.cell}
                   >
                     <GridContainer
@@ -125,9 +102,6 @@ export default function MyItemListing(props) {
                     >
                       <GridItem
                         xs={5}
-                        sm={5}
-                        md={5}
-                        lg={5}
                         className={classes.cell}
                       >
                         <Typography
@@ -140,9 +114,6 @@ export default function MyItemListing(props) {
                       </GridItem>
                       <GridItem
                         xs={7}
-                        sm={7}
-                        md={7}
-                        lg={7}
                         align="left"
                         className={classes.cell}
                       >
@@ -152,7 +123,7 @@ export default function MyItemListing(props) {
                           gutterBottom
                           align="left"
                         >
-                          {myitem.category.map(i => i).reduce((p, c) => `${p} ${c}`, '')}
+                          {myitem.category.map(i => i).reduce((p, c) => `${p} ${c},`, '')}
                         </Typography>
                       </GridItem>
                     </GridContainer>
@@ -160,8 +131,6 @@ export default function MyItemListing(props) {
                   <GridItem
                     xs={12}
                     sm={6}
-                    md={6}
-                    lg={6}
                     className={classes.cell}
                   >
                     <GridContainer
@@ -170,9 +139,6 @@ export default function MyItemListing(props) {
                     >
                       <GridItem
                         xs={5}
-                        sm={5}
-                        md={5}
-                        lg={5}
                         className={classes.cell}
                       >
                         <Typography
@@ -185,9 +151,6 @@ export default function MyItemListing(props) {
                       </GridItem>
                       <GridItem
                         xs={7}
-                        sm={7}
-                        md={7}
-                        lg={7}
                         align="left"
                         className={classes.cell}
                       >
@@ -207,8 +170,6 @@ export default function MyItemListing(props) {
                   <GridItem
                     xs={12}
                     sm={6}
-                    md={6}
-                    lg={6}
                     className={classes.cell}
                   >
                     <GridContainer
@@ -217,9 +178,6 @@ export default function MyItemListing(props) {
                     >
                       <GridItem
                         xs={5}
-                        sm={5}
-                        md={5}
-                        lg={5}
                         className={classes.cell}
                       >
                         <Typography
@@ -232,9 +190,6 @@ export default function MyItemListing(props) {
                       </GridItem>
                       <GridItem
                         xs={7}
-                        sm={7}
-                        md={7}
-                        lg={7}
                         align="left"
                         className={classes.cell}
                       >
@@ -244,7 +199,7 @@ export default function MyItemListing(props) {
                           gutterBottom
                           align="left"
                         >
-                          {moment(myitem.expiry).format('Do MMM YY')}
+                          {moment(myitem.expiry).format('Do MMM YYYY')}
                         </Typography>
                       </GridItem>
                     </GridContainer>
@@ -252,8 +207,6 @@ export default function MyItemListing(props) {
                   <GridItem
                     xs={12}
                     sm={6}
-                    md={6}
-                    lg={6}
                     className={classes.cell}
                   >
                     <GridContainer
@@ -262,18 +215,18 @@ export default function MyItemListing(props) {
                     >
                       <GridItem
                         xs={5}
-                        sm={5}
-                        md={5}
-                        lg={5}
                         className={classes.cell}
                       >
-                        {myitem.availability !== null && GetCollectionMsg(type)}
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          gutterBottom
+                        >
+                          Availability:
+                        </Typography>
                       </GridItem>
                       <GridItem
                         xs={7}
-                        sm={7}
-                        md={7}
-                        lg={7}
                         align="left"
                         className={classes.cell}
                       >
@@ -284,7 +237,69 @@ export default function MyItemListing(props) {
                             gutterBottom
                             align="left"
                           >
-                            {myitem.availability}
+                            {myitem.availability }
+                          </Typography>
+                        )}
+                      </GridItem>
+                    </GridContainer>
+                  </GridItem>
+                </GridContainer>
+                <GridContainer className={classes.container}>
+                  <GridItem xs={12} sm={6} className={classes.cell}>
+                    <GridContainer direction="row" className={classes.container}>
+                      <GridItem xs={5} className={classes.cell}>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          gutterBottom
+                        >
+                          Date Added:
+                        </Typography>
+                      </GridItem>
+                      <GridItem
+                        xs={7}
+                        align="left"
+                        className={classes.cell}
+                      >
+                        <Typography
+                          variant="body2"
+                          color="textPrimary"
+                          gutterBottom
+                          align="left"
+                        >
+                          {moment(myitem.date).format('Do MMM YYYY')}
+                        </Typography>
+                      </GridItem>
+                    </GridContainer>
+                  </GridItem>
+                  <GridItem
+                    xs={12}
+                    sm={6}
+                    className={classes.cell}
+                  >
+                    <GridContainer
+                      direction="row"
+                      className={classes.container}
+                    >
+                      <GridItem
+                        xs={5}
+                        className={classes.cell}
+                      >
+                        {myitem.availability !== null && GetCollectionMsg(type)}
+                      </GridItem>
+                      <GridItem
+                        xs={7}
+                        align="left"
+                        className={classes.cell}
+                      >
+                        {myitem.availability !== null && (
+                          <Typography
+                            variant="body2"
+                            color="textPrimary"
+                            gutterBottom
+                            align="left"
+                          >
+                            This should be added by the collector as to when they are collecting.
                           </Typography>
                         )}
                       </GridItem>
@@ -293,12 +308,6 @@ export default function MyItemListing(props) {
                 </GridContainer>
               </GridItem>
               <GridItem xs={12} align="right">
-                <Button
-                  onClick={handleOnClickAgreeCup}
-                  color={myitem.c_user_uid === null ? 'default' : 'secondary'}
-                >
-                  <EmojiEvent />
-                </Button>
                 {type === 'provide' && (
                   <Link
                     to={`/editItem/${myitem._id}`}
