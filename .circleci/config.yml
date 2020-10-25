@@ -1,10 +1,20 @@
 version: 2.1
 
 jobs:
+  test:unit:
+    docker:
+      - image: circleci/node:14-stretch
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: run test:unit
+          command: |
+            npm run test:unit
 
   checkout_and_build:
     docker:
-      - image: circleci/node:8-stretch
+      - image: circleci/node:14-stretch
     steps:
       - checkout
 
@@ -54,7 +64,7 @@ jobs:
 
   lint:
     docker:
-      - image: circleci/node:8-stretch
+      - image: circleci/node:14-stretch
     steps:
       - attach_workspace:
           at: ~/
@@ -65,7 +75,7 @@ jobs:
 
   upload_live_origin:
     docker:
-      - image: circleci/node:8-stretch
+      - image: circleci/node:14-stretch
     steps:
       - attach_workspace:
           at: ~/
@@ -76,7 +86,7 @@ jobs:
             ~/.local/bin/aws s3 sync --delete build/ s3://${AWS_S3_ORIGIN_BUCKET_LIVE_A}/${PKG_VERSION}/
   publish_live_origin:
     docker:
-      - image: circleci/node:8-stretch
+      - image: circleci/node:14-stretch
     steps:
       - attach_workspace:
           at: ~/
@@ -109,10 +119,14 @@ workflows:
           requires:
             - checkout_and_build
 
+      - test:unit:
+          requires:
+            - lint
+
       - upload_live_origin:
           context: souper-a-builds
           requires:
-            - lint
+            - test:unit
           filters:
             branches:
               only:

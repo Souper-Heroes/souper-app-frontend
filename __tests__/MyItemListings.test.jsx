@@ -9,7 +9,7 @@ const item = {
   photoId: '#1112',
   provideUserId: '1',
   collectUserId: '3',
-  category: 'Nuts',
+  category: ['Nuts'],
   description: 'Bag of Cashew Nuts',
   expiryDate: '24/10/2020',
   location: 'SR5 4TQ',
@@ -29,11 +29,11 @@ test('renders MyItemListings with AddItem Button', () => {
   expect(linkAddItem).toBeInTheDocument();
 });
 
-//test('renders MyItemListings without Add Item Button', () => {
+// test('renders MyItemListings without Add Item Button', () => {
 //  const { getByText } = render(
 //    <MyItemListings key={item.ItemId} type='collect' myitems={[item]} />
 //  );
 
 //  const linkNoAddItem = getByText(/Add Item/i);
 //  expect(linkNoAddItem).toHaveLength(0);
-//});
+// });
