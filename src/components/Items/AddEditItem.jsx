@@ -78,8 +78,8 @@ export default function AddEditItem({
   const [category, setCategory] = useState(item ? formatCategory(item.category) : []);
   // Get the location and postcode from profile if add item
   // from item if editing an item
-  const [myPostcode] = useState(item ? item.postcode : postcode);
-  const [myLocation] = useState(item ? item.location : location);
+  const [myPostcode, setPostcode] = useState(item ? item.postcode : postcode);
+  const [myLocation, setLocation] = useState(item ? item.location : location);
 
   const resetForm = () => {
     setTitle('');
@@ -87,6 +87,8 @@ export default function AddEditItem({
     setCategory([]);
     setExpiry('');
     setAvailability('');
+    setPostcode(postcode);
+    setLocation(location);
   };
 
   useEffect(() => {
