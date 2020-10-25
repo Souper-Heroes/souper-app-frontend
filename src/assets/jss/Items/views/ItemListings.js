@@ -2,7 +2,7 @@ import { container, title } from 'assets/jss/material-kit-react.js';
 
 import imagesStyle from 'assets/jss/material-kit-react/imagesStyles.js';
 
-const ItemViewPageStyle = {
+const itemListingsStyle = {
   container,
   profile: {
     textAlign: 'center',
@@ -81,30 +81,7 @@ const ItemViewPageStyle = {
   },
   bottomFilter: {
     marginBottom: '20px'
-  },
-  root: {
-    maxWidth: 345
-  },
-  media: {
-    height: 140
-  },
-  image: {
-    width: 250,
-    height: 250
-  },
-  img: {
-    //margin: 'auto',
-    display: 'block',
-    maxWidth: '50%',
-    maxHeight: '50%',
-    margin: '20px auto 50px auto',
-    textAlign: 'center'
-  },
-
-  label: { margin: 'auto', padding: '0px' },
-  output: { margin: 'auto', padding: '0px' },
-  button_label2: { margin: 'auto', padding: '0px' },
-  border: { margin: '15px' }
+  }
 };
 
-export default ItemViewPageStyle;
+export default itemListingsStyle;
