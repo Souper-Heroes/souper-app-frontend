@@ -95,7 +95,7 @@ export default function AddEditItem({
     if (!item) {
       resetForm();
     }
-  }, [item]);
+  }, [item]); // eslint-disable-line
 
   const classes = useStyles();
 
