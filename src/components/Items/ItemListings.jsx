@@ -91,14 +91,12 @@ function ItemListings({
 
   useEffect(() => {
     const distanceSlider = document.getElementById('sliderRegular');
-    const distanceVal = 2;
-    const unitVal = 'Miles';
     // create distance Slider when component mounts
     Slider.create(distanceSlider, {
-      start: `${distanceVal}`,
+      start: `${distance}`,
       format: {
         from: Number,
-        to: value => `${value.toFixed(2)} ${unitVal === 'Miles' ? 'mi' : 'km'}`
+        to: value => `${value.toFixed(2)} ${unit === 'Miles' ? 'mi' : 'km'}`
       },
       keyboardSupport: true,
       connect: [true, false],
@@ -159,9 +157,9 @@ function ItemListings({
                     name="category"
                   >
                     <option aria-label="None" value="" />
-                    <option value={'Fruit'}>Fruit</option>
-                    <option value={'Tinned'}>Tinned</option>
-                    <option value={'Veg'}>Veg</option>
+                    <option value="Fruit">Fruit</option>
+                    <option value="Tinned">Tinned</option>
+                    <option value="Veg">Veg</option>
                   </Select>
                 </FormControl>
                 <InputLabel className={classes.filterLabel}>
