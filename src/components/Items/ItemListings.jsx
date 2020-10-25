@@ -56,21 +56,22 @@ function ItemListings({
   categoryOptions
 }) {
   const classes = useStyles();
-  const [sortBy, setSortBy] = useState(-1);
+  const [sortBy, setSortBy] = useState(filters.sortBy);
   const [distance, setDistance] = useState(filters.distance);
   const [unit, setUnit] = useState(filters.unit);
   const [category, setCategory] = useState(filters.category);
   const [expiry, setExpiry] = useState(filters.expiry.length ? moment(filters.expiry).format('DD/MM/yyyy') : filters.expiry);
 
-  const handleGetItems = async () => {
+  const handleGetItems = async (event, sorting) => {
+    if (typeof sorting === 'undefined') { sorting = sortBy; }
     searchItems({
       unit,
       distance,
       long: user.location.coordinates[0],
       lat: user.location.coordinates[1],
-      sortBy,
+      sortBy: (typeof sorting === 'undefined') ? sortBy : sorting,
       category,
-      expiry: moment(expiry).toDate(),
+      expiry: expiry.length ? moment(expiry).toDate() : expiry
     });
   };
 
@@ -83,6 +84,7 @@ function ItemListings({
 
     if (name === 'sortBy') {
       setSortBy(value);
+      handleGetItems(event, value);
     } else if (name === 'unit') {
       // console.log(value);
       setUnit(value);
@@ -245,9 +247,9 @@ function ItemListings({
                     onChange={event => onChangeHandler(event)}
                     name="sortBy"
                   >
-                    <option value="Nearest">Sort by: Nearest first</option>
-                    <option value="Expiry">Sort by: Expiry</option>
-                    <option value="Newest">Sort by: Newest first</option>
+                    <option value="distance">Sort by: Nearest first</option>
+                    <option value="expiry">Sort by: Expiry</option>
+                    <option value="date">Sort by: Newest first</option>
                   </Select>
                 </FormControl>
               </GridItem>
