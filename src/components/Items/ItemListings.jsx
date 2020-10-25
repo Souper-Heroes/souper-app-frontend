@@ -85,11 +85,7 @@ function ItemListings({
     }
   };
 
-  const onDateChangeHandler = date => {
-    setExpiry(date);
-  };
-
-  useEffect(() => {
+  const createSlider = () => {
     const distanceSlider = document.getElementById('sliderRegular');
     // create distance Slider when component mounts
     Slider.create(distanceSlider, {
@@ -113,7 +109,13 @@ function ItemListings({
     });
     // set the Distance State when slider value changed
     distanceSlider.noUiSlider.on('change', () => setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, '')));
-  }, []);
+  };
+
+  const onDateChangeHandler = date => {
+    setExpiry(date);
+  };
+
+  useEffect(createSlider, []);
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
