@@ -93,7 +93,7 @@ MyItemListings.propTypes = {
   sortByItem: PropTypes.func,
   unreserveItem: PropTypes.func
 };
-       
+
 /* <GridItem xs={6} sm={6} align="left">
             <Link to="/addItem" className={classes.link}>
               <Button type="button" color="rose">
