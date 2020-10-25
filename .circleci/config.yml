@@ -1,16 +1,16 @@
 version: 2.1
 
 jobs:
-  test:unit:
+  test:
     docker:
       - image: circleci/node:14-stretch
     steps:
       - attach_workspace:
           at: ~/
       - run:
-          name: run test:unit
+          name: run test
           command: |
-            npm run test:unit
+            npm run test
 
   checkout_and_build:
     docker:
@@ -119,14 +119,14 @@ workflows:
           requires:
             - checkout_and_build
 
-      - test:unit:
+      - test:
           requires:
             - lint
 
       - upload_live_origin:
           context: souper-a-builds
           requires:
-            - test:unit
+            - test
           filters:
             branches:
               only:
