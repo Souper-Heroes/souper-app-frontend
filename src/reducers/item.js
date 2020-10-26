@@ -10,15 +10,6 @@ const initialState = {
     paginatedResults: [],
     totalCount: 0
   },
-  filters: {
-    unit: 'Miles',
-    distance: 2,
-    category: [],
-    expiry: '',
-    sortBy: { distance: 1 },
-    long: 0,
-    latt: 0
-  },
   categoryOptions: [
     { title: 'Nuts' },
     { title: 'Fruit' },
@@ -61,8 +52,7 @@ export default (state = initialState, action) => {
             ? payload[0].totalCount[0].count
             : 0
         },
-        loading: false,
-        filters: action.filters
+        loading: false
       };
     case types.SEARCH_ITEMS_ERROR:
       return {

@@ -67,8 +67,8 @@ function ItemListings({
     searchItems({
       unit,
       distance,
-      long: user.location.coordinates[0],
-      lat: user.location.coordinates[1],
+      long: filters.long,
+      lat: filters.lat,
       sortBy: (typeof sorting === 'undefined') ? sortBy : sorting,
       category,
       expiry: expiry.length ? moment(expiry).toDate() : expiry
@@ -104,10 +104,10 @@ function ItemListings({
     const distanceSlider = document.getElementById('sliderRegular');
     // create distance Slider when component mounts
     Slider.create(distanceSlider, {
-      start: `${distance}`,
+      start: `${filters.distance}`,
       format: {
         from: Number,
-        to: value => `${value.toFixed(2)} ${unit === 'Miles' ? 'mi' : 'km'}`
+        to: value => `${value.toFixed(2)} ${filters.unit === 'Miles' ? 'mi' : 'km'}`
       },
       keyboardSupport: true,
       connect: [true, false],
@@ -134,7 +134,15 @@ function ItemListings({
     if (!user.loading) {
       createSlider();
       if (!search.paginatedResults.length) {
-        handleGetItems();
+        searchItems({
+          unit: filters.unit,
+          distance: filters.distance,
+          long: filters.long,
+          lat: filters.lat,
+          sortBy,
+          category,
+          expiry
+        });
       }
     }
   }, [user.loading]);
@@ -151,7 +159,7 @@ function ItemListings({
                 <FormControl fullWidth required className={classes.formControl}>
                   <Select
                     native
-                    value={unit}
+                    value={filters.unit}
                     onChange={event => onChangeHandler(event)}
                     name="unit"
                   >
