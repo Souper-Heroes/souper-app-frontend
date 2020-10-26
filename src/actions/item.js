@@ -98,7 +98,7 @@ export const searchItems = filterOptions => async dispatch => {
       miles: 0.00062137,
       kilometers: 1000
     };
-    console.log(filterOptions);
+    // console.log(filterOptions);
     const res = await api.get('items/search', {
       params: {
         maxDistance:
@@ -111,7 +111,10 @@ export const searchItems = filterOptions => async dispatch => {
         sortBy: {
           [filterOptions.sortBy]: filterOptions.sortBy === 'date' ? -1 : 1
         },
-        expiry: moment(filterOptions.expiry).toDate(),
+        expiry:
+          filterOptions.expiry !== ''
+            ? moment(filterOptions.expiry).toDate()
+            : '',
         limit: filterOptions.limit,
         page: filterOptions.page
       }
