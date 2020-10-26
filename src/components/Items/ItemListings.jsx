@@ -20,6 +20,7 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
+import Info from 'components/MaterialKitComponents/Typography/Info';
 
 import {
   cardTitle,
@@ -49,7 +50,6 @@ const type = 'search';
 function ItemListings({
   searchItems,
   search,
-  // searchCount,
   filters,
   loading,
   user, // current logged in user
@@ -254,7 +254,11 @@ function ItemListings({
               spacing={1}
             >
               <GridItem xs={12} sm={6} md={8}>
-                <h6><b>{search.totalCount}</b> ITEMS FOUND</h6>
+                <h5>
+                  <small>
+                    <b>{search.totalCount} ITEMS FOUND</b>, within <b>{filters.distance}</b> {filters.unit} of <b>{user.postcode}</b>
+                  </small>
+                </h5>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
                 <FormControl fullWidth required className={classes.formControl}>
@@ -300,11 +304,11 @@ function ItemListings({
                               </Link>
                             </GridItem>
                             <GridItem xs={6}>
-                              <Typography variant="inherit">
+                              <Info>
                                 {`${filters.unit === 'Miles'
                                   ? (item.distance * conversion.miles).toFixed(1) : (item.distance / conversion.kilometres).toFixed(1)}`}
                                 {`${filters.unit === 'Miles' ? ' miles' : ' km'}`}
-                              </Typography>
+                              </Info>
                             </GridItem>
                           </GridContainer>
                         </CardBody>
@@ -346,7 +350,6 @@ ItemListings.propTypes = {
   user: PropTypes.instanceOf(Object).isRequired,
   searchItems: PropTypes.instanceOf(Object).isRequired,
   search: PropTypes.instanceOf(Object),
-  // searchCount: PropTypes.number.isRequired,
   filters: PropTypes.instanceOf(Object).isRequired,
   loading: PropTypes.bool.isRequired,
   categoryOptions: PropTypes.instanceOf(Array).isRequired
