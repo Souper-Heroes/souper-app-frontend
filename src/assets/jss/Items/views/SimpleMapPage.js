@@ -16,8 +16,7 @@ const SimpleMapPageStyle = {
   pin: {
     display: 'flex',
     alignItems: 'center',
-    width: '180px',
-    color: 'blue'
+    width: '180px'
   },
 
   pinicon: {

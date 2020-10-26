@@ -23,7 +23,7 @@ export default function SimpleMapPage({ _id, myitems, user }) {
   const pinstyle = {
     color: '#e91e63', // btn-rose
     width: '25px'
-  }
+  };
 
   const LocationPin = ({ text }) => (
     <div className={classes.pin}>
