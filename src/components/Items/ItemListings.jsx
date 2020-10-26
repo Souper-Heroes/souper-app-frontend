@@ -123,16 +123,21 @@ function ItemListings({
       }
     });
     // set the Distance State when slider value changed
-    distanceSlider.noUiSlider.on('change', () =>
-      setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, ''))
-    );
+    distanceSlider.noUiSlider.on('change', () => setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, '')));
   };
 
   const onDateChangeHandler = date => {
     setExpiry(date);
   };
 
-  useEffect(createSlider, []);
+  useEffect(() => {
+    if (!user.loading) {
+      createSlider();
+      if (!search.paginatedResults.length) {
+        handleGetItems();
+      }
+    }
+  }, [user.loading]);
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>

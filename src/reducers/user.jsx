@@ -6,6 +6,7 @@ const profile_pic = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA5gAAAPACAYAA
 
 const initialState = {
   userLoadedError: false,
+  loading: true,
   address: '',
   addrstatus: '',
   display_name: '',
@@ -21,7 +22,8 @@ export default (state = { ...initialState }, action) => {
     case types.USER_LOADED:
       return {
         ...state,
-        ...action.user
+        ...action.user,
+        loading: false
       };
     case types.USER_LOAD_FAILURE:
       return {
