@@ -35,8 +35,8 @@ const mapDispatchToProps = dispatch => ({
     // eslint-disable-next-line implicit-arrow-linebreak
     dispatch(updateCollectionDates(_id, availiability)),
 
-  unreserveItem: _id => dispatch(unreserveItem(_id)),
-  reserveItem: _id => dispatch(reserveItem(_id))
+  unreserveItem: (_id, history) => dispatch(unreserveItem(_id, history)),
+  reserveItem: (_id, history) => dispatch(reserveItem(_id, history))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemViewPage);
