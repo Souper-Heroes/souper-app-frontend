@@ -70,7 +70,12 @@ export default (state = { ...initialState }, action) => {
     case `${types.UPDATE_PROFILE}_FULFILLED`:
       return {
         ...state,
-        ...action.payload.data
+        ...action.payload.data,
+        filters: {
+          ...state.filters,
+          long: action.payload.data.location.coordinates[0],
+          lat: action.payload.data.location.coordinates[1]
+        }
       };
     case itemTypes.SEARCH_ITEMS:
       return {

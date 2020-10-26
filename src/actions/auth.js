@@ -67,10 +67,13 @@ export const loadUser = user => async dispatch => {
   try {
     let res = await api.get('/users');
     if (!res.data) {
+      console.log(user.user.displayName);
       res = await api.post('/users', user.user);
     }
+    console.log(res);
     dispatch(userLoaded(res.data));
   } catch (err) {
+    console.log(err);
     dispatch(userLoadError());
   }
 };
@@ -154,11 +157,7 @@ export const signUp = (email, password, displayName) => dispatch => {
       user.user.updateProfile({
         displayName
       });
-    })
-    .then(user => {
       dispatch(loadUser(user));
-    })
-    .then(user => {
       dispatch(receiveLogin(user));
     })
     .catch(error => {
