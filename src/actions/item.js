@@ -115,8 +115,7 @@ export const searchItems = filterOptions => async dispatch => {
           filterOptions.expiry !== ''
             ? moment(filterOptions.expiry).toDate()
             : '',
-        limit: filterOptions.limit,
-        page: filterOptions.page
+        limit: filterOptions.limit
       }
     });
     dispatch({

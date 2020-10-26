@@ -188,6 +188,7 @@ function ItemListings({
                 <InputLabel className={classes.filterLabel}>Unit</InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
                   <Select
+                    className={classes.selectLabel}
                     native
                     value={unit}
                     onChange={event => onChangeHandler(event)}
@@ -290,6 +291,7 @@ function ItemListings({
               <GridItem xs={12} sm={6} md={4}>
                 <FormControl fullWidth required className={classes.formControl}>
                   <Select
+                    className={classes.selectLabel}
                     native
                     value={sortBy}
                     onChange={event => onChangeHandler(event)}

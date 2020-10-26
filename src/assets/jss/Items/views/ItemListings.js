@@ -75,6 +75,18 @@ const itemListingsStyle = {
     letterSpacing: 'normal',
     textAlign: 'left'
   },
+  selectLabel: {
+    marginTop: '10px',
+    color: 'rgba(0, 0, 0, 0.55)',
+    cursor: 'pointer',
+    fontSize: '15px',
+    transition: '0.3s ease all',
+    lineHeight: '1.428571429',
+    fontWeight: '400',
+    paddingLeft: '0',
+    letterSpacing: 'normal',
+    textAlign: 'left'
+  },
   slider: {
     marginTop: '50px',
     marginBottom: '50px'
