@@ -21,7 +21,9 @@ const SimpleMapPageStyle = {
   },
 
   pinicon: {
-    fontSize: '10rem'
+    fontSize: '16px',
+    color: '#e91e63', // btn-rose
+    width: '25px'
   },
 
   pintext: {
