@@ -1,5 +1,5 @@
+import * as ROUTES from 'components/Routing/routes';
 import api from '../utils/api';
-
 import { setAlert } from './alert';
 
 export const types = {
@@ -164,7 +164,7 @@ export const updateCollectionDates = (_id, availability) => ({
   success: true
 });
 
-export const reserveItem = _id => async dispatch => {
+export const reserveItem = (_id, history) => async dispatch => {
   try {
     const res = await api.put(`/items/reserve/${_id}`);
 
@@ -172,6 +172,7 @@ export const reserveItem = _id => async dispatch => {
       type: types.RESERVE_ITEM,
       payload: res.data
     });
+    history.push(ROUTES.ITEM_LIST);
   } catch (err) {
     console.log(err);
     dispatch({
@@ -180,10 +181,11 @@ export const reserveItem = _id => async dispatch => {
   }
 };
 
-export const unreserveItem = _id => async dispatch => {
+export const unreserveItem = (_id, history) => async dispatch => {
   try {
     const res = await api.put(`/items/unreserve/${_id}`);
 
+    history.push(ROUTES.ITEM_LIST);
     dispatch({
       type: types.UNRESERVE_ITEM,
       payload: res.data

@@ -53,6 +53,11 @@ function ItemListings({
   const [category, setCategory] = useState('');
   const [expiry, setExpiry] = useState(filters.expiry);
 
+  const conversion = {
+    miles: 0.00062137,
+    kilometres: 1000
+  };
+
   const handleGetItems = async () => {
     searchItems({
       unit,
@@ -221,20 +226,27 @@ function ItemListings({
                       <Card className={classes.textLeft}>
                         <CardBody>
                           <h5 className={classes.cardTitle}>{item.title}</h5>
-                          <strong>
-                            <h6 className={classes.cardSubtitle}>
-                              {`Expires: ${moment(item.expiry).format('DD/MM/YYYY')}`}
-                            </h6>
-                          </strong>
+                          <Typography variant="body2">
+                            {`Expires: ${moment(item.expiry).format('Do MMM YY')}`}
+                          </Typography>
                           <p>{item.description}</p>
-                          <Link
-                            to={`/itemview/${item._id}/${type}`}
-                            className={classes.link}
-                          >
-                            <Typography>
-                              View Item
-                            </Typography>
-                          </Link>
+                          <GridContainer>
+                            <GridItem xs={6}>
+                              <Link
+                                to={`/itemview/${item._id}/${type}`}
+                                className={classes.link}
+                              >
+                                View Item
+                              </Link>
+                            </GridItem>
+                            <GridItem xs={6}>
+                              <Typography variant="inherit">
+                                {`${filters.unit === 'Miles'
+                                  ? (item.distance * conversion.miles).toFixed(1) : (item.distance / conversion.kilometres).toFixed(1)}`}
+                                {`${filters.unit === 'Miles' ? ' miles' : ' km'}`}
+                              </Typography>
+                            </GridItem>
+                          </GridContainer>
                         </CardBody>
                       </Card>
                     </GridItem>
