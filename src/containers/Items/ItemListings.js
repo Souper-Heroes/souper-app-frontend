@@ -9,7 +9,6 @@ const mapStateToProps = state => ({
   user: state.user,
   items: state.item.items,
   search: state.item.search,
-  searchCount: state.item.search.length,
   filters: state.user.filters,
   loading: state.item.loading,
   categoryOptions: state.item.categoryOptions
