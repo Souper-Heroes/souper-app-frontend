@@ -61,8 +61,8 @@ function ItemListings({
   const [unit, setUnit] = useState(filters.unit);
   const [category, setCategory] = useState(filters.category);
   const [expiry, setExpiry] = useState(filters.expiry);
-  const [page, setPage] = useState(filters.page);
-  const [pagination, setPagination] = useState([]);
+  // const [page, setPage] = useState(filters.page);
+  const [pagination] = useState([]);
   const conversion = {
     miles: 0.00062137,
     kilometres: 1000
@@ -89,10 +89,10 @@ function ItemListings({
     setCategory(values);
   };
 
-  const onPageChangeHandler = (event, value) => {
-    setPage(value);
-    handleGetItems(event, sortBy, value);
-  };
+  // const onPageChangeHandler = (event, value) => {
+  //   setPage(value);
+  //   handleGetItems(event, sortBy, value);
+  // };
 
   const onChangeHandler = event => {
     const { name, value } = event.currentTarget;
@@ -100,7 +100,7 @@ function ItemListings({
       setSortBy(value);
       handleGetItems(event, value);
     } else if (name === 'unit') {
-      // console.log(value);
+      console.log(value);
       setUnit(value);
       document.getElementById('sliderRegular').noUiSlider.updateOptions({
         start: `${distance}`,
@@ -164,15 +164,18 @@ function ItemListings({
     }
   }, [user.loading]);
 
-  useEffect(() => {
-    const pages = [{ text: 'PREV' }];
-    // eslint-disable-next-line no-plusplus
-    for (let i = 1; i < search.totalCount / filters.limit; i++) {
-      pages.push({ active: page === i, text: i, onClick: event => onPageChangeHandler(event, i) });
-    }
-    pages.push({ text: 'NEXT' });
-    setPagination(pages);
-  }, [search, filters.limit, page]);
+  // useEffect(() => {
+  //   const pages = [];
+  //   if (search.totalCount > filters.limit) {
+  //     pages.push({ text: 'PREV' });
+  //     // eslint-disable-next-line no-plusplus
+  //     for (let i = 1; i <= Math.ceil(search.totalCount / filters.limit); i++) {
+  //       pages.push({ active: page === i, text: i, onClick: event => onPageChangeHandler(event, i) });
+  //     }
+  //     pages.push({ text: 'NEXT' });
+  //     setPagination(pages);
+  //   }
+  // }, [search, filters.limit, page]);
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
@@ -186,7 +189,7 @@ function ItemListings({
                 <FormControl fullWidth required className={classes.formControl}>
                   <Select
                     native
-                    value={filters.unit}
+                    value={unit}
                     onChange={event => onChangeHandler(event)}
                     name="unit"
                   >
@@ -246,7 +249,8 @@ function ItemListings({
                     name="expiry"
                     timeFormat={false}
                     dateFormat="DD/MM/yyyy"
-                    value={moment(expiry).format('DD/MM/yyyy')}
+                    value={expiry.length ? moment(expiry).format('DD/MM/yyyy') : ''}
+                    // value={expiry}
                     onChange={onDateChangeHandler}
                     closeOnSelect
                     inputProps={{
