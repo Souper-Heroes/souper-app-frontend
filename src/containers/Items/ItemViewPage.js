@@ -22,8 +22,6 @@ const mapStateToProps = (state, ownProps) => (
     id: ownProps.match.params.id,
     myitems: state.item.myitems,
     type: ownProps.match.params.type,
-    // item: ownProps.match.params.type !== 'search' ? state.item.myitems ? state.item.myitems.find(i => i._id === ownProps.match.params.id) : null
-    //  : state.item.search ? state.item.search.find(i => i._id === ownProps.match.params.id) : null
     item: getItem(state, ownProps)
   }
 );
@@ -33,8 +31,8 @@ const mapDispatchToProps = dispatch => ({
     // eslint-disable-next-line implicit-arrow-linebreak
     dispatch(updateCollectionDates(_id, availiability)),
 
-  unreserveItem: _id => dispatch(unreserveItem(_id)),
-  reserveItem: _id => dispatch(reserveItem(_id)),
+  unreserveItem: (_id, history) => dispatch(unreserveItem(_id, history)),
+  reserveItem: (_id, history) => dispatch(reserveItem(_id, history)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemViewPage);

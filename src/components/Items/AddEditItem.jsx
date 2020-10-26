@@ -71,15 +71,15 @@ export default function AddEditItem({
     return objArr;
   };
 
-  const [availability, setAvailability] = useState(
-    item ? item.availability : ''
-  );
+  const [availability, setAvailability] = useState(item ? item.availability : '');
   const [title, setTitle] = useState(item ? item.title : '');
   const [description, setDescription] = useState(item ? item.description : '');
   const [expiry, setExpiry] = useState(item ? formatExpiry(item.expiry) : '');
-  const [category, setCategory] = useState(
-    item ? formatCategory(item.category) : []
-  );
+  const [category, setCategory] = useState(item ? formatCategory(item.category) : []);
+  // Get the location and postcode from profile if add item
+  // from item if editing an item
+  const [myPostcode] = useState(item ? item.postcode : postcode);
+  const [myLocation] = useState(item ? item.location : location);
 
   const resetForm = () => {
     setTitle('');
@@ -132,20 +132,21 @@ export default function AddEditItem({
           description,
           category: category.map(cat => cat.title),
           expiry: moment(expiry),
-          postcode,
-          location,
+          postcode: myPostcode,
+          location: myLocation,
           availability,
         },
         item._id
       );
     } else {
       const addedItem = await addItem({
+        c_user_uid: null,
         title,
         description,
         category: category.map(cat => cat.title),
         expiry: moment(expiry),
-        postcode,
-        location,
+        postcode: myPostcode,
+        location: myLocation,
         availability
       });
       // reset form
@@ -264,7 +265,7 @@ export default function AddEditItem({
                   id="disabled"
                   inputProps={{
                     disabled: true,
-                    value: postcode.toUpperCase()
+                    value: myPostcode.toUpperCase()
                   }}
                   formControlProps={{
                     fullWidth: true
