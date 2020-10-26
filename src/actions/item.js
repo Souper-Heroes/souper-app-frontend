@@ -1,4 +1,5 @@
 import * as ROUTES from 'components/Routing/routes';
+import moment from 'moment';
 import api from '../utils/api';
 import { setAlert } from './alert';
 
@@ -110,7 +111,7 @@ export const searchItems = filterOptions => async dispatch => {
         sortBy: {
           [filterOptions.sortBy]: filterOptions.sortBy === 'date' ? -1 : 1
         },
-        expiry: filterOptions.expiry,
+        expiry: moment(filterOptions.expiry).toDate(),
         limit: filterOptions.limit,
         page: filterOptions.page
       }
