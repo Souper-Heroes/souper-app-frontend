@@ -60,7 +60,7 @@ function ItemListings({
   const [distance, setDistance] = useState(filters.distance);
   const [unit, setUnit] = useState(filters.unit);
   const [category, setCategory] = useState(filters.category);
-  const [expiry, setExpiry] = useState(filters.expiry.length ? moment(filters.expiry).format('DD/MM/yyyy') : filters.expiry);
+  const [expiry, setExpiry] = useState(filters.expiry);
   const [page, setPage] = useState(filters.page);
   const [pagination, setPagination] = useState([]);
   const conversion = {
@@ -69,8 +69,9 @@ function ItemListings({
   };
 
   // createPaginations();
-  const handleGetItems = async (event, sorting) => {
+  const handleGetItems = async (event, sorting, pageNumber) => {
     if (typeof sorting === 'undefined') { sorting = sortBy; }
+    if (typeof pageNumber === 'undefined') { pageNumber = sortBy; }
     searchItems({
       unit,
       distance,
@@ -78,9 +79,9 @@ function ItemListings({
       lat: filters.lat,
       sortBy: (typeof sorting === 'undefined') ? sortBy : sorting,
       category,
-      expiry: expiry.length ? moment(expiry).toDate() : expiry,
+      expiry,
       limit: filters.limit,
-      page
+      page: pageNumber
     });
   };
 
@@ -89,8 +90,8 @@ function ItemListings({
   };
 
   const onPageChangeHandler = (event, value) => {
-    console.log(value);
     setPage(value);
+    handleGetItems(event, sortBy, value);
   };
 
   const onChangeHandler = event => {
@@ -167,7 +168,7 @@ function ItemListings({
     const pages = [{ text: 'PREV' }];
     // eslint-disable-next-line no-plusplus
     for (let i = 1; i < search.totalCount / filters.limit; i++) {
-      pages.push({ active: page === i, text: i, onClick: event => onPageChangeHandler(event, i) })
+      pages.push({ active: page === i, text: i, onClick: event => onPageChangeHandler(event, i) });
     }
     pages.push({ text: 'NEXT' });
     setPagination(pages);
@@ -245,7 +246,7 @@ function ItemListings({
                     name="expiry"
                     timeFormat={false}
                     dateFormat="DD/MM/yyyy"
-                    value={expiry}
+                    value={moment(expiry).format('DD/MM/yyyy')}
                     onChange={onDateChangeHandler}
                     closeOnSelect
                     inputProps={{
