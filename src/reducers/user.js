@@ -24,7 +24,9 @@ const initialState = {
     expiry: '',
     sortBy: 'distance',
     long: 0,
-    lat: 0
+    lat: 0,
+    limit: 2,
+    page: 1
   }
 };
 

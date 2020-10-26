@@ -61,11 +61,14 @@ function ItemListings({
   const [unit, setUnit] = useState(filters.unit);
   const [category, setCategory] = useState(filters.category);
   const [expiry, setExpiry] = useState(filters.expiry.length ? moment(filters.expiry).format('DD/MM/yyyy') : filters.expiry);
+  const [page, setPage] = useState(filters.page);
+  const [pagination, setPagination] = useState([]);
   const conversion = {
     miles: 0.00062137,
     kilometres: 1000
   };
-  
+
+  // createPaginations();
   const handleGetItems = async (event, sorting) => {
     if (typeof sorting === 'undefined') { sorting = sortBy; }
     searchItems({
@@ -75,7 +78,9 @@ function ItemListings({
       lat: filters.lat,
       sortBy: (typeof sorting === 'undefined') ? sortBy : sorting,
       category,
-      expiry: expiry.length ? moment(expiry).toDate() : expiry
+      expiry: expiry.length ? moment(expiry).toDate() : expiry,
+      limit: filters.limit,
+      page
     });
   };
 
@@ -83,9 +88,13 @@ function ItemListings({
     setCategory(values);
   };
 
+  const onPageChangeHandler = (event, value) => {
+    console.log(value);
+    setPage(value);
+  };
+
   const onChangeHandler = event => {
     const { name, value } = event.currentTarget;
-
     if (name === 'sortBy') {
       setSortBy(value);
       handleGetItems(event, value);
@@ -126,6 +135,7 @@ function ItemListings({
         density: 10
       }
     });
+    setDistance(filters.distance);
     // set the Distance State when slider value changed
     distanceSlider.noUiSlider.on('change', () => setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, '')));
   };
@@ -145,11 +155,23 @@ function ItemListings({
           lat: filters.lat,
           sortBy,
           category,
-          expiry
+          expiry,
+          limit: filters.limit,
+          page: filters.page
         });
       }
     }
   }, [user.loading]);
+
+  useEffect(() => {
+    const pages = [{ text: 'PREV' }];
+    // eslint-disable-next-line no-plusplus
+    for (let i = 1; i < search.totalCount / filters.limit; i++) {
+      pages.push({ active: page === i, text: i, onClick: event => onPageChangeHandler(event, i) })
+    }
+    pages.push({ text: 'NEXT' });
+    setPagination(pages);
+  }, [search, filters.limit, page]);
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
@@ -327,15 +349,7 @@ function ItemListings({
               direction="row-reverse"
             >
               <Paginations
-                pages={[
-                  { text: 'PREV' },
-                  { active: true, text: 1 },
-                  { text: 2 },
-                  { text: 3 },
-                  { text: 4 },
-                  { text: 5 },
-                  { text: 'NEXT' }
-                ]}
+                pages={pagination}
                 color="rose"
               />
             </GridItem>
