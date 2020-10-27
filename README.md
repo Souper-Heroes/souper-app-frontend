@@ -23,3 +23,10 @@ Install [Node.js](http://nodejs.org/) and node dependencies:
 npm install
 ```
 
+## Usage
+
+To start the frontend:
+
+```
+npm start
+```
