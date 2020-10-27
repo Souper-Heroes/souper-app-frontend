@@ -1,4 +1,7 @@
 # souper-app-frontend
+This is the frontend for the Souper Heroes Food Waste Reduction app.
+The app aims to provide ESG benefits to users by helping them minimize their food wastage.
+Built using React using the Material UI framework, incorporating Firebase authentication and Redux state management.
 
 ## Factsheet
 
@@ -28,6 +31,8 @@ Configuration is via the following environment variables:
 Node >= 8
 
 ## Project setup
+Install [Node.js](http://nodejs.org/) and node dependencies:
+
 ```
 npm install
 ```
