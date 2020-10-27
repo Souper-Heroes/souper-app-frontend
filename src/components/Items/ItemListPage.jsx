@@ -8,6 +8,7 @@ import styles from 'assets/jss/material-kit-react/views/profilePage';
 import MyItemListings from 'containers/Items/MyItemListings';
 import CustomTabs from 'components/MaterialKitComponents/CustomTabs/CustomTabs';
 import PropTypes from 'prop-types';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(styles);
 
@@ -56,11 +57,20 @@ export default function ItemListPage({
           <div className={classes.container}>
             <GridContainer justify="center">
               <GridItem xs={12}>
-                <CustomTabs
-                  headerColor="rose"
-                  plainTabs
-                  tabs={createCollectionTabs()}
-                />
+                {createCollectionTabs().length > 0
+                  && (
+                    <CustomTabs
+                      headerColor="rose"
+                      plainTabs
+                      tabs={createCollectionTabs()}
+                    />
+                  )}
+                {createCollectionTabs().length === 0
+                  && (
+                    <Typography align="center">
+                      You have no items for listing or collection
+                    </Typography>
+                  )}
               </GridItem>
             </GridContainer>
           </div>
