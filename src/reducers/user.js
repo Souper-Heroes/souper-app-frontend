@@ -25,7 +25,7 @@ const initialState = {
     sortBy: 'distance',
     long: 0,
     lat: 0,
-    limit: 25, // not being used currently
+    limit: 12,
     page: 1
   }
 };
