@@ -86,12 +86,18 @@ export default (state = { ...initialState }, action) => {
           ...state.filters,
           long: action.payload.data.location.coordinates[0],
           lat: action.payload.data.location.coordinates[1]
-        }
+        },
+        loading: false
       };
     case itemTypes.SEARCH_ITEMS:
       return {
         ...state,
         filters: action.filters
+      };
+    case types.ADD_USER_LOCATION:
+      return {
+        ...state,
+        loading: true
       };
     default:
       return state;
