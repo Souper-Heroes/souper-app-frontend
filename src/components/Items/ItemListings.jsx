@@ -139,8 +139,7 @@ function ItemListings({
       start: `${filters.distance}`,
       format: {
         from: Number,
-        to: value =>
-          `${value.toFixed(2)} ${filters.unit === 'Miles' ? 'mi' : 'km'}`
+        to: value => `${value.toFixed(2)} ${filters.unit === 'Miles' ? 'mi' : 'km'}`
       },
       keyboardSupport: true,
       connect: [true, false],
@@ -157,9 +156,7 @@ function ItemListings({
     });
     setDistance(filters.distance);
     // set the Distance State when slider value changed
-    distanceSlider.noUiSlider.on('change', () =>
-      setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, ''))
-    );
+    distanceSlider.noUiSlider.on('change', () => setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, '')));
   };
 
   const onDateChangeHandler = date => {
@@ -265,14 +262,10 @@ function ItemListings({
                       id="checkboxes"
                       options={categoryOptions}
                       disableCloseOnSelect
-                      onChange={(event, values) =>
-                        onCategoryChange(event, values)
-                      }
+                      onChange={(event, values) => onCategoryChange(event, values)}
                       value={category}
                       getOptionLabel={option => option.title}
-                      getOptionSelected={(option, value) =>
-                        option.title === value.title
-                      }
+                      getOptionSelected={(option, value) => option.title === value.title}
                       renderOption={(option, { selected }) => (
                         <>
                           <Checkbox
@@ -400,11 +393,11 @@ function ItemListings({
                                   {`${
                                     filters.unit === 'Miles'
                                       ? (
-                                          item.distance * conversion.miles
-                                        ).toFixed(1)
+                                        item.distance * conversion.miles
+                                      ).toFixed(1)
                                       : (
-                                          item.distance / conversion.kilometres
-                                        ).toFixed(1)
+                                        item.distance / conversion.kilometres
+                                      ).toFixed(1)
                                   }`}
                                   {`${
                                     filters.unit === 'Miles' ? ' miles' : ' km'
