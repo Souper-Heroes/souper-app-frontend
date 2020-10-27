@@ -2,17 +2,17 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
-import MyItemListing from 'components/Items/MyItemListing';
+import ItemViewPage from 'components/Items/ItemViewPage';
 
 const item = {
   itemId: '2',
   photoId: '#1112',
   provideUserId: '1',
   collectUserId: '3',
-  category: 'Nuts',
+  category: ['Nuts'],
   description: 'Bag of Cashew Nuts',
   expiryDate: '24/10/2020',
-  location: 'SR5 4TQ',
+  location: 'SR5 4ZQ',
   preferredProvideStartTime: '24/10/2020 10:30AM',
   preferredProvideEndTime: '24/10/2020 5:50PM',
   preferredCollectStartTime: null,
@@ -20,11 +20,9 @@ const item = {
   reservedItem: 'false',
 };
 
-test('renders MyItemListing Component', () => {
-  const { getByText } = render(
-    <MyItemListing key={item.ItemId} type="provide" myitem={item} />
-  );
+test('renders ItemViewPage Component', () => {
+  const { getByText } = render(<ItemViewPage item={item} />);
+  const linkLocation = getByText(/Location/i);
 
-  const linkExpires = getByText(/Expires/i);
-  expect(linkExpires).toBeInTheDocument();
+  expect(linkLocation).toBeInTheDocument();
 });
