@@ -22,7 +22,7 @@ const item = {
 
 test('renders ItemViewPage Component', () => {
   const { getByText } = render(<ItemViewPage item={item} />);
-  const linkLocation = getByText(/Collection Details/i);
+  const linkLocation = getByText(/Post Code/i);
 
   expect(linkLocation).toBeInTheDocument();
 });
