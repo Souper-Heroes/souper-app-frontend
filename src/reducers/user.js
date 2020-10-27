@@ -39,10 +39,22 @@ export default (state = { ...initialState }, action) => {
         loading: false,
         filters: {
           ...state.filters,
-          unit: action.user.preferred_distance_unit,
-          distance: action.user.preferred_distance,
-          long: action.user.location.coordinates[0],
-          lat: action.user.location.coordinates[1]
+          unit:
+            'preferred_distance_unit' in action.user
+              ? action.user.preferred_distance_unit
+              : state.filters.unit,
+          distance:
+            'preferred_distance' in action.user
+              ? action.user.preferred_distance
+              : state.filters.distance,
+          long:
+            'location' in action.user
+              ? action.user.location.coordinates[0]
+              : state.filters.long,
+          lat:
+            'location' in action.user
+              ? action.user.location.coordinates[1]
+              : state.filters.lat
         }
       };
     case types.USER_LOAD_FAILURE:
