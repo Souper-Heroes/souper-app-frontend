@@ -12,7 +12,8 @@ const mapStateToProps = (state, ownProps) => ({
   myitems: state.item.myitems,
   item: state.item.myitems
     ? state.item.myitems.find(i => i._id === ownProps.match.params.id)
-    : null
+    : null,
+  categoryOptions: state.item.categoryOptions
 });
 
 const mapDispatchToProps = dispatch => ({
