@@ -175,6 +175,7 @@ function ItemListings({
         });
       }
     }
+  // eslint-disable-next-line
   }, [user.loading]);
 
   useEffect(() => {
@@ -191,6 +192,7 @@ function ItemListings({
     } else {
       setPagination([]);
     }
+  // eslint-disable-next-line
   }, [search.totalCount, filters.limit, page]);
 
   return (
