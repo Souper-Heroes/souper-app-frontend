@@ -13,11 +13,12 @@ import { getAddressProfile } from 'actions/user';
 
 const useStyles = makeStyles(styles);
 
-export default function Location({ user }) {
+export default function Location({ user, updateProfile }) {
   const classes = useStyles();
 
   const [postcode, setPostCode] = useState('');
   const [address, setAddress] = useState('');
+  const [location, setLocation] = useState('');
 
   const postCodeRef = useRef();
 
@@ -33,11 +34,17 @@ export default function Location({ user }) {
     if (postCodeRef.current.reportValidity()) {
       const addressUpdated = await getAddressProfile(postcode);
       setAddress(addressUpdated.address);
+      setLocation(addressUpdated.location);
     }
   };
 
   const onSubmit = async e => {
     e.preventDefault();
+    updateProfile({
+      address,
+      postcode,
+      location
+    });
   };
 
   return (
@@ -120,5 +127,6 @@ export default function Location({ user }) {
 }
 
 Location.propTypes = {
+  updateProfile: PropTypes.func,
   user: PropTypes.instanceOf(Object)
 };
