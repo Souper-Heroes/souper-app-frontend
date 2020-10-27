@@ -15,6 +15,7 @@ Built using React using the Material UI framework, incorporating Firebase authen
 | **Deployment type**       | CircleCI + AWS(S3 + CloudFront)
 | **Production URL**     | [https://d1ndnbcmyzr04g.cloudfront.net/index.html](https://d1ndnbcmyzr04g.cloudfront.net/index.html)|
 
+
 ## Configuration
 
 Configuration is via the following environment variables:
