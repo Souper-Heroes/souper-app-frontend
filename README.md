@@ -23,6 +23,15 @@ Install [Node.js](http://nodejs.org/) and node dependencies:
 npm install
 ```
 
+## Chrome Extension Developer Tools 
+
+React Developer Tools:
+[React Developer Extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+
+Redux Devtool:
+[Redux Devtool](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+
+
 ## Usage
 
 To start the frontend:
@@ -30,3 +39,4 @@ To start the frontend:
 ```
 npm start
 ```
+
