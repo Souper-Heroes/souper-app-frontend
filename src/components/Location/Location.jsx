@@ -91,20 +91,25 @@ export default function Location({ user }) {
                   value: address
                 }}
               />
-              <GridItem xs={12} sm={12} md={8}>
-                <Button
-                  color="rose"
-                  endIcon={<Icon>search</Icon>}
-                  onClick={event => searchAddress(event)}
-                >Search Address
-                </Button>
+              <GridItem xs={12} sm={6} md={4} container spacing={1}>
+                <GridItem xs={12} sm={12} md={12}>
+                  <Button
+                    fullWidth
+                    color="rose"
+                    endIcon={<Icon>search</Icon>}
+                    onClick={event => searchAddress(event)}
+                  >Search Address
+                  </Button>
+                </GridItem>
               </GridItem>
               {address.length > 0 && (
-                <GridItem xs={12} sm={12} md={4} container justify="flex-end">
+              <GridItem xs={12} sm={6} md={8} container spacing={1}>
+                <GridItem xs={12} sm={12} md={12} container justify="flex-end">
                   <Button type="submit" color="success">
                     Continue
                   </Button>
                 </GridItem>
+              </GridItem>
               )}
             </GridContainer>
           </form>
