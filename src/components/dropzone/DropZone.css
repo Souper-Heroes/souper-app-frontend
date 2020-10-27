@@ -1,0 +1,46 @@
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.drop-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 250px;
+  border: 4px dashed #e91e63;
+}
+
+.upload-icon {
+  width: 50px;
+  height: 50px;
+  background: url(../../assets/img/upload.png) no-repeat center center;
+  background-size: 100%;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+.drop-message {
+  text-align: center;
+  color: #e91e63;
+  font-family: Arial;
+  font-size: 20px;
+}
+
+.file-input {
+  display: none;
+}
+
+.image-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}

@@ -1,0 +1,6 @@
+public/
+build/
+node_modules/
+src/assets/
+src/serviceWorker.js
+src/**/*.css
