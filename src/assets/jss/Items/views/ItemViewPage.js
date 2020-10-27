@@ -9,7 +9,7 @@ const ItemViewPageStyle = {
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '56.25%' // 16:9
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -20,7 +20,7 @@ const ItemViewPageStyle = {
     // ),
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: 'rotate(180deg)'
   },
 
   // avatar: {
@@ -28,8 +28,8 @@ const ItemViewPageStyle = {
   // },
 
   nospace: {
-    display: "flex",
-    whiteSpace: 'nowrap',
+    display: 'flex',
+    whiteSpace: 'nowrap'
     // overflow: 'hidden'
     // marginRight: '1em'
   },
