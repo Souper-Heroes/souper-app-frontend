@@ -54,6 +54,16 @@ npm install
 ```
 npm run start
 ```
+## Chrome Extension Developer Tools 
+
+React Developer Tools:
+[React Developer Extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+
+Redux Devtool:
+[Redux Devtool Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+
+
+## Usage
 
 ### Compiles and minifies for production
 ```
@@ -69,3 +79,4 @@ npm run lint
 ```
 npm run test
 ```
+
