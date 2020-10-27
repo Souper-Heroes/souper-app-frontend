@@ -29,7 +29,7 @@ Furthermore, this project has the following features:
 
 Configuration is via the following environment variables:
 
-| Env var      |
+| Env var      |    
 | ------------ |
 | `REACT_APP_FIREBASE_API_KEY` | 
 | `REACT_APP_FIREBASE_AUTH_DOMAIN` |
@@ -38,7 +38,9 @@ Configuration is via the following environment variables:
 | `REACT_APP_FIREBASE_STORAGE_BUCKET` | 
 | `REACT_APP_FIREBASE_MESSAGING_SENDER_ID` | 
 | `REACT_APP_FIREBASE_APP_ID` |
-| `REACT_APP_GOOGLE_MAPS_API_KEY` | 
+| `REACT_APP_GOOGLE_MAPS_API_KEY` |
+| `SOUP_API` |
+ 
 
 ## Requirements
 Node >= 8
