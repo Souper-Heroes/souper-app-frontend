@@ -6,15 +6,25 @@ const initialState = {
   myitems: [],
   loading: true,
   items: [],
-  search: [],
-  filters: {
-    unit: 'Miles',
-    distance: 2,
-    category: '',
-    expiry: '',
-    long: 0,
-    latt: 0
+  search: {
+    paginatedResults: [],
+    totalCount: 0
   },
+  categoryOptions: [
+    { title: 'Nuts' },
+    { title: 'Fruit' },
+    { title: 'Dairy' },
+    { title: 'Fish' },
+    { title: 'Meat' },
+    { title: 'Cereal' },
+    { title: 'Fresh' },
+    { title: 'Cooked' },
+    { title: 'Raw' },
+    { title: 'Frozen' },
+    { title: 'Dried' },
+    { title: 'Tinned' },
+    { title: 'Packet' }
+  ],
   error: {}
 };
 
@@ -34,9 +44,15 @@ export default (state = initialState, action) => {
     case types.SEARCH_ITEMS:
       return {
         ...state,
-        search: payload,
-        loading: false,
-        filters: action.filters
+        search: {
+          paginatedResults: payload[0].paginatedResults.length
+            ? payload[0].paginatedResults
+            : [],
+          totalCount: payload[0].paginatedResults.length
+            ? payload[0].totalCount[0].count
+            : 0
+        },
+        loading: false
       };
     case types.SEARCH_ITEMS_ERROR:
       return {

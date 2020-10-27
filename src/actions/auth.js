@@ -154,9 +154,13 @@ export const signUp = (email, password, displayName) => dispatch => {
       user.user.updateProfile({
         displayName
       });
-    })
-    .then(user => {
-      dispatch(loadUser(user));
+      const userDetails = {
+        user: {
+          photoURL: user.user.photoURL,
+          displayName
+        }
+      };
+      dispatch(loadUser(userDetails));
     })
     .then(user => {
       dispatch(receiveLogin(user));

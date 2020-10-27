@@ -3,11 +3,12 @@ import Datetime from 'react-datetime';
 import moment from 'moment';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
+import Checkbox from '@material-ui/core/Checkbox';
 import { Link } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
-import profile from 'assets/jss/material-kit-react/views/profilePage';
+import itemListings from 'assets/jss/Items/views/ItemListings';
 import Card from 'components/MaterialKitComponents/Card/Card';
 import CardBody from 'components/MaterialKitComponents/Card/CardBody';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -15,6 +16,11 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from 'components/MaterialKitComponents/CustomButtons/Button';
 import Select from '@material-ui/core/Select';
 import Paginations from 'components/MaterialKitComponents/Pagination/Pagination';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+import Info from 'components/MaterialKitComponents/Typography/Info';
 
 import {
   cardTitle,
@@ -25,8 +31,11 @@ import Slider from 'nouislider';
 import PropTypes from 'prop-types';
 import Spinner from '../Layout/Spinner';
 
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
 const styles = {
-  ...profile,
+  ...itemListings,
   cardTitle,
   cardLink,
   cardSubtitle,
@@ -41,41 +50,70 @@ const type = 'search';
 function ItemListings({
   searchItems,
   search,
-  // searchCount,
   filters,
   loading,
-  user // current logged in user
+  user, // current logged in user
+  categoryOptions
 }) {
   const classes = useStyles();
-  const [sortBy, setSortBy] = useState('Distance');
+  const [sortBy, setSortBy] = useState(filters.sortBy);
   const [distance, setDistance] = useState(filters.distance);
   const [unit, setUnit] = useState(filters.unit);
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState(filters.category);
   const [expiry, setExpiry] = useState(filters.expiry);
-
+  const [page, setPage] = useState(filters.page);
+  const [pagination, setPagination] = useState([]);
   const conversion = {
     miles: 0.00062137,
     kilometres: 1000
   };
 
-  const handleGetItems = async () => {
+  // createPaginations();
+  const handleGetItems = async (event, sorting, pageNumber) => {
+    if (typeof sorting === 'undefined') { sorting = sortBy; }
+    if (typeof pageNumber === 'undefined') { pageNumber = 1; setPage(1); }
     searchItems({
       unit,
       distance,
-      long: user.location.coordinates[0], // 0.18387,
-      lat: user.location.coordinates[1], // 51.57415,
+      long: filters.long,
+      lat: filters.lat,
+      sortBy: (typeof sorting === 'undefined') ? sortBy : sorting,
       category,
-      expiry
+      expiry,
+      limit: filters.limit,
+      page: pageNumber
     });
+  };
+
+  const onCategoryChange = (event, values) => {
+    setCategory(values);
+  };
+
+  const onPageChangeHandler = (event, value, totalPages) => {
+    if (value === 'next') {
+      const nextPage = page + 1;
+      if ((nextPage <= totalPages) && nextPage !== page) {
+        setPage(nextPage);
+        handleGetItems(event, sortBy, nextPage);
+      }
+    } else if (value === 'prev') {
+      const nextPage = page - 1;
+      if ((nextPage >= 1) && nextPage !== page) {
+        setPage(nextPage);
+        handleGetItems(event, sortBy, nextPage);
+      }
+    } else {
+      setPage(value);
+      handleGetItems(event, sortBy, value);
+    }
   };
 
   const onChangeHandler = event => {
     const { name, value } = event.currentTarget;
-    // console.log(name, value)
     if (name === 'sortBy') {
       setSortBy(value);
+      handleGetItems(event, value);
     } else if (name === 'unit') {
-      // console.log(value);
       setUnit(value);
       document.getElementById('sliderRegular').noUiSlider.updateOptions({
         start: `${distance}`,
@@ -89,26 +127,20 @@ function ItemListings({
     }
   };
 
-  const onDateChangeHandler = date => {
-    setExpiry(date);
-  };
-
-  useEffect(() => {
+  const createSlider = () => {
     const distanceSlider = document.getElementById('sliderRegular');
-    const distanceVal = 2;
-    const unitVal = 'Miles';
     // create distance Slider when component mounts
     Slider.create(distanceSlider, {
-      start: `${distanceVal}`,
+      start: `${filters.distance}`,
       format: {
         from: Number,
-        to: value => `${value.toFixed(2)} ${unitVal === 'Miles' ? 'mi' : 'km'}`
+        to: value => `${value.toFixed(2)} ${filters.unit === 'Miles' ? 'mi' : 'km'}`
       },
       keyboardSupport: true,
       connect: [true, false],
       range: {
         min: 0,
-        max: 5
+        max: 10
       },
       tooltips: true,
       pips: {
@@ -117,9 +149,51 @@ function ItemListings({
         density: 10
       }
     });
+    setDistance(filters.distance);
     // set the Distance State when slider value changed
     distanceSlider.noUiSlider.on('change', () => setDistance(distanceSlider.noUiSlider.get().replace(/[^\d.-]/g, '')));
-  }, []);
+  };
+
+  const onDateChangeHandler = date => {
+    setExpiry(date);
+  };
+
+  useEffect(() => {
+    if (!user.loading) {
+      createSlider();
+      if (!search.paginatedResults.length) {
+        searchItems({
+          unit: filters.unit,
+          distance: filters.distance,
+          long: filters.long,
+          lat: filters.lat,
+          sortBy,
+          category,
+          expiry,
+          limit: filters.limit,
+          page: filters.page
+        });
+      }
+    }
+  // eslint-disable-next-line
+  }, [user.loading]);
+
+  useEffect(() => {
+    const pages = [];
+    if (search.totalCount > filters.limit) {
+      const totalPages = Math.ceil(search.totalCount / filters.limit);
+      pages.push({ active: false, text: 'PREV', onClick: event => onPageChangeHandler(event, 'prev', totalPages) });
+      // eslint-disable-next-line no-plusplus
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push({ active: page === i, text: i, onClick: event => onPageChangeHandler(event, i, totalPages) });
+      }
+      pages.push({ active: false, text: 'NEXT', onClick: event => onPageChangeHandler(event, 'next', totalPages) });
+      setPagination(pages);
+    } else {
+      setPagination([]);
+    }
+  // eslint-disable-next-line
+  }, [search.totalCount, filters.limit, page]);
 
   return (
     <div className={classNames(classes.main, classes.mainRaised)}>
@@ -132,6 +206,7 @@ function ItemListings({
                 <InputLabel className={classes.filterLabel}>Unit</InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
                   <Select
+                    className={classes.selectLabel}
                     native
                     value={unit}
                     onChange={event => onChangeHandler(event)}
@@ -146,39 +221,62 @@ function ItemListings({
                 </InputLabel>
                 <FormControl fullWidth>
                   <div
-                    className="slider-primary"
                     id="sliderRegular"
-                    // className={classes.slider}
+                    className={classes.slider}
                     name="slider"
                     onChange={event => onChangeHandler(event)}
                   />
                 </FormControl>
-                <InputLabel className={classes.filterLabel}>
-                  Category
-                </InputLabel>
                 <FormControl fullWidth required className={classes.formControl}>
-                  <Select
-                    native
+                  <Autocomplete
+                    className={classes.filterLabel}
+                    multiple
+                    id="checkboxes"
+                    options={categoryOptions}
+                    disableCloseOnSelect
+                    onChange={(event, values) => onCategoryChange(event, values)}
                     value={category}
-                    onChange={event => onChangeHandler(event)}
-                    name="category"
-                  >
-                    <option aria-label="None" value="" />
-                    <option value="Fruit">Fruit</option>
-                    <option value="Tinned">Tinned</option>
-                    <option value="Veg">Veg</option>
-                  </Select>
+                    getOptionLabel={option => option.title}
+                    getOptionSelected={(option, value) => option.title === value.title}
+                    renderOption={(option, { selected }) => (
+                      <>
+                        <Checkbox
+                          icon={icon}
+                          checkedIcon={checkedIcon}
+                          style={{ marginRight: 8 }}
+                          checked={selected}
+                        />
+                        {option.title}
+                      </>
+                    )}
+                    renderInput={params => (
+                      <TextField
+                        {...params}
+                        variant="outlined"
+                        label="Category"
+                        placeholder="filter categories"
+                      />
+                    )}
+                  />
                 </FormControl>
                 <InputLabel className={classes.filterLabel}>
-                  Expiry Date
+                  Earliest Expiry Date
                 </InputLabel>
                 <FormControl fullWidth>
                   <Datetime
                     className={classes.bottomFilter}
-                    inputProps={{ placeholder: 'Select Expiry date..' }}
                     name="expiry"
-                    value={expiry}
+                    timeFormat={false}
+                    dateFormat="DD/MM/yyyy"
+                    value={expiry.length ? moment(expiry).format('DD/MM/yyyy') : ''}
+                    // value={expiry}
                     onChange={onDateChangeHandler}
+                    closeOnSelect
+                    inputProps={{
+                      placeholder: 'Select Expiry date..',
+                      required: true,
+                      onKeyDown: e => e.preventDefault()
+                    }}
                   />
                 </FormControl>
                 <FormControl fullWidth>
@@ -202,27 +300,40 @@ function ItemListings({
               spacing={1}
             >
               <GridItem xs={12} sm={6} md={8}>
-                <h6>{search.filter(item => item.c_user_uid === null && item.user_uid !== user._id).length} ITEMS FOUND</h6>
+                <h5>
+                  <small>
+                    <b>{search.totalCount} ITEMS FOUND</b>, within <b>{filters.distance}</b> {filters.unit} of <b>{user.postcode}</b>
+                  </small>
+                </h5>
               </GridItem>
               <GridItem xs={12} sm={6} md={4}>
                 <FormControl fullWidth required className={classes.formControl}>
                   <Select
+                    className={classes.selectLabel}
                     native
                     value={sortBy}
                     onChange={event => onChangeHandler(event)}
                     name="sortBy"
                   >
-                    <option aria-label="None" value="" />
-                    <option value="Distance">Sort by: Distance</option>
-                    <option value="Expiry">Sort by: Expiry Date</option>
+                    <option value="distance">Sort by: Nearest first</option>
+                    <option value="expiry">Sort by: Expiry</option>
+                    <option value="date">Sort by: Newest first</option>
                   </Select>
                 </FormControl>
               </GridItem>
-              {loading ? (<Spinner />) : (
+              {loading ? (
+                <Spinner />
+              ) : (
                 <>
                   {/* Only retrieve items not belonging to the user and not already being collected by someone else */}
-                  {search.filter(item => item.c_user_uid === null && item.user_uid !== user._id).map(item => (
-                    <GridItem xs={12} sm={6} md={4} key={item._id}>
+                  {search.paginatedResults.map(item => (
+                    <GridItem
+                      xs={12}
+                      sm={6}
+                      md={4}
+                      key={item._id}
+                      className={classes.card}
+                    >
                       <Card className={classes.textLeft}>
                         <CardBody>
                           <h5 className={classes.cardTitle}>{item.title}</h5>
@@ -240,11 +351,11 @@ function ItemListings({
                               </Link>
                             </GridItem>
                             <GridItem xs={6}>
-                              <Typography variant="inherit">
+                              <Info>
                                 {`${filters.unit === 'Miles'
                                   ? (item.distance * conversion.miles).toFixed(1) : (item.distance / conversion.kilometres).toFixed(1)}`}
                                 {`${filters.unit === 'Miles' ? ' miles' : ' km'}`}
-                              </Typography>
+                              </Info>
                             </GridItem>
                           </GridContainer>
                         </CardBody>
@@ -263,16 +374,8 @@ function ItemListings({
               direction="row-reverse"
             >
               <Paginations
-                pages={[
-                  { text: 'PREV' },
-                  { active: true, text: 1 },
-                  { text: 2 },
-                  { text: 3 },
-                  { text: 4 },
-                  { text: 5 },
-                  { text: 'NEXT' }
-                ]}
-                color="primary"
+                pages={pagination}
+                color="rose"
               />
             </GridItem>
           </GridContainer>
@@ -285,10 +388,10 @@ function ItemListings({
 ItemListings.propTypes = {
   user: PropTypes.instanceOf(Object).isRequired,
   searchItems: PropTypes.instanceOf(Object).isRequired,
-  search: PropTypes.instanceOf(Array),
-  // searchCount: PropTypes.number.isRequired,
+  search: PropTypes.instanceOf(Object),
   filters: PropTypes.instanceOf(Object).isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  categoryOptions: PropTypes.instanceOf(Array).isRequired
 };
 
 export default ItemListings;
