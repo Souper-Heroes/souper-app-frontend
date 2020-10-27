@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
 import Header from 'components/Layout/Header';
 import HeaderLinks from 'containers/Layout/HeaderLinks';
 import { Restaurant, PostAdd } from '@material-ui/icons';
@@ -9,6 +10,16 @@ import * as ROUTES from 'components/Routing/routes';
 import citrus from 'assets/img/citrus-fruit.jpg';
 import PropTypes from 'prop-types';
 import Alert from 'components/Alert/Alert';
+import Tooltip from '@material-ui/core/Tooltip';
+
+const LightTooltip = withStyles(theme => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: 'rgba(0, 0, 0, 0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 13,
+  },
+}))(Tooltip);
 
 const Layout = ({ children }) => {
   const history = useHistory();
@@ -23,11 +34,11 @@ const Layout = ({ children }) => {
     <div>
       <Alert />
       <Header
-        brand={<Restaurant onClick={redirectToDashboard} />}
+        brand={<LightTooltip title="Dashboard"><Restaurant onClick={redirectToDashboard} /></LightTooltip>}
         color="rose"
         rightLinks={<HeaderLinks />}
         fixed
-        addItem={<PostAdd onClick={redirectToAddItem} />}
+        addItem={<LightTooltip title="Add item"><PostAdd onClick={redirectToAddItem} /></LightTooltip>}
       />
       <Parallax small filter image={citrus} />
       {children}
