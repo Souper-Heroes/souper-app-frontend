@@ -1,4 +1,5 @@
 import { types as authTypes } from '../actions/auth';
+import { types as itemTypes } from '../actions/item';
 import { types } from '../actions/user';
 
 // eslint-disable-next-line
@@ -6,6 +7,7 @@ const profile_pic = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA5gAAAPACAYAA
 
 const initialState = {
   userLoadedError: false,
+  loading: true,
   address: '',
   addrstatus: '',
   display_name: '',
@@ -13,7 +15,18 @@ const initialState = {
   postcode: '',
   location: {},
   preferred_distance_unit: 'Miles',
-  preferred_distance: 2
+  preferred_distance: 5,
+  filters: {
+    unit: 'Miles',
+    distance: 5,
+    category: [],
+    expiry: '',
+    sortBy: 'distance',
+    long: 0,
+    lat: 0,
+    limit: 12,
+    page: 1
+  }
 };
 
 export default (state = { ...initialState }, action) => {
@@ -21,7 +34,27 @@ export default (state = { ...initialState }, action) => {
     case types.USER_LOADED:
       return {
         ...state,
-        ...action.user
+        ...action.user,
+        loading: false,
+        filters: {
+          ...state.filters,
+          unit:
+            'preferred_distance_unit' in action.user
+              ? action.user.preferred_distance_unit
+              : state.filters.unit,
+          distance:
+            'preferred_distance' in action.user
+              ? action.user.preferred_distance
+              : state.filters.distance,
+          long:
+            'location' in action.user
+              ? action.user.location.coordinates[0]
+              : state.filters.long,
+          lat:
+            'location' in action.user
+              ? action.user.location.coordinates[1]
+              : state.filters.lat
+        }
       };
     case types.USER_LOAD_FAILURE:
       return {
@@ -48,7 +81,17 @@ export default (state = { ...initialState }, action) => {
     case `${types.UPDATE_PROFILE}_FULFILLED`:
       return {
         ...state,
-        ...action.payload.data
+        ...action.payload.data,
+        filters: {
+          ...state.filters,
+          long: action.payload.data.location.coordinates[0],
+          lat: action.payload.data.location.coordinates[1]
+        }
+      };
+    case itemTypes.SEARCH_ITEMS:
+      return {
+        ...state,
+        filters: action.filters
       };
     default:
       return state;

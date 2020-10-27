@@ -16,12 +16,13 @@ const SimpleMapPageStyle = {
   pin: {
     display: 'flex',
     alignItems: 'center',
-    width: '180px',
-    color: 'blue'
+    width: '180px'
   },
 
   pinicon: {
-    fontSize: '10rem'
+    fontSize: '16px',
+    color: '#e91e63', // btn-rose
+    width: '25px'
   },
 
   pintext: {

@@ -1,4 +1,5 @@
 import * as ROUTES from 'components/Routing/routes';
+import moment from 'moment';
 import api from '../utils/api';
 import { setAlert } from './alert';
 
@@ -97,6 +98,7 @@ export const searchItems = filterOptions => async dispatch => {
       miles: 0.00062137,
       kilometers: 1000
     };
+    // console.log(filterOptions);
     const res = await api.get('items/search', {
       params: {
         maxDistance:
@@ -104,7 +106,17 @@ export const searchItems = filterOptions => async dispatch => {
             ? filterOptions.distance / conversion.miles
             : filterOptions.distance * conversion.kilometers,
         lat: filterOptions.lat,
-        long: filterOptions.long
+        long: filterOptions.long,
+        category: filterOptions.category.map(cat => cat.title),
+        sortBy: {
+          [filterOptions.sortBy]: filterOptions.sortBy === 'date' ? -1 : 1
+        },
+        expiry:
+          filterOptions.expiry !== ''
+            ? moment(filterOptions.expiry).toDate()
+            : '',
+        limit: filterOptions.limit,
+        page: filterOptions.page
       }
     });
     dispatch({
