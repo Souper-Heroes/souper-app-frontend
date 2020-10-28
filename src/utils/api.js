@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { myFirebase } from '../firebase/firebase';
 
-const { SOUP_API = 'https://souper-app-backend.herokuapp.com' } = process.env;
+const {
+  REACT_APP_SOUP_API = 'https://souper-app-backend.herokuapp.com'
+} = process.env;
 
 const api = axios.create({
-  baseURL: `${SOUP_API}/api/`,
+  baseURL: `${REACT_APP_SOUP_API}/api/`,
   headers: {
     'Content-Type': 'application/json'
   }
