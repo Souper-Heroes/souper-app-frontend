@@ -13,6 +13,7 @@ export const types = {
   GET_ITEM_ERROR: 'GET_ITEM_ERROR',
   GET_ITEMS_ERROR: 'GET_ITEMS_ERROR',
   GET_DELETE_ITEM_ERROR: 'GET_DELETE_ITEM_ERROR',
+  GET_MY_ITEMS_REQUEST: 'GET_MY_ITEMS_REQUEST',
   GET_MY_ITEMS: 'GET_MY_ITEMS',
   GET_MY_ITEMS_ERROR: 'GET_MY_ITEMS_ERROR',
   GET_PROVIDER_ITEMS: 'GET_PROVIDER_ITEMS',
@@ -143,6 +144,10 @@ export const searchItems = filterOptions => async dispatch => {
 
 export const getMyItems = () => async dispatch => {
   try {
+    dispatch({
+      type: types.GET_MY_ITEMS_REQUEST
+    });
+
     const res = await api.get('/items/user_id');
 
     dispatch({

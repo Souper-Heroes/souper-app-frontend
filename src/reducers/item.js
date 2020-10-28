@@ -66,6 +66,11 @@ export default (state = initialState, action) => {
         items: payload,
         loading: false
       };
+    case types.GET_MY_ITEMS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
     case types.GET_MY_ITEMS:
       return {
         ...state,
