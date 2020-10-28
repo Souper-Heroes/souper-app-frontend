@@ -6,7 +6,7 @@ import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import Button from 'components/CustomButtons/Button';
 import Typography from '@material-ui/core/Typography';
 import styles from 'assets/jss/Items/views/ItemViewPage';
-import banana from 'assets/img/purple-banana.jpg';
+// import banana from 'assets/img/purple-banana.jpg';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import * as ROUTES from 'components/Routing/routes';
@@ -89,7 +89,7 @@ export default function ItemViewPage({
             />
             <CardMedia
               className={classes.media}
-              image={banana}
+              image={item.image}
               title={item.title}
             />
             <CardContent>

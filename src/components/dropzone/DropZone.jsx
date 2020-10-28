@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './DropZone.css';
 
-function DropZone() {
+function DropZone({ imgData }) {
   const fileInputRef = useRef();
 
   const dragOver = e => {
@@ -26,16 +26,27 @@ function DropZone() {
     fileInputRef.current.click();
   };
 
-  const [imgData, setImgData] = useState(null);
+  //   const encodeImageFile = e => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     reader.onloadend = () => {
+  //       setProfilePic(reader.result);
+  //     };
+  //   }
+  // };
+
+
+  //const [imgData, setImgData] = useState(null);
 
   const handleFiles = files => {
     if (validateFile(files[0])) {
-      // setPicture(files[0]);
       const reader = new FileReader();
-      reader.addEventListener('load', () => {
-        setImgData(reader.result);
-      });
       reader.readAsDataURL(files[0]);
+      reader.addEventListener('load', () => {
+        imgData = reader.result;
+      });
     }
     // ## TODO - tell the user the file is invalid
   };

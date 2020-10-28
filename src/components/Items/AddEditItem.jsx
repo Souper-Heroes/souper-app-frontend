@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // nodejs library that concatenates classes
 import classNames from 'classnames';
@@ -28,7 +28,8 @@ import styles from 'assets/jss/material-kit-react/views/profilePage';
 import PropTypes from 'prop-types';
 
 // DropZone imports
-import DropZone from '../dropzone/DropZone';
+// import DropZone from '../dropzone/DropZone';
+import '../dropzone/DropZone.css';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -42,7 +43,7 @@ export default function AddEditItem({
   postcode,
   address,
   location,
-  categoryOptions
+  categoryOptions,
 }) {
   const formatExpiry = expiry => moment(expiry).format('DD/MM/yyyy');
 
@@ -67,8 +68,12 @@ export default function AddEditItem({
   const [myPostcode, setPostcode] = useState(item ? item.postcode : postcode);
   const [myAddress, setAddress] = useState(item ? item.address : address);
   const [myLocation, setLocation] = useState(item ? item.location : location);
+  const [image, setImage] = useState(item ? item.image : '');
+
+  console.log("IMAGE DATA: ", image);
 
   const resetForm = () => {
+    setImage('');
     setTitle('');
     setDescription('');
     setCategory([]);
@@ -122,6 +127,7 @@ export default function AddEditItem({
     if (item) {
       await updateItem(
         {
+          image,
           title,
           description,
           category: category.map(cat => cat.title),
@@ -129,13 +135,14 @@ export default function AddEditItem({
           postcode: myPostcode,
           address: myAddress,
           location: myLocation,
-          availability,
+          availability
         },
         item._id
       );
     } else {
       const addedItem = await addItem({
         c_user_uid: null,
+        image,
         title,
         description,
         category: category.map(cat => cat.title),
@@ -150,10 +157,60 @@ export default function AddEditItem({
         resetForm();
       }
     }
+    console.log(image);
   };
 
   const onCancel = () => {
     window.history.back();
+  };
+
+  const fileInputRef = useRef();
+
+  const dragOver = e => {
+    e.preventDefault();
+  };
+  const dragEnter = e => {
+    e.preventDefault();
+  };
+  const dragLeave = e => {
+    e.preventDefault();
+  };
+
+  const validateFile = file => {
+    const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    if (validTypes.indexOf(file.type) === -1) {
+      return false;
+    }
+    return true;
+  };
+
+  // const fileInputClicked = () => {
+  //   fileInputRef.current.click();
+  // };
+
+  const handleFiles = files => {
+    if (validateFile(files[0])) {
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.addEventListener('load', () => {
+        setImage(reader.result);
+      });
+    }
+    // ## TODO - tell the user the file is invalid
+  };
+
+  const fileDrop = e => {
+    e.preventDefault();
+    const { files } = e.dataTransfer;
+    if (files.length) {
+      handleFiles(files);
+    }
+  };
+
+  const fileSelected = () => {
+    if (fileInputRef.current.files.length) {
+      handleFiles(fileInputRef.current.files);
+    }
   };
 
   return (
@@ -163,7 +220,32 @@ export default function AddEditItem({
           <form onSubmit={onSubmit}>
             <GridContainer>
               <GridItem xs={12} sm={6} md={4} style={{ marginTop: 35 }} className={classes.navWrapper}>
-                <DropZone />
+                <div className="container">
+                  <div
+                    className="drop-container"
+                    onDragOver={dragOver}
+                    onDragEnter={dragEnter}
+                    onDragLeave={dragLeave}
+                    onDrop={fileDrop}
+                    // onClick={fileInputClicked}
+                  >
+                    <div>
+                      {(image && <img className="image-display" alt="display" src={image} />) || (
+                        <div className="drop-message">
+                          <div className="upload-icon" />
+                          <input
+                            ref={fileInputRef}
+                            className="file-input"
+                            type="file"
+                            
+                            onChange={fileSelected}
+                          />
+                          Drag & Drop files here
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
               </GridItem>
               <GridItem xs={12} sm={6} md={8} className={classes.navWrapper}>
                 <CustomInput
