@@ -70,8 +70,6 @@ export default function AddEditItem({
   const [myLocation, setLocation] = useState(item ? item.location : location);
   const [image, setImage] = useState(item ? item.image : '');
 
-  console.log("IMAGE DATA: ", image);
-
   const resetForm = () => {
     setImage('');
     setTitle('');
@@ -157,7 +155,6 @@ export default function AddEditItem({
         resetForm();
       }
     }
-    console.log(image);
   };
 
   const onCancel = () => {
