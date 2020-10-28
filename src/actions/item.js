@@ -119,6 +119,15 @@ export const searchItems = filterOptions => async dispatch => {
         page: filterOptions.page
       }
     });
+    if (!res.data[0].totalCount.length) {
+      dispatch(
+        setAlert(
+          'No results found for your search criteria.',
+          'warning',
+          'alert'
+        )
+      );
+    }
     dispatch({
       type: types.SEARCH_ITEMS,
       payload: res.data,
