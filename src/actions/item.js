@@ -184,6 +184,7 @@ export const reserveItem = (_id, history) => async dispatch => {
       type: types.RESERVE_ITEM,
       payload: res.data
     });
+    dispatch(setAlert('Item successfuly reserved.', 'success', 'alert'));
     history.push(ROUTES.ITEM_LIST);
   } catch (err) {
     console.log(err);
@@ -197,11 +198,12 @@ export const unreserveItem = (_id, history) => async dispatch => {
   try {
     const res = await api.put(`/items/unreserve/${_id}`);
 
-    history.push(ROUTES.ITEM_LIST);
     dispatch({
       type: types.UNRESERVE_ITEM,
       payload: res.data
     });
+    dispatch(setAlert('Item successfuly unreserved.', 'success', 'alert'));
+    history.push(ROUTES.ITEM_LIST);
   } catch (err) {
     dispatch({
       type: types.UNRESERVE_ITEM_ERROR
