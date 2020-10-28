@@ -162,7 +162,7 @@ export default function AddEditItem({
         <div className={classes.container}>
           <form onSubmit={onSubmit}>
             <GridContainer>
-              <GridItem xs={12} sm={6} md={4} className={classes.navWrapper}>
+              <GridItem xs={12} sm={6} md={4} style={{ marginTop: 35 }} className={classes.navWrapper}>
                 <DropZone />
               </GridItem>
               <GridItem xs={12} sm={6} md={8} className={classes.navWrapper}>
@@ -293,7 +293,7 @@ export default function AddEditItem({
                     Save
                   </Button>
                 </GridItem>
-                <GridItem xs={12} sm={6} md={2}>
+                <GridItem xs={12} sm={6} md={2} style={{ marginBottom: 20 }}>
                   <Button fullWidth color="danger" size="md" onClick={onCancel}>
                     Cancel
                   </Button>
