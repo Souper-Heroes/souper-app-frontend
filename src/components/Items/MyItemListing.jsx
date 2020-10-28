@@ -101,15 +101,18 @@ export default function MyItemListing(props) {
                     sm={6}
                     className={classes.container}
                   >
-                    <Typography
-                      className={classes.nospace}
-                      variant="body2"
-                      color="textPrimary"
-                      gutterBottom
-                    >
-                      <strong>Post Code:&nbsp;</strong>
-                      {myitem.postcode}
-                    </Typography>
+                    {type !== 'provide' && myitem.address && myitem.address.trim().length > 0
+                      && (
+                        <Typography
+                          className={classes.nospace}
+                          variant="body2"
+                          color="textPrimary"
+                          gutterBottom
+                        >
+                          <strong>Address:&nbsp;</strong>
+                          {myitem.address}
+                        </Typography>
+                      )}
                   </GridItem>
                 </GridContainer>
                 <GridContainer className={classes.container}>
@@ -130,15 +133,16 @@ export default function MyItemListing(props) {
                   <GridItem
                     xs={12}
                     sm={6}
-                    className={classes.cell}
+                    className={classes.container}
                   >
                     <Typography
+                      className={classes.nospace}
                       variant="body2"
                       color="textPrimary"
                       gutterBottom
                     >
-                      <strong>Availability:&nbsp;</strong>
-                      {myitem.availability}
+                      <strong>Post Code:&nbsp;</strong>
+                      {myitem.postcode}
                     </Typography>
                   </GridItem>
                 </GridContainer>
@@ -153,12 +157,20 @@ export default function MyItemListing(props) {
                       {moment(myitem.date).format('Do MMM YYYY')}
                     </Typography>
                   </GridItem>
-
                   <GridItem
-                    xs={6}
+                    xs={12}
                     sm={6}
                     className={classes.container}
-                  />
+                  >
+                    <Typography
+                      variant="body2"
+                      color="textPrimary"
+                      gutterBottom
+                    >
+                      <strong>Availability:&nbsp;</strong>
+                      {myitem.availability}
+                    </Typography>
+                  </GridItem>
                 </GridContainer>
               </GridItem>
               <GridItem xs={12} align="right">
