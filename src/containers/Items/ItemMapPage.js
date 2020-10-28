@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import ItemMapPage from 'components/Items/ItemMapPage';
-// import { getMyItems } from 'actions/item';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   isLoggingIn: state.auth.isLoggingIn,
   isAuthenticated: state.auth.isAuthenticated,
   _id: state.auth.user.uid,
+  type: ownProps.match.params.type,
   myitems: state.item.myitems,
-  // loading: state.item.loading
+  searchitems: state.item.search.paginatedResults
 });
 
 // const mapDispatchToProps = dispatch => ({
