@@ -361,7 +361,6 @@ function ItemListings({
                   <Spinner />
                 ) : (
                   <>
-                    {/* Only retrieve items not belonging to the user and not already being collected by someone else */}
                     {search.paginatedResults.map(item => (
                       <GridItem
                         xs={12}
