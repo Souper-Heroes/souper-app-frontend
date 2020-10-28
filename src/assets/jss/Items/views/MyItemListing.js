@@ -29,6 +29,11 @@ const MyListingPageStyle = {
     margin: 'auto',
   },
 
+  nospace: {
+    display: 'flex',
+    whiteSpace: 'nowrap'
+  },
+
   container: {
     padding: '0em',
     margin: 'auto',
