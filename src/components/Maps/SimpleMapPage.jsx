@@ -10,7 +10,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // const AnyReactComponent = ({ text }) => <div>{text}</div>;
 // TODO destructure 'userLoaded' which holds the logged in users default location
-export default function SimpleMapPage({ _id, myitems, user }) {
+export default function SimpleMapPage({
+  _id,
+  myitems,
+  user,
+  type,
+  searchitems
+}) {
   const classes = makeStyles(styles);
   const defaultProps = {
     center: {
@@ -46,7 +52,7 @@ export default function SimpleMapPage({ _id, myitems, user }) {
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
-        {myitems.filter(myitem => myitem.c_user_uid === _id).map(item => (
+        {type === 'collect' && myitems.filter(myitem => myitem.c_user_uid === _id).map(item => (
           <LocationPin
             key={item._id}
             lat={item.location.coordinates[1]}
@@ -54,7 +60,14 @@ export default function SimpleMapPage({ _id, myitems, user }) {
             text={item.title}
           />
         ))}
-
+        {type === 'search' && searchitems.filter(item => item.c_user_uid === null && item.user_uid !== _id).map(item => (
+          <LocationPin
+            key={item._id}
+            lat={item.location.coordinates[1]}
+            lng={item.location.coordinates[0]}
+            text={item.title}
+          />
+        ))}
       </GoogleMapReact>
     </div>
   );
@@ -62,8 +75,10 @@ export default function SimpleMapPage({ _id, myitems, user }) {
 
 SimpleMapPage.propTypes = {
   _id: PropTypes.string,
+  type: PropTypes.string,
   user: PropTypes.instanceOf(Object),
-  myitems: PropTypes.instanceOf(Object)
+  myitems: PropTypes.instanceOf(Object),
+  searchitems: PropTypes.instanceOf(Object)
 };
 
 /* <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" /> */

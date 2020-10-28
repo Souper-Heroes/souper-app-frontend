@@ -71,8 +71,8 @@ export default function MyItemListings(props) {
         )}
         {type === 'collect' && (
           <GridItem xs={6} sm={6} align="left">
-            <Link to="/itemmap" className={classes.link}>
-              <Button type="button" color="rose" to="/addedititem">
+            <Link to={`/itemmap/${type}`} className={classes.link}>
+              <Button type="button" color="rose">
                 Map
               </Button>
             </Link>
