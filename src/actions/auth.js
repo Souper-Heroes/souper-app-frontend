@@ -156,7 +156,6 @@ export const signUp = (email, password, displayName) => dispatch => {
       });
       const userDetails = {
         user: {
-          photoURL: user.user.photoURL,
           displayName
         }
       };

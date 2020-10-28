@@ -341,15 +341,6 @@ function ItemListings({
                   direction="row"
                   spacing={1}
                 >
-                  <GridItem xs={12} sm={6} md={8}>
-                    <h5>
-                      <small>
-                        <b>{search.totalCount} ITEMS FOUND</b>, within{' '}
-                        <b>{filters.distance}</b> {filters.unit} of{' '}
-                        <b>{user.postcode}</b>
-                      </small>
-                    </h5>
-                  </GridItem>
                   <GridItem xs={12} sm={6} md={4}>
                     <FormControl
                       fullWidth
@@ -369,49 +360,50 @@ function ItemListings({
                       </Select>
                     </FormControl>
                   </GridItem>
-                  {loading ? (<Spinner />) : (
-                    <>
-                      {/* Only retrieve items not belonging to the user and not already being collected by someone else */}
-                      {search.paginatedResults.map(item => (
-                        <GridItem
-                          xs={12}
-                          sm={6}
-                          md={4}
-                          key={item._id}
-                          className={classes.card}
-                        >
-                          <Card className={classes.textLeft}>
-                            <CardBody>
-                              <h5 className={classes.cardTitle}>{item.title}</h5>
-                              <Typography variant="body2">
-                                {`Expires: ${moment(item.expiry).format(
-                                  'Do MMM YY'
-                                )}`}
-                              </Typography>
-                              <p>{item.description}</p>
-                              <GridContainer>
-                                <GridItem xs={6}>
-                                  <Link
-                                    to={`/itemview/${item._id}/${type}`}
-                                    className={classes.link}
-                                  >
-                                    View Item
-                                  </Link>
-                                </GridItem>
-                                <GridItem xs={6}>
-                                  <Info>
-                                    {`${filters.unit === 'Miles' ? (item.distance * conversion.miles).toFixed(1)
-                                      : (item.distance / conversion.kilometres).toFixed(1)}`}
-                                    {`${filters.unit === 'Miles' ? ' miles' : ' km'}`}
-                                  </Info>
-                                </GridItem>
-                              </GridContainer>
-                            </CardBody>
-                          </Card>
-                        </GridItem>
-                      ))}
-                    </>
-                  )}
+                  {loading ? (
+                    <Spinner />)
+                    : (
+                      <>
+                        {search.paginatedResults.map(item => (
+                          <GridItem
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            key={item._id}
+                            className={classes.card}
+                          >
+                            <Card className={classes.textLeft}>
+                              <CardBody>
+                                <h5 className={classes.cardTitle}>{item.title.substring(0, 25)}</h5>
+                                <Typography variant="body2">
+                                  {`Expires: ${moment(item.expiry).format(
+                                    'Do MMM YY'
+                                  )}`}
+                                </Typography>
+                                <p>{item.description.substring(0, 25)}{item.description.length > 26 ? '...' : ''}</p>
+                                <GridContainer>
+                                  <GridItem xs={6}>
+                                    <Link
+                                      to={`/itemview/${item._id}/${type}`}
+                                      className={classes.link}
+                                    >
+                                      View Item
+                                    </Link>
+                                  </GridItem>
+                                  <GridItem xs={6}>
+                                    <Info>
+                                      {`${filters.unit === 'Miles' ? (item.distance * conversion.miles).toFixed(1)
+                                        : (item.distance / conversion.kilometres).toFixed(1)}`}
+                                      {`${filters.unit === 'Miles' ? ' miles' : ' km'}`}
+                                    </Info>
+                                  </GridItem>
+                                </GridContainer>
+                              </CardBody>
+                            </Card>
+                          </GridItem>
+                        ))}
+                      </>
+                    )}
                 </GridItem>
                 <GridItem
                   xs={12}
