@@ -372,13 +372,13 @@ function ItemListings({
                       >
                         <Card className={classes.textLeft}>
                           <CardBody>
-                            <h5 className={classes.cardTitle}>{item.title}</h5>
+                            <h5 className={classes.cardTitle}>{item.title.substring(0, 25)}</h5>
                             <Typography variant="body2">
                               {`Expires: ${moment(item.expiry).format(
                                 'Do MMM YY'
                               )}`}
                             </Typography>
-                            <p>{item.description}</p>
+                            <p>{item.description.substring(0, 25)}{item.description.length > 26 ? '...' : ''}</p>
                             <GridContainer>
                               <GridItem xs={6}>
                                 <Link
