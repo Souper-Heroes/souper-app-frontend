@@ -94,6 +94,7 @@ export default function ItemViewPage({
             />
             <CardContent>
               <GridContainer direction="row">
+
                 <GridItem xs={6}>
                   <Typography variant="body2" color="textSecondary" component="p">
                     <strong>Category:&nbsp;</strong>
@@ -102,22 +103,31 @@ export default function ItemViewPage({
                 </GridItem>
                 <GridItem xs={6}>
                   <Typography variant="body2" color="textSecondary" component="p" className={classes.nospace}>
+                    <strong>Date Added:&nbsp;</strong>
+                    {`${moment(item.date).format('Do MMM YYYY')}`}
+                  </Typography>
+                </GridItem>
+                {item.address && item.address.trim().length > 0 && (
+                  <GridItem xs={6}>
+                    <Typography variant="body2" color="textSecondary" component="p" className={classes.nospace}>
+                      <strong>Address:&nbsp;</strong>
+                      {`${item.address}`}
+                    </Typography>
+                  </GridItem>
+                )}
+                <GridItem xs={6}>
+                  <Typography variant="body2" color="textSecondary" component="p" className={classes.nospace}>
                     <strong>Post Code:&nbsp;</strong>
                     {`${item.postcode}`}
                   </Typography>
                 </GridItem>
-                <GridItem xs={6}>
+                <GridItem xs={12}>
                   <Typography variant="body2" color="textSecondary" component="p">
                     <strong>Availability:&nbsp;</strong>
                     {`${item.availability}`}
                   </Typography>
                 </GridItem>
-                <GridItem xs={6}>
-                  <Typography variant="body2" color="textSecondary" component="p" className={classes.nospace}>
-                    <strong>Date Added:&nbsp;</strong>
-                    {`${moment(item.date).format('Do MMM YYYY')}`}
-                  </Typography>
-                </GridItem>
+
               </GridContainer>
             </CardContent>
             <CardActions disableSpacing>

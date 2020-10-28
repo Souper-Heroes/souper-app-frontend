@@ -29,34 +29,25 @@ export default function MyItemListing(props) {
     myitem,
     deleteItem,
     unreserveItem
-    // deleteExpiredItems,
-    // getAddress,
-    // address,
-    // addrstatus
   } = props;
   const classes = useStyles();
 
-  const GetCollectionMsg = newType => {
-    let message = null;
-    if (newType === 'provide') {
-      message = 'Being Collected:';
-    } else {
-      message = 'To Collect:';
-    }
+  // const GetCollectionMsg = newType => {
+  //  let message = null;
+  //   if (newType === 'provide') {
+  // message = 'Being Collected:';
+  // } else {
+  // message = 'To Collect:';
+  // }
 
-    return (
-      <Typography variant="body2" color="textSecondary" gutterBottom>
-        {message}
-      </Typography>
-    );
-  };
+  // return (
+  // <Typography variant="body2" color="textSecondary" gutterBottom>
+  //   {message}
+  // </Typography>
+  // );
+  // };
 
   const handleOnClickDelete = () => {
-    /* TODO
-    console.log(
-      `Clicked Delete button, do something with item: ${item.itemId}, Title: ${item.description}`
-    ); */
-
     if (type === 'provide') {
       deleteItem(myitem._id);
     } else {
@@ -69,7 +60,7 @@ export default function MyItemListing(props) {
     <GridContainer spacing={1}>
       <GridItem>
         <Paper className={classes.paper} spacing={1}>
-          <GridContainer spacing={2}>
+          <GridContainer spacing={1} className={classes.container}>
             <Grid item xs={12} lg={2}>
               <Link
                 to={`/itemview/${myitem._id}/${type}`}
@@ -94,216 +85,91 @@ export default function MyItemListing(props) {
                   <GridItem
                     xs={12}
                     sm={6}
-                    className={classes.cell}
+                    className={classes.container}
                   >
-                    <GridContainer
-                      direction="row"
-                      className={classes.container}
+                    <Typography
+                      variant="body2"
+                      color="textPrimary"
+                      gutterBottom
                     >
-                      <GridItem
-                        xs={5}
-                        className={classes.cell}
-                      >
-                        <Typography
-                          variant="body2"
-                          color="textSecondary"
-                          gutterBottom
-                        >
-                          Category:
-                        </Typography>
-                      </GridItem>
-                      <GridItem
-                        xs={7}
-                        align="left"
-                        className={classes.cell}
-                      >
-                        <Typography
-                          variant="body2"
-                          color="textPrimary"
-                          gutterBottom
-                          align="left"
-                        >
-                          {myitem.category.map(i => i).reduce((p, c) => `${p} ${c},`, '')}
-                        </Typography>
-                      </GridItem>
-                    </GridContainer>
+                      <strong>Category:&nbsp;</strong>
+                      {myitem.category.map(i => i).reduce((p, c) => `${p} ${c},`, '')}
+                    </Typography>
                   </GridItem>
                   <GridItem
                     xs={12}
                     sm={6}
-                    className={classes.cell}
+                    className={classes.container}
                   >
-                    <GridContainer
-                      direction="row"
-                      className={classes.container}
-                    >
-                      <GridItem
-                        xs={5}
-                        className={classes.cell}
-                      >
+                    {type !== 'provide' && myitem.address && myitem.address.trim().length > 0
+                      && (
                         <Typography
-                          variant="body2"
-                          color="textSecondary"
-                          gutterBottom
-                        >
-                          Location:
-                        </Typography>
-                      </GridItem>
-                      <GridItem
-                        xs={7}
-                        align="left"
-                        className={classes.cell}
-                      >
-                        <Typography
+                          className={classes.nospace}
                           variant="body2"
                           color="textPrimary"
                           gutterBottom
-                          align="left"
                         >
-                          {myitem.postcode}
+                          <strong>Address:&nbsp;</strong>
+                          {myitem.address}
                         </Typography>
-                      </GridItem>
-                    </GridContainer>
+                      )}
                   </GridItem>
                 </GridContainer>
                 <GridContainer className={classes.container}>
                   <GridItem
                     xs={12}
                     sm={6}
-                    className={classes.cell}
+                    className={classes.container}
                   >
-                    <GridContainer
-                      direction="row"
-                      className={classes.container}
+                    <Typography
+                      variant="body2"
+                      color="textPrimary"
+                      gutterBottom
                     >
-                      <GridItem
-                        xs={5}
-                        className={classes.cell}
-                      >
-                        <Typography
-                          variant="body2"
-                          color="textSecondary"
-                          gutterBottom
-                        >
-                          Expires:
-                        </Typography>
-                      </GridItem>
-                      <GridItem
-                        xs={7}
-                        align="left"
-                        className={classes.cell}
-                      >
-                        <Typography
-                          variant="body2"
-                          color="textPrimary"
-                          gutterBottom
-                          align="left"
-                        >
-                          {moment(myitem.expiry).format('Do MMM YYYY')}
-                        </Typography>
-                      </GridItem>
-                    </GridContainer>
+                      <strong>Expires:&nbsp;</strong>
+                      {moment(myitem.expiry).format('Do MMM YYYY')}
+                    </Typography>
                   </GridItem>
                   <GridItem
                     xs={12}
                     sm={6}
-                    className={classes.cell}
+                    className={classes.container}
                   >
-                    <GridContainer
-                      direction="row"
-                      className={classes.container}
+                    <Typography
+                      className={classes.nospace}
+                      variant="body2"
+                      color="textPrimary"
+                      gutterBottom
                     >
-                      <GridItem
-                        xs={5}
-                        className={classes.cell}
-                      >
-                        <Typography
-                          variant="body2"
-                          color="textSecondary"
-                          gutterBottom
-                        >
-                          Availability:
-                        </Typography>
-                      </GridItem>
-                      <GridItem
-                        xs={7}
-                        align="left"
-                        className={classes.cell}
-                      >
-                        {myitem.availability !== null && (
-                          <Typography
-                            variant="body2"
-                            color="textPrimary"
-                            gutterBottom
-                            align="left"
-                          >
-                            {myitem.availability }
-                          </Typography>
-                        )}
-                      </GridItem>
-                    </GridContainer>
+                      <strong>Post Code:&nbsp;</strong>
+                      {myitem.postcode}
+                    </Typography>
                   </GridItem>
                 </GridContainer>
                 <GridContainer className={classes.container}>
-                  <GridItem xs={12} sm={6} className={classes.cell}>
-                    <GridContainer direction="row" className={classes.container}>
-                      <GridItem xs={5} className={classes.cell}>
-                        <Typography
-                          variant="body2"
-                          color="textSecondary"
-                          gutterBottom
-                        >
-                          Date Added:
-                        </Typography>
-                      </GridItem>
-                      <GridItem
-                        xs={7}
-                        align="left"
-                        className={classes.cell}
-                      >
-                        <Typography
-                          variant="body2"
-                          color="textPrimary"
-                          gutterBottom
-                          align="left"
-                        >
-                          {moment(myitem.date).format('Do MMM YYYY')}
-                        </Typography>
-                      </GridItem>
-                    </GridContainer>
+                  <GridItem xs={6} className={classes.container}>
+                    <Typography
+                      variant="body2"
+                      color="textPrimary"
+                      gutterBottom
+                    >
+                      <strong>Date Added:&nbsp;</strong>
+                      {moment(myitem.date).format('Do MMM YYYY')}
+                    </Typography>
                   </GridItem>
                   <GridItem
                     xs={12}
                     sm={6}
-                    className={classes.cell}
+                    className={classes.container}
                   >
-                    <GridContainer
-                      direction="row"
-                      className={classes.container}
+                    <Typography
+                      variant="body2"
+                      color="textPrimary"
+                      gutterBottom
                     >
-                      <GridItem
-                        xs={5}
-                        className={classes.cell}
-                      >
-                        {myitem.availability !== null && GetCollectionMsg(type)}
-                      </GridItem>
-                      <GridItem
-                        xs={7}
-                        align="left"
-                        className={classes.cell}
-                      >
-                        {myitem.availability !== null && (
-                          <Typography
-                            variant="body2"
-                            color="textPrimary"
-                            gutterBottom
-                            align="left"
-                          >
-                            This should be added by the collector as to when they are collecting.
-                          </Typography>
-                        )}
-                      </GridItem>
-                    </GridContainer>
+                      <strong>Availability:&nbsp;</strong>
+                      {myitem.availability}
+                    </Typography>
                   </GridItem>
                 </GridContainer>
               </GridItem>
@@ -335,9 +201,4 @@ MyItemListing.propTypes = {
   myitem: PropTypes.instanceOf(Object),
   deleteItem: PropTypes.func,
   unreserveItem: PropTypes.func
-  // deleteExpiredItems: PropTypes.func,
-  // getAddress: PropTypes.func,
-  // address: PropTypes.instanceOf(Object),
-  // addrstatus: PropTypes.string,
-
 };
