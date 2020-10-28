@@ -288,12 +288,12 @@ export default function AddEditItem({
                 spacing={1}
                 direction="row-reverse"
               >
-                <GridItem xs={12} sm={6} md={2} >
+                <GridItem xs={12} sm={6} md={2}>
                   <Button type="submit" fullWidth color="success" size="md">
                     Save
                   </Button>
                 </GridItem>
-                <GridItem xs={12} sm={6} md={2} style={{ marginBottom: 20 }} >
+                <GridItem xs={12} sm={6} md={2} style={{ marginBottom: 20 }}>
                   <Button fullWidth color="danger" size="md" onClick={onCancel}>
                     Cancel
                   </Button>
