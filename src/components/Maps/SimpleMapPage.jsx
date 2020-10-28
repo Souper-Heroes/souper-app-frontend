@@ -49,8 +49,8 @@ export default function SimpleMapPage({ _id, myitems, user }) {
         {myitems.filter(myitem => myitem.c_user_uid === _id).map(item => (
           <LocationPin
             key={item._id}
-            lat={item.location.coordinates[0]}
-            lng={item.location.coordinates[1]}
+            lat={item.location.coordinates[1]}
+            lng={item.location.coordinates[0]}
             text={item.title}
           />
         ))}

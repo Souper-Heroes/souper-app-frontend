@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 // core components
 import { makeStyles } from '@material-ui/core/styles';
-import styles from 'assets/jss/material-kit-react/views/loginPage';
+import styles from 'assets/jss/Items/views/MyItemListing';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 import MyItemListing from 'containers/Items/MyItemListing';
@@ -13,7 +13,12 @@ import ListingsPaginations from 'components/Items/ListingsPaginations';
 import PropTypes from 'prop-types';
 
 export default function MyItemListings(props) {
-  const { _id, type, myitems } = props;
+  const {
+    _id,
+    type,
+    myitems,
+    history
+  } = props;
   const classes = makeStyles(styles);
   const paginationColSize = type === 'provide' ? 6 : 6;
 
@@ -21,14 +26,14 @@ export default function MyItemListings(props) {
     props.sortByItem(menuItem);
   };
 
-  const deleteItem = async itemId => {
+  const deleteMyItem = async itemId => {
     // console.log(`Clicked Delete button, delete item with _id: ${_id}`);
     await props.deleteItem(itemId);
   };
 
-  const unreserveItem = async itemId => {
+  const unreserveMyItem = async itemId => {
     // console.log(`Clicked Delete button for collector, unreseve item with _id: ${_id}`);
-    await props.unreserveItem(itemId);
+    await props.unreserveItem(itemId, history);
   };
 
   const getMyItems = () =>
@@ -56,8 +61,8 @@ export default function MyItemListings(props) {
               key={myItem._id}
               type={type}
               myitem={myItem}
-              deleteItem={deleteItem}
-              unreserveItem={unreserveItem}
+              deleteItem={deleteMyItem}
+              unreserveItem={unreserveMyItem}
             />
           ))}
         </GridItem>
@@ -91,7 +96,8 @@ MyItemListings.propTypes = {
   myitems: PropTypes.instanceOf(Object),
   deleteItem: PropTypes.func,
   sortByItem: PropTypes.func,
-  unreserveItem: PropTypes.func
+  unreserveItem: PropTypes.func,
+  history: PropTypes.instanceOf(Object),
 };
 
 /* <GridItem xs={6} sm={6} align="left">

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
-import styles from 'assets/jss/material-kit-react/views/profilePage';
+import styles from 'assets/jss/Items/views/ItemListPage';
 import MyItemListings from 'containers/Items/MyItemListings';
 import CustomTabs from 'components/MaterialKitComponents/CustomTabs/CustomTabs';
 import PropTypes from 'prop-types';
