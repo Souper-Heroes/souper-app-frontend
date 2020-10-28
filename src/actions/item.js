@@ -13,6 +13,7 @@ export const types = {
   GET_ITEM_ERROR: 'GET_ITEM_ERROR',
   GET_ITEMS_ERROR: 'GET_ITEMS_ERROR',
   GET_DELETE_ITEM_ERROR: 'GET_DELETE_ITEM_ERROR',
+  GET_MY_ITEMS_REQUEST: 'GET_MY_ITEMS_REQUEST',
   GET_MY_ITEMS: 'GET_MY_ITEMS',
   GET_MY_ITEMS_ERROR: 'GET_MY_ITEMS_ERROR',
   GET_PROVIDER_ITEMS: 'GET_PROVIDER_ITEMS',
@@ -119,6 +120,15 @@ export const searchItems = filterOptions => async dispatch => {
         page: filterOptions.page
       }
     });
+    if (!res.data[0].totalCount.length) {
+      dispatch(
+        setAlert(
+          'No results found for your search criteria.',
+          'warning',
+          'alert'
+        )
+      );
+    }
     dispatch({
       type: types.SEARCH_ITEMS,
       payload: res.data,
@@ -134,6 +144,10 @@ export const searchItems = filterOptions => async dispatch => {
 
 export const getMyItems = () => async dispatch => {
   try {
+    dispatch({
+      type: types.GET_MY_ITEMS_REQUEST
+    });
+
     const res = await api.get('/items/user_id');
 
     dispatch({
