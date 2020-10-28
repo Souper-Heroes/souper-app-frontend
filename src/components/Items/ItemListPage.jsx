@@ -13,7 +13,12 @@ import Spinner from '../Layout/Spinner';
 
 const useStyles = makeStyles(styles);
 
-export default function ItemListPage({ _id, myitems, loading, getMyItems }) {
+export default function ItemListPage({
+  _id,
+  myitems,
+  loading,
+  getMyItems
+}) {
   const classes = useStyles();
 
   useEffect(() => {
