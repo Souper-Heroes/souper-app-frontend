@@ -67,7 +67,8 @@ export default function MyItemListing(props) {
                 className={classes.link}
               >
                 <ButtonBase className={classes.image}>
-                  {(myitem.image) ? <img className={classes.img} alt="complex" src={myitem.image} /> : <img className={classes.img} alt="complex" src={banana} /> }
+                  {(myitem.image) ? <img className={classes.img} alt="complex" src={myitem.image} />
+                    : <img className={classes.img} alt="complex" src={banana} />}
                 </ButtonBase>
               </Link>
             </Grid>

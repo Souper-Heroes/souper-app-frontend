@@ -89,7 +89,7 @@ export default function ItemViewPage({
             />
             <CardMedia
               className={classes.media}
-              image={(item.image) ? item.image : banana }
+              image={(item.image) ? item.image : banana}
               title={item.title}
             />
             <CardContent>

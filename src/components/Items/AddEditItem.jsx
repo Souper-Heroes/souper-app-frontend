@@ -234,7 +234,6 @@ export default function AddEditItem({
                             ref={fileInputRef}
                             className="file-input"
                             type="file"
-                            
                             onChange={fileSelected}
                           />
                           Drag & Drop files here
