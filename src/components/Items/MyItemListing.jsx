@@ -19,7 +19,7 @@ import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
 
 import moment from 'moment';
 import PropTypes from 'prop-types';
-// import banana from 'assets/img/purple-banana.jpg';
+import banana from 'assets/img/purple-banana.jpg';
 
 const useStyles = makeStyles(styles);
 
@@ -67,7 +67,7 @@ export default function MyItemListing(props) {
                 className={classes.link}
               >
                 <ButtonBase className={classes.image}>
-                  <img className={classes.img} alt="complex" src={myitem.image} />
+                  {(myitem.image) ? <img className={classes.img} alt="complex" src={myitem.image} /> : <img className={classes.img} alt="complex" src={banana} /> }
                 </ButtonBase>
               </Link>
             </Grid>
