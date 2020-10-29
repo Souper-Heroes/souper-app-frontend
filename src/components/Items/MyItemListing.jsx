@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { Button } from '@material-ui/core';
+import CustomButton from 'components/CustomButtons/Button';
 
 // @material-ui/icons
 import Edit from '@material-ui/icons/Edit';
@@ -48,12 +49,11 @@ export default function MyItemListing(props) {
   // };
 
   const handleOnClickDelete = () => {
-    if (type === 'provide') {
-      deleteItem(myitem._id);
-    } else {
-      // Unreserve the item
-      unreserveItem(myitem._id);
-    }
+    deleteItem(myitem._id);
+  };
+
+  const handleOnClickUnreserve = () => {
+    unreserveItem(myitem._id);
   };
 
   return (
@@ -184,9 +184,21 @@ export default function MyItemListing(props) {
                     </Button>
                   </Link>
                 )}
-                <Button onClick={handleOnClickDelete}>
-                  <Delete />
-                </Button>
+                {type === 'provide' && (
+                  <Button onClick={handleOnClickDelete}>
+                    <Delete />
+                  </Button>
+                )}
+                {type === 'collect' && (
+                  <CustomButton
+                    className={classes.button_label}
+                    color="success"
+                    size="sm"
+                    onClick={handleOnClickUnreserve}
+                  >
+                    Unreserve
+                  </CustomButton>
+                )}
               </GridItem>
             </GridContainer>
           </GridContainer>
