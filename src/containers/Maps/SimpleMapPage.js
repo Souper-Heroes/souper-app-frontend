@@ -7,6 +7,7 @@ const mapStateToProps = state => ({
   _id: state.auth.user.uid,
   user: state.user,
   myitems: state.item.myitems,
+  searchitems: state.item.search.paginatedResults
 });
 
 // const mapDispatchToProps = dispatch => ({

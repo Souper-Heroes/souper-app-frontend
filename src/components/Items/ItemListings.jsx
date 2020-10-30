@@ -319,6 +319,20 @@ function ItemListings({
                       Apply Filters
                     </Button>
                   </FormControl>
+                  <FormControl fullWidth>
+                    {search.totalCount > 0 && (
+                      <Link to={`/itemmap/${type}`} className={classes.link}>
+                        <Button
+                          fullWidth
+                          size="md"
+                          color="rose"
+                          simple
+                        >
+                          View on Map
+                        </Button>
+                      </Link>
+                    )}
+                  </FormControl>
                 </GridItem>
               </GridItem>
               <GridItem
@@ -361,7 +375,6 @@ function ItemListings({
                   <Spinner />
                 ) : (
                   <>
-                    {/* Only retrieve items not belonging to the user and not already being collected by someone else */}
                     {search.paginatedResults.map(item => (
                       <GridItem
                         xs={12}
@@ -372,13 +385,13 @@ function ItemListings({
                       >
                         <Card className={classes.textLeft}>
                           <CardBody>
-                            <h5 className={classes.cardTitle}>{item.title}</h5>
+                            <h5 className={classes.cardTitle}>{item.title.substring(0, 25)}</h5>
                             <Typography variant="body2">
                               {`Expires: ${moment(item.expiry).format(
                                 'Do MMM YY'
                               )}`}
                             </Typography>
-                            <p>{item.description}</p>
+                            <p>{item.description.substring(0, 25)}{item.description.length > 26 ? '...' : ''}</p>
                             <GridContainer>
                               <GridItem xs={6}>
                                 <Link

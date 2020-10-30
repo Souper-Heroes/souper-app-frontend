@@ -40,6 +40,7 @@ export default function AddEditItem({
   updateItem,
   item,
   postcode,
+  address,
   location,
   categoryOptions
 }) {
@@ -64,6 +65,7 @@ export default function AddEditItem({
   // Get the location and postcode from profile if add item
   // from item if editing an item
   const [myPostcode, setPostcode] = useState(item ? item.postcode : postcode);
+  const [myAddress, setAddress] = useState(item ? item.address : address);
   const [myLocation, setLocation] = useState(item ? item.location : location);
 
   const resetForm = () => {
@@ -73,6 +75,7 @@ export default function AddEditItem({
     setExpiry('');
     setAvailability('');
     setPostcode(postcode);
+    setAddress(address);
     setLocation(location);
   };
 
@@ -110,6 +113,10 @@ export default function AddEditItem({
     setAvailability(e.target.value);
   };
 
+  const handleAddressChange = e => {
+    setAddress(e.target.value);
+  };
+
   const onSubmit = async e => {
     e.preventDefault();
     if (item) {
@@ -120,6 +127,7 @@ export default function AddEditItem({
           category: category.map(cat => cat.title),
           expiry: moment(expiry),
           postcode: myPostcode,
+          address: myAddress,
           location: myLocation,
           availability,
         },
@@ -133,6 +141,7 @@ export default function AddEditItem({
         category: category.map(cat => cat.title),
         expiry: moment(expiry),
         postcode: myPostcode,
+        address: myAddress,
         location: myLocation,
         availability
       });
@@ -153,7 +162,7 @@ export default function AddEditItem({
         <div className={classes.container}>
           <form onSubmit={onSubmit}>
             <GridContainer>
-              <GridItem xs={12} sm={6} md={4} className={classes.navWrapper}>
+              <GridItem xs={12} sm={6} md={4} style={{ marginTop: 35 }} className={classes.navWrapper}>
                 <DropZone />
               </GridItem>
               <GridItem xs={12} sm={6} md={8} className={classes.navWrapper}>
@@ -247,6 +256,18 @@ export default function AddEditItem({
                   }}
                 />
                 <CustomInput
+                  labelText="Address Details"
+                  inputProps={{
+                    required: true,
+                    placeholder: myAddress,
+                    onChange: event => handleAddressChange(event),
+                    value: myAddress
+                  }}
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                />
+                <CustomInput
                   labelText="Postcode"
                   name="postcode"
                   id="disabled"
@@ -272,7 +293,7 @@ export default function AddEditItem({
                     Save
                   </Button>
                 </GridItem>
-                <GridItem xs={12} sm={6} md={2}>
+                <GridItem xs={12} sm={6} md={2} style={{ marginBottom: 20 }}>
                   <Button fullWidth color="danger" size="md" onClick={onCancel}>
                     Cancel
                   </Button>
@@ -291,6 +312,7 @@ AddEditItem.propTypes = {
   updateItem: PropTypes.func,
   item: PropTypes.instanceOf(Object),
   postcode: PropTypes.string,
+  address: PropTypes.string,
   location: PropTypes.instanceOf(Object),
   categoryOptions: PropTypes.instanceOf(Array),
 };
