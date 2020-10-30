@@ -42,8 +42,6 @@ const ItemViewPageStyle = {
   nospace: {
     display: 'flex',
     whiteSpace: 'nowrap'
-    // overflow: 'hidden'
-    // marginRight: '1em'
   },
 
   cardcontainer: {

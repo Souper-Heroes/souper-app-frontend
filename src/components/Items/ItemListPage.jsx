@@ -4,11 +4,12 @@ import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from 'components/MaterialKitComponents/Grid/GridContainer';
 import GridItem from 'components/MaterialKitComponents/Grid/GridItem';
-import styles from 'assets/jss/material-kit-react/views/profilePage';
+import styles from 'assets/jss/Items/views/ItemListPage';
 import MyItemListings from 'containers/Items/MyItemListings';
 import CustomTabs from 'components/MaterialKitComponents/CustomTabs/CustomTabs';
 import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
+import Spinner from '../Layout/Spinner';
 
 const useStyles = makeStyles(styles);
 
@@ -51,32 +52,30 @@ export default function ItemListPage({
   createCollectionTabs();
 
   return (
-    <>
-      {loading ? (<div>Loading...</div>) : (
-        <div className={classNames(classes.main, classes.mainRaised)}>
-          <div className={classes.container}>
-            <GridContainer justify="center">
-              <GridItem xs={12}>
-                {createCollectionTabs().length > 0
-                  && (
-                    <CustomTabs
-                      headerColor="rose"
-                      plainTabs
-                      tabs={createCollectionTabs()}
-                    />
-                  )}
-                {createCollectionTabs().length === 0
-                  && (
-                    <Typography align="center">
-                      You have no items for listing or collection
-                    </Typography>
-                  )}
-              </GridItem>
-            </GridContainer>
-          </div>
-        </div>
-      )}
-    </>
+    <div className={classNames(classes.main, classes.mainRaised)}>
+      <div className={classes.container}>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <GridContainer justify="center">
+            <GridItem xs={12}>
+              {createCollectionTabs().length > 0 && (
+                <CustomTabs
+                  headerColor="rose"
+                  plainTabs
+                  tabs={createCollectionTabs()}
+                />
+              )}
+              {createCollectionTabs().length === 0 && (
+                <Typography align="center">
+                  You have no items for listing or collection
+                </Typography>
+              )}
+            </GridItem>
+          </GridContainer>
+        )}
+      </div>
+    </div>
   );
 }
 

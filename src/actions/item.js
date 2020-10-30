@@ -13,6 +13,7 @@ export const types = {
   GET_ITEM_ERROR: 'GET_ITEM_ERROR',
   GET_ITEMS_ERROR: 'GET_ITEMS_ERROR',
   GET_DELETE_ITEM_ERROR: 'GET_DELETE_ITEM_ERROR',
+  GET_MY_ITEMS_REQUEST: 'GET_MY_ITEMS_REQUEST',
   GET_MY_ITEMS: 'GET_MY_ITEMS',
   GET_MY_ITEMS_ERROR: 'GET_MY_ITEMS_ERROR',
   GET_PROVIDER_ITEMS: 'GET_PROVIDER_ITEMS',
@@ -119,6 +120,15 @@ export const searchItems = filterOptions => async dispatch => {
         page: filterOptions.page
       }
     });
+    if (!res.data[0].totalCount.length) {
+      dispatch(
+        setAlert(
+          'No results found for your search criteria.',
+          'warning',
+          'alert'
+        )
+      );
+    }
     dispatch({
       type: types.SEARCH_ITEMS,
       payload: res.data,
@@ -134,6 +144,10 @@ export const searchItems = filterOptions => async dispatch => {
 
 export const getMyItems = () => async dispatch => {
   try {
+    dispatch({
+      type: types.GET_MY_ITEMS_REQUEST
+    });
+
     const res = await api.get('/items/user_id');
 
     dispatch({
@@ -184,6 +198,7 @@ export const reserveItem = (_id, history) => async dispatch => {
       type: types.RESERVE_ITEM,
       payload: res.data
     });
+    dispatch(setAlert('Item successfuly reserved.', 'success', 'alert'));
     history.push(ROUTES.ITEM_LIST);
   } catch (err) {
     console.log(err);
@@ -197,11 +212,12 @@ export const unreserveItem = (_id, history) => async dispatch => {
   try {
     const res = await api.put(`/items/unreserve/${_id}`);
 
-    history.push(ROUTES.ITEM_LIST);
     dispatch({
       type: types.UNRESERVE_ITEM,
       payload: res.data
     });
+    dispatch(setAlert('Item successfuly unreserved.', 'success', 'alert'));
+    history.push(ROUTES.ITEM_LIST);
   } catch (err) {
     dispatch({
       type: types.UNRESERVE_ITEM_ERROR
