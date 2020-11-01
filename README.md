@@ -88,6 +88,10 @@ npm run test
 
 ### Our Web Application development Journey
 
-We intially created a wireframe for a web application:
+The initial wireframe for a web application we designed :
 
 ![Miro](https://user-images.githubusercontent.com/7528291/97806816-6fe4de00-1c55-11eb-9523-aa335b7796f4.png)
+
+The Architecture we used:
+
+![Architecure Diagram](https://user-images.githubusercontent.com/7528291/97807648-eaaff800-1c59-11eb-86a6-a4330939aaa9.png)
