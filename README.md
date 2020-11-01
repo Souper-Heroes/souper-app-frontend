@@ -92,7 +92,7 @@ npm run test
 
 ![Miro](https://user-images.githubusercontent.com/7528291/97806816-6fe4de00-1c55-11eb-9523-aa335b7796f4.png)
 
-## The front to back architecture we used:
+## The front to back architecture we used
 
 ![Architecure Diagram](https://user-images.githubusercontent.com/7528291/97807648-eaaff800-1c59-11eb-86a6-a4330939aaa9.png)
 
