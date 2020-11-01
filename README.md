@@ -90,4 +90,4 @@ npm run test
 
 We intially created a wireframe for a web application:
 
-
+![Miro](https://user-images.githubusercontent.com/7528291/97806816-6fe4de00-1c55-11eb-9523-aa335b7796f4.png)
