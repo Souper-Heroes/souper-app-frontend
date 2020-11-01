@@ -1,5 +1,9 @@
-# souper-app-frontend
+# Souper App
+
+Thousands of tons of perfectly good food is thrown away every day, there are also extimated to be 3 million children facing food insecurity in the UK. If we can bridge the gap between these two groups we would be solving two problems simultaneously.
+
 ![app-login](https://user-images.githubusercontent.com/70176601/97798191-b1f12e00-1c1b-11eb-8862-beddde7e72c8.jpg)
+
 ## Project description
 
 This project is split up in the frontend part built with React and the backend part with a node/express server.  
