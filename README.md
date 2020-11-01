@@ -86,3 +86,8 @@ npm run lint
 npm run test
 ```
 
+### Our Web Application development Journey
+
+We intially created a wireframe for a web application:
+
+
