@@ -86,3 +86,23 @@ npm run lint
 npm run test
 ```
 
+## Web Application Development Journey ...
+
+### Initial wireframe of the web application
+
+![Miro](https://user-images.githubusercontent.com/7528291/97806816-6fe4de00-1c55-11eb-9523-aa335b7796f4.png)
+
+## The front to back architecture we used
+
+![Architecure Diagram](https://user-images.githubusercontent.com/7528291/97807648-eaaff800-1c59-11eb-86a6-a4330939aaa9.png)
+
+## Implementation of CircleCI pipelines for building and testing
+
+![CircleCi](https://user-images.githubusercontent.com/7528291/97807939-93128c00-1c5b-11eb-9418-64eb0a716272.png)
+
+## Selenium testing
+![Selenium Testing](https://user-images.githubusercontent.com/7528291/97808002-e4228000-1c5b-11eb-89ee-c52150c26383.png)
+
+## Example map of food items about to expire for collection
+![ItemMap](https://user-images.githubusercontent.com/7528291/97808103-b25de900-1c5c-11eb-8915-2125790d1ef1.png)
+
